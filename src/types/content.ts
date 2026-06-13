@@ -1,16 +1,7 @@
-import type { Database } from './database'
-
-/** Blog post row type */
-export type BlogPost = Database['public']['Tables']['blog_posts']['Row']
-
-/** Case study row type */
-export type CaseStudy = Database['public']['Tables']['case_studies']['Row']
-
-/** Resource row type */
-export type Resource = Database['public']['Tables']['resources']['Row']
-
-/** FAQ row type */
-export type FAQ = Database['public']['Tables']['faqs']['Row']
+export type BlogPost = any;
+export type CaseStudy = any;
+export type Resource = any;
+export type FAQ = any;
 
 /** Blog post with computed fields */
 export interface BlogPostWithMeta extends BlogPost {

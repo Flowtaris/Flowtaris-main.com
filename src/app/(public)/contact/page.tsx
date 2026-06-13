@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { Mail, Clock, Calendar, FileText, MessageSquare } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
@@ -83,7 +84,9 @@ export default function ContactPage() {
             {/* Form — 3/5 */}
             <div className="lg:col-span-3">
               <AnimatedSection>
-                <ContactForm />
+                <Suspense fallback={<div className="h-96 flex items-center justify-center text-slate-400">Loading form...</div>}>
+                  <ContactForm />
+                </Suspense>
               </AnimatedSection>
             </div>
 
