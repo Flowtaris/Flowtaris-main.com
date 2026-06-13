@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, Variants } from 'framer-motion'
 import {
   Menu, X, ArrowRight, Database, Cloud, Webhook,
   ShieldCheck, ArrowLeftRight, Component,
@@ -30,7 +30,7 @@ function CommandCenterMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave:
   }
 
   // 100/100 Staggered Entry Physics
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 15, scale: 0.98, filter: 'blur(12px)' },
     show: {
       opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
@@ -42,7 +42,7 @@ function CommandCenterMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave:
     }
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.96, filter: 'blur(8px)' },
     show: {
       opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
@@ -193,7 +193,7 @@ function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: 
     mouseY.set(e.clientY - top)
   }
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0, y: 15, scale: 0.98, filter: 'blur(12px)' },
     show: {
       opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
@@ -205,7 +205,7 @@ function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: 
     }
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.96, filter: 'blur(8px)' },
     show: {
       opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',

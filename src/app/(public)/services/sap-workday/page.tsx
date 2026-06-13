@@ -175,7 +175,7 @@ export default function SAPWorkdayPage() {
             {BENEFITS.map((benefit, i) => (
               <div key={i} className="bg-white p-8 border border-slate-200 rounded-[8px] hover:shadow-xl hover:border-transparent hover:-translate-y-1 transition-all duration-300 group">
                 <div className="w-12 h-12 bg-[#F0F9FF] flex items-center justify-center mb-6 text-[#0284C7] rounded-[4px] group-hover:bg-[#0284C7] group-hover:text-white transition-colors">
-                  {benefit.icon2 ? <benefit.icon2 className="w-6 h-6" /> : <benefit.icon className="w-6 h-6" />}
+                  <benefit.icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-[20px] font-bold text-[#141736] mb-3">{benefit.title}</h3>
                 <p className="text-slate-600 leading-relaxed text-[15px]">{benefit.desc}</p>
