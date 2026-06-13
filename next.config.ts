@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/storage/v1/object/public/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },
@@ -35,10 +41,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://hcaptcha.com https://*.hcaptcha.com https://app.posthog.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: https://www.googletagmanager.com https://hcaptcha.com https://*.hcaptcha.com https://app.posthog.com",
+              "worker-src 'self' blob:",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://*.supabase.co https://img1.wsimg.com",
+              "img-src 'self' data: blob: https://*.supabase.co https://img1.wsimg.com https://images.unsplash.com",
               "connect-src 'self' https://*.supabase.co https://api.resend.com https://app.posthog.com https://www.google-analytics.com",
               "frame-src https://hcaptcha.com https://*.hcaptcha.com https://www.youtube-nocookie.com",
               "object-src 'none'",
@@ -53,15 +60,23 @@ const nextConfig: NextConfig = {
     return [
       // 301 redirects from existing GoDaddy URLs to preserve SEO equity
       { source: '/about-us', destination: '/about', permanent: true },
-      { source: '/blogs', destination: '/insights', permanent: true },
+      { source: '/blogs', destination: '/blog', permanent: true },
       {
         source: '/blogs/:slug',
-        destination: '/insights/:slug',
+        destination: '/blog/:slug',
+        permanent: true,
+      },
+      { source: '/insights', destination: '/blog', permanent: true },
+      {
+        source: '/insights/:slug',
+        destination: '/blog/:slug',
         permanent: true,
       },
       { source: '/faq', destination: '/contact', permanent: true },
     ]
   },
+  compress: true,
+  poweredByHeader: false,
 }
 
 export default nextConfig

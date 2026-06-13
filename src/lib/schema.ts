@@ -8,19 +8,25 @@ export function organizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Flowtaris',
-    url: absoluteUrl('/'),
-    logo: absoluteUrl('/logo.svg'),
     description:
-      'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      email: 'info@flowtaris.com',
-      contactType: 'customer service',
-    },
+      'Enterprise ERP consulting and integration partner specializing in NetSuite, Coupa, SAP, Workday, Ironclad, automation and managed support.',
+    url: 'https://flowtaris.com',
+    logo: absoluteUrl('/logo.png'),
+    email: 'info@flowtaris.com',
+    slogan: 'The Science of Business Flow',
     sameAs: [
-      'https://www.linkedin.com/company/flowtaris',
-      'https://twitter.com/flowtaris',
-      'https://www.youtube.com/@flowtaris',
+      'https://www.linkedin.com/company/flowtaris-private-limited',
+      'https://www.x.com/flowtaris',
+      'https://www.youtube.com/@Flowtaris',
+    ],
+    knowsAbout: [
+      'NetSuite ERP',
+      'Coupa Procurement',
+      'SAP',
+      'Workday',
+      'ERP Integration',
+      'Enterprise Automation',
+      'Managed IT Support',
     ],
   }
 }
@@ -28,31 +34,25 @@ export function organizationSchema() {
 /**
  * Generate Service JSON-LD schema
  */
-export function serviceSchema(params: {
-  name: string
-  description: string
-  url: string
-}) {
+export function serviceSchema(name: string, description: string, url: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    serviceType: params.name,
+    name,
+    description,
+    url: absoluteUrl(url),
     provider: {
       '@type': 'Organization',
       name: 'Flowtaris',
+      url: 'https://flowtaris.com',
     },
-    name: params.name,
-    description: params.description,
-    url: params.url,
   }
 }
 
 /**
  * Generate FAQ JSON-LD schema
  */
-export function faqSchema(
-  faqs: Array<{ question: string; answer: string }>
-) {
+export function faqSchema(faqs: { question: string; answer: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -70,50 +70,47 @@ export function faqSchema(
 /**
  * Generate Article JSON-LD schema
  */
-export function articleSchema(params: {
+export function articleSchema({
+  title,
+  description,
+  datePublished,
+  dateModified,
+  url,
+  imageUrl,
+  authorName,
+}: {
   title: string
   description: string
-  url: string
   datePublished: string
   dateModified: string
-  authorName: string
-  image?: string
+  url: string
+  imageUrl?: string
+  authorName?: string
 }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: params.title,
-    description: params.description,
-    url: params.url,
-    datePublished: params.datePublished,
-    dateModified: params.dateModified,
-    author: {
-      '@type': 'Person',
-      name: params.authorName,
-    },
+    headline: title,
+    description,
+    datePublished,
+    dateModified,
+    url: absoluteUrl(url),
+    image: imageUrl ? absoluteUrl(imageUrl) : undefined,
+    author: authorName
+      ? { '@type': 'Person', name: authorName }
+      : { '@type': 'Organization', name: 'Flowtaris' },
     publisher: {
       '@type': 'Organization',
       name: 'Flowtaris',
-      logo: {
-        '@type': 'ImageObject',
-        url: absoluteUrl('/logo.svg'),
-      },
+      logo: { '@type': 'ImageObject', url: absoluteUrl('/logo.png') },
     },
-    ...(params.image && {
-      image: {
-        '@type': 'ImageObject',
-        url: params.image,
-      },
-    }),
   }
 }
 
 /**
  * Generate BreadcrumbList JSON-LD schema
  */
-export function breadcrumbSchema(
-  items: Array<{ name: string; url: string }>
-) {
+export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -121,7 +118,7 @@ export function breadcrumbSchema(
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url,
+      item: absoluteUrl(item.url),
     })),
   }
 }

@@ -1,48 +1,44 @@
 'use client'
 
-import { useEffect, useRef, useState, type RefObject } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-interface UseIntersectionObserverOptions {
-  threshold?: number
-  rootMargin?: string
-  triggerOnce?: boolean
+interface UseIntersectionObserverOptions extends IntersectionObserverInit {
+  freezeOnceVisible?: boolean
 }
 
-/**
- * Hook to detect when an element enters the viewport.
- * Used for scroll-triggered animations.
- */
-export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
+export function useIntersectionObserver(
   options: UseIntersectionObserverOptions = {}
-): [RefObject<T | null>, boolean] {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options
-  const ref = useRef<T | null>(null)
-  const [isIntersecting, setIsIntersecting] = useState(false)
+): [React.RefObject<HTMLDivElement | null>, boolean] {
+  const {
+    threshold = 0.1,
+    root = null,
+    rootMargin = '0px',
+    freezeOnceVisible = true,
+  } = options
+
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const element = ref.current
     if (!element) return
+    if (freezeOnceVisible && isVisible) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry) {
-          const isVisible = entry.isIntersecting
-          setIsIntersecting(isVisible)
-
-          if (isVisible && triggerOnce) {
-            observer.unobserve(element)
-          }
+        if (entry?.isIntersecting) {
+          setIsVisible(true)
+          if (freezeOnceVisible) observer.disconnect()
+        } else if (!freezeOnceVisible) {
+          setIsVisible(false)
         }
       },
-      { threshold, rootMargin }
+      { threshold, root, rootMargin }
     )
 
     observer.observe(element)
+    return () => observer.disconnect()
+  }, [threshold, root, rootMargin, freezeOnceVisible, isVisible])
 
-    return () => {
-      observer.unobserve(element)
-    }
-  }, [threshold, rootMargin, triggerOnce])
-
-  return [ref, isIntersecting]
+  return [ref, isVisible]
 }

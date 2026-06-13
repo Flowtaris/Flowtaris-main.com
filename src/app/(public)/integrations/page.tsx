@@ -1,22 +1,34 @@
-﻿import { generatePageMetadata } from '@/lib/metadata'
+import { Metadata } from 'next'
+import { PageHero } from '@/components/sections/PageHero'
+import { IntegrationShowcase } from '@/components/sections/IntegrationShowcase'
+import { CTASection } from '@/components/sections/CTASection'
 
-export const metadata = generatePageMetadata({
-  title: 'Enterprise Integration Catalog — Platform Connections',
-  description: 'Explore the Flowtaris integration catalog — supported platform connections across NetSuite, Coupa, SAP, Workday.',
-  path: '/integrations',
-})
+export const metadata: Metadata = {
+  title: 'Enterprise Integrations | Flowtaris',
+  description: 'Seamlessly connect your mission-critical enterprise systems. We architect secure, high-performance data pipelines bridging Coupa, NetSuite, SAP, Workday, and more.',
+}
 
-export default function Page() {
+export default function IntegrationsPage() {
   return (
-    <div className="min-h-screen">
-      <section className="section-padding">
-        <div className="container-content">
-          <span className="section-label">Integrations</span>
-          <h1 className="font-display text-display-lg text-navy-900 mt-4">
-            Enterprise Integration Catalog.
-          </h1>
-        </div>
-      </section>
-    </div>
+    <main>
+      <PageHero
+        label="Ecosystem Connectivity"
+        title="Enterprise"
+        titleHighlight="Integrations"
+        description="We architect secure, bidirectional data pipelines that eliminate manual reconciliation and unify your corporate technology stack."
+        align="center"
+        size="lg"
+        dark={true}
+      />
+
+      <IntegrationShowcase hideViewAll={true} />
+
+      <CTASection
+        title="Ready to automate your workflows?"
+        description="Let's build a reliable integration architecture that scales with your enterprise."
+        primaryAction={{ label: 'Discuss Your Stack', href: '/contact' }}
+        secondaryAction={{ label: 'Explore Case Studies', href: '/case-studies' }}
+      />
+    </main>
   )
 }

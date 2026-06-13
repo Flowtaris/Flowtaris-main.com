@@ -1,59 +1,42 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
-interface UseCountUpOptions {
-  end: number
-  duration?: number
-  start?: number
-  enabled?: boolean
-}
-
-/**
- * Hook for animating number counting up.
- * Used for statistics/metrics sections.
- */
-export function useCountUp({
-  end,
+export function useCountUp(
+  target: number,
   duration = 1500,
-  start = 0,
-  enabled = true,
-}: UseCountUpOptions): number {
-  const [count, setCount] = useState(start)
-  const rafRef = useRef<number | null>(null)
-
-  const animate = useCallback(() => {
-    let startTimestamp: number | null = null
-
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1)
-
-      // Ease-out cubic for natural deceleration
-      const easedProgress = 1 - Math.pow(1 - progress, 3)
-      setCount(Math.floor(easedProgress * (end - start) + start))
-
-      if (progress < 1) {
-        rafRef.current = window.requestAnimationFrame(step)
-      }
-    }
-
-    rafRef.current = window.requestAnimationFrame(step)
-  }, [end, duration, start])
+  isActive = false
+): number {
+  const [count, setCount] = useState(0)
+  const frameRef = useRef<number | undefined>(undefined)
+  const startTimeRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
-    if (!enabled) {
-      return
-    }
+    if (!isActive) return
 
-    animate()
+    startTimeRef.current = undefined
 
-    return () => {
-      if (rafRef.current !== null) {
-        window.cancelAnimationFrame(rafRef.current)
+    const animate = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp
+      const elapsed = timestamp - startTimeRef.current
+      const progress = Math.min(elapsed / duration, 1)
+
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.floor(eased * target))
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(animate)
+      } else {
+        setCount(target)
       }
     }
-  }, [enabled, animate])
+
+    frameRef.current = requestAnimationFrame(animate)
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current)
+    }
+  }, [target, duration, isActive])
 
   return count
 }
