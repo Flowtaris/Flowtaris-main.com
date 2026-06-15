@@ -110,11 +110,11 @@ export default async function AboutPage() {
         
         {/* Minimalist Logo Cloud */}
         <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">ACUMATICA</div>
-          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">THOUGHTSPOT</div>
-          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">WHATFIX</div>
-          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">MARRIOTT</div>
-          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">TURO</div>
+          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">NETSUITE</div>
+          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">COUPA</div>
+          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">SAP</div>
+          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">WORKDAY</div>
+          <div className="text-xl font-bold font-mono tracking-widest text-slate-400">BOOMI</div>
         </div>
       </section>
 
