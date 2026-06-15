@@ -136,7 +136,7 @@ export function ServicesGrid({ dynamicServices = [] }: { dynamicServices?: any[]
   const displayServices = dynamicServices.length > 0
     ? dynamicServices.map((ds, idx) => {
         const heroData = ds.services_hero && ds.services_hero.length > 0 ? ds.services_hero[0] : null;
-        const visualKey = visualKeys[idx % visualKeys.length];
+        const visualKey = visualKeys[idx % visualKeys.length] as keyof typeof ServiceVisuals;
         return {
           Visual: ServiceVisuals[visualKey],
           label: ds.name,
