@@ -41,18 +41,14 @@ export function CaseStudyHighlights() {
   return (
     <section className="section bg-white overflow-hidden py-24">
       <div className="container-content">
-        <AnimatedSection className="flex flex-col items-center text-center mb-16">
-          <div className="flex items-center justify-center gap-2.5 mb-6">
-            <div className="h-px w-8 bg-gold-500" />
-            <span className="text-sm font-mono uppercase tracking-[0.2em] text-gold-500"
-                  style={{ fontFamily: 'var(--font-jetbrains)' }}>
-              Selected Work
-            </span>
-            <div className="h-px w-8 bg-gold-500" />
+        <AnimatedSection className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-[#0A1628] leading-[1.05] tracking-tight" style={{ fontFamily: 'var(--font-sora)' }}>
+              Case Studies
+            </h1>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 max-w-4xl leading-[1.1]"
-              style={{ fontFamily: 'var(--font-sora)' }}>
-            Real Results from Real Enterprise Transformations
+          <h2 className="text-slate-500 max-w-sm text-sm leading-relaxed lg:pb-3 font-light">
+            Real Results from Real Enterprise Transformations. We turn complex requirements into flawless execution.
           </h2>
         </AnimatedSection>
 
@@ -61,11 +57,10 @@ export function CaseStudyHighlights() {
           <AnimatedSection className="w-full lg:w-7/12 order-2 lg:order-1">
             <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl shadow-navy-900/10 bg-slate-100">
               {caseStudies.map((cs, idx) => (
-                <div 
+                <div
                   key={cs.slug}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    activeIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                    }`}
                 >
                   <Image
                     src={cs.image}
@@ -85,9 +80,9 @@ export function CaseStudyHighlights() {
           <div className="w-full lg:w-5/12 flex flex-col gap-6 order-1 lg:order-2">
             {caseStudies.map((cs, idx) => {
               const isActive = activeIndex === idx
-              
+
               return (
-                <div 
+                <div
                   key={cs.slug}
                   className={`group flex flex-col cursor-pointer transition-all duration-500 border-l-4 pl-6 md:pl-8 py-2
                              ${isActive ? 'border-gold-500 opacity-100' : 'border-transparent opacity-40 hover:opacity-70'}`}
@@ -99,10 +94,10 @@ export function CaseStudyHighlights() {
                   </span>
                   <h3 className={`text-2xl md:text-3xl font-bold text-navy-900 transition-colors leading-[1.2]
                                  ${isActive ? 'text-navy-900 mb-4' : 'text-navy-900/60 mb-0'}`}
-                      style={{ fontFamily: 'var(--font-sora)' }}>
+                    style={{ fontFamily: 'var(--font-sora)' }}>
                     {cs.title}
                   </h3>
-                  
+
                   {/* Expandable description */}
                   <div className={`grid transition-all duration-500 ease-in-out ${isActive ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
                     <div className="overflow-hidden">

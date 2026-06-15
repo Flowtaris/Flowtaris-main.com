@@ -8,15 +8,12 @@ import { ArrowRight } from 'lucide-react'
 
 const FOOTER_LINKS = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms & Conditions', href: '/terms-of-use' },
 ]
 
-const SOCIAL_LINKS = [
-  { label: 'Email', href: `mailto:${SITE_EMAIL}` },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/flowtaris' },
-  { label: 'X', href: 'https://x.com/flowtaris' },
-]
+import { SocialLink } from '@/types/database'
 
-export function Footer() {
+export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks = [] }: { settings?: Record<string, string>, socialLinks?: SocialLink[] }) {
   const currentYear = new Date().getFullYear()
 
   // Magnetic Cursor Light Physics
@@ -44,19 +41,19 @@ export function Footer() {
   return (
     <footer
       id="footer-vault"
-      className="relative w-full h-[85vh] min-h-[600px] max-h-[900px] bg-black overflow-hidden group cursor-default"
+      className="relative w-full h-[85vh] min-h-[600px] max-h-[900px] bg-[#0A1628] overflow-hidden group cursor-default"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       {/* 1. Deep Space Ambient Background Layer */}
-      <div className="absolute inset-0 pointer-events-none z-0 bg-black">
+      <div className="absolute inset-0 pointer-events-none z-0 bg-[#0A1628]">
         {/* Extremely Bright Autonomous Orbs using Radial Gradients for true emission */}
-        <div className="absolute top-[-30%] left-[-20%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] bg-[radial-gradient(circle_at_center,#00D639_0%,transparent_70%)] opacity-[0.35] animate-pulse mix-blend-screen" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-[-30%] right-[-20%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-[radial-gradient(circle_at_center,#0055FF_0%,transparent_70%)] opacity-[0.25] animate-pulse mix-blend-screen" style={{ animationDuration: '12s', animationDelay: '2s' }} />
+        <div className="absolute top-[-30%] left-[-20%] w-[70vw] h-[70vw] max-w-[1000px] max-h-[1000px] bg-[radial-gradient(circle_at_center,#E8A020_0%,transparent_70%)] opacity-[0.25] animate-pulse mix-blend-screen" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-[-30%] right-[-20%] w-[60vw] h-[60vw] max-w-[900px] max-h-[900px] bg-[radial-gradient(circle_at_center,#F5B041_0%,transparent_70%)] opacity-[0.20] animate-pulse mix-blend-screen" style={{ animationDuration: '12s', animationDelay: '2s' }} />
 
         {/* Interactive Magnetic Core (Follows Mouse) */}
         <motion.div
-          className="absolute w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,#00FF66_0%,transparent_60%)] opacity-0 group-hover:opacity-[0.85] transition-opacity duration-700 mix-blend-screen"
+          className="absolute w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,#E8A020_0%,transparent_60%)] opacity-0 group-hover:opacity-[0.6] transition-opacity duration-700 mix-blend-screen"
           style={{
             x: springX,
             y: springY,
@@ -67,7 +64,7 @@ export function Footer() {
       </div>
 
       {/* 2. Frosted Glass Vault Layer */}
-      <div className="absolute inset-0 z-10 bg-black/40 backdrop-blur-[60px] border-t border-white/[0.05]" />
+      <div className="absolute inset-0 z-10 bg-[#0A1628]/40 backdrop-blur-[60px] border-t border-white/[0.05]" />
 
       {/* 3. Content Layer */}
       <div className="relative z-20 w-full h-full flex flex-col justify-between px-6 lg:px-16 pt-24 pb-12">
@@ -89,7 +86,7 @@ export function Footer() {
               WebkitTextStroke: '1px rgba(255,255,255,0.1)'
             }}
           >
-            FLOWTARIS
+            {settings.company_name.toUpperCase()}
           </motion.h2>
 
           <motion.p
@@ -99,7 +96,7 @@ export function Footer() {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-gray-400 text-sm md:text-lg lg:text-xl font-medium tracking-wide mt-4 md:mt-[-20px]"
           >
-            Institutional grade systems, perfected.
+            The Science Of Business Flow
           </motion.p>
         </div>
 
@@ -111,17 +108,21 @@ export function Footer() {
           transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="w-full flex flex-col md:flex-row items-center justify-between gap-8 mt-24 pointer-events-auto"
         >
-          {/* Social Links */}
+          {/* Dynamic Social Links */}
           <div className="flex items-center gap-6">
-            {SOCIAL_LINKS.map((link) => (
+            {(socialLinks.length > 0 ? socialLinks : [
+              { id: '1', platform_name: 'Email', url: `mailto:contact@flowtaris.com`, priority: 3, created_at: '', updated_at: '' },
+              { id: '2', platform_name: 'LinkedIn', url: 'https://linkedin.com/company/flowtaris', priority: 2, created_at: '', updated_at: '' },
+              { id: '3', platform_name: 'X', url: 'https://x.com/flowtaris', priority: 1, created_at: '', updated_at: '' },
+            ]).map((link) => (
               <a
-                key={link.label}
-                href={link.href}
-                target={link.label === 'Email' ? '_self' : '_blank'}
+                key={link.id}
+                href={link.url}
+                target={link.url.startsWith('mailto:') ? '_self' : '_blank'}
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-white/40 hover:text-white transition-colors duration-300"
               >
-                {link.label}
+                {link.platform_name}
               </a>
             ))}
           </div>
@@ -138,7 +139,15 @@ export function Footer() {
               </Link>
             ))}
             <span className="text-sm font-medium text-white/20 pl-4 border-l border-white/10">
-              &copy; {currentYear}
+              &copy; {currentYear} • Developed by{' '}
+              <a
+                href="https://www.pixenox.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-300"
+              >
+                Pixenox Solutions
+              </a>
             </span>
           </div>
         </motion.div>

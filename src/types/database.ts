@@ -7,6 +7,21 @@ export type Service = {
   updated_at: string;
 };
 
+export type SiteSetting = {
+  key: string;
+  value: string;
+  updated_at: string;
+};
+
+export type SocialLink = {
+  id: string;
+  platform_name: string;
+  url: string;
+  priority: number;
+  created_at: string;
+  updated_at: string;
+};
+
 export type GlobalHero = {
   id: string;
   main_description: string;
@@ -19,14 +34,13 @@ export type GlobalHeroImage = {
   id: string;
   hero_id: string;
   image_url: string;
-  topic: string;
-  small_description: string | null;
   created_at: string;
   updated_at: string;
 };
 
 export type ModernTechnology = {
   id: string;
+  name?: string;
   logo_url: string;
   priority: number;
   created_at: string;

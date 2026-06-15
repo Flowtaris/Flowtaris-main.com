@@ -45,6 +45,17 @@ export default async function HomePage() {
     .select('*')
     .order('priority', { ascending: false })
 
+  // Fetch hero images
+  let heroImages = []
+  if (heroData?.id) {
+    const { data: images } = await supabase
+      .from('global_hero_images')
+      .select('*')
+      .eq('hero_id', heroData.id)
+      .order('created_at', { ascending: true })
+    if (images) heroImages = images
+  }
+
   // Fetch why choose us content
   const { data: wcuSectors } = await supabase
     .from('why_choose_us_sectors')
@@ -74,6 +85,7 @@ export default async function HomePage() {
         title={heroData?.main_description} 
         description={heroData?.small_description ?? undefined} 
         technologies={technologies || []}
+        heroImages={heroImages}
       />
       <ServiceScrollStack dynamicServices={rawServices || []} />
       <WhyChooseUsSection sectors={wcuSectors || []} cards={wcuCards || []} />

@@ -24,9 +24,26 @@ export default async function PublicLayout({
     .select('id, name, slug, priority, services_hero(color, normal_description)')
     .order('priority', { ascending: false })
 
+  const { data: settingsData } = await supabase
+    .from('site_settings')
+    .select('*')
+
+  const settingsMap = (settingsData as { key: string, value: string }[])?.reduce((acc, curr) => {
+    acc[curr.key] = curr.value;
+    return acc;
+  }, {} as Record<string, string>) || {
+    company_name: 'Flowtaris',
+    logo_url: '/images/logo.png'
+  }
+
+  const { data: socialLinks } = await supabase
+    .from('social_links')
+    .select('*')
+    .order('priority', { ascending: false })
+
   return (
     <div className="relative min-h-screen bg-white flex flex-col">
-      <Navigation dynamicServices={dynamicServices || []} />
+      <Navigation dynamicServices={dynamicServices || []} settings={settingsMap} />
       
       {/* Offset for fixed nav */}
       <div className="h-[72px] flex-shrink-0" aria-hidden="true" />
@@ -38,7 +55,7 @@ export default async function PublicLayout({
 
       {/* Footer in normal document flow */}
       <div className="w-full">
-        <Footer />
+        <Footer settings={settingsMap} socialLinks={socialLinks || []} />
       </div>
     </div>
   )

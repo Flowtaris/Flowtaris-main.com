@@ -32,7 +32,7 @@ export function FinanceCTA() {
             >
               <Link href="/contact" className="inline-block group">
                 <div className="bg-[#00D639] hover:bg-[#00c033] text-black/90 font-medium text-[16px] px-[16px] py-[11px] h-[48px] rounded-full flex items-center justify-center gap-2 transition-colors duration-300">
-                  Take a product tour
+                  Contact Us
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </Link>
@@ -118,41 +118,6 @@ export function FinanceCTA() {
                 </svg>
               </div>
 
-              {/* Floating Widget 1 - Main Stat */}
-              <motion.div
-                className="absolute top-16 left-[-20px] bg-white border border-gray-100 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)] rounded-2xl p-5 w-48"
-                style={{ transform: 'translateZ(120px)' }}
-                initial={{ opacity: 0, x: -20, y: 10 }}
-                animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: -20, y: 10 }}
-                transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-2 h-2 rounded-full bg-[#00D639] animate-pulse" />
-                  <span className="text-xs font-semibold tracking-wider text-gray-400 uppercase">Live Processing</span>
-                </div>
-                <div className="text-3xl font-bold text-gray-900 tracking-tight">12.4M</div>
-                <div className="text-sm font-medium text-[#00D639] mt-1">+142% throughput</div>
-              </motion.div>
-
-              {/* Floating Widget 2 - Secondary Stat */}
-              <motion.div
-                className="absolute bottom-20 right-[-30px] bg-gray-900 text-white shadow-2xl rounded-2xl p-5 w-44"
-                style={{ transform: 'translateZ(140px)' }}
-                initial={{ opacity: 0, x: 20, y: 10 }}
-                animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: 20, y: 10 }}
-                transition={{ delay: 1.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className="text-xs text-gray-400 font-medium mb-1">System Latency</div>
-                <div className="text-2xl font-bold text-white tracking-tight">&lt; 4ms</div>
-                <div className="mt-3 h-1 w-full bg-gray-800 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-[#00D639]"
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: '85%' } : { width: 0 }}
-                    transition={{ delay: 2, duration: 1.5, ease: "easeOut" }}
-                  />
-                </div>
-              </motion.div>
 
               {/* Floating ambient glow lights */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-[#00D639]/10 blur-[80px] rounded-full pointer-events-none" style={{ transform: 'translateZ(-50px)' }} />

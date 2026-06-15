@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, Variants } from 'framer-motion'
 import {
   Menu, X, ArrowRight, Database, Cloud, Webhook,
@@ -56,20 +57,20 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
   const iconMap = [Database, ShoppingCart, ArrowLeftRight, ShieldCheck, Cpu, Briefcase];
 
   // Map dynamic services to the format needed
-  const displayServices = dynamicServices.length > 0 
+  const displayServices = dynamicServices.length > 0
     ? dynamicServices.slice(0, 6).map((ds, idx) => {
-        const heroData = ds.services_hero && ds.services_hero.length > 0 ? ds.services_hero[0] : null;
-        return {
-          title: ds.name,
-          href: `/services/${ds.slug}`,
-          num: `0${idx + 1}`.slice(-2),
-          color: heroData?.color || '#E8A020',
-          desc: heroData?.normal_description?.slice(0, 50) + '...' || 'Enterprise architecture and integration solutions.',
-          detailTitle: ds.name,
-          detailDesc: heroData?.normal_description || 'Scalable architecture and implementations.',
-          icon: iconMap[idx % iconMap.length]
-        }
-      })
+      const heroData = ds.services_hero && ds.services_hero.length > 0 ? ds.services_hero[0] : null;
+      return {
+        title: ds.name,
+        href: `/services/${ds.slug}`,
+        num: `0${idx + 1}`.slice(-2),
+        color: heroData?.color || '#E8A020',
+        desc: heroData?.normal_description?.slice(0, 50) + '...' || 'Enterprise architecture and integration solutions.',
+        detailTitle: ds.name,
+        detailDesc: heroData?.normal_description || 'Scalable architecture and implementations.',
+        icon: iconMap[idx % iconMap.length]
+      }
+    })
     : [
       { title: 'NetSuite Consulting', icon: Database, desc: 'Implementation and custom scripting.', detailTitle: 'NetSuite Mastery', detailDesc: 'Full-cycle implementation, SuiteScript 2.0 customization, and Advanced RevRec deployment.', color: '#4F46E5', href: '/services/netsuite-consulting' },
       { title: 'Coupa Consulting', icon: ShoppingCart, desc: 'BSM implementation and optimization.', detailTitle: 'Spend Optimization', detailDesc: 'Architecting Procure-to-Pay pipelines and supplier management for maximum ROI.', color: '#E11D48', href: '/services/coupa-consulting' },
@@ -366,7 +367,7 @@ function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: 
 // ─────────────────────────────────────────────────────────────────────────────
 // Main Navigation Component
 // ─────────────────────────────────────────────────────────────────────────────
-export function Navigation({ dynamicServices = [] }: { dynamicServices?: any[] }) {
+export function Navigation({ dynamicServices = [], settings = { company_name: 'Flowtaris', logo_url: '/images/logo.png' } }: { dynamicServices?: any[], settings?: Record<string, string> }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
@@ -412,10 +413,18 @@ export function Navigation({ dynamicServices = [] }: { dynamicServices?: any[] }
 
           {/* 1. Left: Logo */}
           <div className="flex-1 flex items-center justify-start">
-            <Link href="/" className="flex items-center group" suppressHydrationWarning>
+            <Link href="/" className="flex items-center group gap-3" suppressHydrationWarning>
+              {settings.logo_url && (
+                <Image
+                  src={settings.logo_url}
+                  alt={settings.company_name}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
+                />
+              )}
               <span className="text-[26px] font-extrabold tracking-tight leading-none text-navy-950 transition-colors duration-300 flex items-center gap-1.5">
-                Flowtaris
-                <span className="block w-2 h-2 rounded-full mb-3 bg-[#E8A020] group-hover:scale-150 transition-transform duration-300" />
+                {settings.company_name}
               </span>
             </Link>
           </div>
@@ -477,7 +486,7 @@ export function Navigation({ dynamicServices = [] }: { dynamicServices?: any[] }
               className="hidden lg:flex items-center justify-center px-8 py-3 rounded-full text-[13px] font-bold uppercase tracking-widest transition-all duration-300 shadow-sm bg-navy-950 text-white hover:bg-navy-800 hover:scale-105"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
-              Initiate
+              Contact Us
             </Link>
 
             <button

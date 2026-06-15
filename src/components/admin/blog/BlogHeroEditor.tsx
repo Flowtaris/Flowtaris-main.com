@@ -67,10 +67,10 @@ export function BlogHeroEditor({ blogId, initialData }: Props) {
         />
       </div>
 
-      <ImageUpload 
-        label="Hero Image" 
-        value={imageUrl} 
-        onChange={setImageUrl} 
+      <ImageUpload
+        label="Hero Image"
+        value={imageUrl}
+        onChange={setImageUrl}
       />
 
       <div className="grid grid-cols-2 gap-4">
@@ -92,7 +92,7 @@ export function BlogHeroEditor({ blogId, initialData }: Props) {
             value={authorName}
             onChange={(e) => setAuthorName(e.target.value)}
             className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            placeholder="e.g. Jane Doe"
+            placeholder="e.g. Name"
           />
         </div>
         <div>

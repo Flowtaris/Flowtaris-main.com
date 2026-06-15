@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, TrendingUp, Award } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
-import { PageHero } from '@/components/sections/PageHero'
 import { CTASection } from '@/components/sections/CTASection'
 import { AnimatedSection, StaggeredGrid } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
@@ -102,15 +101,6 @@ export default async function CaseStudiesPage() {
 
   return (
     <>
-      <PageHero
-        label="Proven Outcomes"
-        title="Real Results from Real"
-        titleHighlight="Enterprise Transformations."
-        description="Every engagement is a strategic partnership. These case studies represent complex, high-stakes transformations where our team delivered measurable, lasting impact."
-        size="lg"
-        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Case Studies' }]}
-      />
-
       {/* Stats row */}
       <section className="bg-white border-b border-slate-100">
         <div className="container-content py-10">

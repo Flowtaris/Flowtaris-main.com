@@ -6,6 +6,7 @@ const leadSchema = z.object({
   form_type: z.string().min(1, 'Form type is required'),
   name: z.string().min(1, 'Name is required'),
   company: z.string().optional(),
+  phone: z.string().optional(),
   work_email: z.string().email('Invalid email address'),
   platform: z.union([z.string(), z.array(z.string())]).optional(),
   service_needed: z.string().optional(),
@@ -39,7 +40,7 @@ export async function POST(req: NextRequest) {
     }
 
     const {
-      form_type, name, company, work_email,
+      form_type, name, company, phone, work_email,
       platform, service_needed, project_timeline,
       team_size, business_challenge, current_challenge,
       desired_outcome, question, preferred_contact,
@@ -108,6 +109,7 @@ export async function POST(req: NextRequest) {
       form_type,
       name,
       company: company || null,
+      phone: phone || null,
       work_email,
       platform: Array.isArray(platform) ? platform.join(', ') : platform || null,
       service_needed: service_needed || null,

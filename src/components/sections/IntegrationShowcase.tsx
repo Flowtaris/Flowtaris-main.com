@@ -78,36 +78,18 @@ export function IntegrationShowcase({ hideViewAll = false }: IntegrationShowcase
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px w-8 bg-[#E8A020]" />
-              <span
-                className="text-xs font-bold uppercase tracking-[0.2em] text-[#E8A020]"
-                style={{ fontFamily: 'var(--font-jetbrains)' }}
-              >
-                Integration Depth
-              </span>
-            </div>
-            <h2
-              className="text-4xl md:text-5xl font-black text-[#0A1834] max-w-2xl tracking-tight leading-tight"
-              style={{ fontFamily: 'var(--font-sora)' }}
-            >
-              We connect the systems{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8A020] to-[#D97706]">
-                your business depends on
-              </span>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
+          <div className="max-w-3xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#0A1628] leading-[1.1] tracking-tight" style={{ fontFamily: 'var(--font-sora)' }}>
+              We connect the systems <span className="text-slate-400">your business depends on.</span>
             </h2>
           </div>
-          {!hideViewAll && (
-            <Link
-              href="/services/erp-integrations"
-              className="hidden md:flex items-center gap-2 text-sm font-bold text-[#0A1834] group hover:text-[#E8A020] transition-colors pb-2"
-            >
-              View All Integrations
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          )}
+          
+          <div className="flex flex-col items-start lg:items-end gap-4 max-w-sm lg:pb-2">
+             <p className="text-slate-500 text-base md:text-lg leading-relaxed font-light text-left lg:text-right">
+                Seamless data flow across your entire enterprise architecture. We bridge the gap between procurement, finance, and operations.
+             </p>
+          </div>
         </div>
 
         {/* The Cinematic Grid */}
@@ -211,18 +193,6 @@ export function IntegrationShowcase({ hideViewAll = false }: IntegrationShowcase
           ))}
         </div>
 
-        {/* Mobile View All Link */}
-        {!hideViewAll && (
-          <div className="mt-8 flex justify-center md:hidden">
-            <Link
-              href="/services/erp-integrations"
-              className="flex items-center gap-2 text-sm font-bold text-[#0A1834] group hover:text-[#E8A020] transition-colors"
-            >
-              View All Integrations
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   )

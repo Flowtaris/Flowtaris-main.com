@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import CardSwap, { Card } from '@/components/ui/CardSwap'
 
 import LogoLoop from '@/components/ui/LogoLoop'
@@ -22,9 +22,10 @@ interface HeroSectionProps {
   title?: string;
   description?: string;
   technologies?: ModernTechnology[];
+  heroImages?: any[];
 }
 
-export function HeroSection({ title, description, technologies }: HeroSectionProps) {
+export function HeroSection({ title, description, technologies, heroImages }: HeroSectionProps) {
   return (
     <section className="min-h-screen bg-[#FAFAFA] flex flex-col justify-center pb-20 font-sans">
       <div className="container mx-auto px-6 md:px-[60px] max-w-[1440px]">
@@ -40,12 +41,9 @@ export function HeroSection({ title, description, technologies }: HeroSectionPro
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-4 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition-colors">
-                Install Component
-              </button>
-              <button className="px-8 py-4 bg-white text-gray-900 font-medium rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors">
-                View GitHub
-              </button>
+              <Link href="/about" className="px-8 py-4 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition-colors inline-block text-center">
+                Diagnose My ERP Problem
+              </Link>
             </div>
           </div>
 
@@ -60,51 +58,51 @@ export function HeroSection({ title, description, technologies }: HeroSectionPro
                 width={498}
                 height={445}
               >
-                <Card className="flex flex-col overflow-hidden border border-white/10 bg-black rounded-xl">
-                  {/* Card Header */}
-                  <div className="w-full h-10 flex items-center px-4 gap-2 border-b border-white/10 bg-white/5 shrink-0">
-                    <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                    <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                    <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-                  </div>
-                  {/* Card Content */}
-                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">React Bits</h3>
-                    <p className="text-sm md:text-base text-gray-400">
-                      Seamlessly integrate smooth, GSAP-powered animations into your application with a simple wrapper component.
-                    </p>
-                  </div>
-                </Card>
-                <Card className="flex flex-col overflow-hidden border border-white/10 bg-black rounded-xl">
-                  {/* Card Header */}
-                  <div className="w-full h-10 flex items-center px-4 gap-2 border-b border-white/10 bg-white/5 shrink-0">
-                    <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                    <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                    <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-                  </div>
-                  {/* Card Content */}
-                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">TypeScript Ready</h3>
-                    <p className="text-sm md:text-base text-gray-400">
-                      Fully typed props and refs for a flawless developer experience right out of the box.
-                    </p>
-                  </div>
-                </Card>
-                <Card className="flex flex-col overflow-hidden border border-white/10 bg-black rounded-xl">
-                  {/* Card Header */}
-                  <div className="w-full h-10 flex items-center px-4 gap-2 border-b border-white/10 bg-white/5 shrink-0">
-                    <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                    <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                    <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-                  </div>
-                  {/* Card Content */}
-                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
-                    <h3 className="text-xl md:text-2xl font-bold mb-2">Customizable</h3>
-                    <p className="text-sm md:text-base text-gray-400">
-                      Easily override CSS classes or pass inline styles to match your project's exact aesthetic.
-                    </p>
-                  </div>
-                </Card>
+                {heroImages && heroImages.length > 0 ? (
+                  heroImages.map((img) => (
+                    <Card key={img.id} className="flex flex-col overflow-hidden border border-white/10 bg-black rounded-xl relative group">
+                      {/* Background Image */}
+                      <img src={img.image_url} alt={img.topic} className="absolute inset-0 w-full h-full object-cover" />
+
+                      {/* Card Header (Top Bar) */}
+                      <div className="w-full h-10 flex items-center px-4 gap-2 border-b border-white/10 bg-black/20 backdrop-blur-md relative z-10 shrink-0">
+                        <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+                        <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                        <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+                      </div>
+
+                      {/* Empty flex-1 to push any future content down or just fill space */}
+                      <div className="flex-1"></div>
+                    </Card>
+                  ))
+                ) : [
+                  <Card key="fallback-1" className="flex flex-col overflow-hidden border border-white/10 bg-black rounded-xl">
+                    <div className="w-full h-10 flex items-center px-4 gap-2 border-b border-white/10 bg-white/5 shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+                      <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                      <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+                    </div>
+                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
+                      <h3 className="text-xl md:text-2xl font-bold mb-2">React Bits</h3>
+                      <p className="text-sm md:text-base text-gray-400">
+                        Seamlessly integrate smooth, GSAP-powered animations into your application with a simple wrapper component.
+                      </p>
+                    </div>
+                  </Card>,
+                  <Card key="fallback-2" className="flex flex-col overflow-hidden border border-white/10 bg-black rounded-xl">
+                    <div className="w-full h-10 flex items-center px-4 gap-2 border-b border-white/10 bg-white/5 shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
+                      <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
+                      <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
+                    </div>
+                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
+                      <h3 className="text-xl md:text-2xl font-bold mb-2">TypeScript Ready</h3>
+                      <p className="text-sm md:text-base text-gray-400">
+                        Fully typed props and refs for a flawless developer experience right out of the box.
+                      </p>
+                    </div>
+                  </Card>
+                ]}
               </CardSwap>
             </div>
           </div>
@@ -117,10 +115,10 @@ export function HeroSection({ title, description, technologies }: HeroSectionPro
         <p className="text-center text-sm font-semibold text-gray-400 mb-8 tracking-wider uppercase">
           Powered by Modern Technologies
         </p>
-        <div style={{ height: '80px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ height: '120px', position: 'relative', overflow: 'hidden' }}>
           <LogoLoop
-            logos={technologies && technologies.length > 0 
-              ? technologies.map(t => ({ src: t.logo_url })) 
+            logos={technologies && technologies.length > 0
+              ? technologies.map(t => ({ src: t.logo_url, title: t.name }))
               : techLogos}
             speed={60}
             direction="right"
@@ -129,7 +127,30 @@ export function HeroSection({ title, description, technologies }: HeroSectionPro
             fadeOut
             fadeOutColor="#FAFAFA"
             ariaLabel="Technology partners"
-            className="opacity-50 hover:opacity-100 transition-opacity duration-300"
+            className="transition-opacity duration-300"
+            renderItem={(item) => {
+              const src = 'src' in item ? item.src : '';
+              const title = item.title || '';
+              return (
+                <div className="group relative flex flex-col items-center justify-center cursor-pointer pb-6">
+                  {src ? (
+                    <img
+                      src={src}
+                      alt={title}
+                      className="w-[75px] h-[75px] object-contain transition-all duration-500 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"
+                    />
+                  ) : (
+                    <div className="transition-all duration-500 text-slate-400 group-hover:text-[#0A1628] filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100">
+                      {'node' in item ? item.node : null}
+                    </div>
+                  )}
+                  {/* H1 Tag for Name (appears on hover) */}
+                  <h1 className="absolute bottom-0 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 text-[#0A1628] font-bold text-sm tracking-wide whitespace-nowrap" style={{ fontFamily: 'var(--font-sora)' }}>
+                    {title}
+                  </h1>
+                </div>
+              );
+            }}
           />
         </div>
       </div>

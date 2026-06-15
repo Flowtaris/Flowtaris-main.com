@@ -8,8 +8,8 @@ import { CheckCircle, Download, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const schema = z.object({
-  name:    z.string().min(2, 'Name required'),
-  email:   z.string().email('Valid email required'),
+  name: z.string().min(2, 'Name required'),
+  email: z.string().email('Valid email required'),
   company: z.string().optional(),
 })
 
@@ -26,20 +26,20 @@ export function ResourceGateForm({ resourceId }: Props) {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    mode:     'onBlur',
+    mode: 'onBlur',
   })
 
   const onSubmit = async (data: FormData) => {
     setStatus('loading')
     try {
       const res = await fetch('/api/forms/submit', {
-        method:  'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({
-          form_type:      'resource_gate',
-          name:           data.name,
-          work_email:     data.email,
-          company:        data.company,
+        body: JSON.stringify({
+          form_type: 'resource_gate',
+          name: data.name,
+          work_email: data.email,
+          company: data.company,
           service_needed: `Resource download: ${resourceId}`,
         }),
       })
@@ -101,7 +101,7 @@ export function ResourceGateForm({ resourceId }: Props) {
           {...register('email')}
           type="email"
           className={cn('input', errors.email && 'input-error')}
-          placeholder="jane@company.com"
+          placeholder="Email Address"
         />
         {errors.email && <p className="error-message">{errors.email.message}</p>}
       </div>

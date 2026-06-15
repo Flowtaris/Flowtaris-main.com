@@ -94,3 +94,28 @@ export async function updateWhyChooseUsPriorities(updates: { id: string, priorit
   revalidatePath('/admin/why-choose-us')
   revalidatePath('/')
 }
+
+// Global Hero Image Actions
+export async function addHeroImage(data: any) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('global_hero_images').insert([data])
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/hero')
+  revalidatePath('/')
+}
+
+export async function updateHeroImage(id: string, data: any) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('global_hero_images').update(data).eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/hero')
+  revalidatePath('/')
+}
+
+export async function deleteHeroImage(id: string) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('global_hero_images').delete().eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/hero')
+  revalidatePath('/')
+}
