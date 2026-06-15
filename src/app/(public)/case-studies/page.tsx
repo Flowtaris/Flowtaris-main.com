@@ -322,8 +322,8 @@ export default async function CaseStudiesPage() {
                           <div className="flex items-start gap-2 p-2.5 rounded-lg bg-gold-50 border border-gold-100 mb-4">
                             <CheckCircle className="w-3.5 h-3.5 text-gold-500 shrink-0 mt-0.5" />
                             <div>
-                              <div className="text-xs font-bold text-navy-900">{metrics[0].value}{metrics[0].unit}</div>
-                              <div className="text-[10px] text-slate-400">{metrics[0].label}</div>
+                              <div className="text-xs font-bold text-navy-900">{metrics[0]?.value}{metrics[0]?.unit}</div>
+                              <div className="text-[10px] text-slate-400">{metrics[0]?.label}</div>
                             </div>
                           </div>
                         )}
