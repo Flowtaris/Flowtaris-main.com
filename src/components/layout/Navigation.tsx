@@ -117,7 +117,7 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
             >
               <div className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center mb-6 text-[#E8A020] shadow-[0_4px_12px_rgba(0,0,0,0.04)] group-hover:scale-110 transition-transform duration-500">
                 {activeService ? (() => {
-                  const ActiveIcon = activeService.icon as React.ElementType;
+                  const ActiveIcon = activeService.icon as any;
                   return <ActiveIcon strokeWidth={1.5} className="w-7 h-7" style={{ color: activeService.color }} />
                 })() : (
                   <Globe strokeWidth={1.5} className="w-7 h-7" />
@@ -177,14 +177,19 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
                   borderColor: hoveredIdx === idx ? '#0A1628' : ''
                 }}
               >
-                <item.icon
-                  className="w-5 h-5 text-slate-500 transition-all duration-400"
-                  strokeWidth={1.5}
-                  style={{
-                    color: hoveredIdx === idx ? item.color : '',
-                    transform: hoveredIdx === idx ? 'scale(1.1)' : 'scale(1)'
-                  }}
-                />
+                {(() => {
+                  const ItemIcon = item.icon as any;
+                  return (
+                    <ItemIcon
+                      className="w-5 h-5 text-slate-500 transition-all duration-400"
+                      strokeWidth={1.5}
+                      style={{
+                        color: hoveredIdx === idx ? item.color : '',
+                        transform: hoveredIdx === idx ? 'scale(1.1)' : 'scale(1)'
+                      }}
+                    />
+                  );
+                })()}
               </div>
               <div className="relative">
                 <h4 className="text-[14px] font-bold text-slate-800 tracking-tight mb-0.5 group-hover:text-[#0A1628] transition-colors">{item.title}</h4>
