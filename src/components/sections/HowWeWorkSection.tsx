@@ -86,8 +86,9 @@ export function HowWeWorkSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting)
+      (entries) => {
+        const entry = entries[0];
+        if (entry) setIsInView(entry.isIntersecting);
       },
       { threshold: 0.2 } // Starts playing when 20% of section is visible
     )
