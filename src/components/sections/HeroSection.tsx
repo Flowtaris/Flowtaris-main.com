@@ -27,11 +27,11 @@ interface HeroSectionProps {
 export function HeroSection({ title, description, technologies }: HeroSectionProps) {
   return (
     <section className="min-h-screen bg-[#FAFAFA] flex flex-col justify-center pb-20 font-sans">
-      <div className="container mx-auto px-6 md:px-[60px] max-w-[1260px]">
+      <div className="container mx-auto px-6 md:px-[60px] max-w-[1440px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left Content */}
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-6" style={{ fontFamily: 'var(--font-sora)' }}>
               {title || "ERP Implementation for Companies Outgrowing Chaos"}
             </h1>
