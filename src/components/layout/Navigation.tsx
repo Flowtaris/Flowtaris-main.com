@@ -116,9 +116,10 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
               className="relative z-10 flex flex-col h-full"
             >
               <div className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center mb-6 text-[#E8A020] shadow-[0_4px_12px_rgba(0,0,0,0.04)] group-hover:scale-110 transition-transform duration-500">
-                {activeService ? (
-                  <activeService.icon strokeWidth={1.5} className="w-7 h-7" style={{ color: activeService.color }} />
-                ) : (
+                {activeService ? (() => {
+                  const ActiveIcon = activeService.icon as React.ElementType;
+                  return <ActiveIcon strokeWidth={1.5} className="w-7 h-7" style={{ color: activeService.color }} />
+                })() : (
                   <Globe strokeWidth={1.5} className="w-7 h-7" />
                 )}
               </div>
