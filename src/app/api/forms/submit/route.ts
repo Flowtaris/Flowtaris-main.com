@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     // ── Validate payload using Zod ───────────────────────────────────────
     const parsedResult = leadSchema.safeParse(body)
     if (!parsedResult.success) {
-      return NextResponse.json({ error: parsedResult.error.errors[0].message }, { status: 400 })
+      return NextResponse.json({ error: parsedResult.error.issues[0].message }, { status: 400 })
     }
 
     const {

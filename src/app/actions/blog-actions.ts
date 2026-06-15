@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import {
   BlogHero,
   BlogTopic,
@@ -9,8 +9,6 @@ import {
 } from '@/types/database'
 
 function revalidateBlog(slug: string) {
-  revalidateTag('blogs')
-  revalidateTag(slug)
   revalidatePath('/admin/blog')
   revalidatePath(`/admin/blog/${slug}`)
   revalidatePath(`/blog/${slug}`)
