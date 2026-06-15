@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
+  { label: 'Case Studies', href: '/case-studies' },
   { label: 'Blog', href: '/blog' },
 ]
 
@@ -497,7 +498,8 @@ export function Navigation() {
               <div className="flex flex-col gap-6">
                 <Link href="/services" className="text-xl font-bold text-navy-950">Services</Link>
                 <Link href="/integrations" className="text-xl font-bold text-navy-950">Integrations</Link>
-                {NAV_LINKS.map(l => <Link key={l.label} href={l.href} className="text-xl font-bold text-navy-950">{l.label}</Link>)}
+                <Link href="/case-studies" className="text-xl font-bold text-navy-950">Case Studies</Link>
+                {NAV_LINKS.filter(l => l.href !== '/case-studies').map(l => <Link key={l.label} href={l.href} className="text-xl font-bold text-navy-950">{l.label}</Link>)}
               </div>
             </div>
           </motion.div>

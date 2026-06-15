@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { IntegrationForm } from '@/components/admin/IntegrationForm'
 import { Plus } from 'lucide-react'
+import Link from 'next/link'
 
 export const revalidate = 0; // Ensures it's dynamically rendered
 
@@ -49,14 +50,21 @@ export default async function AdminIntegrationsPage() {
                 <div>
                   <h3 className="font-medium text-navy-900">{item.name}</h3>
                   <div className="flex gap-4 mt-1 text-xs text-slate-500">
+                    <span className="font-mono text-slate-400">/{item.slug}</span>
                     <span>SVG 1: {item.svg_slot_1 ? 'Provided' : 'Empty'}</span>
                     <span>SVG 2: {item.svg_slot_2 ? 'Provided' : 'Empty'}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">
-                    Edit / Delete capabilities coming soon
-                  </span>
+                  <Link 
+                    href={`/admin/integrations/${item.slug || item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                    className="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1.5 rounded font-medium transition-colors"
+                  >
+                    Manage Content
+                  </Link>
+                  <button className="text-xs bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1.5 rounded font-medium transition-colors">
+                    Delete
+                  </button>
                 </div>
               </div>
             ))}

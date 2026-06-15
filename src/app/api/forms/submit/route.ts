@@ -1,28 +1,50 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { z } from 'zod'
+
+const leadSchema = z.object({
+  form_type: z.string().min(1, 'Form type is required'),
+  name: z.string().min(1, 'Name is required'),
+  company: z.string().optional(),
+  work_email: z.string().email('Invalid email address'),
+  platform: z.union([z.string(), z.array(z.string())]).optional(),
+  service_needed: z.string().optional(),
+  project_timeline: z.string().optional(),
+  team_size: z.string().optional(),
+  business_challenge: z.string().optional(),
+  current_challenge: z.string().optional(),
+  desired_outcome: z.string().optional(),
+  question: z.string().optional(),
+  preferred_contact: z.string().optional(),
+  hcaptcha_token: z.string().optional(),
+})
 
 // Rate limiting: simple in-memory for edge (replace with Upstash for production)
 const submissions = new Map<string, number>()
 
+export async function GET() {
+  const supabase = await createClient()
+  const { data, error } = await supabase.from('leads').select('*')
+  return NextResponse.json({ data, error })
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
+    
+    // ── Validate payload using Zod ───────────────────────────────────────
+    const parsedResult = leadSchema.safeParse(body)
+    if (!parsedResult.success) {
+      return NextResponse.json({ error: parsedResult.error.errors[0].message }, { status: 400 })
+    }
+
     const {
       form_type, name, company, work_email,
       platform, service_needed, project_timeline,
-      business_challenge, preferred_contact,
+      team_size, business_challenge, current_challenge,
+      desired_outcome, question, preferred_contact,
       hcaptcha_token,
-    } = body
-
-    // ── Validate required fields ───────────────────────────────────────
-    if (!name || !work_email || !form_type) {
-      return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 })
-    }
-
-    // Basic email format check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(work_email)) {
-      return NextResponse.json({ error: 'Invalid email address.' }, { status: 400 })
-    }
+    } = parsedResult.data
 
     // ── Rate limiting — 20 second cooldown per IP ──────────────────────
     const ip = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? 'unknown'
@@ -80,8 +102,30 @@ export async function POST(req: NextRequest) {
       })
     }
 
-    // Mock successful submission since backend is not implemented yet
-    console.log('[Form Submission] Received form data. Skipping DB save.', { name, work_email, form_type })
+    // Save to database
+    const supabase = await createClient()
+    const { error: dbError } = await supabase.from('leads').insert({
+      form_type,
+      name,
+      company: company || null,
+      work_email,
+      platform: Array.isArray(platform) ? platform.join(', ') : platform || null,
+      service_needed: service_needed || null,
+      project_timeline: project_timeline || null,
+      team_size: team_size || null,
+      business_challenge: business_challenge || null,
+      current_challenge: current_challenge || null,
+      desired_outcome: desired_outcome || null,
+      question: question || null,
+      preferred_contact: preferred_contact || null,
+    })
+
+    if (dbError) {
+      const fs = require('fs')
+      fs.writeFileSync('db_error_log.txt', JSON.stringify(dbError, null, 2))
+      console.error('[Form Submission] Database error:', dbError)
+      return NextResponse.json({ error: 'Database error. Did you run the SQL migration?' }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {

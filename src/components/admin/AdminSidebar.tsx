@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Users, FileText, BookOpen,
   FolderOpen, HelpCircle, Search, ImageIcon,
-  Settings, Shield, LogOut, Star, Database, Cpu, Link2,
+  Settings, Shield, LogOut, Star, Database, Cpu, Link2, Info,
   type LucideIcon
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -25,7 +25,8 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Services',     href: '/admin/services',     icon: Database,        roles: ['super_admin', 'content_manager'] },
   { label: 'Why Choose Us',href: '/admin/why-choose-us',icon: Users,           roles: ['super_admin', 'content_manager'] },
   { label: 'Integrations', href: '/admin/integrations', icon: Link2,           roles: ['super_admin', 'content_manager'] },
-  { label: 'Leads',        href: '/admin/leads',        icon: Users,           roles: ['super_admin', 'lead_manager'] },
+  { label: 'About',        href: '/admin/about',        icon: Info,            roles: ['super_admin', 'content_manager'] },
+  { label: 'Contact Forms',href: '/admin/leads',        icon: Users,           roles: ['super_admin', 'lead_manager'] },
   { label: 'Blog',         href: '/admin/blog',         icon: BookOpen,        roles: ['super_admin', 'content_manager'] },
   { label: 'Case Studies', href: '/admin/case-studies',  icon: Star,            roles: ['super_admin', 'content_manager'] },
   { label: 'Resources',    href: '/admin/resources',    icon: FolderOpen,      roles: ['super_admin', 'content_manager'] },

@@ -45,8 +45,47 @@ CREATE TRIGGER update_modern_technologies_modtime BEFORE UPDATE ON modern_techno
 -- ==========================================
 -- 3. SERVICES PAGE/SECTION
 -- ==========================================
+
+-- Parent services registry (each row = one service page)
+CREATE TABLE IF NOT EXISTS services (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL UNIQUE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE TRIGGER update_services_modtime BEFORE UPDATE ON services FOR EACH ROW EXECUTE PROCEDURE update_updated_at_column();
+
+-- Migration for existing installs: add service_id FK to all content tables
+-- (safe to run repeatedly thanks to IF NOT EXISTS / DO guards)
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_hero' AND column_name='service_id') THEN
+        ALTER TABLE services_hero ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_why_choose' AND column_name='service_id') THEN
+        ALTER TABLE services_why_choose ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_business_suite_main' AND column_name='service_id') THEN
+        ALTER TABLE services_business_suite_main ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_business_suite_items' AND column_name='service_id') THEN
+        ALTER TABLE services_business_suite_items ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_erp_architecture_main' AND column_name='service_id') THEN
+        ALTER TABLE services_erp_architecture_main ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_erp_architecture_cards' AND column_name='service_id') THEN
+        ALTER TABLE services_erp_architecture_cards ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='services_deep_module' AND column_name='service_id') THEN
+        ALTER TABLE services_deep_module ADD COLUMN service_id UUID REFERENCES services(id) ON DELETE CASCADE;
+    END IF;
+END $$;
+
 CREATE TABLE services_hero (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     hero_description TEXT NOT NULL,
     normal_description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -56,6 +95,7 @@ CREATE TRIGGER update_services_hero_modtime BEFORE UPDATE ON services_hero FOR E
 
 CREATE TABLE services_why_choose (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     main_description TEXT NOT NULL,
     small_description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -66,6 +106,7 @@ CREATE TRIGGER update_services_why_choose_modtime BEFORE UPDATE ON services_why_
 -- A Complete Business Management Suite
 CREATE TABLE services_business_suite_main (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     small_description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -74,6 +115,7 @@ CREATE TRIGGER update_services_business_suite_main_modtime BEFORE UPDATE ON serv
 
 CREATE TABLE services_business_suite_items (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     title TEXT NOT NULL,
     description TEXT,
     image_url TEXT,
@@ -85,6 +127,7 @@ CREATE TRIGGER update_services_business_suite_items_modtime BEFORE UPDATE ON ser
 -- Engineering the ERP Architecture
 CREATE TABLE services_erp_architecture_main (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     small_description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
@@ -93,6 +136,7 @@ CREATE TRIGGER update_services_erp_architecture_main_modtime BEFORE UPDATE ON se
 
 CREATE TABLE services_erp_architecture_cards (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     title TEXT NOT NULL,
     description TEXT,
     tags TEXT[] DEFAULT '{}',
@@ -105,6 +149,7 @@ CREATE TRIGGER update_services_erp_architecture_cards_modtime BEFORE UPDATE ON s
 -- Deep Module Expertise
 CREATE TABLE services_deep_module (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    service_id UUID REFERENCES services(id) ON DELETE CASCADE,
     title TEXT NOT NULL,
     small_description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -155,7 +200,7 @@ BEGIN
         WHERE table_schema = 'public' 
         AND table_name IN (
             'global_hero', 'global_hero_images', 'modern_technologies',
-            'services_hero', 'services_why_choose', 'services_business_suite_main',
+            'services', 'services_hero', 'services_why_choose', 'services_business_suite_main',
             'services_business_suite_items', 'services_erp_architecture_main',
             'services_erp_architecture_cards', 'services_deep_module',
             'why_choose_us_cards', 'integrations'

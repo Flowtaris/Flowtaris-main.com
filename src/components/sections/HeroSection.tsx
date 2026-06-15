@@ -16,7 +16,12 @@ const techLogos = [
   { node: <SiNodedotjs size={75} />, title: "Node.js", href: "https://nodejs.org" },
 ]
 
-export function HeroSection() {
+interface HeroSectionProps {
+  title?: string;
+  description?: string;
+}
+
+export function HeroSection({ title, description }: HeroSectionProps) {
   return (
     <section className="min-h-screen bg-[#FAFAFA] flex flex-col justify-center pb-20 font-sans">
       <div className="container mx-auto px-6 md:px-[60px] max-w-[1260px]">
@@ -25,10 +30,10 @@ export function HeroSection() {
           {/* Left Content */}
           <div className="max-w-xl">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 tracking-tight leading-tight mb-6">
-              ERP Implementation for Companies Outgrowing Chaos
+              {title || "ERP Implementation for Companies Outgrowing Chaos"}
             </h1>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-              A lightweight, hardware-accelerated React component for creating beautiful card swapping animations. No complex configuration required.
+              {description || "A lightweight, hardware-accelerated React component for creating beautiful card swapping animations. No complex configuration required."}
             </p>
 
             <div className="flex flex-wrap gap-4">

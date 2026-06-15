@@ -79,11 +79,7 @@ export function WhyChooseUsSection() {
               </div>
             </div>
 
-            {/* Discover CTA Button */}
-            <button className="absolute bottom-8 right-8 bg-[#0F172A] hover:bg-black text-white px-6 py-4 rounded-full flex items-center gap-3 font-semibold shadow-xl transition-all hover:scale-105 z-20">
-              <MessageCircle className="w-5 h-5 fill-white" />
-              Discover Flowtaris
-            </button>
+
           </div>
         </div>
       </div>

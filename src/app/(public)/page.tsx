@@ -13,6 +13,7 @@ import { Suspense } from 'react'
 import { SkeletonCard } from '@/components/ui/Skeleton'
 
 import { HeroSection } from '@/components/sections/HeroSection'
+import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: 'Flowtaris \u2014 Enterprise ERP & Integration Consulting',
@@ -27,8 +28,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
   const schema = organizationSchema()
+  const supabase = await createClient()
+
+  // Fetch global hero content
+  const { data: heroData } = await supabase
+    .from('global_hero')
+    .select('*')
+    .limit(1)
+    .maybeSingle()
 
   return (
     <>
@@ -38,7 +47,10 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <HeroSection />
+      <HeroSection 
+        title={heroData?.main_description} 
+        description={heroData?.small_description ?? undefined} 
+      />
       <ServiceScrollStack />
       <WhyChooseUsSection />
       <CapabilitiesBanner />

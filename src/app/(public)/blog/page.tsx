@@ -1,99 +1,67 @@
-'use client'
-
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Search } from 'lucide-react'
+import { createClient } from '@/lib/supabase/server'
 
-const POSTS = [
-  {
-    id: 'sox-compliance',
-    title: 'Automating SOX Compliance in Your Procure-to-Pay Pipeline',
-    excerpt: 'Manual audits are prone to error. Learn how cryptographic hashing and immutable ledger posts can guarantee strict compliance without the overhead.',
-    category: 'Security & Compliance',
-    date: 'June 5, 2026',
-    author: 'Michael Chang',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'netsuite-suiteql',
-    title: 'Advanced SuiteQL: Unlocking Real-time Financial Telemetry',
-    excerpt: 'Move beyond traditional saved searches. A deep dive into utilizing SuiteQL via RESTlets for high-performance, real-time data extraction.',
-    category: 'Technical Guide',
-    date: 'May 28, 2026',
-    author: 'Elena Rodriguez',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'workday-hcm',
-    title: 'Idempotency Patterns in Workday Payroll Integrations',
-    excerpt: 'Handling network failures gracefully. How to design idempotent payloads to ensure high-value journal entries are never duplicated.',
-    category: 'Engineering',
-    date: 'May 15, 2026',
-    author: 'Sarah Chen',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'coupa-idoc',
-    title: 'Legacy Meets Modern: Bridging JSON and SAP IDocs',
-    excerpt: 'Architectural patterns for translating modern RESTful JSON payloads into legacy SAP ALE and IDoc formats securely and reliably.',
-    category: 'Architecture',
-    date: 'May 02, 2026',
-    author: 'David Kumar',
-    image: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'saas-governance',
-    title: 'The Hidden Cost of Shadow IT: Automating SaaS Governance',
-    excerpt: 'How integrating SaaS management platforms with your ERP can automatically uncover unsanctioned software spend and enforce policies.',
-    category: 'Strategy',
-    date: 'April 20, 2026',
-    author: 'Rachel Foster',
-    image: 'https://images.unsplash.com/photo-1639322537504-6427a16b0a28?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'ai-automation',
-    title: 'Evaluating LLMs for Automated Invoice Reconciliation',
-    excerpt: 'Our findings on utilizing frontier AI models to parse, map, and mathematically reconcile complex multi-line PDF invoices at scale.',
-    category: 'AI & ML',
-    date: 'April 08, 2026',
-    author: 'Dr. James Wilson',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'data-mesh-implementation',
-    title: 'Transitioning to a Data Mesh Architecture for Financial Data',
-    excerpt: 'Why centralized data lakes are failing enterprise finance. A practical guide to implementing a domain-oriented decentralized data ownership model.',
-    category: 'Data Architecture',
-    date: 'March 22, 2026',
-    author: 'Alex Thorne',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'zero-trust-erp',
-    title: 'Implementing Zero Trust within Legacy ERP Ecosystems',
-    excerpt: 'Securing massive ERP surfaces isn\'t just about VPNs anymore. We explore applying identity-aware proxies and micro-segmentation to on-premise systems.',
-    category: 'Security',
-    date: 'March 11, 2026',
-    author: 'Michael Chang',
-    image: 'https://images.unsplash.com/photo-1614064641913-6b714165ea24?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: 'cloud-cost-optimization',
-    title: 'FinOps for Integration: Optimizing High-Volume Middleware Cloud Costs',
-    excerpt: 'When integration pipelines process billions of events, infrastructure costs can spiral. Learn how to architect for efficiency without sacrificing throughput.',
-    category: 'Strategy',
-    date: 'February 28, 2026',
-    author: 'Elena Rodriguez',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600'
+export default async function BlogsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const params = await searchParams;
+  const page = typeof params.page === 'string' ? parseInt(params.page) : 1;
+  const limit = 7; // 1 featured + 6 regular
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const supabase = await createClient(['blogs'])
+  const { data: blogsData, error, count } = await supabase
+    .from('blogs')
+    .select(`
+      id,
+      name,
+      slug,
+      created_at,
+      blogs_hero (
+        title,
+        description,
+        image_url,
+        publication_date,
+        author_name
+      )
+    `, { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to)
+
+  const totalPages = Math.ceil((count || 0) / limit);
+
+  if (error) {
+    console.error('Error fetching blogs:', error)
   }
-]
 
-const FEATURED_POST = POSTS[0]
-const REGULAR_POSTS = POSTS.slice(1)
+  const posts = (blogsData || []).map((b: any) => {
+    const hero = Array.isArray(b.blogs_hero) ? b.blogs_hero[0] : b.blogs_hero;
+    
+    return {
+      id: b.slug,
+      title: hero?.title || b.name,
+      excerpt: hero?.description || '',
+      category: b.name,
+      date: hero?.publication_date || new Date(b.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      author: hero?.author_name || 'Admin',
+      image: hero?.image_url || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1600'
+    }
+  })
 
-export default function BlogsPage() {
-  if (!FEATURED_POST) return null;
+  const FEATURED_POST = posts[0]
+  const REGULAR_POSTS = posts.slice(1)
+
+  if (!FEATURED_POST) return (
+    <main className="bg-white min-h-screen font-sans flex items-center justify-center">
+      <p className="text-slate-500">No blogs found.</p>
+    </main>
+  );
   
   return (
     <main className="bg-white min-h-screen font-sans selection:bg-[#E8A020] selection:text-white">
@@ -192,6 +160,35 @@ export default function BlogsPage() {
             </Link>
           ))}
         </div>
+        
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="mt-16 flex items-center justify-center gap-4">
+            {page > 1 ? (
+              <Link href={`/blog?page=${page - 1}`} className="px-5 py-2.5 rounded-full border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">
+                Previous
+              </Link>
+            ) : (
+              <span className="px-5 py-2.5 rounded-full border border-slate-100 text-sm font-semibold text-slate-300 cursor-not-allowed">
+                Previous
+              </span>
+            )}
+            
+            <span className="text-sm font-semibold text-slate-500">
+              Page {page} of {totalPages}
+            </span>
+            
+            {page < totalPages ? (
+              <Link href={`/blog?page=${page + 1}`} className="px-5 py-2.5 rounded-full border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">
+                Next
+              </Link>
+            ) : (
+              <span className="px-5 py-2.5 rounded-full border border-slate-100 text-sm font-semibold text-slate-300 cursor-not-allowed">
+                Next
+              </span>
+            )}
+          </div>
+        )}
       </section>
     </main>
   )

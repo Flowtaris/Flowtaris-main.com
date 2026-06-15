@@ -27,16 +27,6 @@ export default function IdentityProvisioningPage() {
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12 relative z-10">
           <div className="flex flex-col items-center text-center">
             
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white border border-zinc-200 shadow-sm mb-12"
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-              <span className="text-[11px] font-mono font-medium tracking-wide text-zinc-600 uppercase">Enterprise Integration</span>
-            </motion.div>
-            
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -196,11 +186,11 @@ export default function IdentityProvisioningPage() {
         </div>
       </section>
 
-      {/* ── BENTO GRID FEATURES ── */}
-      <section className="py-32">
+      {/* ── SIMPLE GRID FEATURES ── */}
+      <section className="py-24 bg-white border-t border-zinc-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
-          <div className="mb-20 max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-zinc-900 mb-4" style={{ fontFamily: 'var(--font-sora)' }}>
+          <div className="mb-16 max-w-2xl">
+            <h2 className="text-3xl font-medium tracking-tight text-zinc-900 mb-4" style={{ fontFamily: 'var(--font-sora)' }}>
               Security precision.
             </h2>
             <p className="text-lg text-zinc-500">
@@ -208,111 +198,50 @@ export default function IdentityProvisioningPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[300px]">
-            {/* Feature 1 - Large spanning */}
-            <div className="md:col-span-2 relative bg-white border border-zinc-200 rounded-3xl p-8 overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-blue-50 to-transparent rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/3" />
-              <div className="relative z-10 h-full flex flex-col justify-between">
-                <div className="mb-8 md:mb-0">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-6 text-zinc-900">
-                    <Database className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">Dynamic Role Assignment</h3>
-                  <p className="text-zinc-500 max-w-sm text-sm leading-relaxed">
-                    Map Workday job profiles and cost centers to Coupa user roles automatically. Ensure users get exact permissions on day one.
-                  </p>
-                </div>
-                {/* Mini Visualization */}
-                <div className="w-full h-24 bg-zinc-50 border border-zinc-200/60 rounded-xl flex items-center px-4 gap-4 overflow-hidden">
-                  <div className="flex flex-col gap-2 w-1/3">
-                    <div className="h-2 w-3/4 bg-blue-200 rounded" />
-                    <div className="h-2 w-1/2 bg-blue-200 rounded" />
-                  </div>
-                  <div className="flex-1 border-t border-dashed border-zinc-300 relative hidden sm:block">
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 py-1 bg-white border border-zinc-200 text-[10px] font-mono text-zinc-500 rounded shadow-sm">
-                      map_roles()
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2 w-1/3 items-end">
-                    <div className="h-2 w-full bg-orange-200 rounded" />
-                    <div className="h-2 w-2/3 bg-orange-200 rounded" />
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-[#FAFAFA] border border-zinc-200 rounded-2xl p-8">
+              <div className="w-10 h-10 rounded-lg bg-white border border-zinc-200 flex items-center justify-center mb-6 text-zinc-700">
+                <Database className="w-5 h-5" />
               </div>
+              <h3 className="text-xl font-semibold text-zinc-900 mb-3">Dynamic Role Assignment</h3>
+              <p className="text-zinc-500 leading-relaxed">
+                Map Workday job profiles and cost centers to Coupa user roles automatically. Ensure users get exact permissions on day one.
+              </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-white border border-zinc-200 rounded-3xl p-8 flex flex-col justify-between group shadow-sm hover:shadow-md transition-shadow">
-              <div className="mb-8 md:mb-0">
-                <div className="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-6 text-zinc-900">
-                  <Lock className="w-5 h-5" />
-                </div>
-                <h3 className="text-xl font-semibold text-zinc-900 mb-2">Instant Offboarding</h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  When a termination is logged in Workday, Coupa access is instantly revoked, ensuring SOX compliance.
-                </p>
+            <div className="bg-[#FAFAFA] border border-zinc-200 rounded-2xl p-8">
+              <div className="w-10 h-10 rounded-lg bg-white border border-zinc-200 flex items-center justify-center mb-6 text-zinc-700">
+                <Lock className="w-5 h-5" />
               </div>
-              <div className="h-16 bg-zinc-900 rounded-xl p-3 flex flex-col justify-center overflow-hidden">
-                <div className="text-[10px] font-mono text-green-400">ACCESS_REVOKED [200]</div>
-                <div className="text-[10px] font-mono text-zinc-500 mt-1">{"{ status: inactive, ts: 1718239011 }"}</div>
-              </div>
+              <h3 className="text-xl font-semibold text-zinc-900 mb-3">Instant Offboarding</h3>
+              <p className="text-zinc-500 leading-relaxed">
+                When a termination is logged in Workday, Coupa access is instantly revoked, ensuring SOX compliance.
+              </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-white border border-zinc-200 rounded-3xl p-8 flex flex-col justify-between group shadow-sm hover:shadow-md transition-shadow">
-              <div>
-                <div className="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-6 text-zinc-900">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <h3 className="text-xl font-semibold text-zinc-900 mb-2">Approval Chains</h3>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  Keep Coupa approval limits and managerial hierarchies perfectly synced with Workday supervisory organizations.
-                </p>
+            <div className="bg-[#FAFAFA] border border-zinc-200 rounded-2xl p-8">
+              <div className="w-10 h-10 rounded-lg bg-white border border-zinc-200 flex items-center justify-center mb-6 text-zinc-700">
+                <Zap className="w-5 h-5" />
               </div>
+              <h3 className="text-xl font-semibold text-zinc-900 mb-3">Approval Chains</h3>
+              <p className="text-zinc-500 leading-relaxed">
+                Keep Coupa approval limits and managerial hierarchies perfectly synced with Workday supervisory organizations.
+              </p>
             </div>
 
-            {/* Feature 4 - Spanning */}
-            <div className="md:col-span-2 relative bg-white border border-zinc-200 rounded-3xl p-8 overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
-              <div className="relative z-10 h-full flex flex-col md:flex-row gap-8 items-center justify-between">
-                <div className="md:w-1/2">
-                  <div className="w-10 h-10 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center mb-6 text-zinc-900">
-                    <Network className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-zinc-900 mb-2">Cost Center Back-Sync</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">
-                    Keep your Workday cost centers perfectly mapped to your Coupa Chart of Accounts dynamically.
-                  </p>
-                </div>
-                <div className="md:w-1/2 w-full h-full relative min-h-[150px]">
-                  {/* Abstract diagram */}
-                  <div className="absolute inset-0 bg-zinc-50 border border-zinc-100 rounded-xl flex items-center justify-center overflow-hidden">
-                    <div className="w-32 h-32 relative">
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-zinc-200 rounded-full" />
-                      <div className="absolute bottom-0 left-0 w-8 h-8 bg-zinc-200 rounded-full" />
-                      <div className="absolute bottom-0 right-0 w-8 h-8 bg-zinc-200 rounded-full" />
-                      
-                      {/* Connecting lines */}
-                      <svg className="absolute inset-0 w-full h-full">
-                        <path d="M 64 16 L 16 112" stroke="#d4d4d8" strokeWidth="2" strokeDasharray="4 4" />
-                        <path d="M 64 16 L 112 112" stroke="#d4d4d8" strokeWidth="2" strokeDasharray="4 4" />
-                        <path d="M 16 112 L 112 112" stroke="#d4d4d8" strokeWidth="2" strokeDasharray="4 4" />
-                      </svg>
-                      
-                      {/* Active dot */}
-                      <motion.div 
-                        animate={{ 
-                          top: ['0%', '100%', '100%', '0%'], 
-                          left: ['50%', '0%', '100%', '50%'] 
-                        }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-2 h-2 bg-blue-500 rounded-full -translate-x-1 -translate-y-1"
-                      />
-                    </div>
-                  </div>
-                </div>
+            {/* Feature 4 */}
+            <div className="bg-[#FAFAFA] border border-zinc-200 rounded-2xl p-8">
+              <div className="w-10 h-10 rounded-lg bg-white border border-zinc-200 flex items-center justify-center mb-6 text-zinc-700">
+                <Network className="w-5 h-5" />
               </div>
+              <h3 className="text-xl font-semibold text-zinc-900 mb-3">Cost Center Back-Sync</h3>
+              <p className="text-zinc-500 leading-relaxed">
+                Keep your Workday cost centers perfectly mapped to your Coupa Chart of Accounts dynamically.
+              </p>
             </div>
-
           </div>
         </div>
       </section>
