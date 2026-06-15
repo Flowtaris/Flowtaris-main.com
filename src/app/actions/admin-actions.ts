@@ -107,6 +107,18 @@ export async function deleteIntegration(id: string) {
   revalidatePath('/integrations')
 }
 
+export async function updateIntegrationPriorities(updates: { id: string, priority: number }[]) {
+  const supabase = await createClient()
+  
+  const promises = updates.map(update => 
+    supabase.from('integrations').update({ priority: update.priority }).eq('id', update.id)
+  )
+  await Promise.all(promises)
+  
+  revalidatePath('/admin/integrations')
+  revalidatePath('/')
+}
+
 // ==========================================
 // SERVICES (ERP Architecture Cards) ACTIONS
 // ==========================================

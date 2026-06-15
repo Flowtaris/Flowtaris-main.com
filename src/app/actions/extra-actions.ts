@@ -9,6 +9,7 @@ export async function addTechnology(data: any) {
   const { error } = await supabase.from('modern_technologies').insert([data])
   if (error) throw new Error(error.message)
   revalidatePath('/admin/technologies')
+  revalidatePath('/')
 }
 
 export async function deleteTechnology(id: string) {
@@ -16,6 +17,54 @@ export async function deleteTechnology(id: string) {
   const { error } = await supabase.from('modern_technologies').delete().eq('id', id)
   if (error) throw new Error(error.message)
   revalidatePath('/admin/technologies')
+  revalidatePath('/')
+}
+
+export async function updateTechnology(id: string, data: any) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('modern_technologies').update(data).eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/technologies')
+  revalidatePath('/')
+}
+
+export async function updateTechnologyPriorities(updates: { id: string, priority: number }[]) {
+  const supabase = await createClient()
+  
+  const promises = updates.map(update => 
+    supabase.from('modern_technologies').update({ priority: update.priority }).eq('id', update.id)
+  )
+  await Promise.all(promises)
+  
+  revalidatePath('/admin/technologies')
+  revalidatePath('/')
+}
+
+// Why Choose Us Sectors Actions
+export async function addWhyChooseUsSector(data: any) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('why_choose_us_sectors').insert([data])
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/why-choose-us')
+  revalidatePath('/')
+}
+
+export async function deleteWhyChooseUsSector(id: string) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('why_choose_us_sectors').delete().eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/why-choose-us')
+  revalidatePath('/')
+}
+
+export async function updateWhyChooseUsSectorPriorities(updates: { id: string, priority: number }[]) {
+  const supabase = await createClient()
+  const promises = updates.map(update => 
+    supabase.from('why_choose_us_sectors').update({ priority: update.priority }).eq('id', update.id)
+  )
+  await Promise.all(promises)
+  revalidatePath('/admin/why-choose-us')
+  revalidatePath('/')
 }
 
 // Why Choose Us Actions
@@ -31,4 +80,17 @@ export async function deleteWhyChooseUs(id: string) {
   const { error } = await supabase.from('why_choose_us_cards').delete().eq('id', id)
   if (error) throw new Error(error.message)
   revalidatePath('/admin/why-choose-us')
+  revalidatePath('/')
+}
+
+export async function updateWhyChooseUsPriorities(updates: { id: string, priority: number }[]) {
+  const supabase = await createClient()
+  
+  const promises = updates.map(update => 
+    supabase.from('why_choose_us_cards').update({ priority: update.priority }).eq('id', update.id)
+  )
+  await Promise.all(promises)
+  
+  revalidatePath('/admin/why-choose-us')
+  revalidatePath('/')
 }

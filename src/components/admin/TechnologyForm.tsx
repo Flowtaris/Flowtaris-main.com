@@ -39,7 +39,7 @@ export function TechnologyForm() {
 
       const data = {
         logo_url,
-        priority: parseInt(formData.get('priority') as string) || 0,
+        priority: 0,
       }
 
       await addTechnology(data)
@@ -68,18 +68,7 @@ export function TechnologyForm() {
         />
       </div>
 
-      <div>
-        <label htmlFor="priority" className="block text-sm font-medium text-navy-900 mb-1">
-          Priority (Higher = appears first)
-        </label>
-        <input
-          type="number"
-          name="priority"
-          id="priority"
-          defaultValue={0}
-          className="w-32 rounded-md border border-slate-300 px-3 py-2 text-sm"
-        />
-      </div>
+
 
       <div className="flex items-center gap-4">
         <button type="submit" disabled={isPending} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">

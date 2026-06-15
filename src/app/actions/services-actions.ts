@@ -21,16 +21,12 @@ function revalidateService(slug: string) {
 // ==========================================
 // SERVICES REGISTRY (parent)
 // ==========================================
-export async function createService(data: { name: string; slug: string }) {
+export async function createService(data: { name: string; slug: string; priority?: number }) {
   const supabase = await createClient()
-  const { data: created, error } = await supabase
-    .from('services')
-    .insert([{ name: data.name, slug: data.slug }])
-    .select('id, slug')
-    .single()
+  const { error } = await supabase.from('services').insert([data])
   if (error) throw new Error(error.message)
   revalidatePath('/admin/services')
-  return created
+  revalidatePath('/')
 }
 
 export async function deleteService(id: string) {
@@ -38,6 +34,26 @@ export async function deleteService(id: string) {
   const { error } = await supabase.from('services').delete().eq('id', id)
   if (error) throw new Error(error.message)
   revalidatePath('/admin/services')
+}
+
+export async function updateService(id: string, data: any) {
+  const supabase = await createClient()
+  const { error } = await supabase.from('services').update(data).eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath('/admin/services')
+  revalidatePath('/')
+}
+
+export async function updateServicePriorities(updates: { id: string, priority: number }[]) {
+  const supabase = await createClient()
+  
+  const promises = updates.map(update => 
+    supabase.from('services').update({ priority: update.priority }).eq('id', update.id)
+  )
+  await Promise.all(promises)
+  
+  revalidatePath('/admin/services')
+  revalidatePath('/')
 }
 
 // ==========================================

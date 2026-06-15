@@ -22,6 +22,7 @@ export function IntegrationForm() {
       slug,
       svg_slot_1: formData.get('svg_slot_1') as string || null,
       svg_slot_2: formData.get('svg_slot_2') as string || null,
+      priority: 0,
     }
 
     try {

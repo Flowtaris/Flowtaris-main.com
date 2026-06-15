@@ -39,6 +39,23 @@ export default async function HomePage() {
     .limit(1)
     .maybeSingle()
 
+  // Fetch modern technologies
+  const { data: technologies } = await supabase
+    .from('modern_technologies')
+    .select('*')
+    .order('priority', { ascending: false })
+
+  // Fetch why choose us content
+  const { data: wcuSectors } = await supabase
+    .from('why_choose_us_sectors')
+    .select('*')
+    .order('priority', { ascending: false })
+
+  const { data: wcuCards } = await supabase
+    .from('why_choose_us_cards')
+    .select('*')
+    .order('priority', { ascending: false })
+
   return (
     <>
       {/* Organization schema - global */}
@@ -50,9 +67,10 @@ export default async function HomePage() {
       <HeroSection 
         title={heroData?.main_description} 
         description={heroData?.small_description ?? undefined} 
+        technologies={technologies || []}
       />
       <ServiceScrollStack />
-      <WhyChooseUsSection />
+      <WhyChooseUsSection sectors={wcuSectors || []} cards={wcuCards || []} />
       <CapabilitiesBanner />
 
       <Suspense fallback={

@@ -1,7 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { IntegrationForm } from '@/components/admin/IntegrationForm'
-import { Plus } from 'lucide-react'
-import Link from 'next/link'
+import { IntegrationsList } from '@/components/admin/IntegrationsList'
 
 export const revalidate = 0; // Ensures it's dynamically rendered
 
@@ -11,7 +10,7 @@ export default async function AdminIntegrationsPage() {
   const { data: integrations, error } = await supabase
     .from('integrations')
     .select('*')
-    .order('created_at', { ascending: false })
+    .order('priority', { ascending: false })
 
   // If table doesn't exist yet, just mock the array so the page renders
   const safeIntegrations = error ? [] : integrations
@@ -44,35 +43,8 @@ export default async function AdminIntegrationsPage() {
             </div>
           )}
           
-          <div className="divide-y divide-slate-100">
-            {safeIntegrations?.map((item) => (
-              <div key={item.id} className="py-4 flex items-center justify-between">
-                <div>
-                  <h3 className="font-medium text-navy-900">{item.name}</h3>
-                  <div className="flex gap-4 mt-1 text-xs text-slate-500">
-                    <span className="font-mono text-slate-400">/{item.slug}</span>
-                    <span>SVG 1: {item.svg_slot_1 ? 'Provided' : 'Empty'}</span>
-                    <span>SVG 2: {item.svg_slot_2 ? 'Provided' : 'Empty'}</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Link 
-                    href={`/admin/integrations/${item.slug || item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                    className="text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 px-3 py-1.5 rounded font-medium transition-colors"
-                  >
-                    Manage Content
-                  </Link>
-                  <button className="text-xs bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1.5 rounded font-medium transition-colors">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
-            {(!safeIntegrations || safeIntegrations.length === 0) && !error && (
-              <div className="py-8 text-center text-slate-500 text-sm">
-                No integrations found. Add one above!
-              </div>
-            )}
+          <div className="mt-4">
+            <IntegrationsList initialIntegrations={safeIntegrations || []} />
           </div>
         </div>
       </div>

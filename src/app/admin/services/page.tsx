@@ -8,7 +8,7 @@ export default async function AdminServicesPage() {
   const { data: services } = await supabase
     .from('services')
     .select('*')
-    .order('created_at', { ascending: true })
+    .order('priority', { ascending: false })
 
   return <ServicesList initialServices={services ?? []} />
 }

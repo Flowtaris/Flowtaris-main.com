@@ -3,34 +3,37 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { ShieldCheck, MessageCircle, ScanLine } from 'lucide-react';
+import { WhyChooseUsCard, WhyChooseUsSector } from '@/types/database';
 
-const tabs = [
-  'Multi-channel brands',
-  'Manufacturers',
-  'Hybrid product businesses',
-  'Regulated product industries'
-];
+export function WhyChooseUsSection({ sectors, cards }: { sectors: WhyChooseUsSector[], cards: WhyChooseUsCard[] }) {
+  const [activeTabId, setActiveTabId] = useState<string | null>(sectors[0]?.id || null);
 
-export function WhyChooseUsSection() {
-  const [activeTab, setActiveTab] = useState(1);
+  // If no sectors, fallback to empty layout or return null
+  if (!sectors.length) return null;
+
+  // Ensure activeTabId is valid
+  const currentTabId = activeTabId && sectors.find(s => s.id === activeTabId) ? activeTabId : sectors[0]!.id;
+  
+  // Find the card for the current sector
+  const activeCard = cards.find(c => c.sector_id === currentTabId) || cards[0];
 
   return (
     <section className="bg-[#FAFAFA] py-24 font-sans">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Tabs */}
         <div className="flex overflow-x-auto hide-scrollbar mb-16 border-b border-gray-200">
-          {tabs.map((tab, idx) => (
+          {sectors.map((sector) => (
             <button
-              key={idx}
-              onClick={() => setActiveTab(idx)}
+              key={sector.id}
+              onClick={() => setActiveTabId(sector.id)}
               className={`whitespace-nowrap px-8 py-5 text-xl font-bold transition-all relative ${
-                activeTab === idx
+                currentTabId === sector.id
                   ? 'text-gray-900'
                   : 'text-gray-400 hover:text-gray-600'
               }`}
             >
-              {tab}
-              {activeTab === idx && (
+              {sector.name}
+              {currentTabId === sector.id && (
                 <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gray-900" />
               )}
             </button>
@@ -43,13 +46,10 @@ export function WhyChooseUsSection() {
           <div className="w-full lg:w-5/12 p-12 md:p-16 flex flex-col justify-center relative z-10">
             <ShieldCheck className="w-10 h-10 text-gray-900 mb-8" strokeWidth={1.5} />
             <h3 className="text-4xl lg:text-[44px] font-bold text-gray-900 leading-[1.1] tracking-tight mb-6">
-              Protect your business with full product traceability
+              {activeCard?.description || 'Protect your business'}
             </h3>
             <p className="text-gray-600 text-[17px] leading-relaxed mb-12">
-              Keep a clear record for every product you sell, and track lot and
-              serial information across inventory and production. Flowtaris
-              makes it easier to stay audit-ready and respond to compliance
-              requests without building separate processes for compliance.
+              {activeCard?.small_description || 'Keep a clear record...'}
             </p>
             <button className="flex items-center text-gray-900 font-bold hover:text-gray-600 gap-3 group transition-colors">
               <ScanLine className="w-5 h-5" />
@@ -59,13 +59,17 @@ export function WhyChooseUsSection() {
 
           {/* Right Image Container */}
           <div className="w-full lg:w-7/12 relative min-h-[400px] lg:min-h-[700px]">
-            <Image
-              src="/images/inventory-worker.png"
-              alt="Inventory Traceability"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 60vw"
-            />
+            {activeCard?.image_url ? (
+              <Image
+                src={activeCard.image_url}
+                alt="Section Image"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
+            ) : (
+              <div className="w-full h-full bg-slate-200" />
+            )}
             
             {/* Stat Cards - Floating between columns */}
             <div className="absolute left-6 bottom-16 lg:-left-24 flex flex-col gap-6 z-20">

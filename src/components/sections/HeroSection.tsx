@@ -16,12 +16,15 @@ const techLogos = [
   { node: <SiNodedotjs size={75} />, title: "Node.js", href: "https://nodejs.org" },
 ]
 
+import { ModernTechnology } from '@/types/database'
+
 interface HeroSectionProps {
   title?: string;
   description?: string;
+  technologies?: ModernTechnology[];
 }
 
-export function HeroSection({ title, description }: HeroSectionProps) {
+export function HeroSection({ title, description, technologies }: HeroSectionProps) {
   return (
     <section className="min-h-screen bg-[#FAFAFA] flex flex-col justify-center pb-20 font-sans">
       <div className="container mx-auto px-6 md:px-[60px] max-w-[1260px]">
@@ -116,7 +119,9 @@ export function HeroSection({ title, description }: HeroSectionProps) {
         </p>
         <div style={{ height: '80px', position: 'relative', overflow: 'hidden' }}>
           <LogoLoop
-            logos={techLogos}
+            logos={technologies && technologies.length > 0 
+              ? technologies.map(t => ({ src: t.logo_url })) 
+              : techLogos}
             speed={60}
             direction="right"
             logoHeight={75}

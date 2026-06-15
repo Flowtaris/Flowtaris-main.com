@@ -2,6 +2,7 @@ export type Service = {
   id: string;
   name: string;
   slug: string;
+  priority: number;
   created_at: string;
   updated_at: string;
 };
@@ -96,11 +97,21 @@ export type ServicesDeepModule = {
   updated_at: string;
 };
 
+export type WhyChooseUsSector = {
+  id: string;
+  name: string;
+  priority: number;
+  created_at: string;
+  updated_at: string;
+};
+
 export type WhyChooseUsCard = {
   id: string;
+  sector_id: string | null;
   description: string;
   small_description: string | null;
   image_url: string | null;
+  priority: number;
   created_at: string;
   updated_at: string;
 };
@@ -111,6 +122,7 @@ export type Integration = {
   slug: string;
   svg_slot_1: string | null;
   svg_slot_2: string | null;
+  priority: number;
   created_at: string;
   updated_at: string;
 };

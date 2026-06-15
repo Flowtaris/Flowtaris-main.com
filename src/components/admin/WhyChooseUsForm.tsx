@@ -3,9 +3,13 @@
 import { useState } from 'react'
 import { addWhyChooseUs } from '@/app/actions/extra-actions'
 
-export function WhyChooseUsForm() {
+import { WhyChooseUsSector } from '@/types/database'
+import { ImageUpload } from '@/components/admin/ImageUpload'
+
+export function WhyChooseUsForm({ sectors }: { sectors: WhyChooseUsSector[] }) {
   const [isPending, setIsPending] = useState(false)
   const [message, setMessage] = useState('')
+  const [imageUrl, setImageUrl] = useState('')
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -16,13 +20,16 @@ export function WhyChooseUsForm() {
     const data = {
       description: formData.get('description') as string,
       small_description: formData.get('small_description') as string || null,
-      image_url: formData.get('image_url') as string || null,
+      image_url: imageUrl || null,
+      sector_id: formData.get('sector_id') as string || null,
+      priority: 0,
     }
 
     try {
       await addWhyChooseUs(data)
       setMessage('Card added successfully!')
       ;(e.target as HTMLFormElement).reset()
+      setImageUrl('')
     } catch (error: any) {
       setMessage(`Error: ${error.message}`)
     } finally {
@@ -58,16 +65,30 @@ export function WhyChooseUsForm() {
       </div>
 
       <div>
-        <label htmlFor="image_url" className="block text-sm font-medium text-navy-900 mb-1">
-          Image URL
+        <label htmlFor="sector_id" className="block text-sm font-medium text-navy-900 mb-1">
+          Sector (Tab)
         </label>
-        <input
-          type="text"
-          name="image_url"
-          id="image_url"
-          placeholder="https://..."
+        <select
+          name="sector_id"
+          id="sector_id"
+          required
           className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+        >
+          <option value="">-- Select Sector --</option>
+          {sectors?.map(sector => (
+            <option key={sector.id} value={sector.id}>{sector.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <ImageUpload
+          label="Image"
+          value={imageUrl}
+          onChange={setImageUrl}
         />
+        {/* Hidden input to ensure FormData works if needed, though we read imageUrl from state directly */}
+        <input type="hidden" name="image_url" value={imageUrl} />
       </div>
 
       <div className="flex items-center gap-4">
