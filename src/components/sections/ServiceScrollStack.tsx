@@ -53,7 +53,12 @@ export function ServiceScrollStack({ dynamicServices = [] }: { dynamicServices?:
                   <span className="text-[10px] font-mono text-white/60 uppercase tracking-[0.2em] group-hover:text-white transition-colors duration-500">
                     No. {service.num}
                   </span>
-                  <service.Icon className="w-5 h-5 text-white/60 group-hover:text-white transition-colors duration-500" strokeWidth={1} />
+                  {(() => {
+                    const ServiceIcon = service.Icon as any;
+                    return (
+                      <ServiceIcon className="w-5 h-5 text-white/60 group-hover:text-white transition-colors duration-500" strokeWidth={1} />
+                    );
+                  })()}
                 </div>
 
                 {/* Content */}
