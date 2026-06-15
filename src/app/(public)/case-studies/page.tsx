@@ -4,6 +4,8 @@ import { CTASection } from '@/components/sections/CTASection'
 import { CaseStudiesHero } from '@/components/sections/CaseStudiesHero'
 import { FeaturedShowcase } from '@/components/sections/FeaturedShowcase'
 import { InteractiveCaseList } from '@/components/sections/InteractiveCaseList'
+import { Award, TrendingUp, CheckCircle } from 'lucide-react'
+import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
   title: 'Case Studies | Proven Enterprise ERP Transformation Results — Flowtaris',
@@ -59,7 +61,16 @@ export default async function CaseStudiesPage() {
   }
 
   return (
-    <>
+    <main className="flex min-h-screen flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
+      <CaseStudiesHero />
+      
+      {featured.length > 0 && <FeaturedShowcase featured={featured} />}
+
       {/* Stats row */}
       <section className="bg-white border-b border-slate-100">
         <div className="container-content py-10">
@@ -89,6 +100,8 @@ export default async function CaseStudiesPage() {
           <p className="text-slate-500 mb-4">Case studies coming soon.</p>
         </section>
       )}
+      
+      {allCards.length > 0 && <InteractiveCaseList cases={rest.length > 0 ? rest : allCards} />}
 
       {/* Wrapping CTA in a dark context if needed, but CTA is usually its own section */}
       <CTASection

@@ -86,7 +86,7 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
               WebkitTextStroke: '1px rgba(255,255,255,0.1)'
             }}
           >
-            {settings.company_name.toUpperCase()}
+            {(settings?.company_name || 'FLOWTARIS').toUpperCase()}
           </motion.h2>
 
           <motion.p

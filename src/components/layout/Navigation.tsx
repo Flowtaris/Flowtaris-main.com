@@ -417,7 +417,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
               {settings.logo_url && (
                 <Image
                   src={settings.logo_url}
-                  alt={settings.company_name}
+                  alt={settings?.company_name || 'Flowtaris'}
                   width={40}
                   height={40}
                   className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
