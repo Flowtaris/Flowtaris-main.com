@@ -80,9 +80,6 @@ export default async function BlogsPage({
               <Image src={FEATURED_POST.image} alt={FEATURED_POST.title} fill className="object-cover hover:scale-105 transition-transform duration-500" />
             </Link>
             <div className="p-6 lg:pr-12">
-              <span className="inline-block px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold tracking-widest uppercase rounded-full mb-6">
-                {FEATURED_POST.category}
-              </span>
               <Link href={`/blog/${FEATURED_POST.id}`}>
                 <h2 className="text-3xl font-bold text-[#0A1628] leading-snug mb-4 hover:text-[#E8A020] transition-colors" style={{ fontFamily: 'var(--font-sora)' }}>
                   {FEATURED_POST.title}
@@ -143,11 +140,6 @@ export default async function BlogsPage({
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-1">
-                <div className="mb-4">
-                  <span className="inline-block px-3 py-1 bg-slate-200 text-slate-700 text-[10px] font-bold tracking-widest uppercase rounded-full">
-                    {post.category}
-                  </span>
-                </div>
                 <h3 className="text-xl font-bold text-[#0A1628] mb-3 leading-snug group-hover:text-[#E8A020] transition-colors" style={{ fontFamily: 'var(--font-sora)' }}>
                   {post.title}
                 </h3>

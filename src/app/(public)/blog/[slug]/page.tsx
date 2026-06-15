@@ -71,12 +71,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             
             {/* Left Column (Content) */}
             <div>
-              <div className="mb-6">
-                <span className="inline-block px-3 py-1 bg-[#E8A020]/10 text-[#E8A020] text-[11px] font-bold tracking-widest uppercase rounded-full">
-                  {post.category}
-                </span>
-              </div>
-              
               <h1 className="text-4xl lg:text-[46px] font-bold text-slate-900 leading-[1.2] mb-6 tracking-tight">
                 {post.title}
               </h1>
@@ -206,9 +200,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     <Image src={relatedPost.image} alt={relatedPost.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div className="p-6">
-                    <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold tracking-widest uppercase rounded-full mb-4">
-                      {relatedPost.category}
-                    </span>
                     <h3 className="text-lg font-bold text-slate-900 mb-3 leading-snug group-hover:text-[#E8A020] transition-colors">
                       {relatedPost.title}
                     </h3>
