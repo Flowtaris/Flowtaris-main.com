@@ -143,6 +143,7 @@ export function ServicesGrid({ dynamicServices = [] }: { dynamicServices?: any[]
           href: `/services/${ds.slug}`,
           description: heroData?.normal_description || 'Enterprise implementation and custom consulting.',
           tags: ['Consulting', 'Implementation', 'Support'],
+          color: heroData?.color || '#E8A020',
         }
       })
     : services;
@@ -165,7 +166,7 @@ export function ServicesGrid({ dynamicServices = [] }: { dynamicServices?: any[]
                 key={index}
                 href={service.href}
                 className="group flex flex-col h-full bg-white border border-slate-200 p-10 md:p-14 transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.08)] hover:-translate-y-1 relative overflow-hidden min-h-[460px] rounded-2xl"
-                style={{ '--brand-color': service.color } as React.CSSProperties}
+                style={{ '--brand-color': (service as any).color || '#E8A020' } as React.CSSProperties}
               >
                 {/* Subtle top border accent on hover */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--brand-color)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
