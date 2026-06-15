@@ -59,7 +59,7 @@ export default async function CaseStudiesPage() {
   }
 
   return (
-    <main className="bg-[#0B1121] min-h-screen">
+    <main className="bg-slate-50 min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -70,8 +70,8 @@ export default async function CaseStudiesPage() {
       <InteractiveCaseList cases={rest} />
 
       {allCards.length === 0 && (
-        <section className="bg-[#0B1121] py-24 text-center">
-          <p className="text-slate-400 mb-4">Case studies coming soon.</p>
+        <section className="bg-slate-50 py-24 text-center">
+          <p className="text-slate-500 mb-4">Case studies coming soon.</p>
         </section>
       )}
 
