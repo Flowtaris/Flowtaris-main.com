@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { BarChart3, Database, ShieldCheck, Check, Globe, Cloud, Layout, Server, Settings, Users, ArrowRight, Zap, Code, Shield } from 'lucide-react'
 
-const iconRegistry: Record<string, React.ElementType> = {
+const iconRegistry: Record<string, any> = {
   Database,
   BarChart3,
   ShieldCheck,
