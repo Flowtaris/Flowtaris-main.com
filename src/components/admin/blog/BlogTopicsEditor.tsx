@@ -60,7 +60,7 @@ function TopicRow({ topic, onDeleted }: { topic: BlogTopic; onDeleted: () => voi
     try {
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('bucket', 'images')
+      formData.append('bucket', 'assets')
       formData.append('folder', 'blog-topics')
 
       const { publicUrl, error } = await uploadImage(formData)
@@ -357,7 +357,7 @@ function AddTopicForm({ blogId, onAdded }: { blogId: string; onAdded: () => void
     try {
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('bucket', 'images')
+      formData.append('bucket', 'assets')
       formData.append('folder', 'blog-topics')
 
       const { publicUrl, error } = await uploadImage(formData)

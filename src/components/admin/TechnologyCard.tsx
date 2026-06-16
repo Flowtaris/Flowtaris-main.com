@@ -32,7 +32,7 @@ export function TechnologyCard({ tech }: { tech: ModernTechnology }) {
       if (editFile) {
         const uploadFormData = new FormData()
         uploadFormData.append('file', editFile)
-        uploadFormData.append('bucket', 'images')
+        uploadFormData.append('bucket', 'assets')
         uploadFormData.append('folder', 'technologies')
 
         const { publicUrl, error } = await uploadImage(uploadFormData)

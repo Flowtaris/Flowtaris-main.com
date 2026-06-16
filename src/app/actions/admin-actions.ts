@@ -196,3 +196,45 @@ export async function deleteAboutTopic(id: string) {
   revalidatePath('/admin/about')
   revalidatePath('/about')
 }
+
+// ==========================================
+// EDITOR ACTIONS (Case Studies, Blogs, Resources)
+// ==========================================
+export async function saveCaseStudy(id: string | null, data: any) {
+  const supabase = await createClient()
+  if (!id) {
+    const { error } = await supabase.from('case_studies').insert([data])
+    if (error) throw new Error(error.message)
+  } else {
+    const { error } = await supabase.from('case_studies').update(data).eq('id', id)
+    if (error) throw new Error(error.message)
+  }
+  revalidatePath('/admin/case-studies')
+  revalidatePath('/case-studies')
+}
+
+export async function saveBlogPost(id: string | null, data: any) {
+  const supabase = await createClient()
+  if (!id) {
+    const { error } = await supabase.from('blog_posts').insert([data])
+    if (error) throw new Error(error.message)
+  } else {
+    const { error } = await supabase.from('blog_posts').update(data).eq('id', id)
+    if (error) throw new Error(error.message)
+  }
+  revalidatePath('/admin/blog')
+  revalidatePath('/insights')
+}
+
+export async function saveResource(id: string | null, data: any) {
+  const supabase = await createClient()
+  if (!id) {
+    const { error } = await supabase.from('resources').insert([data])
+    if (error) throw new Error(error.message)
+  } else {
+    const { error } = await supabase.from('resources').update(data).eq('id', id)
+    if (error) throw new Error(error.message)
+  }
+  revalidatePath('/admin/resources')
+  revalidatePath('/resources')
+}

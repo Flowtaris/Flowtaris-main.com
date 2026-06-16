@@ -22,7 +22,7 @@ export function TechnologyForm() {
       if (file && file.size > 0) {
         const uploadFormData = new FormData()
         uploadFormData.append('file', file)
-        uploadFormData.append('bucket', 'images')
+        uploadFormData.append('bucket', 'assets')
         uploadFormData.append('folder', 'technologies')
 
         const { publicUrl, error } = await uploadImage(uploadFormData)

@@ -2,9 +2,10 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { saveCaseStudy } from '@/app/actions/admin-actions'
 import { useToast } from '@/components/ui/Toast'
 import { MarkdownEditor } from './MarkdownEditor'
+import { ImageUpload } from '@/components/admin/ImageUpload'
 import { Loader2, Save, Eye } from 'lucide-react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,27 +33,19 @@ export function CaseStudyEditor({ caseStudy }: { caseStudy: any }) {
 
   const handleSave = () => {
     startTransition(async () => {
-      const supabase = createClient()
-      
       const payload = {
         ...formData,
         published_at: formData.status === 'published' && (!caseStudy || caseStudy.status !== 'published') ? new Date().toISOString() : undefined,
         updated_at: new Date().toISOString()
       }
 
-      let res
-      if (caseStudy) {
-        res = await supabase.from('case_studies').update(payload).eq('id', caseStudy.id)
-      } else {
-        res = await supabase.from('case_studies').insert(payload)
-      }
-
-      if (res.error) {
-        toast('error', 'Failed to save case study', res.error.message)
-      } else {
+      try {
+        await saveCaseStudy(caseStudy ? caseStudy.id : null, payload)
         toast('success', 'Case study saved successfully')
         router.push('/admin/case-studies')
         router.refresh()
+      } catch (error: any) {
+        toast('error', 'Failed to save case study', error.message)
       }
     })
   }
@@ -169,12 +162,10 @@ export function CaseStudyEditor({ caseStudy }: { caseStudy: any }) {
               />
             </div>
             <div>
-              <label className="label text-xs">Cover Image URL</label>
-              <input
-                type="text"
+              <ImageUpload
+                label="Cover Image"
                 value={formData.cover_image_url}
-                onChange={(e) => setFormData({ ...formData, cover_image_url: e.target.value })}
-                className="input py-2 text-sm"
+                onChange={(url) => setFormData({ ...formData, cover_image_url: url })}
               />
             </div>
           </div>

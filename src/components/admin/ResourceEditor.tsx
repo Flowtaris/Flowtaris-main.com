@@ -2,8 +2,9 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { saveResource } from '@/app/actions/admin-actions'
 import { useToast } from '@/components/ui/Toast'
+import { ImageUpload } from '@/components/admin/ImageUpload'
 import { Loader2, Save, Eye } from 'lucide-react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,26 +33,18 @@ export function ResourceEditor({ resource }: { resource: any }) {
 
   const handleSave = () => {
     startTransition(async () => {
-      const supabase = createClient()
-      
       const payload = {
         ...formData,
         updated_at: new Date().toISOString()
       }
 
-      let res
-      if (resource) {
-        res = await supabase.from('resources').update(payload).eq('id', resource.id)
-      } else {
-        res = await supabase.from('resources').insert(payload)
-      }
-
-      if (res.error) {
-        toast('error', 'Failed to save resource', res.error.message)
-      } else {
+      try {
+        await saveResource(resource ? resource.id : null, payload)
         toast('success', 'Resource saved successfully')
         router.push('/admin/resources')
         router.refresh()
+      } catch (error: any) {
+        toast('error', 'Failed to save resource', error.message)
       }
     })
   }
@@ -155,12 +148,10 @@ export function ResourceEditor({ resource }: { resource: any }) {
               />
             </div>
             <div>
-              <label className="label text-xs">Cover Image URL</label>
-              <input
-                type="text"
+              <ImageUpload
+                label="Cover Image"
                 value={formData.cover_image_url}
-                onChange={(e) => setFormData({ ...formData, cover_image_url: e.target.value })}
-                className="input py-2 text-sm"
+                onChange={(url) => setFormData({ ...formData, cover_image_url: url })}
               />
             </div>
           </div>

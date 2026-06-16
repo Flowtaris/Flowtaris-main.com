@@ -27,7 +27,7 @@ export function HeroImagesSection({ heroId, initialImages }: { heroId: string, i
     try {
       const formData = new FormData()
       formData.append('file', newFile)
-      formData.append('bucket', 'images')
+      formData.append('bucket', 'assets')
       formData.append('folder', 'hero')
 
       const { publicUrl, error: uploadError } = await uploadImage(formData)
@@ -81,7 +81,7 @@ export function HeroImagesSection({ heroId, initialImages }: { heroId: string, i
       if (editFile) {
         const formData = new FormData()
         formData.append('file', editFile)
-        formData.append('bucket', 'images')
+        formData.append('bucket', 'assets')
         formData.append('folder', 'hero')
 
         const { publicUrl, error: uploadError } = await uploadImage(formData)

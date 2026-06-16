@@ -35,7 +35,7 @@ export async function uploadAsset(formData: FormData): Promise<string> {
 
 export async function uploadImage(formData: FormData): Promise<{ publicUrl: string | null, error: string | null }> {
   const file = formData.get('file') as File | null
-  const bucket = (formData.get('bucket') as string) || 'images'
+  const bucket = (formData.get('bucket') as string) || 'assets'
   const folder = (formData.get('folder') as string) || ''
 
   if (!file) {

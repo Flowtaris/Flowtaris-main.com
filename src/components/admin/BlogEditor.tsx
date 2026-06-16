@@ -2,9 +2,10 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+import { saveBlogPost } from '@/app/actions/admin-actions'
 import { useToast } from '@/components/ui/Toast'
 import { MarkdownEditor } from './MarkdownEditor'
+import { ImageUpload } from '@/components/admin/ImageUpload'
 import { Loader2, Save, Eye } from 'lucide-react'
 
 interface Post {
@@ -44,8 +45,6 @@ export function BlogEditor({ post, userId }: { post: Post | null; userId: string
 
   const handleSave = () => {
     startTransition(async () => {
-      const supabase = createClient()
-      
       const payload = {
         ...formData,
         author_id: userId,
@@ -53,19 +52,13 @@ export function BlogEditor({ post, userId }: { post: Post | null; userId: string
         updated_at: new Date().toISOString()
       }
 
-      let res
-      if (post) {
-        res = await supabase.from('blog_posts').update(payload).eq('id', post.id)
-      } else {
-        res = await supabase.from('blog_posts').insert(payload)
-      }
-
-      if (res.error) {
-        toast('error', 'Failed to save post', res.error.message)
-      } else {
+      try {
+        await saveBlogPost(post ? post.id : null, payload)
         toast('success', 'Post saved successfully')
         router.push('/admin/blog')
         router.refresh()
+      } catch (error: any) {
+        toast('error', 'Failed to save post', error.message)
       }
     })
   }
@@ -160,13 +153,10 @@ export function BlogEditor({ post, userId }: { post: Post | null; userId: string
               />
             </div>
             <div>
-              <label className="label text-xs">Cover Image URL</label>
-              <input
-                type="text"
+              <ImageUpload
+                label="Cover Image"
                 value={formData.cover_image_url}
-                onChange={(e) => setFormData({ ...formData, cover_image_url: e.target.value })}
-                className="input py-2 text-sm"
-                placeholder="https://..."
+                onChange={(url) => setFormData({ ...formData, cover_image_url: url })}
               />
             </div>
           </div>
