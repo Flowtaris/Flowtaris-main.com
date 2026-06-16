@@ -29,7 +29,7 @@ export function useFocusTrap(isActive: boolean) {
 
     // Need a tiny timeout to ensure the drawer is fully rendered/visible before focusing
     setTimeout(() => {
-      firstElement.focus()
+      firstElement?.focus()
     }, 50)
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -38,12 +38,12 @@ export function useFocusTrap(isActive: boolean) {
       if (e.shiftKey) {
         if (document.activeElement === firstElement) {
           e.preventDefault()
-          lastElement.focus()
+          lastElement?.focus()
         }
       } else {
         if (document.activeElement === lastElement) {
           e.preventDefault()
-          firstElement.focus()
+          firstElement?.focus()
         }
       }
     }
