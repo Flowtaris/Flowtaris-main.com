@@ -462,7 +462,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
         ref={headerRef}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          scrolled
+          (scrolled || mobileOpen)
             ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-b border-slate-100'
             : 'bg-transparent'
         )}
@@ -584,9 +584,15 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
 
             <button
               className="lg:hidden p-2 rounded-lg transition-colors"
-              onClick={() => setMobileOpen(true)}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              <Menu className="w-6 h-6 text-navy-950" />
+              {mobileOpen ? (
+                <X className="w-6 h-6 text-navy-950" />
+              ) : (
+                <Menu className="w-6 h-6 text-navy-950" />
+              )}
             </button>
           </div>
 
@@ -620,11 +626,10 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
               ref={drawerRef as any} 
               role="dialog" 
               aria-modal="true" 
-              className="absolute right-0 top-0 bottom-0 w-[80vw] bg-white shadow-2xl p-6"
+              className="absolute right-0 top-0 bottom-0 w-[80vw] bg-white shadow-2xl p-6 pt-[100px]"
               onClick={(e) => e.stopPropagation()}
             >
-              <button onClick={() => setMobileOpen(false)}><X className="mb-8 text-navy-950" /></button>
-              <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] pb-20">
+              <div className="flex flex-col gap-6 overflow-y-auto max-h-[calc(100vh-100px)] pb-20">
                 
                 {/* Services Accordion */}
                 <div className="flex flex-col">
