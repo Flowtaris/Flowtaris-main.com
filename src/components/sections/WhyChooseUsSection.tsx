@@ -33,12 +33,12 @@ export function WhyChooseUsSection({ sectors, cards }: { sectors: WhyChooseUsSec
         </div>
 
         {/* Tabs */}
-        <div className="flex justify-start md:justify-center overflow-x-auto hide-scrollbar mb-16 border-b border-gray-200 w-full px-4 md:px-0">
+        <div className="flex justify-start md:justify-center overflow-x-auto hide-scrollbar mb-8 md:mb-16 border-b border-gray-200 w-full px-4 md:px-0">
           {sectors.map((sector) => (
             <button
               key={sector.id}
               onClick={() => setActiveTabId(sector.id)}
-              className={`whitespace-nowrap px-8 py-5 text-xl font-bold transition-all relative ${currentTabId === sector.id
+              className={`whitespace-nowrap px-4 md:px-8 py-3 md:py-5 text-base md:text-xl font-bold transition-all relative ${currentTabId === sector.id
                   ? 'text-gray-900'
                   : 'text-gray-400 hover:text-gray-600'
                 }`}
@@ -52,20 +52,20 @@ export function WhyChooseUsSection({ sectors, cards }: { sectors: WhyChooseUsSec
         </div>
 
         {/* Content Box */}
-        <div className="relative rounded-[32px] overflow-hidden shadow-2xl bg-[#F5F5F5] flex flex-col lg:flex-row min-h-[600px]">
+        <div className="relative rounded-[32px] overflow-hidden shadow-2xl bg-[#F5F5F5] flex flex-col lg:flex-row min-h-[500px] lg:min-h-[600px]">
           {/* Left Content */}
-          <div className="w-full lg:w-5/12 p-12 md:p-16 flex flex-col justify-center relative z-10">
-            <ShieldCheck className="w-10 h-10 text-gray-900 mb-8" strokeWidth={1.5} />
-            <h3 className="text-4xl lg:text-[44px] font-bold text-gray-900 leading-[1.1] tracking-tight mb-6">
+          <div className="w-full lg:w-5/12 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10">
+            <ShieldCheck className="w-8 h-8 md:w-10 md:h-10 text-gray-900 mb-6 md:mb-8" strokeWidth={1.5} />
+            <h3 className="text-2xl md:text-4xl lg:text-[44px] font-bold text-gray-900 leading-[1.1] tracking-tight mb-4 md:mb-6">
               {activeCard?.description || 'Protect your business'}
             </h3>
-            <p className="text-gray-600 text-[17px] leading-relaxed mb-12">
+            <p className="text-gray-600 text-sm md:text-[17px] leading-relaxed mb-6 md:mb-12">
               {activeCard?.small_description || 'Keep a clear record...'}
             </p>
           </div>
 
           {/* Right Image Container */}
-          <div className="w-full lg:w-7/12 relative min-h-[400px] lg:min-h-[700px]">
+          <div className="w-full lg:w-7/12 relative min-h-[300px] md:min-h-[400px] lg:min-h-[700px]">
             {activeCard?.image_url ? (
               <Image
                 src={activeCard.image_url}
