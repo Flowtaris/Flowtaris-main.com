@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { GlobalHeroImage } from '@/types/database'
 import { addHeroImage, deleteHeroImage, updateHeroImage } from '@/app/actions/extra-actions'
 import { createClient } from '@/lib/supabase/client'
+import { uploadImage } from '@/app/actions/upload-actions'
 import { Trash2, Pencil, Check, X, Plus } from 'lucide-react'
 
 export function HeroImagesSection({ heroId, initialImages }: { heroId: string, initialImages: GlobalHeroImage[] }) {
@@ -24,18 +25,14 @@ export function HeroImagesSection({ heroId, initialImages }: { heroId: string, i
 
     setIsPending(true)
     try {
-      const supabase = createClient()
-      const fileExt = newFile.name.split('.').pop()
-      const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`
-      const filePath = `hero/${fileName}`
-      
-      const { error: uploadError } = await supabase.storage
-        .from('images')
-        .upload(filePath, newFile)
+      const formData = new FormData()
+      formData.append('file', newFile)
+      formData.append('bucket', 'images')
+      formData.append('folder', 'hero')
+
+      const { publicUrl, error: uploadError } = await uploadImage(formData)
         
-      if (uploadError) throw new Error(uploadError.message)
-      
-      const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(filePath)
+      if (uploadError || !publicUrl) throw new Error(uploadError || 'Failed to upload image')
       
       const newData = {
         hero_id: heroId,
@@ -82,13 +79,13 @@ export function HeroImagesSection({ heroId, initialImages }: { heroId: string, i
     try {
       let image_url = currentUrl
       if (editFile) {
-        const supabase = createClient()
-        const fileExt = editFile.name.split('.').pop()
-        const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`
-        const filePath = `hero/${fileName}`
-        const { error: uploadError } = await supabase.storage.from('images').upload(filePath, editFile)
-        if (uploadError) throw new Error(uploadError.message)
-        const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(filePath)
+        const formData = new FormData()
+        formData.append('file', editFile)
+        formData.append('bucket', 'images')
+        formData.append('folder', 'hero')
+
+        const { publicUrl, error: uploadError } = await uploadImage(formData)
+        if (uploadError || !publicUrl) throw new Error(uploadError || 'Failed to upload image')
         image_url = publicUrl
       }
 

@@ -35,14 +35,19 @@ export function HeroSection({ title, description, technologies, heroImages }: He
           {/* Left Content */}
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-6" style={{ fontFamily: 'var(--font-sora)' }}>
-              {title || "ERP Implementation for Companies Outgrowing Chaos"}
+              {title ? title : (
+                <>
+                  Enterprise ERP Consulting, Integration and Automation Services <br className="block sm:hidden" />
+                  for Finance and Procurement
+                </>
+              )}
             </h1>
-            <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-10 leading-relaxed">
               {description || "Boutique ERP consulting firm helping mid-market companies implement, integrate, and optimise NetSuite, Coupa, SAP, and Workday platforms"}
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <Link href="/about" className="px-8 py-4 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition-colors inline-block text-center">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+              <Link href="/about" className="w-full sm:w-auto px-8 py-4 bg-black text-white font-medium rounded-lg hover:bg-gray-800 transition-colors inline-block text-center">
                 Diagnose My ERP Problem
               </Link>
             </div>
@@ -125,7 +130,7 @@ export function HeroSection({ title, description, technologies, heroImages }: He
       </div>
 
       {/* Logo Loop Section */}
-      <div className="w-full mt-24">
+      <div className="w-full mt-24 overflow-hidden">
         <p className="text-center text-sm font-semibold text-gray-400 mb-8 tracking-wider uppercase">
           Powered by Modern Technologies
         </p>
@@ -153,10 +158,10 @@ export function HeroSection({ title, description, technologies, heroImages }: He
                       alt={title}
                       width={75}
                       height={75}
-                      className="w-[75px] h-[75px] object-contain transition-all duration-500 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"
+                      className="w-auto h-6 lg:h-10 object-contain transition-all duration-500 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"
                     />
                   ) : (
-                    <div className="transition-all duration-500 text-slate-500 group-hover:text-[#0A1628] filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100">
+                    <div className="transition-all duration-500 text-slate-500 group-hover:text-[#0A1628] filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 scale-50 lg:scale-100 origin-bottom">
                       {'node' in item ? item.node : null}
                     </div>
                   )}

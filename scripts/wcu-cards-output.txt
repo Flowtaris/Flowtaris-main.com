@@ -1,0 +1,30 @@
+--- CARD ---
+ID: 14aa7a3e-3139-456a-80ff-bc660611765d
+Description: Integration Excellence
+Small Description: Successful organizations depend on seamless communication between ERP, procurement, HR, legal, and operational systems. Flowtaris specializes in enterprise integrations across NetSuite, Coupa, SAP, Workday, Ironclad, and custom applications. Our integration-first approach helps eliminate data silos, improve process efficiency, and ensure reliable information flows across the organization.
+Image: https://mvymhdaepjrepznyhndx.supabase.co/storage/v1/object/public/assets/56b0d323-13b4-470a-b7f7-047609d0ba3c.png
+
+--- CARD ---
+ID: 8aaebcbd-89d0-42d8-a0a5-e0e949059d29
+Description: From Complexity to Control
+Small Description: Modern organizations often operate across multiple disconnected systems, creating inefficiencies, duplicate data, reporting challenges, and operational risk. Flowtaris helps enterprises simplify complex environments by aligning ERP platforms, procurement systems, business workflows, and reporting processes into a unified operating model. The result is improved visibility, stronger governance, and greater control across finance, procurement, and business operations.
+Image: https://mvymhdaepjrepznyhndx.supabase.co/storage/v1/object/public/assets/fd45f907-b44a-4e1f-ae9d-d51df36b9ac1.png
+
+--- CARD ---
+ID: 4083faf4-37ff-41e7-a69f-8e6afc631b6b
+Description: Enterprise Expertise, Minus the Overhead
+Small Description: Large consulting firms often bring layers of management, extended timelines, and inflated project costs. Flowtaris delivers enterprise ERP consulting and integration expertise through focused specialist teams that prioritize speed, accountability, and measurable outcomes. Clients gain direct access to experienced consultants without unnecessary complexity.
+Image: https://mvymhdaepjrepznyhndx.supabase.co/storage/v1/object/public/assets/1f339908-6059-45bd-a1a9-055928e2c75e.png
+
+--- CARD ---
+ID: 9b7c7156-63eb-4cf6-ab21-1b437efbffa1
+Description: Enterprise Expertise, Minus the Overhead
+Small Description: Large consulting firms often bring layers of management, extended timelines, and inflated project costs. Flowtaris delivers enterprise ERP consulting and integration expertise through focused specialist teams that prioritize speed, accountability, and measurable outcomes. Clients gain direct access to experienced consultants without unnecessary complexity.
+Image: https://mvymhdaepjrepznyhndx.supabase.co/storage/v1/object/public/assets/ec8698f2-ad12-4763-a0f9-6cc4d9fc681a.png
+
+--- CARD ---
+ID: eed7308f-4624-41d8-b604-eaeb3bbe04f2
+Description: Go-Live Is Not The Finish Line
+Small Description: Many consulting engagements end when systems go live. Flowtaris continues supporting organizations through managed services, release management, optimization initiatives, issue resolution, enhancements, and ongoing business process improvements. Our objective is to help clients maximize value throughout the entire lifecycle of their enterprise platforms.
+Image: https://mvymhdaepjrepznyhndx.supabase.co/storage/v1/object/public/assets/4da94048-d8f8-42e4-9f72-51a95d102cd0.png
+

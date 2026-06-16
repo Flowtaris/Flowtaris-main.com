@@ -14,8 +14,17 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Network-first for API routes and HTML
-  if (url.pathname.startsWith('/api/') || event.request.mode === 'navigate') {
+  // BYPASS CACHE ENTIRELY FOR LOCALHOST (Development)
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    return; // Let the browser handle it normally
+  }
+
+  // Network-first for API routes, HTML, and Next.js internal chunks
+  if (
+    url.pathname.startsWith('/api/') || 
+    url.pathname.startsWith('/_next/') || 
+    event.request.mode === 'navigate'
+  ) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
@@ -30,7 +39,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache-first for static assets
+  // Cache-first for images and other truly static assets
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) return cachedResponse;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from '@/components/ui/PageTransition'
 import Image from 'next/image'
-import { ArrowRight, Activity, GitMerge, Database, Workflow, Server, Zap, Layers, Cpu } from 'lucide-react'
+import { ArrowRight, ArrowDown, Activity, GitMerge, Database, Workflow, Server, Zap, Layers, Cpu } from 'lucide-react'
 import { createClient } from '@/utils/supabase/server'
 
 interface IntegrationShowcaseProps {
@@ -90,13 +90,14 @@ export async function IntegrationShowcase({ hideViewAll = false }: IntegrationSh
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A1834] via-[#0A1834]/30 to-transparent transition-opacity duration-500 group-hover:opacity-0" />
                 
                 {/* The Initial Title (Disappears as photo implodes) */}
-                <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end transition-opacity duration-300 group-hover:opacity-0">
-                  <div className="flex items-center gap-3 mb-3">
+                <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 flex flex-col justify-end transition-opacity duration-300 group-hover:opacity-0">
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3 mb-3">
                     <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black text-white border border-white/20 uppercase tracking-widest">{item.source_system}</span>
-                    <ArrowRight className="w-3 h-3 text-[#E8A020]" strokeWidth={3} />
+                    <ArrowRight className="hidden md:block w-3 h-3 text-[#E8A020]" strokeWidth={3} />
+                    <ArrowDown className="block md:hidden w-3 h-3 text-[#E8A020] ml-3" strokeWidth={3} />
                     <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black text-white border border-white/20 uppercase tracking-widest">{item.target_system}</span>
                   </div>
-                  <h3 className="text-3xl font-black text-white tracking-tight" style={{ fontFamily: 'var(--font-sora)' }}>{item.name}</h3>
+                  <h3 className="text-base md:text-lg lg:text-3xl font-black text-white tracking-tight" style={{ fontFamily: 'var(--font-sora)' }}>{item.name}</h3>
                 </div>
               </div>
 
@@ -145,13 +146,13 @@ export async function IntegrationShowcase({ hideViewAll = false }: IntegrationSh
               </div>
 
               {/* === THE REVEALED TEXT === */}
-              <div className="absolute bottom-0 inset-x-0 p-8 z-30 pointer-events-none">
+              <div className="absolute bottom-0 inset-x-0 p-4 md:p-6 z-30 pointer-events-none">
                 <div className="transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-[800ms] delay-[900ms]">
-                  <h3 className="text-2xl font-bold text-white mb-3" style={{ fontFamily: 'var(--font-sora)' }}>{item.name}</h3>
+                  <h3 className="text-base md:text-lg lg:text-2xl font-bold text-white mb-3" style={{ fontFamily: 'var(--font-sora)' }}>{item.name}</h3>
                   <p className="text-white/70 text-sm leading-relaxed mb-6 line-clamp-2">
                     {item.meta_description}
                   </p>
-                  <div className="inline-flex items-center gap-2 px-5 py-3 bg-[#0A1834] border border-[#E8A020]/30 rounded-full text-[#E8A020] font-bold text-xs shadow-lg pointer-events-auto hover:bg-[#E8A020] hover:text-[#0A1834] transition-all duration-300">
+                  <div className="flex md:inline-flex w-full md:w-auto justify-center md:justify-start items-center gap-2 px-5 py-3 bg-[#0A1834] border border-[#E8A020]/30 rounded-full text-[#E8A020] font-bold text-xs shadow-lg pointer-events-auto hover:bg-[#E8A020] hover:text-[#0A1834] transition-all duration-300">
                     Explore Architecture <ArrowRight className="w-3 h-3" />
                   </div>
                 </div>

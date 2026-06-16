@@ -171,47 +171,71 @@ export function HowWeWorkSection() {
               const isActive = activeStep === idx
 
               return (
-                <button
-                  key={idx}
-                  onClick={() => setActiveStep(idx)}
-                  className="group relative w-full flex items-center p-5 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] focus:outline-none text-left"
-                >
-                  {/* Hover Background Pill */}
-                  <div className="absolute inset-0 rounded-2xl bg-slate-200/40 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500" />
-
-                  {/* Active Kinetic Pill with Progress Wash */}
-                  <div
-                    className={`absolute inset-0 rounded-2xl bg-white shadow-[0_20px_40px_-10px_rgba(10,24,52,0.05)] border border-slate-100 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-                      }`}
+                <div key={idx} className="flex flex-col gap-2">
+                  <button
+                    onClick={() => setActiveStep(idx)}
+                    className="group relative w-full flex items-center p-5 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] focus:outline-none text-left"
                   >
-                    {/* Golden Progress Background Wash */}
-                    <div
-                      className="absolute left-0 top-0 bottom-0 bg-[#E8A020]/[0.03]"
-                      style={{ width: isActive ? `${progress}%` : '0%' }}
-                    />
-                    {/* Golden Progress Bottom Border */}
-                    <div
-                      className="absolute left-0 bottom-0 h-0.5 bg-[#E8A020]"
-                      style={{ width: isActive ? `${progress}%` : '0%' }}
-                    />
-                  </div>
+                    {/* Hover Background Pill */}
+                    <div className="absolute inset-0 rounded-2xl bg-slate-200/40 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500" />
 
-                  {/* Active Golden Edge Indicator */}
-                  <div
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 w-1.5 rounded-r-full bg-[#E8A020] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'h-10 opacity-100' : 'h-0 opacity-0'
-                      }`}
-                  />
-
-                  {/* Menu Text */}
-                  <div className="relative z-10 flex items-center gap-5 ml-4">
-                    <div className={`text-sm font-bold tracking-widest transition-colors duration-500 ${isActive ? 'text-[#E8A020]' : 'text-slate-500 group-hover:text-[#E8A020]/70'}`} style={{ fontFamily: 'var(--font-jetbrains)' }}>
-                      0{idx + 1}
+                    {/* Active Kinetic Pill with Progress Wash */}
+                    <div
+                      className={`absolute inset-0 rounded-2xl bg-white shadow-[0_20px_40px_-10px_rgba(10,24,52,0.05)] border border-slate-100 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+                        }`}
+                    >
+                      {/* Golden Progress Background Wash */}
+                      <div
+                        className="absolute left-0 top-0 bottom-0 bg-[#E8A020]/[0.03]"
+                        style={{ width: isActive ? `${progress}%` : '0%' }}
+                      />
+                      {/* Golden Progress Bottom Border */}
+                      <div
+                        className="absolute left-0 bottom-0 h-0.5 bg-[#E8A020]"
+                        style={{ width: isActive ? `${progress}%` : '0%' }}
+                      />
                     </div>
-                    <div className={`text-lg font-black transition-colors duration-500 ${isActive ? 'text-navy-900' : 'text-slate-500 group-hover:text-navy-700'}`} style={{ fontFamily: 'var(--font-sora)' }}>
-                      {step.title}
+
+                    {/* Active Golden Edge Indicator */}
+                    <div
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 w-1.5 rounded-r-full bg-[#E8A020] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? 'h-10 opacity-100' : 'h-0 opacity-0'
+                        }`}
+                    />
+
+                    {/* Menu Text */}
+                    <div className="relative z-10 flex items-center gap-5 ml-4">
+                      <div className={`text-sm font-bold tracking-widest transition-colors duration-500 ${isActive ? 'text-[#E8A020]' : 'text-slate-500 group-hover:text-[#E8A020]/70'}`} style={{ fontFamily: 'var(--font-jetbrains)' }}>
+                        0{idx + 1}
+                      </div>
+                      <div className={`text-lg font-black transition-colors duration-500 ${isActive ? 'text-navy-900' : 'text-slate-500 group-hover:text-navy-700'}`} style={{ fontFamily: 'var(--font-sora)' }}>
+                        {step.title}
+                      </div>
+                    </div>
+                  </button>
+
+                  {/* MOBILE ACCORDION CONTENT */}
+                  <div className={`lg:hidden overflow-hidden transition-all duration-500 ${isActive ? 'max-h-[1000px] opacity-100 mb-4' : 'max-h-0 opacity-0 mb-0'}`}>
+                    <div className="p-5 bg-white rounded-2xl border border-slate-100 shadow-sm ml-2 mr-2">
+                      <div className="relative w-full h-48 mb-5 rounded-xl overflow-hidden">
+                        <Image src={step.image} alt={step.title} fill sizes="(max-width: 1024px) 100vw, 0vw" className="object-cover" />
+                      </div>
+                      <p className="text-slate-700 text-sm mb-5 leading-relaxed font-medium">
+                        {step.description}
+                      </p>
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3" style={{ fontFamily: 'var(--font-jetbrains)' }}>
+                        Deliverables
+                      </h4>
+                      <div className="grid grid-cols-1 gap-2.5">
+                        {step.deliverables.map((item, i) => (
+                          <div key={i} className="flex items-start gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 text-[#E8A020] shrink-0 mt-0.5" />
+                            <span className="text-sm font-bold text-navy-900">{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </button>
+                </div>
               )
             })}
           </div>
@@ -222,7 +246,7 @@ export function HowWeWorkSection() {
           RIGHT SIDE: The Luminous Glass Vault
           A stack of massive, highly polished ambient glass cards.
         */}
-        <div className="w-full lg:w-2/3 h-[600px] md:h-[650px] relative pointer-events-none perspective-[2000px]">
+        <div className="hidden lg:block w-full lg:w-2/3 h-[600px] md:h-[650px] relative pointer-events-none perspective-[2000px]">
           {METHODOLOGY_STEPS.map((step, idx) => {
             const isActive = activeStep === idx
             const isPast = idx < activeStep

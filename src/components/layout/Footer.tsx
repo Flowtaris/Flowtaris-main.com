@@ -143,15 +143,7 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
               </Link>
             ))}
             <span className="text-xs uppercase tracking-[0.15em] font-bold text-white/30 pl-6 border-l border-white/10">
-              &copy; {currentYear} • Developed by{' '}
-              <a
-                href="https://www.pixenox.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-300"
-              >
-                Pixenox Solutions
-              </a>
+              &copy; {currentYear} {settings?.company_name || 'FLOWTARIS'}
             </span>
           </div>
         </motion.div>

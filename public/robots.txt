@@ -1,0 +1,73 @@
+# Google & Bing Crawlers
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /studio/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /studio/
+
+User-agent: Googlebot-Image
+User-agent: Googlebot-Video
+User-agent: Slurp
+Allow: /
+
+# AI Crawlers - Explicit Allow for GEO Score
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: anthropic-ai
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: YouBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: cohere-ai
+User-agent: AI2Bot
+User-agent: Diffbot
+User-agent: Omgilibot
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /studio/
+
+# Block unwanted scrapers
+User-agent: Bytespider
+Disallow: /
+
+# SEO Crawlers (with Crawl-Delay)
+User-agent: AhrefsBot
+User-agent: SemrushBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /studio/
+Crawl-delay: 1
+
+User-agent: MJ12bot
+User-agent: DotBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /studio/
+
+# General Fallback
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /studio/
+
+Sitemap: https://flowtaris.com/sitemap.xml
+Sitemap: https://flowtaris.com/sitemap-static.xml

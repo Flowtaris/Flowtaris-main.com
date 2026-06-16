@@ -39,13 +39,13 @@ export function CapabilitiesBanner() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center lg:justify-between items-center max-w-6xl mx-auto gap-y-8 lg:gap-y-0">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-nowrap lg:justify-between items-center max-w-6xl mx-auto gap-y-8 lg:gap-y-0">
             {stats.map((stat, index) => (
               <React.Fragment key={index}>
-                <div className="w-1/2 lg:w-auto lg:flex-1 flex flex-col items-center group/stat cursor-default">
+                <div className={`flex flex-col items-center group/stat cursor-default ${index === 4 ? 'col-span-2 sm:col-span-1 lg:col-span-auto' : ''}`}>
                   {/* Giant floating Gold number */}
                   <div 
-                    className="text-4xl md:text-5xl lg:text-[56px] leading-none font-black mb-2 tracking-tighter transform transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/stat:-translate-y-1 group-hover/stat:scale-110 bg-gradient-to-br from-[#FDE047] via-[#E8A020] to-[#D97706] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(232,160,32,0.3)]" 
+                    className="text-3xl md:text-4xl lg:text-[56px] leading-none font-black mb-2 tracking-tighter transform transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/stat:-translate-y-1 group-hover/stat:scale-110 bg-gradient-to-br from-[#FDE047] via-[#E8A020] to-[#D97706] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(232,160,32,0.3)]" 
                     style={{ fontFamily: 'var(--font-sora)' }}
                   >
                     {stat.value}
@@ -58,7 +58,7 @@ export function CapabilitiesBanner() {
                 
                 {/* Minimalist Glass Divider */}
                 {index < stats.length - 1 && (
-                  <div className="hidden lg:block w-[1px] h-10 bg-[#E8A020]/20 rounded-full" />
+                  <div className="hidden lg:block w-[1px] h-10 bg-[#E8A020]/20 rounded-full shrink-0" />
                 )}
               </React.Fragment>
             ))}

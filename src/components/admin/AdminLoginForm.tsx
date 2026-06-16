@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
+
+import { adminSignIn } from '@/app/actions/auth-actions'
 import { Loader2, Eye, EyeOff } from 'lucide-react'
 
 export function AdminLoginForm() {
@@ -11,27 +11,26 @@ export function AdminLoginForm() {
   const [showPwd,  setShowPwd]  = useState(false)
   const [loading,  setLoading]  = useState(false)
   const [error,    setError]    = useState('')
-  const router = useRouter()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
     setError('')
 
-    const supabase = createClient()
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-
-    if (authError) {
-      setError('Invalid email or password.')
+    try {
+      const formData = new FormData(e.currentTarget)
+      const res = await adminSignIn(formData)
+      if (res?.error) {
+        setError(res.error)
+      } else if (res?.success) {
+        window.location.href = '/admin' // Use window.location for a full reload to ensure server components fetch the new session cookie properly
+      }
+    } catch (err: any) {
+      console.warn('Login failed:', err?.message || err)
+      setError('A server error occurred. Please try again.')
+    } finally {
       setLoading(false)
-      return
     }
-
-    router.push('/admin')
-    router.refresh()
   }
 
   return (
@@ -41,6 +40,7 @@ export function AdminLoginForm() {
           Email Address
         </label>
         <input
+          name="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -60,6 +60,7 @@ export function AdminLoginForm() {
         </label>
         <div className="relative">
           <input
+            name="password"
             type={showPwd ? 'text' : 'password'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}

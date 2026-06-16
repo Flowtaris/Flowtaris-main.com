@@ -8,11 +8,21 @@ import {
   Menu, X, ArrowRight, Database, Cloud, Webhook,
   ShieldCheck, ArrowLeftRight, Component,
   Box, Layers, ShoppingCart, Globe, Briefcase, Command, MessageCircle,
-  Cpu, Network, Lock, Zap
+  Cpu, Network, Lock, Zap, ChevronDown
 } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
+import { useIsMobile } from '@/hooks/useIsMobile'
+
+const INTEGRATIONS_LIST = [
+  { title: 'Coupa to NetSuite', icon: ArrowLeftRight, desc: 'Procurement to GL journal automation.', detailTitle: 'Procurement to GL', detailDesc: 'Procurement-to-GL journal automation with full reconciliation and audit trail.', color: '#4F46E5', href: '/integrations/procurement-to-GL' },
+  { title: 'Workday to NetSuite', icon: Database, desc: 'HCM Sync & Payroll automation.', detailTitle: 'HCM Sync', detailDesc: 'Payroll journal entry automation from HCM to ERP — eliminating manual finance work.', color: '#E11D48', href: '/integrations/hcm-sync' },
+  { title: 'Coupa to SAP', icon: Layers, desc: 'Procurement workflow sync.', detailTitle: 'IDoc Management', detailDesc: 'Procurement workflow sync between Coupa and SAP S/4HANA with IDoc management.', color: '#E8A020', href: '/integrations/idoc-management' },
+  { title: 'Ironclad to Coupa', icon: Webhook, desc: 'Contract lifecycle automation.', detailTitle: 'Contract Lifecycle', detailDesc: 'Contract lifecycle to procurement workflow — automated supplier onboarding.', color: '#059669', href: '/integrations/contract-lifecycle' },
+  { title: 'Workday to Coupa', icon: Network, desc: 'Employee provisioning.', detailTitle: 'Identity Provisioning', detailDesc: 'Employee provisioning and access management automation across HR and procurement.', color: '#7C3AED', href: '/integrations/identity-provisioning' },
+  { title: 'Zylo to ERP', icon: Zap, desc: 'SaaS governance automation.', detailTitle: 'SaaS Governance', detailDesc: 'SaaS portfolio governance and software asset management automation.', color: '#0284C7', href: '/integrations/saas-governance' },
+]
 
 const NAV_LINKS = [
   { label: 'About', href: '/about' },
@@ -256,16 +266,7 @@ function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: 
 
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null)
 
-  const INTEGRATIONS = [
-    { title: 'Coupa to NetSuite', icon: ArrowLeftRight, desc: 'Procurement to GL journal automation.', detailTitle: 'Procurement to GL', detailDesc: 'Procurement-to-GL journal automation with full reconciliation and audit trail.', color: '#4F46E5', href: '/integrations/procurement-to-GL' },
-    { title: 'Workday to NetSuite', icon: Database, desc: 'HCM Sync & Payroll automation.', detailTitle: 'HCM Sync', detailDesc: 'Payroll journal entry automation from HCM to ERP — eliminating manual finance work.', color: '#E11D48', href: '/integrations/hcm-sync' },
-    { title: 'Coupa to SAP', icon: Layers, desc: 'Procurement workflow sync.', detailTitle: 'IDoc Management', detailDesc: 'Procurement workflow sync between Coupa and SAP S/4HANA with IDoc management.', color: '#E8A020', href: '/integrations/idoc-management' },
-    { title: 'Ironclad to Coupa', icon: Webhook, desc: 'Contract lifecycle automation.', detailTitle: 'Contract Lifecycle', detailDesc: 'Contract lifecycle to procurement workflow — automated supplier onboarding.', color: '#059669', href: '/integrations/contract-lifecycle' },
-    { title: 'Workday to Coupa', icon: Network, desc: 'Employee provisioning.', detailTitle: 'Identity Provisioning', detailDesc: 'Employee provisioning and access management automation across HR and procurement.', color: '#7C3AED', href: '/integrations/identity-provisioning' },
-    { title: 'Zylo to ERP', icon: Zap, desc: 'SaaS governance automation.', detailTitle: 'SaaS Governance', detailDesc: 'SaaS portfolio governance and software asset management automation.', color: '#0284C7', href: '/integrations/saas-governance' },
-  ]
-
-  const activeInt = hoveredIdx !== null ? INTEGRATIONS[hoveredIdx] : null
+  const activeInt = hoveredIdx !== null ? INTEGRATIONS_LIST[hoveredIdx] : null
 
   return (
     <motion.div
@@ -334,7 +335,7 @@ function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: 
         className="flex-[1.5] grid grid-cols-2 grid-rows-3 gap-2 relative z-10"
         onMouseLeave={() => setHoveredIdx(null)}
       >
-        {INTEGRATIONS.map((item, idx) => (
+        {INTEGRATIONS_LIST.map((item, idx) => (
           <motion.div key={idx} {...(shouldReduceMotion ? motionProps : { variants: itemVariants })} className="relative group" onMouseEnter={() => setHoveredIdx(idx)}>
             <Link
               href={item.href}
@@ -384,6 +385,10 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeMenu, setActiveMenu] = useState<string | null>(null)
+  const isMobile = useIsMobile(1024)
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null)
+  
+  const headerRef = useRef<HTMLElement>(null)
   const navTimer = useRef<NodeJS.Timeout | null>(null)
   const pathname = usePathname()
 
@@ -414,20 +419,47 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
+  useEffect(() => {
+    if (!isMobile || !activeMenu) return
+    const handleDocumentClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setActiveMenu(null)
+      }
+    }
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveMenu(null)
+    }
+    document.addEventListener('click', handleDocumentClick)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('click', handleDocumentClick)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobile, activeMenu])
+
   const handleMouseEnter = (menu: string) => {
+    if (isMobile) return
     if (navTimer.current) clearTimeout(navTimer.current)
     setActiveMenu(menu)
   }
 
   const handleMouseLeave = () => {
+    if (isMobile) return
     navTimer.current = setTimeout(() => {
       setActiveMenu(null)
     }, 150)
   }
 
+  const handleClick = (menu: string, e: React.MouseEvent) => {
+    if (!isMobile) return
+    e.preventDefault()
+    setActiveMenu(prev => prev === menu ? null : menu)
+  }
+
   return (
     <>
       <header
+        ref={headerRef}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
@@ -466,6 +498,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
               onMouseLeave={handleMouseLeave}
             >
               <button
+                onClick={(e) => handleClick('services', e)}
                 onFocus={() => handleMouseEnter('services')}
                 onBlur={(e) => {
                   if (!e.currentTarget.contains(e.relatedTarget as Node)) {
@@ -483,7 +516,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
                 aria-expanded={activeMenu === 'services'}
                 aria-haspopup="true"
                 className={cn(
-                  "text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
+                  "flex items-center min-h-[44px] text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
                   activeMenu === 'services' && "text-navy-950 !font-bold"
                 )}
                 style={{ fontFamily: 'var(--font-mono)' }}
@@ -499,6 +532,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
               onMouseLeave={handleMouseLeave}
             >
               <button
+                onClick={(e) => handleClick('integrations', e)}
                 onFocus={() => handleMouseEnter('integrations')}
                 onBlur={(e) => {
                   if (!e.currentTarget.contains(e.relatedTarget as Node)) {
@@ -516,7 +550,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
                 aria-expanded={activeMenu === 'integrations'}
                 aria-haspopup="true"
                 className={cn(
-                  "text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
+                  "flex items-center min-h-[44px] text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
                   activeMenu === 'integrations' && "text-navy-950 !font-bold"
                 )}
                 style={{ fontFamily: 'var(--font-mono)' }}
@@ -584,11 +618,38 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
             {/* Simple mobile menu implementation */}
             <div ref={drawerRef as any} role="dialog" aria-modal="true" className="absolute right-0 top-0 bottom-0 w-[80vw] bg-white shadow-2xl p-6">
               <button onClick={() => setMobileOpen(false)}><X className="mb-8 text-navy-950" /></button>
-              <div className="flex flex-col gap-6">
-                <Link href="/services" className="text-xl font-bold text-navy-950">Services</Link>
-                <Link href="/integrations" className="text-xl font-bold text-navy-950">Integrations</Link>
-                <Link href="/case-studies" className="text-xl font-bold text-navy-950">Case Studies</Link>
-                {NAV_LINKS.filter(l => l.href !== '/case-studies').map(l => <Link key={l.label} href={l.href} className="text-xl font-bold text-navy-950">{l.label}</Link>)}
+              <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] pb-20">
+                
+                {/* Services Accordion */}
+                <div className="flex flex-col">
+                  <button onClick={() => setExpandedMobile(expandedMobile === 'services' ? null : 'services')} className="flex items-center justify-between text-xl font-bold text-navy-950 py-2">
+                    Services <ChevronDown className={cn("w-5 h-5 transition-transform", expandedMobile === 'services' && "rotate-180")} />
+                  </button>
+                  <div className={cn("flex-col gap-3 mt-3 overflow-hidden", expandedMobile === 'services' ? "flex" : "hidden")}>
+                    {dynamicServices.slice(0, 8).map(s => (
+                      <Link key={s.slug || s.name} href={`/services/${s.slug}`} className="text-base text-slate-600 pl-4 py-2 border-l-2 border-slate-100 hover:border-[#E8A020]">
+                        {s.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Integrations Accordion */}
+                <div className="flex flex-col">
+                  <button onClick={() => setExpandedMobile(expandedMobile === 'integrations' ? null : 'integrations')} className="flex items-center justify-between text-xl font-bold text-navy-950 py-2">
+                    Integrations <ChevronDown className={cn("w-5 h-5 transition-transform", expandedMobile === 'integrations' && "rotate-180")} />
+                  </button>
+                  <div className={cn("flex-col gap-3 mt-3 overflow-hidden", expandedMobile === 'integrations' ? "flex" : "hidden")}>
+                    {INTEGRATIONS_LIST.map(int => (
+                      <Link key={int.title} href={int.href} className="text-base text-slate-600 pl-4 py-2 border-l-2 border-slate-100 hover:border-[#E8A020]">
+                        {int.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                <Link href="/case-studies" className="text-xl font-bold text-navy-950 py-2">Case Studies</Link>
+                {NAV_LINKS.filter(l => l.href !== '/case-studies').map(l => <Link key={l.label} href={l.href} className="text-xl font-bold text-navy-950 py-2">{l.label}</Link>)}
               </div>
             </div>
           </motion.div>

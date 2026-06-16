@@ -39,17 +39,22 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Audit Log',    href: '/admin/audit-log',    icon: FileText,        roles: ['super_admin'] },
 ]
 
+import { adminSignOut } from '@/app/actions/auth-actions'
+
 export function AdminSidebar({ role }: { role: string }) {
   const pathname = usePathname()
-  const router   = useRouter()
 
   const filteredNav = NAV_ITEMS.filter((item) => item.roles.includes(role))
 
   const signOut = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/admin/login')
-    router.refresh()
+    try {
+      const res = await adminSignOut()
+      if (res?.success) {
+        window.location.href = '/admin/login'
+      }
+    } catch (err: any) {
+      console.warn('Failed to sign out:', err?.message || err)
+    }
   }
 
   const isActive = (href: string) =>
