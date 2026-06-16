@@ -616,7 +616,13 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
             onClick={() => setMobileOpen(false)}
           >
             {/* Simple mobile menu implementation */}
-            <div ref={drawerRef as any} role="dialog" aria-modal="true" className="absolute right-0 top-0 bottom-0 w-[80vw] bg-white shadow-2xl p-6">
+            <div 
+              ref={drawerRef as any} 
+              role="dialog" 
+              aria-modal="true" 
+              className="absolute right-0 top-0 bottom-0 w-[80vw] bg-white shadow-2xl p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
               <button onClick={() => setMobileOpen(false)}><X className="mb-8 text-navy-950" /></button>
               <div className="flex flex-col gap-6 overflow-y-auto max-h-[80vh] pb-20">
                 
