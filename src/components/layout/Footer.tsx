@@ -81,9 +81,12 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[clamp(4rem,18vw,15rem)] font-black tracking-tighter leading-none text-[#555] mix-blend-color-dodge select-none"
+            className="text-[clamp(4rem,18vw,15rem)] font-black tracking-tighter leading-none select-none"
             style={{
-              WebkitTextStroke: '1px rgba(255,255,255,0.1)'
+              background: 'linear-gradient(180deg, #FFFFFF 0%, #7A8CA3 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))'
             }}
           >
             {(settings?.company_name || 'FLOWTARIS').toUpperCase()}
@@ -94,7 +97,8 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-gray-400 text-sm md:text-lg lg:text-xl font-medium tracking-wide mt-4 md:mt-[-20px]"
+            className="text-[#E8A020] text-sm md:text-xl font-bold tracking-[0.25em] uppercase mt-2 md:mt-[-10px]"
+            style={{ textShadow: '0 0 20px rgba(232, 160, 32, 0.4)' }}
           >
             The Science Of Business Flow
           </motion.p>
@@ -120,7 +124,7 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
                 href={link.url}
                 target={link.url.startsWith('mailto:') ? '_self' : '_blank'}
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-white/40 hover:text-white transition-colors duration-300"
+                className="text-xs uppercase tracking-[0.15em] font-bold text-white/50 hover:text-white transition-colors duration-300"
               >
                 {link.platform_name}
               </a>
@@ -133,12 +137,12 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-white/40 hover:text-white transition-colors duration-300"
+                className="text-xs uppercase tracking-[0.15em] font-bold text-white/50 hover:text-white transition-colors duration-300"
               >
                 {link.label}
               </Link>
             ))}
-            <span className="text-sm font-medium text-white/20 pl-4 border-l border-white/10">
+            <span className="text-xs uppercase tracking-[0.15em] font-bold text-white/30 pl-6 border-l border-white/10">
               &copy; {currentYear} • Developed by{' '}
               <a
                 href="https://www.pixenox.com/"
