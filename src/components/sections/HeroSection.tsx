@@ -134,15 +134,15 @@ export function HeroSection({ title, description, technologies, heroImages }: He
         <p className="text-center text-sm font-semibold text-gray-400 mb-8 tracking-wider uppercase">
           Powered by Modern Technologies
         </p>
-        <div style={{ height: '120px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ height: '180px', position: 'relative', overflow: 'hidden' }}>
           <LogoLoop
             logos={technologies && technologies.length > 0
               ? technologies.map(t => ({ src: t.logo_url, title: t.name }))
               : techLogos}
             speed={60}
             direction="right"
-            logoHeight={75}
-            gap={85}
+            logoHeight={150}
+            gap={100}
             fadeOut
             fadeOutColor="#FAFAFA"
             ariaLabel="Technology partners"
@@ -151,17 +151,17 @@ export function HeroSection({ title, description, technologies, heroImages }: He
               const src = 'src' in item ? item.src : '';
               const title = item.title || '';
               return (
-                <div className="group relative flex flex-col items-center justify-center cursor-pointer pb-6">
+                <div className="group relative flex flex-col items-center justify-center cursor-pointer pb-8">
                   {src ? (
                     <Image
                       src={src}
                       alt={title}
-                      width={75}
-                      height={75}
-                      className="w-auto h-6 lg:h-10 object-contain transition-all duration-500 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"
+                      width={300}
+                      height={150}
+                      className="w-auto h-16 lg:h-[120px] object-contain transition-all duration-500 filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"
                     />
                   ) : (
-                    <div className="transition-all duration-500 text-slate-500 group-hover:text-[#0A1628] filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 scale-50 lg:scale-100 origin-bottom">
+                    <div className="transition-all duration-500 text-slate-500 group-hover:text-[#0A1628] filter grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 scale-100 lg:scale-[1.6] origin-bottom">
                       {'node' in item ? item.node : null}
                     </div>
                   )}
