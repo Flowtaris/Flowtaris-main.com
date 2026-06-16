@@ -85,11 +85,15 @@ export const metadata: Metadata = {
   },
 }
 
+import { headers } from 'next/headers'
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const nonce = headers().get('x-nonce') || undefined
+
   return (
     <html
       lang="en"
@@ -115,7 +119,7 @@ export default function RootLayout({
           <CookieConsent />
           <ServiceWorkerRegistration />
           
-          <SchemaInjector schema={{
+          <SchemaInjector nonce={nonce} schema={{
             "@context": "https://schema.org",
             "@type": ["Organization", "ProfessionalService"],
             "@id": "https://flowtaris.com/#organization",
@@ -177,7 +181,7 @@ export default function RootLayout({
             }
           }} />
 
-          <SchemaInjector schema={{
+          <SchemaInjector nonce={nonce} schema={{
             "@context": "https://schema.org",
             "@type": "WebSite",
             "@id": "https://flowtaris.com/#website",
@@ -197,7 +201,7 @@ export default function RootLayout({
             }
           }} />
 
-          <SchemaInjector schema={{
+          <SchemaInjector nonce={nonce} schema={{
             "@context": "https://schema.org",
             "@type": "WebPage",
             "url": "https://flowtaris.com/",
