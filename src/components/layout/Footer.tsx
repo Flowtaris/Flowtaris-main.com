@@ -112,8 +112,17 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
           transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="w-full flex flex-col md:flex-row items-center justify-between gap-8 mt-24 pointer-events-auto"
         >
-          {/* Dynamic Social Links */}
-          <div className="flex items-center gap-6">
+          {/* Dynamic Social & Contact Links */}
+          <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center md:justify-start">
+            <a 
+              href={`tel:${settings?.phone_number?.replace(/\s/g, '') || '+61212345678'}`}
+              className="text-xs uppercase tracking-[0.15em] font-bold text-white/50 hover:text-white transition-colors duration-300"
+            >
+              {settings?.phone_number || '+61 2 1234 5678'}
+            </a>
+
+            <span className="w-1 h-1 rounded-full bg-white/20 hidden md:block" />
+
             {(socialLinks.length > 0 ? socialLinks : [
               { id: '1', platform_name: 'Email', url: `mailto:contact@flowtaris.com`, priority: 3, created_at: '', updated_at: '' },
               { id: '2', platform_name: 'LinkedIn', url: 'https://linkedin.com/company/flowtaris', priority: 2, created_at: '', updated_at: '' },

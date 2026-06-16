@@ -8,6 +8,7 @@ import { Loader2, CheckCircle } from 'lucide-react'
 export function SiteSettingsForm({ initialSettings }: { initialSettings: Record<string, string> }) {
   const [companyName, setCompanyName] = useState(initialSettings['company_name'] || 'Flowtaris')
   const [logoUrl, setLogoUrl] = useState(initialSettings['logo_url'] || '/images/logo.png')
+  const [phoneNumber, setPhoneNumber] = useState(initialSettings['phone_number'] || '+61 2 1234 5678')
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
@@ -17,8 +18,9 @@ export function SiteSettingsForm({ initialSettings }: { initialSettings: Record<
 
     const res1 = await upsertSiteSetting('company_name', companyName)
     const res2 = await upsertSiteSetting('logo_url', logoUrl)
+    const res3 = await upsertSiteSetting('phone_number', phoneNumber)
 
-    if (res1.success && res2.success) {
+    if (res1.success && res2.success && res3.success) {
       setStatus('success')
       setTimeout(() => setStatus('idle'), 3000)
     } else {
@@ -37,6 +39,18 @@ export function SiteSettingsForm({ initialSettings }: { initialSettings: Record<
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
           className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">Support Phone Number</label>
+        <p className="text-xs text-slate-500 mb-2">The contact phone number displayed in the footer (e.g. +61 2 1234 5678).</p>
+        <input
+          type="text"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="+61 2 1234 5678"
         />
       </div>
 
