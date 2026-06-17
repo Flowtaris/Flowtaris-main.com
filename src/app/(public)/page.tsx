@@ -38,13 +38,15 @@ export default async function HomePage() {
     { data: technologies },
     { data: wcuSectors },
     { data: wcuCards },
-    { data: rawServices }
+    { data: rawServices },
+    { data: faqsData }
   ] = await Promise.all([
     supabase.from('global_hero').select('*').limit(1).maybeSingle(),
     supabase.from('modern_technologies').select('*').order('priority', { ascending: false }),
     supabase.from('why_choose_us_sectors').select('*').order('priority', { ascending: false }),
     supabase.from('why_choose_us_cards').select('*').order('priority', { ascending: false }),
-    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false })
+    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false }),
+    supabase.from('faqs').select('*').eq('status', 'Active').order('priority', { ascending: false }).order('created_at', { ascending: false })
   ])
 
   // Fetch hero images sequentially since it depends on heroData.id
@@ -88,76 +90,20 @@ export default async function HomePage() {
         }
       }} />
 
-      <SchemaInjector schema={{
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
+      {faqsData && faqsData.length > 0 && (
+        <SchemaInjector schema={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqsData.map(faq => ({
             "@type": "Question",
-            "name": "What is Flowtaris?",
+            "name": faq.question,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Flowtaris is a boutique, enterprise-grade ERP consulting firm. We specialise in architecting, implementing, and optimising complex business systems without the bureaucracy of large system integrators."
+              "text": faq.answer
             }
-          },
-          {
-            "@type": "Question",
-            "name": "Which ERP platforms do you implement?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We provide end-to-end consulting for NetSuite, Coupa, SAP (including S/4HANA), and Workday. Our expertise covers both platform-specific implementation and complex cross-system integrations."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How long does a typical ERP implementation take?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Implementation timelines vary based on scope, but a standard mid-market NetSuite or Coupa deployment typically ranges from 4 to 9 months. We accelerate time-to-value through strategic, phased rollouts."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What industries does Flowtaris serve?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We primarily serve mid-market to enterprise organisations spanning manufacturing, fintech, healthcare, professional services, and retail sectors globally."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How is your pricing structured?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Flowtaris operates on a value-based, fixed-fee model for well-defined implementations to ensure budget certainty. For ongoing health audits and complex integrations, we utilise retained advisory models."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What makes Flowtaris different from Big 4 consulting partners?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Unlike large integrators, Flowtaris guarantees direct access to senior, certified architects rather than junior staff. We offer higher agility, focused engineering excellence, and zero bureaucratic overhead."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you offer post-go-live managed support?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. We provide dedicated hypercare immediately following go-live to ensure stability. Subsequently, we offer flexible managed support retainers to continuously optimise your system."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the first step to engage Flowtaris?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The first step is scheduling a discovery call through our contact page. Within 48 hours, you will speak directly with a senior architect to begin rigorous project scoping."
-            }
-          }
-        ]
-      }} />
+          }))
+        }} />
+      )}
 
       <HeroSection 
         title={heroData?.main_description} 
@@ -193,20 +139,15 @@ export default async function HomePage() {
           </div>
           <div className="lg:col-span-2">
             <Accordion 
-              items={[
-                { 
-                  question: 'What makes Flowtaris different from large ERP consultancies?', 
-                  answer: 'Unlike massive global systems integrators that rely on junior resources and standardized templates, Flowtaris operates as a specialized boutique consultancy. Our teams consist strictly of senior architects with Big 4 backgrounds and active certifications in NetSuite, Coupa, and Workday. This allows us to deliver highly customized, complex iPaaS integrations and ERP optimizations faster and with a significantly lower failure rate than traditional large-scale consulting firms.' 
-                },
-                { 
-                  question: 'How quickly can Flowtaris start an ERP implementation or integration project?', 
-                  answer: 'Flowtaris typically deploys a dedicated ERP architect and integration team within two to four weeks of a signed Statement of Work. Because we specialize exclusively in the NetSuite, Coupa, SAP, and Workday ecosystem, we avoid the lengthy resource-pooling delays common at larger firms. During this immediate onboarding phase, we conduct technical discovery and establish the foundation for your SOX-compliant data pipelines.' 
-                },
-                { 
-                  question: 'Which ERP platforms and software does Flowtaris specialize in?', 
-                  answer: 'Flowtaris exclusively specializes in architecting and integrating Oracle NetSuite, Coupa Business Spend Management (BSM), SAP S/4HANA, and Workday HCM. We do not dilute our expertise across dozens of platforms; instead, we focus entirely on building autonomous, high-volume financial data pipelines and SuiteScript 2.x customizations connecting these four enterprise leaders via modern iPaaS solutions.' 
-                }
-              ]} 
+              items={faqsData && faqsData.length > 0 
+                ? faqsData.map(faq => ({ question: faq.question, answer: faq.answer }))
+                : [
+                    { 
+                      question: 'What makes Flowtaris different from large ERP consultancies?', 
+                      answer: 'Unlike massive global systems integrators that rely on junior resources and standardized templates, Flowtaris operates as a specialized boutique consultancy. Our teams consist strictly of senior architects with Big 4 backgrounds and active certifications in NetSuite, Coupa, and Workday. This allows us to deliver highly customized, complex iPaaS integrations and ERP optimizations faster and with a significantly lower failure rate than traditional large-scale consulting firms.' 
+                    }
+                  ]
+              } 
             />
           </div>
         </div>
