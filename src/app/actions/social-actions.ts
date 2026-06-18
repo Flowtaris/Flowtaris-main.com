@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import { SocialLink } from '@/types/database'
 
 export async function upsertSocialLink(data: Partial<SocialLink>) {
@@ -21,7 +21,6 @@ export async function upsertSocialLink(data: Partial<SocialLink>) {
   }
 
   revalidatePath('/', 'layout')
-  revalidateTag('layout-data')
   return { success: true }
 }
 
@@ -36,6 +35,5 @@ export async function deleteSocialLink(id: string) {
   if (error) return { success: false, error: error.message }
 
   revalidatePath('/', 'layout')
-  revalidateTag('layout-data')
   return { success: true }
 }
