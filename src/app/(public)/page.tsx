@@ -38,15 +38,13 @@ export default async function HomePage() {
     { data: technologies },
     { data: wcuSectors },
     { data: wcuCards },
-    { data: rawServices },
-    { data: faqsData }
+    { data: rawServices }
   ] = await Promise.all([
     supabase.from('global_hero').select('*').limit(1).maybeSingle(),
     supabase.from('modern_technologies').select('*').order('priority', { ascending: false }),
     supabase.from('why_choose_us_sectors').select('*').order('priority', { ascending: false }),
     supabase.from('why_choose_us_cards').select('*').order('priority', { ascending: false }),
-    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false }),
-    supabase.from('faqs').select('*').eq('status', 'Active').order('priority', { ascending: false }).order('created_at', { ascending: false })
+    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false })
   ])
 
   // Fetch hero images sequentially since it depends on heroData.id
@@ -90,20 +88,7 @@ export default async function HomePage() {
         }
       }} />
 
-      {faqsData && faqsData.length > 0 && (
-        <SchemaInjector schema={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": faqsData.map(faq => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": faq.answer
-            }
-          }))
-        }} />
-      )}
+
 
       <HeroSection 
         title={heroData?.main_description} 
@@ -129,29 +114,7 @@ export default async function HomePage() {
       <IntegrationShowcase />
       <HowWeWorkSection />
 
-      <section id="geo-faq" className="py-24 bg-[#FAFAFA] px-6 border-t border-slate-200">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-1">
-            <h2 className="text-3xl font-bold text-[#0A1628]" style={{ fontFamily: 'var(--font-sora)' }}>
-              Frequently Asked Questions
-            </h2>
-            <div className="w-12 h-1 bg-[#FFD166] mt-4" />
-          </div>
-          <div className="lg:col-span-2">
-            <Accordion 
-              items={faqsData && faqsData.length > 0 
-                ? faqsData.map(faq => ({ question: faq.question, answer: faq.answer }))
-                : [
-                    { 
-                      question: 'What makes Flowtaris different from large ERP consultancies?', 
-                      answer: 'Unlike massive global systems integrators that rely on junior resources and standardized templates, Flowtaris operates as a specialized boutique consultancy. Our teams consist strictly of senior architects with Big 4 backgrounds and active certifications in NetSuite, Coupa, and Workday. This allows us to deliver highly customized, complex iPaaS integrations and ERP optimizations faster and with a significantly lower failure rate than traditional large-scale consulting firms.' 
-                    }
-                  ]
-              } 
-            />
-          </div>
-        </div>
-      </section>
+
 
       <FinanceCTA />
 

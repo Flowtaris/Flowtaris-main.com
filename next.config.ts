@@ -65,7 +65,6 @@ const nextConfig: NextConfig = {
         destination: '/blog/:slug',
         permanent: true,
       },
-      { source: '/faq', destination: '/contact', permanent: true },
     ]
   },
   compress: true,

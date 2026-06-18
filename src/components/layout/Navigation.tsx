@@ -29,6 +29,7 @@ const NAV_LINKS = [
   { label: 'Case Studies', href: '/case-studies' },
   { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
+  { label: 'FAQ', href: '/faq' },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -662,6 +663,16 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
 
                 <Link href="/case-studies" className="text-xl font-bold text-navy-950 py-2">Case Studies</Link>
                 {NAV_LINKS.filter(l => l.href !== '/case-studies').map(l => <Link key={l.label} href={l.href} className="text-xl font-bold text-navy-950 py-2">{l.label}</Link>)}
+                
+                <div className="mt-8 pt-6 border-t border-slate-100">
+                  <Link
+                    href="/contact"
+                    className="flex w-full items-center justify-center px-8 py-4 rounded-full text-[15px] font-bold uppercase tracking-widest transition-all duration-300 shadow-sm bg-navy-950 text-white hover:bg-navy-800"
+                    style={{ fontFamily: 'var(--font-mono)' }}
+                  >
+                    Contact Us
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>

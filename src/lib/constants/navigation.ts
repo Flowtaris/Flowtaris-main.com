@@ -57,6 +57,7 @@ export const NAV_COMPANY = [
   { label: 'Case Studies',    href: '/case-studies' },
   { label: 'Insights',        href: '/insights' },
   { label: 'Resources',       href: '/resources' },
+  { label: 'FAQ',             href: '/faq' },
 ] as const
 
 export const FOOTER_SOCIALS = [

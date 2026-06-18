@@ -7,6 +7,7 @@ import { NAV_SERVICES, NAV_INDUSTRIES, SITE_EMAIL } from '@/lib/constants/naviga
 import { ArrowRight } from 'lucide-react'
 
 const FOOTER_LINKS = [
+  { label: 'FAQ', href: '/faq' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms & Conditions', href: '/terms-of-use' },
 ]

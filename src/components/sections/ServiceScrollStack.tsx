@@ -49,7 +49,7 @@ export function ServiceScrollStack({ dynamicServices = [] }: { dynamicServices?:
 
         {/* Premium Pencil Draft Grid System */}
         <div className="pt-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12 lg:gap-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 xl:gap-12">
             {displayServices.map((service, index) => {
               const isExpanded = expandedIdx === index;
               return (
@@ -64,7 +64,7 @@ export function ServiceScrollStack({ dynamicServices = [] }: { dynamicServices?:
                   }}
                   className={cn(
                     "group flex flex-col h-full relative overflow-hidden rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white transition-all duration-700 hover:shadow-[0_20px_40px_-10px_var(--brand-color-shadow)]",
-                    isMobile ? (isExpanded ? "p-8 min-h-[300px]" : "p-6 min-h-[140px]") : "p-10 md:p-14 min-h-[440px] hover:-translate-y-2"
+                    isMobile ? (isExpanded ? "p-8 min-h-[300px]" : "p-6 min-h-[140px]") : "p-8 md:p-10 min-h-[320px] hover:-translate-y-2"
                   )}
                   style={{ 
                     '--brand-color': service.color,
@@ -152,7 +152,7 @@ export function ServiceScrollStack({ dynamicServices = [] }: { dynamicServices?:
                         />
                       </svg>
                     </h2>
-                    <p className={cn("text-[15px] text-slate-600 font-light leading-relaxed max-w-[95%] group-hover:text-[#0A1628] transition-colors duration-500", isMobile && !isExpanded ? "line-clamp-1" : "")}>
+                    <p className={cn("text-[15px] text-slate-600 font-light leading-relaxed max-w-[95%] group-hover:text-[#0A1628] transition-colors duration-500", isMobile && !isExpanded ? "line-clamp-1" : "line-clamp-5")}>
                       {service.description}
                     </p>
                   </div>
