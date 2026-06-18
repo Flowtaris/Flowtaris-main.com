@@ -17,6 +17,7 @@ export type SocialLink = {
   id: string;
   platform_name: string;
   url: string;
+  icon_svg?: string;
   priority: number;
   created_at: string;
   updated_at: string;
