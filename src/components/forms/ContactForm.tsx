@@ -10,9 +10,9 @@ import { cn } from '@/lib/utils'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
-  company: z.string().optional().or(z.literal('')),
+  company: z.string().refine(val => !val || val === '' || val.length >= 2, 'Company name must be at least 2 characters').optional(),
   work_email: z.string().email('Please enter a valid email'),
-  phone: z.string().optional().or(z.literal('')),
+  phone: z.string().refine(val => !val || val === '' || /^\+?[0-9\s\-()]{7,}$/.test(val), 'Please enter a valid phone number').optional(),
   question: z.string().min(10, 'Please provide a bit more context'),
 })
 
@@ -110,9 +110,10 @@ export function ContactForm() {
             <input
               id="contact-name"
               {...register('name')}
+              disabled={status === 'loading'}
               placeholder="Name"
               className={cn(
-                "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all",
+                "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed",
                 errors.name && "border-red-300 focus:ring-red-500"
               )}
             />
@@ -125,9 +126,10 @@ export function ContactForm() {
               id="contact-email"
               {...register('work_email')}
               type="email"
+              disabled={status === 'loading'}
               placeholder="Email Address"
               className={cn(
-                "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all",
+                "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed",
                 errors.work_email && "border-red-300 focus:ring-red-500"
               )}
             />
@@ -142,9 +144,14 @@ export function ContactForm() {
             <input
               id="contact-company"
               {...register('company')}
+              disabled={status === 'loading'}
               placeholder="Enterprise Corp"
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all"
+              className={cn(
+                "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed",
+                errors.company && "border-red-300 focus:ring-red-500"
+              )}
             />
+            {errors.company && <p className="text-xs text-red-500 pl-1">{errors.company.message}</p>}
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -153,9 +160,14 @@ export function ContactForm() {
               id="contact-phone"
               {...register('phone')}
               type="tel"
+              disabled={status === 'loading'}
               placeholder="Phone Number"
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all"
+              className={cn(
+                "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed",
+                errors.phone && "border-red-300 focus:ring-red-500"
+              )}
             />
+            {errors.phone && <p className="text-xs text-red-500 pl-1">{errors.phone.message}</p>}
           </div>
         </div>
 
@@ -165,10 +177,11 @@ export function ContactForm() {
           <textarea
             id="contact-question"
             {...register('question')}
+            disabled={status === 'loading'}
             placeholder="Briefly describe your requirements, challenges, or the systems involved..."
             rows={4}
             className={cn(
-              "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all resize-none",
+              "w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 text-sm text-[#0A1628] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0A1628] focus:border-transparent transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed",
               errors.question && "border-red-300 focus:ring-red-500"
             )}
           />

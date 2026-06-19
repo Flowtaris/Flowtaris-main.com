@@ -10,7 +10,7 @@ export function FinanceCTA() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   return (
-    <section className="bg-[#FAFAFA] py-24 lg:py-32 overflow-hidden relative">
+    <section className="bg-[#FAFAFA] pb-24 lg:pb-32 overflow-hidden relative">
       <div className="container-content mx-auto px-6 max-w-7xl relative z-10" ref={containerRef}>
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8">
 
