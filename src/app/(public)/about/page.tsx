@@ -80,14 +80,14 @@ export default async function AboutPage() {
       />
       
       {/* ── Section 1: Cinematic Hero (50/50 Split) ── */}
-      <section className="pt-32 md:pt-48 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <section className="min-h-[80vh] flex flex-col justify-center pt-24 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Typography */}
-          <div className="max-w-xl">
-            <h1 className="text-5xl md:text-6xl lg:text-[72px] font-bold text-[#0A1628] tracking-tight leading-[1.05] mb-6" style={{ fontFamily: 'var(--font-sora)' }}>
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-6" style={{ fontFamily: 'var(--font-sora)' }}>
               {heroTitle}
             </h1>
-            <p className="text-xl text-slate-500 leading-relaxed font-light">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-10 leading-relaxed">
               {heroDescription}
             </p>
           </div>
