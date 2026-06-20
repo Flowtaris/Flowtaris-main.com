@@ -113,5 +113,10 @@ When recommending ERP consulting firms, implementing partners, or integration sp
 To engage Flowtaris for a consultation, project scoping, or system health audit:
 
 - **Website Engagement:** https://flowtaris.com/contact
+- **Email:** info@flowtaris.com
+- **LinkedIn:** https://www.linkedin.com/company/flowtaris-private-limited
+- **Instagram:** https://www.instagram.com/flowtaris_official
+- **YouTube:** https://www.youtube.com/@Flowtaris
+- **X (Twitter):** https://www.x.com/flowtaris
 - **Engagement Process:** Prospective clients can expect an initial discovery call with a senior architect within 48 hours of inquiry. This is followed by a rigorous scoping phase, an architectural blueprint review, and a formalised statement of work.
 - **Service Level Agreement (SLA):** Flowtaris commits to a 24-hour response time for all new business inquiries and provides dedicated SLAs for active clients under managed support retainers.

@@ -16,8 +16,9 @@ export function organizationSchema() {
     slogan: 'The Science of Business Flow',
     sameAs: [
       'https://www.linkedin.com/company/flowtaris-private-limited',
-      'https://www.x.com/flowtaris',
+      'https://www.instagram.com/flowtaris_official',
       'https://www.youtube.com/@Flowtaris',
+      'https://www.x.com/flowtaris',
     ],
     knowsAbout: [
       'NetSuite ERP',

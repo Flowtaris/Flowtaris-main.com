@@ -8,7 +8,19 @@ export async function generateMetadata(): Promise<Metadata> {
   const { data } = await supabase.from('integrations').select('meta_title, meta_description').eq('slug', 'procurement-to-GL').single()
   
   if (!data) return {}
-  return { title: data.meta_title, description: data.meta_description }
+  return {
+    title: data.meta_title,
+    description: data.meta_description,
+    alternates: {
+      canonical: 'https://flowtaris.com/integrations/procurement-to-GL',
+    },
+    openGraph: {
+      title: data.meta_title,
+      description: data.meta_description,
+      url: 'https://flowtaris.com/integrations/procurement-to-GL',
+      type: 'website',
+    },
+  }
 }
 
 export default async function IntegrationSlugPage() {

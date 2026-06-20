@@ -8,6 +8,15 @@ import { breadcrumbSchema } from '@/lib/schema'
 export const metadata: Metadata = {
   title: 'Contact Flowtaris — Book an ERP Consultation',
   description: 'Book a consultation, request a proposal or get in touch with the Flowtaris enterprise ERP and integration consulting team.',
+  alternates: {
+    canonical: 'https://flowtaris.com/contact',
+  },
+  openGraph: {
+    title: 'Contact Flowtaris — Book an ERP Consultation',
+    description: 'Book a consultation, request a proposal or get in touch with the Flowtaris enterprise ERP and integration consulting team.',
+    url: 'https://flowtaris.com/contact',
+    type: 'website',
+  },
 }
 
 const contactOptions = [

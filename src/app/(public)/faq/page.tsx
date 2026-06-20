@@ -7,6 +7,9 @@ import { FAQAccordion } from '@/components/ui/FAQAccordion'
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions | Flowtaris',
   description: "Find answers to common questions about Flowtaris' enterprise ERP consulting, integration strategies, and implementation methodologies.",
+  alternates: {
+    canonical: 'https://flowtaris.com/faq',
+  },
   openGraph: {
     title: 'Frequently Asked Questions | Flowtaris',
     description: "Find answers to common questions about Flowtaris' enterprise ERP consulting, integration strategies, and implementation methodologies.",

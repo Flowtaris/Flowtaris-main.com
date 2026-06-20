@@ -8,6 +8,9 @@ import { organizationSchema } from '@/lib/schema'
 export const metadata: Metadata = {
   title: "About Flowtaris — Enterprise ERP Consulting Experts",
   description: "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks.",
+  alternates: {
+    canonical: 'https://flowtaris.com/about',
+  },
   openGraph: {
     title: "About Flowtaris — Enterprise ERP Consulting Experts",
     description: "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks.",

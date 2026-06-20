@@ -126,43 +126,37 @@ export default async function RootLayout({
             "@context": "https://schema.org",
             "@type": ["Organization", "ProfessionalService"],
             "@id": "https://flowtaris.com/#organization",
-            "name": "Flowtaris",
+            "name": "Flowtaris Private Limited",
+            "alternateName": "Flowtaris",
             "url": "https://flowtaris.com",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://flowtaris.com/logo.png",
+              "url": "https://flowtaris.com/images/logo.png",
               "width": 512,
               "height": 512
             },
-            "description": "Flowtaris is a boutique, enterprise-grade ERP consulting firm specialising in NetSuite, Coupa, SAP, and Workday implementations and optimisation.",
-            "foundingDate": "2020-01-01",
+            "description": "Flowtaris is a boutique, enterprise-grade ERP consulting firm specializing in NetSuite, Coupa, SAP, and Workday implementations, integrations, and managed support.",
+            "foundingDate": "2021",
             "numberOfEmployees": {
               "@type": "QuantitativeValue",
               "minValue": 10,
               "maxValue": 50
             },
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Level 1, 333 George Street",
-              "addressLocality": "Sydney",
-              "addressRegion": "NSW",
-              "postalCode": "2000",
-              "addressCountry": "Australia"
-            },
             "contactPoint": {
               "@type": "ContactPoint",
-              "telephone": "+61-2-1234-5678",
               "contactType": "customer service",
-              "email": "contact@flowtaris.com",
+              "email": "info@flowtaris.com",
               "availableLanguage": ["English"]
             },
             "sameAs": [
-              "https://www.linkedin.com/company/flowtaris",
-              "https://twitter.com/flowtaris",
-              "https://www.crunchbase.com/organization/flowtaris"
+              "https://www.linkedin.com/company/flowtaris-private-limited",
+              "https://www.instagram.com/flowtaris_official",
+              "https://www.youtube.com/@Flowtaris",
+              "https://www.x.com/flowtaris"
             ],
             "areaServed": "Worldwide",
             "serviceType": "ERP Consulting",
+            "slogan": "The Science of Business Flow",
             "knowsAbout": [
               "Enterprise Resource Planning (ERP)",
               "NetSuite Implementation",

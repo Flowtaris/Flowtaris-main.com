@@ -27,6 +27,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.meta_title ?? `${post.title} | Flowtaris`,
     description: post.meta_description ?? post.excerpt ?? '',
+    alternates: {
+      canonical: `https://flowtaris.com/insights/${slug}`,
+    },
     openGraph: {
       title: post.meta_title ?? post.title,
       description: post.meta_description ?? post.excerpt ?? '',

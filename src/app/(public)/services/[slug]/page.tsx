@@ -1,6 +1,38 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { DynamicServiceClient } from './DynamicServiceClient'
+
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const slug = params.slug;
+  const supabase = await createClient()
+
+  const { data: service } = await supabase
+    .from('services')
+    .select('name, slug, services_hero(normal_description, color)')
+    .eq('slug', slug)
+    .single()
+
+  if (!service) return { title: 'Service | Flowtaris' }
+
+  const heroData = (service as any).services_hero?.[0] || (service as any).services_hero
+  const description = heroData?.normal_description || `${service.name} — Enterprise implementation, consulting, and managed support by Flowtaris.`
+
+  return {
+    title: `${service.name} | Flowtaris — Enterprise ERP Consulting`,
+    description,
+    alternates: {
+      canonical: `https://flowtaris.com/services/${slug}`,
+    },
+    openGraph: {
+      title: `${service.name} | Flowtaris`,
+      description,
+      url: `https://flowtaris.com/services/${slug}`,
+      type: 'website',
+    },
+  }
+}
 
 export default async function ServiceSlugPage(props: { params: Promise<{ slug: string }> }) {
   const params = await props.params;

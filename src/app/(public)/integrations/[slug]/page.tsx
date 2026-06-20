@@ -20,6 +20,15 @@ export async function generateMetadata({
   return {
     title: data.meta_title || data.name,
     description: data.meta_description,
+    alternates: {
+      canonical: `https://flowtaris.com/integrations/${slug}`,
+    },
+    openGraph: {
+      title: data.meta_title || data.name,
+      description: data.meta_description,
+      url: `https://flowtaris.com/integrations/${slug}`,
+      type: 'website',
+    },
   }
 }
 
