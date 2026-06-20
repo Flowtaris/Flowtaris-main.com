@@ -50,6 +50,7 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
   const [step, setStep] = useState(0)
   const [userData, setUserData] = useState<UserData>({ interest: "", name: "", email: "" })
   const [isTyping, setIsTyping] = useState(false)
+  const [isInputFocused, setIsInputFocused] = useState(false)
   const [showTooltip, setShowTooltip] = useState(true)
   const [resumeTooltip, setResumeTooltip] = useState(false)
   const [initialScrollY, setInitialScrollY] = useState(0)
@@ -73,9 +74,12 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
   useEffect(() => {
     const handleScroll = () => {
       if (isOpen) {
-        // Disable auto-close on scroll for mobile devices 
+        // Disable auto-close on scroll if the user is actively typing
+        if (isInputFocused) return
+
+        // Disable auto-close on scroll for mobile/tablet devices 
         // to prevent virtual keyboard popups from closing the chat
-        if (window.innerWidth < 768) return
+        if (window.innerWidth < 1024) return
 
         const diff = Math.abs(window.scrollY - initialScrollY)
         if (diff > 80) {
@@ -88,12 +92,15 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [isOpen, step, initialScrollY])
+  }, [isOpen, step, initialScrollY, isInputFocused])
 
   // Auto-close on click outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (isOpen && containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        // Prevent closing if they accidentally tap outside while typing
+        if (isInputFocused) return
+
         setIsOpen(false)
         if (step > 0 && step < 3) {
           setResumeTooltip(true)
@@ -101,8 +108,12 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
       }
     }
     document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [isOpen, step])
+    document.addEventListener("touchstart", handleClickOutside, { passive: true })
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener("touchstart", handleClickOutside)
+    }
+  }, [isOpen, step, isInputFocused])
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -348,6 +359,8 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                  onFocus={() => setIsInputFocused(true)}
+                  onBlur={() => setIsInputFocused(false)}
                   disabled={step === 0 || step === 3 || isTyping}
                   className="flex-1 bg-[#0A0F1C]/80 px-4 py-3 text-sm text-white placeholder-gray-500 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all disabled:opacity-50"
                 />
