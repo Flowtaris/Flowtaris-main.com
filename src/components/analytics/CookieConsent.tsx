@@ -87,7 +87,7 @@ export function CookieConsent() {
           <p className="text-xs text-slate-500 mb-4 leading-relaxed">
             We use cookies to improve your experience and understand how our site is used.{' '}
             <Link href="/cookie-policy" className="text-gold-600 hover:underline">
-              Learn more
+              Read our full Cookie Policy
             </Link>
           </p>
 

@@ -89,7 +89,7 @@ export function HeroSection({ title, description, technologies, heroImages }: He
                       <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                     </div>
                     <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
-                      <h3 className="text-xl md:text-2xl font-bold mb-2">NetSuite Consulting</h3>
+                      <h2 className="text-xl md:text-2xl font-bold mb-2">NetSuite Consulting</h2>
                       <p className="text-sm md:text-base text-gray-400">
                         Implementation & SuiteScript
                       </p>
@@ -102,7 +102,7 @@ export function HeroSection({ title, description, technologies, heroImages }: He
                       <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                     </div>
                     <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
-                      <h3 className="text-xl md:text-2xl font-bold mb-2">Coupa BSM</h3>
+                      <h2 className="text-xl md:text-2xl font-bold mb-2">Coupa BSM</h2>
                       <p className="text-sm md:text-base text-gray-400">
                         Procurement Transformation
                       </p>
@@ -115,7 +115,7 @@ export function HeroSection({ title, description, technologies, heroImages }: He
                       <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                     </div>
                     <div className="p-6 md:p-8 flex-1 flex flex-col justify-end text-white">
-                      <h3 className="text-xl md:text-2xl font-bold mb-2">ERP Integrations</h3>
+                      <h2 className="text-xl md:text-2xl font-bold mb-2">ERP Integrations</h2>
                       <p className="text-sm md:text-base text-gray-400">
                         Connect your entire stack
                       </p>
