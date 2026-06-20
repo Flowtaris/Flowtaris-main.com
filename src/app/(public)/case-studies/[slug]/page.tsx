@@ -82,8 +82,16 @@ export default async function CaseStudyPage({
 
   const heroImage = cs.cover_image_url || "/images/cs_hero_cover.png"
 
+  const { breadcrumbSchema } = await import('@/lib/schema')
+  const breadcrumb = breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Case Studies', url: '/case-studies' },
+    { name: cs.title || slug, url: `/case-studies/${slug}` },
+  ])
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <CaseStudyHero
         title={cs.title}
         outcomeSummary={cs.outcome_summary}

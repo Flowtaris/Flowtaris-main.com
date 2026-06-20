@@ -110,8 +110,16 @@ export default async function ServiceSlugPage(props: { params: Promise<{ slug: s
     faqContent = questions
   }
 
+  const { breadcrumbSchema } = await import('@/lib/schema')
+  const breadcrumb = breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+    { name: service.name || slug, url: `/services/${slug}` },
+  ])
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {faqJsonLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       )}

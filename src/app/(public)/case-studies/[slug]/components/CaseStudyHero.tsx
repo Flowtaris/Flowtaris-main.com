@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 
@@ -74,10 +75,13 @@ export function CaseStudyHero({
             className="col-span-1 md:col-span-12 lg:col-span-5 bg-white rounded-3xl overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] border border-gray-200/60 h-[300px] lg:h-auto min-h-[400px] relative group"
           >
             <div className="absolute inset-0 bg-gray-900/5 group-hover:bg-transparent transition-colors duration-700 z-10" />
-            <img 
+            <Image
               src={coverImage || "/images/cs_hero_cover.png"} 
               alt={title}
-              className="w-full h-full object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-center transform group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]"
             />
           </motion.div>
 

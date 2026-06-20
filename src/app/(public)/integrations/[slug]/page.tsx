@@ -66,13 +66,23 @@ export default async function IntegrationSlugPage({
     supabase.from('integrations_execution_trace').select('*').eq('integration_id', integrationId).order('created_at', { ascending: true }),
   ])
 
+  const { breadcrumbSchema } = await import('@/lib/schema')
+  const breadcrumb = breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Integrations', url: '/integrations' },
+    { name: integration.name || slug, url: `/integrations/${slug}` },
+  ])
+
   return (
-    <DynamicIntegrationClient
-      integration={integration}
-      hero={heroData ?? null}
-      securityMain={securityMainData ?? null}
-      securityCards={securityCardsData ?? []}
-      traceSteps={traceData ?? []}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <DynamicIntegrationClient
+        integration={integration}
+        hero={heroData ?? null}
+        securityMain={securityMainData ?? null}
+        securityCards={securityCardsData ?? []}
+        traceSteps={traceData ?? []}
+      />
+    </>
   )
 }
