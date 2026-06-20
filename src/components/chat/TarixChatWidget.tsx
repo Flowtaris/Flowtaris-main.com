@@ -73,6 +73,10 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
   useEffect(() => {
     const handleScroll = () => {
       if (isOpen) {
+        // Disable auto-close on scroll for mobile devices 
+        // to prevent virtual keyboard popups from closing the chat
+        if (window.innerWidth < 768) return
+
         const diff = Math.abs(window.scrollY - initialScrollY)
         if (diff > 80) {
           setIsOpen(false)
