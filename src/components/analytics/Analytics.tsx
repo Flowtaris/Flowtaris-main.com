@@ -20,6 +20,17 @@ const GA4_ID     = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? 'https://app.posthog.com'
 
+export function trackEvent(eventName: string, eventParams: Record<string, any> = {}) {
+  if (typeof window !== 'undefined') {
+    if (window.gtag) {
+      window.gtag('event', eventName, eventParams)
+    }
+    if (window.posthog) {
+      window.posthog.capture(eventName, eventParams)
+    }
+  }
+}
+
 export function Analytics() {
   const pathname = usePathname()
 

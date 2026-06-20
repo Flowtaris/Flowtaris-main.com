@@ -53,6 +53,11 @@ export function ContactForm() {
         throw new Error(json.error ?? 'Submission failed. Please try again.')
       }
 
+      import('@/components/analytics/Analytics').then(({ trackEvent }) => {
+        trackEvent('form_submission', { form_name: 'Contact Form', company: data.company || 'Unknown' })
+        trackEvent('generate_lead', { currency: 'USD', value: 500 }) // Valuable B2B lead
+      })
+
       setStatus('success')
     } catch (err) {
       setStatus('error')

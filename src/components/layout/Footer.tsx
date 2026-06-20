@@ -135,6 +135,11 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
                     href={href}
                     target={href.startsWith('mailto:') ? '_self' : '_blank'}
                     rel="noopener noreferrer"
+                    onClick={() => {
+                      import('@/components/analytics/Analytics').then(({ trackEvent }) => {
+                        trackEvent('social_click', { platform: link.platform_name })
+                      })
+                    }}
                     className="text-white/60 hover:text-white transition-all duration-300 hover:scale-110"
                     aria-label={link.platform_name}
                   >

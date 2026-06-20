@@ -73,7 +73,15 @@ export default function DynamicIntegrationClient({
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
               className="flex items-center gap-4"
             >
-              <Link href="/contact" className="h-12 px-6 bg-zinc-900 text-white rounded-lg font-medium text-sm hover:bg-zinc-800 transition-colors shadow-sm flex items-center gap-2 group">
+              <Link
+                href="/contact"
+                onClick={() => {
+                  import('@/components/analytics/Analytics').then(({ trackEvent }) => {
+                    trackEvent('cta_click', { button_name: 'Deploy Integration', integration: integration.name || heroTitle })
+                  })
+                }}
+                className="h-12 px-6 bg-zinc-900 text-white rounded-lg font-medium text-sm hover:bg-zinc-800 transition-colors shadow-sm flex items-center gap-2 group"
+              >
                 Deploy Integration
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
@@ -256,7 +264,15 @@ export default function DynamicIntegrationClient({
           <p className="text-lg text-zinc-500 mb-10">
             {integration.cta_description || 'Let\'s architect a seamless data pipeline for your enterprise.'}
           </p>
-          <Link href="/contact" className="inline-flex h-14 px-8 bg-zinc-900 text-white rounded-xl font-medium text-[15px] hover:bg-zinc-800 transition-colors shadow-lg shadow-zinc-200 items-center gap-2">
+          <Link
+            href="/contact"
+            onClick={() => {
+              import('@/components/analytics/Analytics').then(({ trackEvent }) => {
+                trackEvent('cta_click', { button_name: 'Schedule Architecture Review', integration: integration.name || heroTitle })
+              })
+            }}
+            className="inline-flex h-14 px-8 bg-zinc-900 text-white rounded-xl font-medium text-[15px] hover:bg-zinc-800 transition-colors shadow-lg shadow-zinc-200 items-center gap-2"
+          >
             Schedule Architecture Review
             <ArrowRight className="w-4 h-4" />
           </Link>
