@@ -64,7 +64,7 @@ export function ServiceScrollStack({ dynamicServices = [] }: { dynamicServices?:
                   }}
                   className={cn(
                     "group flex flex-col h-full relative overflow-hidden rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white transition-all duration-700 hover:shadow-[0_20px_40px_-10px_var(--brand-color-shadow)]",
-                    isMobile ? (isExpanded ? "p-8 min-h-[300px]" : "p-6 min-h-[140px]") : "p-8 md:p-10 min-h-[320px] hover:-translate-y-2"
+                    isMobile ? (isExpanded ? "p-8 min-h-[300px]" : "p-6 min-h-[140px]") : "p-8 md:p-10 lg:p-6 xl:p-10 min-h-[320px] hover:-translate-y-2"
                   )}
                   style={{ 
                     '--brand-color': service.color,
@@ -129,7 +129,7 @@ export function ServiceScrollStack({ dynamicServices = [] }: { dynamicServices?:
                   {/* Title & Description */}
                   <div className="flex-1 relative z-10">
                     <h2
-                      className={cn("font-light text-[#0A1628] relative inline-block group-hover:text-[var(--brand-color)] transition-colors duration-500 group-hover:drop-shadow-[0_0_12px_var(--brand-color-shadow)]", isMobile ? "text-2xl mb-3" : "text-3xl lg:text-[34px] mb-6 leading-[1.15]")}
+                      className={cn("font-light text-[#0A1628] relative inline-block group-hover:text-[var(--brand-color)] transition-colors duration-500 group-hover:drop-shadow-[0_0_12px_var(--brand-color-shadow)]", isMobile ? "text-2xl mb-3" : "text-3xl lg:text-[26px] xl:text-[34px] mb-6 leading-[1.15] break-words")}
                       style={{ fontFamily: 'var(--font-sora)' }}
                     >
                       {service.title}

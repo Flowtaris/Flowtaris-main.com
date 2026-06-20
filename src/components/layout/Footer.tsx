@@ -11,6 +11,12 @@ const GlassdoorIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
+const YoutubeIcon = ({ className }: { className?: string }) => (
+  <svg role="img" viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+)
+
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} xmlns="http://www.w3.org/2000/svg">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -55,6 +61,7 @@ const getSocialIcon = (link: SocialLink) => {
   if (n.includes('glassdoor')) return <GlassdoorIcon className="w-6 h-6" />
   if (n.includes('mail') || n.includes('email')) return <Mail className="w-6 h-6" />
   if (n.includes('whatsapp')) return <WhatsappIcon className="w-6 h-6" />
+  if (n.includes('youtube')) return <YoutubeIcon className="w-6 h-6" />
   return null
 }
 
@@ -105,10 +112,10 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
               <span className="w-1 h-1 rounded-full bg-white/20 hidden sm:block" />
 
               {(socialLinks.length > 0 ? socialLinks : [
-                { id: '1', platform_name: 'LinkedIn', url: 'https://linkedin.com/company/flowtaris', priority: 4, created_at: '', updated_at: '' },
-                { id: '2', platform_name: 'Twitter', url: 'https://twitter.com/flowtaris', priority: 3, created_at: '', updated_at: '' },
-                { id: '3', platform_name: 'Instagram', url: 'https://instagram.com/flowtaris', priority: 2, created_at: '', updated_at: '' },
-                { id: '4', platform_name: 'Glassdoor', url: 'https://glassdoor.com/flowtaris', priority: 1, created_at: '', updated_at: '' },
+                { id: '1', platform_name: 'LinkedIn', url: 'https://www.linkedin.com/company/flowtaris-private-limited', priority: 4, created_at: '', updated_at: '' },
+                { id: '2', platform_name: 'X', url: 'https://www.x.com/flowtaris', priority: 3, created_at: '', updated_at: '' },
+                { id: '3', platform_name: 'Instagram', url: 'https://www.instagram.com/flowtaris_official?igsh=d2N5a2FzZDlqZ2F5&utm_source=qr', priority: 2, created_at: '', updated_at: '' },
+                { id: '4', platform_name: 'YouTube', url: 'https://www.youtube.com/@Flowtaris', priority: 1, created_at: '', updated_at: '' },
               ]).map((link) => {
                 const Icon = getSocialIcon(link)
                 const isWhatsapp = link.platform_name.toLowerCase().includes('whatsapp')

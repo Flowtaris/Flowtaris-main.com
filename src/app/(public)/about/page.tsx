@@ -34,7 +34,7 @@ export default async function AboutPage() {
   const heroTitle = heroData?.title || "Enterprise ERP will not be run by disjointed tools. It will be run by integrated architecture."
   const heroDescription = heroData?.description || "Flowtaris is the specialized consulting workforce that architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks forever."
   const heroImage = heroData?.image_url || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200"
-  
+
   const topics = topicsData && topicsData.length > 0 ? topicsData : []
 
   const settingsMap = (settingsData || []).reduce((acc: any, curr) => {
@@ -78,7 +78,7 @@ export default async function AboutPage() {
           })
         }}
       />
-      
+
       {/* ── Section 1: Cinematic Hero (50/50 Split) ── */}
       <section className="min-h-[80vh] flex flex-col justify-center pt-24 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -94,10 +94,10 @@ export default async function AboutPage() {
           {/* Right: Team Photo / Logo Card */}
           <div className="w-full aspect-square relative rounded-[2rem] overflow-hidden border border-slate-100 bg-white shadow-sm flex items-center justify-center p-8 md:p-16">
             <div className="relative w-full h-full">
-              <Image 
-                src={heroImage} 
-                alt="Flowtaris Team" 
-                fill 
+              <Image
+                src={heroImage}
+                alt="Flowtaris Team"
+                fill
                 className="object-contain"
                 priority
               />
@@ -163,7 +163,7 @@ export default async function AboutPage() {
         <h2 className="text-2xl font-bold text-[#0A1628] tracking-tight mb-16" style={{ fontFamily: 'var(--font-sora)' }}>
           {trustedHeading}
         </h2>
-        
+
         {/* Partner Certifications */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 mt-8 place-items-center">
           {trustedPartners.map((partner: any) => (
@@ -184,9 +184,9 @@ export default async function AboutPage() {
       <section className="py-32 bg-white text-center rounded-t-[40px] border-t border-slate-200">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-[#0A1628] mb-10 tracking-tight" style={{ fontFamily: 'var(--font-sora)' }}>
-            Software organized the work.<br/>Flowtaris automates it.
+            Software organized the work.<br />Flowtaris automates it.
           </h2>
-          <Link 
+          <Link
             href="/contact"
             className="inline-flex items-center justify-center px-10 py-5 bg-[#0A1628] text-white rounded-full font-bold text-lg hover:bg-black transition-colors"
           >
