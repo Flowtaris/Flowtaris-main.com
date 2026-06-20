@@ -63,7 +63,7 @@ const COMPARISONS = {
     integration: {
       apiSystemA: 'Modern RESTful APIs. Highly documented, supporting rapid bidirectional syncs for POs, Invoices, and Payments.',
       apiSystemB: 'Complex integration landscape relying heavily on cXML and proprietary SAP middleware.',
-      flowtarisPitch: 'Whether you choose Coupa\'s agility or Ariba\'s depth, the critical failure point is always the ERP integration. Flowtaris engineers bulletproof, SOX-compliant pipelines syncing Master Data, Purchase Orders, and Invoice Recepts between your Procurement platform and your core Financial ERP.'
+      flowtarisPitch: 'Whether you choose Coupa\'s agility or Ariba\'s depth, the critical failure point is always the ERP integration. Flowtaris engineers bulletproof, SOX-compliant pipelines syncing Master Data, Purchase Orders, and Invoice Receipts between your Procurement platform and your core Financial ERP.'
     },
     tco: {
       timelineA: '3 to 6 Months',

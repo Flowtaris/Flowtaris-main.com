@@ -58,6 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound()
 
+  const authorName = post.author_name || 'Flowtaris Team'
   const article = articleSchema({
     title:         post.title,
     description:   post.excerpt ?? '',
@@ -65,6 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
     dateModified:  post.updated_at ?? post.published_at ?? post.created_at,
     url:           `/insights/${post.slug}`,
     imageUrl:      post.og_image_url ?? undefined,
+    authorName:    authorName,
   })
 
   const breadcrumb = breadcrumbSchema([
@@ -156,16 +158,16 @@ export default async function BlogPostPage({ params }: Props) {
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-navy-900 flex items-center justify-center text-gold-500 font-bold text-sm flex-shrink-0">
-                    F
+                    {authorName.charAt(0)}
                   </div>
                   <div>
                     <div
                       className="text-sm font-semibold text-navy-900"
                       style={{ fontFamily: 'var(--font-sora)' }}
                     >
-                      Flowtaris Team
+                      {authorName}
                     </div>
-                    <div className="text-xs text-slate-500">Enterprise ERP Consultants</div>
+                    <div className="text-xs text-slate-500">{authorName === 'Flowtaris Team' ? 'Enterprise ERP Consultants' : 'Enterprise ERP Architect'}</div>
                   </div>
                 </div>
               </div>

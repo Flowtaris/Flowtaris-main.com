@@ -56,8 +56,15 @@ export default async function FAQPage() {
       ? faqsData.map((faq) => ({ question: faq.question, answer: faq.answer }))
       : FALLBACK_FAQS
 
+  const { breadcrumbSchema } = await import('@/lib/schema')
+  const breadcrumb = breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'FAQ', url: '/faq' },
+  ])
+
   return (
     <main className="bg-white min-h-screen font-sans text-slate-800 selection:bg-[#E8A020] selection:text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {/* Schema Injection */}
       {faqsData && faqsData.length > 0 && (
         <SchemaInjector
