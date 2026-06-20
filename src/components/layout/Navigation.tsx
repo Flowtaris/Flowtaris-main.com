@@ -470,7 +470,7 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
         )}
         style={{ height: '90px' }}
       >
-        <div className="h-full w-full px-6 lg:px-12 flex items-center justify-between relative">
+        <div className="h-full w-full px-6 lg:px-12 flex items-center justify-between gap-6 lg:gap-10 relative">
 
           {/* 1. Left: Logo */}
           <div className="flex-1 flex items-center justify-start">
@@ -484,14 +484,17 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
                   className="w-10 h-10 object-contain group-hover:scale-105 transition-transform duration-300"
                 />
               )}
-              <span className="text-[26px] font-extrabold tracking-tight leading-none text-navy-950 transition-colors duration-300 flex items-center gap-1.5">
+              <span 
+                className="text-[24px] font-extrabold tracking-tight leading-none text-navy-950 transition-colors duration-300 flex items-center gap-1.5"
+                style={{ fontFamily: 'var(--font-sora)' }}
+              >
                 {settings.company_name}
               </span>
             </Link>
           </div>
 
           {/* 2. Center: Spaced Navigation Links */}
-          <nav className="hidden lg:flex items-center justify-center gap-10 h-full pointer-events-auto">
+          <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-10 h-full pointer-events-auto">
 
             {/* Services Dropdown Trigger */}
             <div
@@ -518,10 +521,10 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
                 aria-expanded={activeMenu === 'services'}
                 aria-haspopup="true"
                 className={cn(
-                  "flex items-center min-h-[44px] text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
+                  "flex items-center min-h-[44px] text-[13px] font-semibold transition-all duration-300 uppercase tracking-[0.15em] text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
                   activeMenu === 'services' && "text-navy-950 !font-bold"
                 )}
-                style={{ fontFamily: 'var(--font-mono)' }}
+                style={{ fontFamily: 'var(--font-sora)' }}
               >
                 Services
               </button>
@@ -552,10 +555,10 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
                 aria-expanded={activeMenu === 'integrations'}
                 aria-haspopup="true"
                 className={cn(
-                  "flex items-center min-h-[44px] text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
+                  "flex items-center min-h-[44px] text-[13px] font-semibold transition-all duration-300 uppercase tracking-[0.15em] text-navy-700 hover:text-navy-950 bg-transparent border-none outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E8A020] rounded-sm",
                   activeMenu === 'integrations' && "text-navy-950 !font-bold"
                 )}
-                style={{ fontFamily: 'var(--font-mono)' }}
+                style={{ fontFamily: 'var(--font-sora)' }}
               >
                 Integrations
               </button>
@@ -566,8 +569,8 @@ export function Navigation({ dynamicServices = [], settings = { company_name: 'F
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[14px] font-semibold transition-all duration-300 uppercase tracking-widest text-navy-700 hover:text-navy-950"
-                style={{ fontFamily: 'var(--font-mono)' }}
+                className="text-[13px] font-semibold transition-all duration-300 uppercase tracking-[0.15em] text-navy-700 hover:text-navy-950"
+                style={{ fontFamily: 'var(--font-sora)' }}
               >
                 {link.label}
               </Link>
