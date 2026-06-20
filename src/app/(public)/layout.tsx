@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
-import { TarixChatWidget } from '@/components/chat/TarixChatWidget'
+import { ChatWrapper } from '@/components/chat/ChatWrapper'
 
 import { createClient } from '@/lib/supabase/server'
 
@@ -67,7 +67,7 @@ export default async function PublicLayout({
         <Footer settings={settingsMap} socialLinks={socialLinks || []} />
       </div>
 
-      <TarixChatWidget whatsappNumber={settingsMap['whatsapp_number'] || settingsMap['phone_number'] || '919391274394'} />
+      <ChatWrapper whatsappNumber={settingsMap['whatsapp_number'] || settingsMap['phone_number'] || '919391274394'} />
     </div>
   )
 }
