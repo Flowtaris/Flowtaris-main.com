@@ -72,7 +72,7 @@ export default async function ServiceSlugPage(props: { params: Promise<{ slug: s
   let faqContent = null;
   let faqJsonLd = null;
 
-  if (slug === 'netsuite-consulting') {
+  if (slug === 'netsuite-implementation') {
     const questions = [
       { q: "How long does a typical NetSuite implementation take?", a: "A standard NetSuite Cloud ERP implementation with Flowtaris typically takes between 3 to 6 months. Timelines vary based on the complexity of your chart of accounts, the number of subsidiaries, and the volume of required SuiteScript 2.x customizations or third-party API integrations." },
       { q: "How much does a NetSuite implementation cost?", a: "Implementation costs depend entirely on project scope, data migration complexity, and required iPaaS integrations. Flowtaris provides a fixed-fee Statement of Work after our initial deep-dive technical discovery, ensuring transparent pricing with no hidden change orders." },
