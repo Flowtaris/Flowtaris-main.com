@@ -119,7 +119,7 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: absoluteUrl(item.url),
+      item: absoluteUrl(item.url)
     })),
   }
 }

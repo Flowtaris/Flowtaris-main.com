@@ -44,5 +44,6 @@ export function truncate(str: string, length: number): string {
  * Generate absolute URL for the site
  */
 export function absoluteUrl(path: string): string {
-  return `${process.env.NEXT_PUBLIC_SITE_URL}${path}`
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.flowtaris.com'
+  return `${base}${path}`
 }
