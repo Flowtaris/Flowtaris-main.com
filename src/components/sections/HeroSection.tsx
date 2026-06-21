@@ -37,7 +37,7 @@ export function HeroSection({ title, description, technologies, heroImages }: He
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-6" style={{ fontFamily: 'var(--font-sora)' }}>
               {title ? title : (
                 <>
-                  Enterprise ERP Consulting, Integration and Automation Services <br className="block sm:hidden" />
+                  Enterprise ERP Consulting, Integration & Automation Services <br className="block sm:hidden" />
                   for Finance and Procurement
                 </>
               )}
