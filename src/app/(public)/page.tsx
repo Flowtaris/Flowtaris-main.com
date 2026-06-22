@@ -17,14 +17,16 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
-  title: 'Flowtaris',
+  title: {
+    absolute: 'Flowtaris — Enterprise ERP & Integration Consulting',
+  },
   description:
     'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
   alternates: {
     canonical: 'https://www.flowtaris.com',
   },
   openGraph: {
-    title: 'Flowtaris',
+    title: 'Flowtaris — Enterprise ERP & Integration Consulting',
     description:
       'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
     url: 'https://www.flowtaris.com',

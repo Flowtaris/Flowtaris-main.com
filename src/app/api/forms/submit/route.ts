@@ -28,7 +28,7 @@ const submissions = new Map<string, number>()
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    
+
     // ── Validate payload using Zod ───────────────────────────────────────
     const parsedResult = leadSchema.safeParse(body)
     if (!parsedResult.success) {
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-          secret:   process.env.HCAPTCHA_SECRET_KEY,
+          secret: process.env.HCAPTCHA_SECRET_KEY,
           response: hcaptcha_token,
         }),
       })
@@ -76,25 +76,22 @@ export async function POST(req: NextRequest) {
           <tr><td><strong>Name</strong></td><td>${name}</td></tr>
           <tr><td><strong>Company</strong></td><td>${company ?? '—'}</td></tr>
           <tr><td><strong>Email</strong></td><td>${work_email}</td></tr>
-          <tr><td><strong>Service</strong></td><td>${service_needed ?? '—'}</td></tr>
-          <tr><td><strong>Platform</strong></td><td>${Array.isArray(platform) ? platform.join(', ') : platform ?? '—'}</td></tr>
-          <tr><td><strong>Timeline</strong></td><td>${project_timeline ?? '—'}</td></tr>
-          <tr><td><strong>Challenge</strong></td><td>${business_challenge ?? '—'}</td></tr>
-          <tr><td><strong>Preferred Contact</strong></td><td>${preferred_contact ?? '—'}</td></tr>
+          <tr><td><strong>Phone</strong></td><td>${phone ?? '—'}</td></tr>
+          <tr><td><strong>Project Details</strong></td><td>${question ?? '—'}</td></tr>
         </table>
       `
 
       await fetch('https://api.resend.com/emails', {
-        method:  'POST',
+        method: 'POST',
         headers: {
-          Authorization:  `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from:    process.env.NOTIFICATION_EMAIL_FROM ?? 'noreply@flowtaris.com',
-          to:      [process.env.NOTIFICATION_EMAIL_TO ?? 'info@flowtaris.com'],
+          from: process.env.NOTIFICATION_EMAIL_FROM ?? 'noreply@flowtaris.com',
+          to: [process.env.NOTIFICATION_EMAIL_TO ?? 'info@flowtaris.com'],
           subject: `New ${form_type} — ${name} from ${company ?? 'Unknown Company'}`,
-          html:    emailHtml,
+          html: emailHtml,
         }),
       })
     }
