@@ -70,8 +70,27 @@ export default async function HomePage() {
         "@context": "https://schema.org",
         "@type": ["Organization", "ProfessionalService"],
         "@id": "https://www.flowtaris.com/#organization",
-        "name": "Flowtaris Private Limited",
-        "alternateName": "Flowtaris",
+        "name": "Flowtaris",
+        "legalName": "Flowtaris Private Limited",
+        "alternateName": [
+          "Flowtaris ERP",
+          "Flowtaris Consulting",
+          "Flowtaris Netsuite",
+          "Flowtaris Coupa",
+          "Flowtaris Workday",
+          "Flowtaris Salesforce",
+          "Flowtaris SAP",
+          "Flowtaris ServiceNow",
+          "Flowtaris Jira",
+          "Flowtaris Integration",
+          "Flowtaris Automation",
+          "Flowtaris Automation Service",
+          "ERP services",
+          "Coupa",
+          "Netsuite",
+          "Workday",
+          "SAP"
+        ],
         "url": "https://www.flowtaris.com",
         "logo": {
           "@type": "ImageObject",
@@ -94,9 +113,10 @@ export default async function HomePage() {
         },
         "sameAs": [
           "https://www.linkedin.com/company/flowtaris-private-limited",
-          "https://www.instagram.com/flowtaris_official",
+          "https://www.instagram.com/flowtaris_official?igsh=d2N5a2FzZDlqZ2F5&utm_source=qr",
           "https://www.youtube.com/@Flowtaris",
-          "https://www.x.com/flowtaris"
+          "https://www.x.com/flowtaris",
+          "https://www.facebook.com/1148842388302429"
         ],
         "areaServed": "Worldwide",
         "serviceType": "ERP Consulting",
