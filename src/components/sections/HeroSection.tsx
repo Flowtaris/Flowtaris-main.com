@@ -43,7 +43,7 @@ export function HeroSection({ title, description, technologies, heroImages }: He
               )}
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-10 leading-relaxed">
-              {description || "Boutique ERP consulting firm helping mid-market companies implement, integrate, and optimise NetSuite, Coupa, SAP, and Workday platforms"}
+              {description || " ERP consulting firm helping mid-market companies implement, integrate, and optimise NetSuite, Coupa, SAP, and Workday platforms"}
             </p>
 
             <div className="flex flex-col sm:flex-row flex-wrap gap-4">

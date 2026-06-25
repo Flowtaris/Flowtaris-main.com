@@ -121,57 +121,6 @@ export default async function RootLayout({
           <Analytics />
           <CookieConsent />
           <ServiceWorkerRegistration />
-          
-          <SchemaInjector schema={{
-            "@context": "https://schema.org",
-            "@type": ["Organization", "ProfessionalService"],
-            "@id": "https://www.flowtaris.com/#organization",
-            "name": "Flowtaris Private Limited",
-            "alternateName": "Flowtaris",
-            "url": "https://www.flowtaris.com",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.flowtaris.com/images/logo.png",
-              "width": 512,
-              "height": 512
-            },
-            "description": "Flowtaris is a boutique, enterprise-grade ERP consulting firm specializing in NetSuite, Coupa, SAP, and Workday implementations, integrations, and managed support.",
-            "foundingDate": "2026",
-            "numberOfEmployees": {
-              "@type": "QuantitativeValue",
-              "minValue": 10,
-              "maxValue": 50
-            },
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "contactType": "customer service",
-              "email": "info@flowtaris.com",
-              "availableLanguage": ["English"]
-            },
-            "sameAs": [],
-            "areaServed": "Worldwide",
-            "serviceType": "ERP Consulting",
-            "slogan": "The Science of Business Flow",
-            "knowsAbout": [
-              "Enterprise Resource Planning (ERP)",
-              "NetSuite Implementation",
-              "Coupa Business Spend Management",
-              "SAP S/4HANA",
-              "Workday HCM",
-              "ERP Integration",
-              "SuiteScript Development",
-              "AP Automation",
-              "ERP Health Audit",
-              "Change Management",
-              "Financial Systems Architecture",
-              "iPaaS Middleware"
-            ],
-            "hasOfferCatalog": {
-              "@type": "OfferCatalog",
-              "name": "ERP Consulting Services",
-              "url": "https://www.flowtaris.com/services"
-            }
-          }} />
 
           <SchemaInjector schema={{
             "@context": "https://schema.org",
@@ -179,7 +128,7 @@ export default async function RootLayout({
             "@id": "https://www.flowtaris.com/#website",
             "url": "https://www.flowtaris.com",
             "name": "Flowtaris",
-            "description": "Boutique ERP Consulting Firm",
+            "description": " ERP Consulting Firm",
             "publisher": {
               "@id": "https://www.flowtaris.com/#organization"
             }

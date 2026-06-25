@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
         </table>
       `
 
-      await fetch('https://api.resend.com/emails', {
+      const resendRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
@@ -89,11 +89,16 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           from: process.env.NOTIFICATION_EMAIL_FROM ?? 'noreply@flowtaris.com',
-          to: [process.env.NOTIFICATION_EMAIL_TO ?? 'info@flowtaris.com'],
+          to: (process.env.NOTIFICATION_EMAIL_TO ?? 'info@flowtaris.com').split(',').map(email => email.trim()),
           subject: `New ${form_type} — ${name} from ${company ?? 'Unknown Company'}`,
           html: emailHtml,
         }),
       })
+
+      if (!resendRes.ok) {
+        const errorText = await resendRes.text()
+        console.error('[Resend Error]:', resendRes.status, errorText)
+      }
     }
 
     // Save to database

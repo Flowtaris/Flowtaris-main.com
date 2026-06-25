@@ -140,7 +140,7 @@ export default async function AboutPage() {
               <div className="space-y-8 text-xl text-slate-600 font-light leading-relaxed">
                 <p>For the last decade, mid-market and enterprise organizations across North America and Europe have purchased isolated point solutions. While deploying Oracle NetSuite Cloud ERP for financials, Coupa BSM for procurement, and Workday HCM for human resources solved immediate departmental needs, it created fragmented architectures.</p>
                 <p>These disconnected data silos mean finance and accounting teams spend thousands of hours manually reconciling journal entries, AP/AR ledgers, and multi-subsidiary consolidations across platforms. Missing SuiteScript 2.x customizations or failing iPaaS integrations severely delay month-end close.</p>
-                <p>At Flowtaris, our certified NetSuite and Coupa architects believe true enterprise agility requires automated, SOX-compliant data pipelines. Serving the technology, SaaS, manufacturing, and healthcare sectors, our boutique consultancy engineers systems where financial data flows autonomously between core platforms.</p>
+                <p>At Flowtaris, our certified NetSuite and Coupa architects believe true enterprise agility requires automated, SOX-compliant data pipelines. Serving the technology, SaaS, manufacturing, and healthcare sectors, our  consultancy engineers systems where financial data flows autonomously between core platforms.</p>
               </div>
             </div>
           </section>
@@ -154,7 +154,7 @@ export default async function AboutPage() {
                 <p>Flowtaris was founded in 2021 in London by a specialized team of former Big 4 ERP implementation leaders. We witnessed the same failure patterns repeating across complex Fortune 500 deployments: poorly mapped charts of accounts, hardcoded integration logic, and ignored change management.</p>
                 <p>Massive systems integrators consistently deployed core ERPs like SAP S/4HANA or NetSuite OneWorld, only to leave behind fragile, manual CSV uploads and broken REST APIs that required armies of administrators to maintain.</p>
                 <p>Standard deployment isn't enough for high-growth companies (50-2000 employees). Organizations need deep, technical ERP specialists holding active NetSuite ERP Consultant and Coupa Platform certifications who understand complex API limits, SuiteTalk, and native Web Services.</p>
-                <p>Today, Flowtaris operates globally as the premier boutique systems integration consultancy exclusively focused on the NetSuite, Coupa, SAP, and Workday ecosystem—engineering highly secure architectures managing billions in transaction flows for innovative B2B enterprises.</p>
+                <p>Today, Flowtaris operates globally as the premier  systems integration consultancy exclusively focused on the NetSuite, Coupa, SAP, and Workday ecosystem—engineering highly secure architectures managing billions in transaction flows for innovative B2B enterprises.</p>
               </div>
             </div>
           </section>
