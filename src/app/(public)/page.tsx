@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { ServiceScrollStack } from '@/components/sections/ServiceScrollStack'
 import { Accordion } from '@/components/ui/Accordion'
 import { WhyChooseUsSection } from '@/components/sections/WhyChooseUsSection'
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { CapabilitiesBanner } from '@/components/sections/CapabilitiesBanner'
 
 import { CaseStudyHighlights } from '@/components/sections/CaseStudyHighlights'
@@ -37,22 +38,24 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   const supabase = await createClient()
 
-  // Fetch independent data in parallel
   const [
     { data: heroData },
     { data: technologies },
     { data: wcuSectors },
     { data: wcuCards },
-    { data: rawServices }
+    { data: rawServices },
+    { data: testimonials }
   ] = await Promise.all([
     supabase.from('global_hero').select('*').limit(1).maybeSingle(),
     supabase.from('modern_technologies').select('*').order('priority', { ascending: false }),
     supabase.from('why_choose_us_sectors').select('*').order('priority', { ascending: false }),
     supabase.from('why_choose_us_cards').select('*').order('priority', { ascending: false }),
-    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false })
+    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false }),
+    supabase.from('testimonials').select('*').order('priority', { ascending: false })
   ])
 
   // Fetch hero images sequentially since it depends on heroData.id
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let heroImages: any[] = []
   if (heroData?.id) {
     const { data: images } = await supabase
@@ -179,6 +182,9 @@ export default async function HomePage() {
       />
       <ServiceScrollStack dynamicServices={rawServices || []} />
       <WhyChooseUsSection sectors={wcuSectors || []} cards={wcuCards || []} />
+      {testimonials && testimonials.length > 0 && (
+        <TestimonialsSection testimonials={testimonials} />
+      )}
       <CapabilitiesBanner />
 
       <Suspense fallback={

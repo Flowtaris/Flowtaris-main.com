@@ -9,14 +9,15 @@ const METHODOLOGY_STEPS = [
     id: 'discovery',
     title: 'Discovery & Architecture',
     subtitle: 'Phase 1',
-    description: 'We don’t start with code. We start by mapping your business processes to standard enterprise data models, identifying automation gaps.',
+    description: "We don't start with code. We start by mapping your business processes to standard enterprise data models, identifying automation gaps.",
     deliverables: [
       'Current State Process Mapping',
       'Gap Analysis & Risk Register',
       'Future State Architecture Diagram',
       'Initial Implementation Timeline',
     ],
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200', // Blue/Gold Architectural Glass
+    // Real consultants working around a whiteboard with sticky notes
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200',
   },
   {
     id: 'design',
@@ -29,7 +30,8 @@ const METHODOLOGY_STEPS = [
       'Integration Data Mapping',
       'Security & Access Matrix',
     ],
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1200', // Precise Geometric Abstract
+    // Real designers/PMs reviewing documents at a table
+    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1200',
   },
   {
     id: 'build',
@@ -42,7 +44,8 @@ const METHODOLOGY_STEPS = [
       'Middleware Integration Build',
       'Sprint Review Demos',
     ],
-    image: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200', // Dynamic Light Trails
+    // Close-up of a real developer's hands typing code on a keyboard
+    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1200',
   },
   {
     id: 'test',
@@ -55,7 +58,8 @@ const METHODOLOGY_STEPS = [
       'End-User Training Materials',
       'Cutover Plan',
     ],
-    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1200', // Clean Minimal Intersection
+    // Real business team in a meeting room reviewing work together
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200',
   },
   {
     id: 'deploy',
@@ -68,7 +72,8 @@ const METHODOLOGY_STEPS = [
       '30-Day Hypercare Support',
       'Transition to Managed Services',
     ],
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200', // Golden Liquid Scale
+    // Real operations team monitoring live dashboards on large screens
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200',
   },
 ]
 

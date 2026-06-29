@@ -25,6 +25,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Technologies', href: '/admin/technologies', icon: Cpu,             roles: ['super_admin', 'content_manager'] },
   { label: 'Services',     href: '/admin/services',     icon: Database,        roles: ['super_admin', 'content_manager'] },
   { label: 'Why Choose Us',href: '/admin/why-choose-us',icon: Users,           roles: ['super_admin', 'content_manager'] },
+  { label: 'Testimonials', href: '/admin/testimonials', icon: Star,            roles: ['super_admin', 'content_manager'] },
   { label: 'Integrations', href: '/admin/integrations', icon: Link2,           roles: ['super_admin', 'content_manager'] },
   { label: 'Capabilities', href: '/admin/management-capabilities', icon: Star, roles: ['super_admin', 'content_manager'] },
   { label: 'About',        href: '/admin/about',        icon: Info,            roles: ['super_admin', 'content_manager'] },

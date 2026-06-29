@@ -370,3 +370,16 @@ export type JobApplication = {
   status: string;
   created_at: string;
 };
+
+export type Testimonial = {
+  id: string;
+  client_name: string;
+  client_role: string | null;
+  client_company: string | null;
+  content: string;
+  image_url: string | null;
+  rating: number;
+  priority: number;
+  created_at: string;
+  updated_at: string;
+};
