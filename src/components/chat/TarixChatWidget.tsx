@@ -242,7 +242,7 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
       } else if (matchedFaqs.length > 1) {
         enqueueBotMessages([
           { text: `I found a few questions related to "${query}". Which one would you like to know?` },
-          { type: "options", options: matchedFaqs.slice(0, 5).map(f => f.question) }
+          { text: "", type: "options", options: matchedFaqs.slice(0, 5).map(f => f.question) }
         ])
         setStep('faqs_list')
         return true
