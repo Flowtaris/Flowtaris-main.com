@@ -53,6 +53,7 @@ export function TestimonialsSection({ testimonials }: { testimonials: Testimonia
   }
 
   const currentTestimonial = testimonials[currentIndex]
+  if (!currentTestimonial) return null
 
   return (
     <section 
