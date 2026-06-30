@@ -2,6 +2,20 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function proxy(request: NextRequest) {
+  // 0. Intercept legacy URLs and tracking query parameters with a 410 Gone
+  const { pathname, searchParams } = request.nextUrl
+  if (
+    pathname.startsWith('/f/') ||
+    pathname.startsWith('/blogs/f/') ||
+    searchParams.has('rwg_token') ||
+    searchParams.has('gsas') ||
+    searchParams.has('blogcategory')
+  ) {
+    return new NextResponse('410 Gone - This page has been permanently removed.', {
+      status: 410,
+      headers: { 'Content-Type': 'text/plain' },
+    })
+  }
   // 1. Generate Nonce and CSP first
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
   const isProd = process.env.NODE_ENV === 'production'
