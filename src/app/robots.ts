@@ -5,16 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: [
-        '/admin/', 
-        '/api/', 
-        '/studio/',
-        '/blogs/',
-        '/f/',
-        '/*?blogcategory=',
-        '/*?rwg_token=',
-        '/*?gsas='
-      ],
+      disallow: ['/admin/', '/api/', '/studio/'],
     },
     sitemap: [
       'https://www.flowtaris.com/sitemap.xml',
