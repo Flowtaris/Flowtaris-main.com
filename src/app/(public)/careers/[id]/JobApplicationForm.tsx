@@ -13,6 +13,12 @@ export default function JobApplicationForm({ careerId }: { careerId: string }) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    
+    if (!fileName) {
+      setError('Please attach your resume before submitting.')
+      return
+    }
+
     setIsSubmitting(true)
     setError(null)
     
@@ -112,7 +118,6 @@ export default function JobApplicationForm({ careerId }: { careerId: string }) {
               type="file" 
               name="resume" 
               ref={fileInputRef}
-              required
               accept=".pdf,.doc,.docx"
               onChange={handleFileChange}
               className="hidden"
