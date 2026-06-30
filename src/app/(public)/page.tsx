@@ -87,8 +87,19 @@ export default async function HomePage() {
           "width": 512,
           "height": 512
         },
-        "description": "Flowtaris is a  enterprise-grade ERP consulting firm specializing in NetSuite, Coupa, SAP, and Workday implementations, integrations, and managed support.",
+        "image": "https://www.flowtaris.com/images/logo.png",
+        "description": "Flowtaris is an enterprise-grade ERP consulting firm specializing in NetSuite, Coupa, SAP, and Workday implementations, integrations, and managed support.",
         "foundingDate": "2026",
+        "telephone": "+91-9391274394",
+        "priceRange": "$$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Flat No. 303, Swarna Residency, Kondapur, Serilingampally",
+          "addressLocality": "Hyderabad",
+          "addressRegion": "Telangana",
+          "postalCode": "500084",
+          "addressCountry": "IN"
+        },
         "numberOfEmployees": {
           "@type": "QuantitativeValue",
           "minValue": 10,
@@ -97,6 +108,7 @@ export default async function HomePage() {
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
+          "telephone": "+91-9391274394",
           "email": "info@flowtaris.com",
           "availableLanguage": ["English"]
         },
