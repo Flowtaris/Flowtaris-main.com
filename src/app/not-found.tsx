@@ -1,11 +1,33 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
+import { ChatWrapper } from '@/components/chat/ChatWrapper'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
-export default function NotFound() {
+export default async function NotFound() {
+  const supabase = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+
+  const [
+    { data: dynamicServices },
+    { data: settingsData },
+    { data: socialLinks }
+  ] = await Promise.all([
+    supabase.from('services').select('id, name, slug, priority, services_hero(color, normal_description)').order('priority', { ascending: false }),
+    supabase.from('site_settings').select('*'),
+    supabase.from('social_links').select('*').order('priority', { ascending: false })
+  ])
+
+  const settingsMap = (settingsData || []).reduce((acc: any, curr: any) => {
+    acc[curr.key] = curr.value
+    return acc
+  }, {})
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Navigation />
+      <Navigation dynamicServices={dynamicServices || []} settings={settingsMap} />
       <div className="h-[72px]" aria-hidden="true" />
       <main className="flex-1 flex items-center justify-center px-4 bg-grid-navy">
         <div className="text-center max-w-lg">
@@ -40,7 +62,8 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer settings={settingsMap} socialLinks={socialLinks || []} />
+      <ChatWrapper whatsappNumber={settingsMap['whatsapp_number'] || settingsMap['phone_number'] || '919391274394'} />
     </div>
   )
 }

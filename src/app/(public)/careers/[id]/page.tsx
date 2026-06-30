@@ -4,7 +4,8 @@ import { MapPin, Briefcase, Calendar, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import JobApplicationForm from './JobApplicationForm'
 
-export default async function CareerDetailPage({ params }: { params: { id: string } }) {
+export default async function CareerDetailPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const supabase = await createClient(['careers'])
   const { data: career } = await supabase.from('careers').select('*').eq('id', params.id).single()
 

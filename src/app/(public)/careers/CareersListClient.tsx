@@ -4,11 +4,9 @@ import { Career } from '@/types/database'
 import { useState, useMemo } from 'react'
 import { Search, MapPin, Briefcase, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import ApplicationModal from './ApplicationModal'
 
 export default function CareersListClient({ initialCareers }: { initialCareers: Career[] }) {
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCareer, setSelectedCareer] = useState<Career | null>(null)
 
   const filteredCareers = useMemo(() => {
     return initialCareers.filter(career => {
@@ -49,9 +47,9 @@ export default function CareersListClient({ initialCareers }: { initialCareers: 
         {filteredCareers.length > 0 ? (
           <div className="space-y-6">
             {filteredCareers.map((career) => (
-              <div 
+              <Link 
                 key={career.id} 
-                onClick={() => setSelectedCareer(career)}
+                href={`/careers/${career.id}`}
                 className="group block bg-white rounded-3xl p-8 border border-slate-200/60 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-4px_rgba(10,22,40,0.08)] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -91,7 +89,7 @@ export default function CareersListClient({ initialCareers }: { initialCareers: 
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
@@ -107,11 +105,6 @@ export default function CareersListClient({ initialCareers }: { initialCareers: 
           </div>
         )}
       </section>
-
-      <ApplicationModal 
-        career={selectedCareer} 
-        onClose={() => setSelectedCareer(null)} 
-      />
     </>
   )
 }
