@@ -76,23 +76,9 @@ export default async function HomePage() {
         "name": "Flowtaris",
         "legalName": "Flowtaris Private Limited",
         "alternateName": [
-          "Flowtaris ERP",
-          "Flowtaris Consulting",
-          "Flowtaris Netsuite",
-          "Flowtaris Coupa",
-          "Flowtaris Workday",
-          "Flowtaris Salesforce",
-          "Flowtaris SAP",
-          "Flowtaris ServiceNow",
-          "Flowtaris Jira",
-          "Flowtaris Integration",
-          "Flowtaris Automation",
-          "Flowtaris Automation Service",
-          "ERP services",
-          "Coupa",
-          "Netsuite",
-          "Workday",
-          "SAP"
+          "Flowtaris",
+          "Flowtaris Private Limited",
+          "Flowtaris ERP"
         ],
         "url": "https://www.flowtaris.com",
         "logo": {
