@@ -170,17 +170,6 @@ export function Footer({ settings = { company_name: 'FLOWTARIS' }, socialLinks =
               <div>
                 &copy; {settings?.company_name || 'Flowtaris'}. All Rights Reserved.
               </div>
-              <div className="text-[5px] uppercase tracking-[0.02em] font-normal text-white/15 max-w-[110px] text-right self-end leading-[1.2] lg:text-[6.5px] lg:tracking-[0.03em] lg:max-w-[150px] lg:text-right lg:self-auto lg:leading-[1.3]">
-                Website Designed &amp; Developed By{' '}
-                <a
-                  href="https://www.pixenox.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/35 hover:text-white underline underline-offset-2 transition-colors duration-300"
-                >
-                  Pixenox Solutions
-                </a>
-              </div>
             </div>
           </div>
 
