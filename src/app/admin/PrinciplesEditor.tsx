@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { supabase } from "@/lib/supabase";
 
 const inputStyle = { padding: "10px 12px", border: "1px solid #D1D5DB", borderRadius: 6, fontSize: 14, width: "100%", background: "#F9FAFB", color: "#111827" };
 const textareaStyle = { ...inputStyle, height: 80, resize: "vertical" as const };
@@ -9,7 +8,7 @@ const labelStyle = { display: "block", marginBottom: 6, fontSize: 13, fontWeight
 const cardStyle = { background: "#fff", borderRadius: 12, padding: 32, border: "1px solid #E5E7EB", marginBottom: 24, boxShadow: "0 1px 3px rgba(0,0,0,0.04)" };
 const sectionTitleStyle = { fontSize: 16, fontWeight: 600 as const, color: "#111827", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #E5E7EB" };
 
-export default function PrinciplesEditor() {
+export default function PrinciplesEditor({ site }: { site: string }) {
   const [pageData, setPageData] = useState<any>(null);
   const [judgmentData, setJudgmentData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -17,19 +16,30 @@ export default function PrinciplesEditor() {
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [draft, setDraft] = useState<any>(null);
 
-  useEffect(() => { fetchAll(); }, []);
+  useEffect(() => { fetchAll(); }, [site]);
 
   async function fetchAll() {
     setLoading(true);
-    if (!supabase) { setLoading(false); return; }
-    const [pageRes, judgRes] = await Promise.all([
-      supabase.from("page_content").select("content").eq("id", "principles").single(),
-      supabase.from("page_content").select("content").eq("id", "judgment").single()
-    ]);
-    if (pageRes.data?.content) setPageData(pageRes.data.content);
-    else setPageData(defaultPageData());
-    if (judgRes.data?.content) setJudgmentData(judgRes.data.content);
-    else setJudgmentData({ logs: [] });
+    try {
+      const [pageRes, judgRes] = await Promise.all([
+        fetch(`/api/content/${site}?table=page_content&id=principles`).then(r => r.json()),
+        fetch(`/api/content/${site}?table=page_content&id=judgment`).then(r => r.json())
+      ]);
+      
+      if (pageRes.data && pageRes.data.length > 0 && pageRes.data[0].content) {
+        setPageData(pageRes.data[0].content);
+      } else {
+        setPageData(defaultPageData());
+      }
+      
+      if (judgRes.data && judgRes.data.length > 0 && judgRes.data[0].content) {
+        setJudgmentData(judgRes.data[0].content);
+      } else {
+        setJudgmentData({ logs: [] });
+      }
+    } catch (err) {
+      console.error(err);
+    }
     setLoading(false);
   }
 
@@ -39,19 +49,27 @@ export default function PrinciplesEditor() {
   // --- Save helpers ---
   async function savePageContent() {
     try {
-      if (!supabase) throw new Error("Supabase not configured");
-      const { error } = await supabase.from("page_content").upsert({ id: "principles", content: pageData });
-      if (error) throw error;
-      alert("Page content saved!");
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ table: "page_content", record: { id: "principles", content: pageData, updated_at: new Date().toISOString() } })
+      });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
+      alert(`Page content saved to flowtaris.${site}!`);
     } catch (e: any) { alert("Error: " + e.message); }
   }
 
   async function saveJudgmentLogs(updatedLogs: any[]) {
     try {
-      if (!supabase) throw new Error("Supabase not configured");
       const content = { ...judgmentData, logs: updatedLogs };
-      const { error } = await supabase.from("page_content").upsert({ id: "judgment", content });
-      if (error) throw error;
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ table: "page_content", record: { id: "judgment", content, updated_at: new Date().toISOString() } })
+      });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
       setJudgmentData(content);
     } catch (e: any) { alert("Error: " + e.message); }
   }
@@ -119,30 +137,41 @@ export default function PrinciplesEditor() {
     await saveJudgmentLogs(updatedLogs);
 
     // Also ensure the slug page exists
-    if (supabase) {
+    try {
       const slugId = `judgment_slug_${draft.slug}`;
-      const { data: existing } = await supabase.from("page_content").select("id").eq("id", slugId).single();
+      const slugRes = await fetch(`/api/content/${site}?table=page_content&id=${slugId}`);
+      const slugJson = await slugRes.json();
+      const existing = slugJson.data && slugJson.data.length > 0;
       if (!existing) {
-        await supabase.from("page_content").insert({
-          id: slugId,
-          content: {
-            category: "DECISION LOG",
-            tags: logEntry.tags,
-            title: draft.title,
-            excerpt: "",
-            author: draft.author || "AUTHOR",
-            authorFull: "Flowtaris Leadership",
-            role: "Leadership",
-            date: draft.date,
-            readTime: "3 MIN READ",
-            context: ["This principle emerged from a specific scenario we encountered."],
-            decision: { main: "Decision details pending.", supporting: "" },
-            alternativesRejected: [{ number: "01", title: "Status Quo", reason: "Inaction was not an option." }],
-            outcome: { metrics: [{ value: "—", label: "Pending" }], timeframe: "—", caveats: [] },
-            principle: draft.principleStatement,
-          },
+        await fetch(`/api/content/${site}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            table: "page_content",
+            record: {
+              id: slugId,
+              content: {
+                category: "DECISION LOG",
+                tags: logEntry.tags,
+                title: draft.title,
+                excerpt: "",
+                author: draft.author || "AUTHOR",
+                authorFull: "Flowtaris Leadership",
+                role: "Leadership",
+                date: draft.date,
+                readTime: "3 MIN READ",
+                context: ["This principle emerged from a specific scenario we encountered."],
+                decision: { main: "Decision details pending.", supporting: "" },
+                alternativesRejected: [{ number: "01", title: "Status Quo", reason: "Inaction was not an option." }],
+                outcome: { metrics: [{ value: "—", label: "Pending" }], timeframe: "—", caveats: [] },
+                principle: draft.principleStatement,
+              }
+            }
+          })
         });
       }
+    } catch (e) {
+      console.error(e);
     }
 
     setEditingIdx(null);

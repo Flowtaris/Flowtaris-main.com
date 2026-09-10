@@ -1,36 +1,48 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
-export default function ResourcesEditor() {
+export default function ResourcesEditor({ site }: { site: string }) {
   const [pdfs, setPdfs] = useState<any[]>([]);
   const [newPdfTitle, setNewPdfTitle] = useState("");
   const [newPdfUrl, setNewPdfUrl] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { fetchData(); }, [site]);
 
   async function fetchData() {
-    if (!supabase) { setLoading(false); return; }
-    const { data } = await supabase.from("pdf_documents").select("*").order("created_at", { ascending: false });
-    if (data) setPdfs(data);
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/content/${site}?table=pdf_documents`);
+      const { data } = await res.json();
+      if (data) setPdfs(data);
+    } catch (e) {
+      console.error(e);
+    }
     setLoading(false);
   }
 
   async function addPdf() {
-    if (!supabase) return;
     if (!newPdfTitle || !newPdfUrl) { alert("Please enter title and URL for the PDF."); return; }
-    const { error } = await supabase.from("pdf_documents").insert({ title: newPdfTitle, url: newPdfUrl });
-    if (error) alert("Error adding PDF: " + error.message);
-    else { setNewPdfTitle(""); setNewPdfUrl(""); fetchData(); }
+    try {
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ table: "pdf_documents", record: { title: newPdfTitle, url: newPdfUrl } })
+      });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
+      setNewPdfTitle(""); setNewPdfUrl(""); fetchData();
+    } catch (e: any) { alert("Error adding PDF: " + e.message); }
   }
 
   async function deletePdf(id: string) {
-    if (!supabase) return;
-    const { error } = await supabase.from("pdf_documents").delete().eq("id", id);
-    if (error) alert("Error deleting PDF: " + error.message);
-    else fetchData();
+    try {
+      const res = await fetch(`/api/content/${site}?table=pdf_documents&id=${id}`, { method: "DELETE" });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
+      fetchData();
+    } catch (e: any) { alert("Error deleting PDF: " + e.message); }
   }
 
   if (loading) return <div>Loading...</div>;

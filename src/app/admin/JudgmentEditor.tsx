@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
-export default function JudgmentEditor() {
+export default function JudgmentEditor({ site }: { site: string }) {
   const [judgmentTitle, setJudgmentTitle] = useState("");
   const [judgmentSubtitle, setJudgmentSubtitle] = useState("");
   const [judgmentDescription, setJudgmentDescription] = useState("");
@@ -12,37 +11,66 @@ export default function JudgmentEditor() {
   const [editingLogId, setEditingLogId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { fetchData(); }, [site]);
 
   async function fetchData() {
-    if (!supabase) { setLoading(false); return; }
-    const { data } = await supabase.from("page_content").select("content").eq("id", "judgment").single();
-    if (data?.content) {
-      setJudgmentTitle(data.content.title || "");
-      setJudgmentSubtitle(data.content.subtitle || "");
-      setJudgmentDescription(data.content.description || "");
-      setDecisionLogs(data.content.logs || []);
-    } else {
-      setJudgmentTitle("HOW WE THINK.");
-      setJudgmentSubtitle("Written by the people making the decisions.");
-      setJudgmentDescription("Decisions made under pressure.\\nWhat we chose. What we rejected.\\nWhat happened next.");
-      setDecisionLogs([]);
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
+      const { data, message, error } = await res.json();
+      
+      if (data && data.length > 0 && data[0].content) {
+        setJudgmentTitle(data[0].content.title || "");
+        setJudgmentSubtitle(data[0].content.subtitle || "");
+        setJudgmentDescription(data[0].content.description || "");
+        setDecisionLogs(data[0].content.logs || []);
+      } else {
+        if (message) console.warn(message);
+        setJudgmentTitle("HOW WE THINK.");
+        setJudgmentSubtitle("Written by the people making the decisions.");
+        setJudgmentDescription("Decisions made under pressure.\\nWhat we chose. What we rejected.\\nWhat happened next.");
+        setDecisionLogs([]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch", err);
     }
     setLoading(false);
   }
 
   async function saveJudgmentContent() {
-    if (!supabase) return;
-    const { error } = await supabase.from("page_content").upsert({ id: "judgment", content: { title: judgmentTitle, subtitle: judgmentSubtitle, description: judgmentDescription, logs: decisionLogs } });
-    if (error) alert("Error saving: " + error.message);
-    else alert("Judgment content saved!");
+    try {
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          table: "page_content",
+          record: { id: "judgment", content: { title: judgmentTitle, subtitle: judgmentSubtitle, description: judgmentDescription, logs: decisionLogs }, updated_at: new Date().toISOString() }
+        })
+      });
+      const { error } = await res.json();
+      if (error) alert("Error saving: " + error);
+      else alert(`Judgment content saved to flowtaris.${site}!`);
+    } catch (err) {
+      alert("Network error while saving.");
+    }
   }
 
   async function saveDecisionLogs(updatedLogs: any[]) {
-    if (!supabase) return;
-    const { error } = await supabase.from("page_content").upsert({ id: "judgment", content: { title: judgmentTitle, subtitle: judgmentSubtitle, description: judgmentDescription, logs: updatedLogs } });
-    if (error) alert("Error saving logs: " + error.message);
-    else setDecisionLogs(updatedLogs);
+    try {
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          table: "page_content",
+          record: { id: "judgment", content: { title: judgmentTitle, subtitle: judgmentSubtitle, description: judgmentDescription, logs: updatedLogs }, updated_at: new Date().toISOString() }
+        })
+      });
+      const { error } = await res.json();
+      if (error) alert("Error saving logs: " + error);
+      else setDecisionLogs(updatedLogs);
+    } catch (err) {
+      alert("Network error while saving.");
+    }
   }
 
   function addDecisionLog() {

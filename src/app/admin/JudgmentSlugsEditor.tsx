@@ -1,21 +1,29 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
-export default function JudgmentSlugsEditor() {
+export default function JudgmentSlugsEditor({ site }: { site: string }) {
   const [decisionLogs, setDecisionLogs] = useState<any[]>([]);
   const [selectedSlug, setSelectedSlug] = useState("");
   const [slugData, setSlugData] = useState<any>(null);
   const [isSlugLoading, setIsSlugLoading] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchLogs(); }, []);
+  useEffect(() => { fetchLogs(); }, [site]);
 
   async function fetchLogs() {
-    if (!supabase) { setLoading(false); return; }
-    const { data } = await supabase.from("page_content").select("content").eq("id", "judgment").single();
-    if (data?.content?.logs) setDecisionLogs(data.content.logs);
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
+      const { data } = await res.json();
+      if (data && data.length > 0 && data[0].content?.logs) {
+        setDecisionLogs(data[0].content.logs);
+      } else {
+        setDecisionLogs([]);
+      }
+    } catch (e) {
+      console.error(e);
+    }
     setLoading(false);
   }
 
@@ -23,21 +31,25 @@ export default function JudgmentSlugsEditor() {
     if (!slug) { setSelectedSlug(""); setSlugData(null); return; }
     setSelectedSlug(slug);
     setIsSlugLoading(true);
-    if (!supabase) { setIsSlugLoading(false); return; }
-    const { data } = await supabase.from("page_content").select("content").eq("id", `judgment_slug_${slug}`).single();
-    if (data?.content) {
-      setSlugData(data.content);
-    } else {
-      setSlugData({
-        category: "DECISION LOG", tags: ["TAG1", "TAG2"], title: "TITLE", excerpt: "EXCERPT",
-        author: "AUTHOR", authorFull: "Full Name", role: "Role", date: "DATE", readTime: "5 MIN READ",
-        context: ["Paragraph 1", "Paragraph 2"],
-        decision: { main: "Main decision", supporting: "Supporting details" },
-        alternativesRejected: [{ number: "01", title: "Alt 1", reason: "Reason 1" }],
-        outcome: { timeframe: "Timeframe:", metrics: [{ value: "100", label: "Metric" }], caveats: ["Caveat 1"] },
-        principle: { statement: "PRINCIPLE", category: "Category" },
-        authorNote: "Note", relatedDecisions: [], previousDecision: null, nextDecision: null
-      });
+    try {
+      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment_slug_${slug}`);
+      const { data } = await res.json();
+      if (data && data.length > 0 && data[0].content) {
+        setSlugData(data[0].content);
+      } else {
+        setSlugData({
+          category: "DECISION LOG", tags: ["TAG1", "TAG2"], title: "TITLE", excerpt: "EXCERPT",
+          author: "AUTHOR", authorFull: "Full Name", role: "Role", date: "DATE", readTime: "5 MIN READ",
+          context: ["Paragraph 1", "Paragraph 2"],
+          decision: { main: "Main decision", supporting: "Supporting details" },
+          alternativesRejected: [{ number: "01", title: "Alt 1", reason: "Reason 1" }],
+          outcome: { timeframe: "Timeframe:", metrics: [{ value: "100", label: "Metric" }], caveats: ["Caveat 1"] },
+          principle: { statement: "PRINCIPLE", category: "Category" },
+          authorNote: "Note", relatedDecisions: [], previousDecision: null, nextDecision: null
+        });
+      }
+    } catch (e) {
+      console.error(e);
     }
     setIsSlugLoading(false);
   }
@@ -65,10 +77,17 @@ export default function JudgmentSlugsEditor() {
   async function saveSlugContent() {
     if (!selectedSlug || !slugData) return;
     try {
-      if (!supabase) throw new Error("Supabase not configured");
-      const { error } = await supabase.from("page_content").upsert({ id: `judgment_slug_${selectedSlug}`, content: slugData });
-      if (error) throw error;
-      alert("Slug content saved successfully!");
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          table: "page_content",
+          record: { id: `judgment_slug_${selectedSlug}`, content: slugData, updated_at: new Date().toISOString() }
+        })
+      });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
+      alert(`Slug content saved successfully to flowtaris.${site}!`);
     } catch (e: any) { alert("Error saving: " + e.message); }
   }
 

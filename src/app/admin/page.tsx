@@ -1,8 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import { Session } from "@supabase/supabase-js";
+import { useState } from "react";
 import Link from "next/link";
 
 // ── Editor Components ──────────────────────────────────────────────
@@ -23,7 +21,6 @@ import {
   FileText,
   Scale,
   MessageSquare,
-  LogOut,
   ArrowLeft,
   Grid,
   FileBox,
@@ -34,16 +31,16 @@ import {
 
 // ── Sidebar Configuration ──────────────────────────────────────────
 const sidebarLinks = [
-  { id: "dashboard",       label: "Dashboard",            icon: <LayoutDashboard size={18} /> },
-  { id: "hero",            label: "Homepage & Hero",      icon: <Type size={18} /> },
-  { id: "trust",           label: "Systems of Trust",     icon: <ShieldCheck size={18} /> },
-  { id: "judgment",        label: "Judgment Logs",        icon: <Scale size={18} /> },
-  { id: "judgment_slugs",  label: "Judgment Slugs",       icon: <FileText size={18} /> },
-  { id: "principles",      label: "Principles",           icon: <BookOpen size={18} /> },
-  { id: "statement",       label: "Trust Statement",      icon: <MessageSquare size={18} /> },
-  { id: "leverage",        label: "Leverage Page",        icon: <Grid size={18} /> },
-  { id: "resources",       label: "PDF Resources",        icon: <FileBox size={18} /> },
-  { id: "workday",         label: "Workday Specialists",  icon: <Briefcase size={18} /> },
+  { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
+  { id: "hero", label: "Homepage & Hero", icon: <Type size={18} /> },
+  { id: "trust", label: "Systems of Trust", icon: <ShieldCheck size={18} /> },
+  { id: "judgment", label: "Judgment Logs", icon: <Scale size={18} /> },
+  { id: "judgment_slugs", label: "Judgment Slugs", icon: <FileText size={18} /> },
+  { id: "principles", label: "Principles", icon: <BookOpen size={18} /> },
+  { id: "statement", label: "Trust Statement", icon: <MessageSquare size={18} /> },
+  { id: "leverage", label: "Leverage Page", icon: <Grid size={18} /> },
+  { id: "resources", label: "PDF Resources", icon: <FileBox size={18} /> },
+  { id: "workday", label: "Workday Specialists", icon: <Briefcase size={18} /> },
 ];
 
 // ── Dashboard Quick-Links ──────────────────────────────────────────
@@ -84,81 +81,15 @@ function DashboardCard({
 
 // ── Main Admin Page ────────────────────────────────────────────────
 export default function AdminPage() {
-  // ── Auth State ─────────────────────────────
-  const [session, setSession] = useState<Session | null>(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginLoading, setLoginLoading] = useState(false);
-  const [loginError, setLoginError] = useState("");
-  const [loading, setLoading] = useState(true);
-
   // ── Navigation State ───────────────────────
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeSite, setActiveSite] = useState<"com" | "co" | "ai">("com");
 
-  // ── Auth Effects ───────────────────────────
-  useEffect(() => {
-    if (!supabase) { setLoading(false); return; }
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
-    });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-    return () => subscription.unsubscribe();
-  }, []);
-
-  async function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-    setLoginLoading(true);
-    setLoginError("");
-    if (!supabase) { setLoginError("Supabase not configured"); setLoginLoading(false); return; }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) setLoginError(error.message);
-    setLoginLoading(false);
-  }
-
-  async function handleLogout() {
-    if (!supabase) return;
-    await supabase.auth.signOut();
-  }
-
-  // ── Loading State ──────────────────────────
-  if (loading) {
-    return <div style={{ padding: 40, color: "#333", fontFamily: "sans-serif" }}>Loading...</div>;
-  }
-
-  // ── Login Screen ───────────────────────────
-  if (!session) {
-    return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F5F7FA", fontFamily: "sans-serif" }}>
-        <div style={{ width: "100%", maxWidth: 400, padding: "40px", background: "#fff", borderRadius: 12, boxShadow: "0 4px 20px rgba(0,0,0,0.05)" }}>
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <h1 style={{ fontSize: 24, fontWeight: "bold", color: "#0B1120" }}>Admin Login</h1>
-            <p style={{ color: "#666", fontSize: 14, marginTop: 8 }}>Sign in to manage Flowtaris content</p>
-          </div>
-
-          {loginError && (
-            <div style={{ background: "#FEE2E2", color: "#B91C1C", padding: 12, borderRadius: 6, marginBottom: 20, fontSize: 14 }}>{loginError}</div>
-          )}
-
-          <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{ display: "block", marginBottom: 8, fontSize: 14, color: "#374151", fontWeight: 500 }}>Email Address</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{ width: "100%", background: "#F9FAFB", color: "#111827", border: "1px solid #D1D5DB", padding: "10px 12px", borderRadius: 6, outline: "none" }} required />
-            </div>
-            <div style={{ marginBottom: 24 }}>
-              <label style={{ display: "block", marginBottom: 8, fontSize: 14, color: "#374151", fontWeight: 500 }}>Password</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{ width: "100%", background: "#F9FAFB", color: "#111827", border: "1px solid #D1D5DB", padding: "10px 12px", borderRadius: 6, outline: "none" }} required />
-            </div>
-            <button type="submit" disabled={loginLoading} style={{ width: "100%", background: "#0F172A", color: "#fff", padding: "12px", border: "none", borderRadius: 6, cursor: "pointer", fontWeight: 500 }}>
-              {loginLoading ? "Authenticating..." : "Sign In"}
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
+  const SITES = [
+    { id: "com", label: "flowtaris.com", color: "#2563EB" },
+    { id: "co",  label: "flowtaris.co",  color: "#7C3AED" },
+    { id: "ai",  label: "flowtaris.ai",  color: "#059669" },
+  ];
 
   // ── Authenticated Shell ────────────────────
   return (
@@ -194,17 +125,6 @@ export default function AdminPage() {
             </button>
           ))}
         </nav>
-
-        {/* Sign Out */}
-        <div style={{ padding: "20px 12px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          <button
-            onClick={handleLogout}
-            style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "12px 16px", background: "transparent", color: "#9CA3AF", border: "none", borderRadius: 8, cursor: "pointer", textAlign: "left", fontSize: 14 }}
-          >
-            <LogOut size={18} />
-            Sign Out
-          </button>
-        </div>
       </aside>
 
       {/* ── Main Content ── */}
@@ -216,9 +136,34 @@ export default function AdminPage() {
             <ArrowLeft size={16} />
             View Public Site
           </Link>
+          
+          {/* Site Switcher */}
+          <div style={{ display: "flex", gap: 6, background: "#F3F4F6", padding: 4, borderRadius: 8 }}>
+            {SITES.map((site) => (
+              <button
+                key={site.id}
+                onClick={() => setActiveSite(site.id as any)}
+                style={{
+                  padding: "6px 14px",
+                  border: "none",
+                  borderRadius: 6,
+                  cursor: "pointer",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  background: activeSite === site.id ? "#fff" : "transparent",
+                  color: activeSite === site.id ? site.color : "#6B7280",
+                  boxShadow: activeSite === site.id ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
+                  transition: "all 0.15s",
+                }}
+              >
+                {site.label}
+              </button>
+            ))}
+          </div>
+
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 14, fontWeight: 500, color: "#111827" }}>{session.user.email}</div>
+              <div style={{ fontSize: 14, fontWeight: 500, color: "#111827" }}>Admin User</div>
               <div style={{ fontSize: 12, color: "#6B7280" }}>Super Admin</div>
             </div>
             <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#0B1121", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -247,14 +192,14 @@ export default function AdminPage() {
           )}
 
           {/* ── Section Editors ── */}
-          {activeTab === "hero"            && <HeroEditor />}
-          {activeTab === "trust"           && <TrustEditor />}
-          {activeTab === "judgment"        && <JudgmentEditor />}
-          {activeTab === "judgment_slugs"  && <JudgmentSlugsEditor />}
-          {activeTab === "principles"      && <PrinciplesEditor />}
-          {activeTab === "leverage"        && <LeverageEditor />}
-          {activeTab === "resources"       && <ResourcesEditor />}
-          {activeTab === "workday"         && <WorkdayEditor />}
+          {activeTab === "hero"           && <HeroEditor site={activeSite} />}
+          {activeTab === "trust"          && <TrustEditor site={activeSite} />}
+          {activeTab === "judgment"       && <JudgmentEditor site={activeSite} />}
+          {activeTab === "judgment_slugs" && <JudgmentSlugsEditor site={activeSite} />}
+          {activeTab === "principles"     && <PrinciplesEditor site={activeSite} />}
+          {activeTab === "leverage"       && <LeverageEditor site={activeSite} />}
+          {activeTab === "resources"      && <ResourcesEditor site={activeSite} />}
+          {activeTab === "workday"        && <WorkdayEditor site={activeSite} />}
 
           {/* ── Placeholder Tabs ── */}
           {activeTab === "statement" && (

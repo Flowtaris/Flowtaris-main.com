@@ -1,22 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
-export default function LeverageEditor() {
+export default function LeverageEditor({ site }: { site: string }) {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [site]);
 
   async function fetchData() {
     setLoading(true);
-    if (!supabase) { setLoading(false); return; }
-    const { data: res } = await supabase.from("page_content").select("content").eq("id", "leverage").single();
-    if (res?.content) {
-      setData(res.content);
+    try {
+      const res = await fetch(`/api/content/${site}?table=page_content&id=leverage`);
+      const { data: resData } = await res.json();
+      if (resData && resData.length > 0 && resData[0].content) {
+        setData(resData[0].content);
     } else {
       // Default template
       setData({
@@ -32,16 +32,23 @@ export default function LeverageEditor() {
         operatingPrinciple: "LEVERAGE IS NOT ABOUT DOING MORE.\\nIT IS ABOUT MAKING THE SAME\\nCAPABILITY REACH FURTHER.",
         finalCta: { title: "HAVE AN OPPORTUNITY\\nTHAT NEEDS MORE CAPABILITY?", desc: "Let's determine whether\\nthe right leverage already exists.", cta: "REGISTER AN OPPORTUNITY →" }
       });
+      });
+    } catch (err) {
+      console.error(err);
     }
     setLoading(false);
   }
 
   async function save() {
     try {
-      if (!supabase) throw new Error("Supabase not configured");
-      const { error } = await supabase.from("page_content").upsert({ id: "leverage", content: data });
-      if (error) throw error;
-      alert("Leverage page saved!");
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ table: "page_content", record: { id: "leverage", content: data, updated_at: new Date().toISOString() } })
+      });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
+      alert(`Leverage page saved to flowtaris.${site}!`);
     } catch (e: any) {
       alert("Error: " + e.message);
     }

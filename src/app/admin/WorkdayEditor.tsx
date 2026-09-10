@@ -1,28 +1,41 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
-export default function WorkdayEditor() {
+export default function WorkdayEditor({ site }: { site: string }) {
   const [specialists, setSpecialists] = useState<any[]>([]);
   const [newSpecialist, setNewSpecialist] = useState({ name: "", role: "", specialty: "", certs: "", link: "" });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { fetchData(); }, [site]);
 
   async function fetchData() {
-    if (!supabase) { setLoading(false); return; }
-    const { data } = await supabase.from("page_content").select("content").eq("id", "workday_specialists").single();
-    if (data?.content?.specialists) setSpecialists(data.content.specialists);
-    else setSpecialists([]);
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/content/${site}?table=page_content&id=workday_specialists`);
+      const { data } = await res.json();
+      if (data && data.length > 0 && data[0].content?.specialists) {
+        setSpecialists(data[0].content.specialists);
+      } else {
+        setSpecialists([]);
+      }
+    } catch (e) {
+      console.error(e);
+    }
     setLoading(false);
   }
 
   async function saveSpecialists(updated: any[]) {
-    if (!supabase) return;
-    const { error } = await supabase.from("page_content").upsert({ id: "workday_specialists", content: { specialists: updated } });
-    if (error) alert("Error: " + error.message);
-    else setSpecialists(updated);
+    try {
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ table: "page_content", record: { id: "workday_specialists", content: { specialists: updated }, updated_at: new Date().toISOString() } })
+      });
+      const { error } = await res.json();
+      if (error) throw new Error(error);
+      setSpecialists(updated);
+    } catch (e: any) { alert("Error: " + e.message); }
   }
 
   function addSpecialist() {

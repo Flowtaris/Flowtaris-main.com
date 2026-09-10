@@ -4,9 +4,12 @@ export const revalidate = 0;
 
 export default async function Home() {
   let content: any = {
+    eyebrow: "FLOWTARIS",
     heroTitle: "WE DON'T JUST\nDELIVER SYSTEMS.\nWE MAKE THE\nDECISIONS BEHIND THEM\nVISIBLE.",
     heroSubtitle: "Engineering complex systems for companies where reliability, judgment, and execution matter.",
-    heroImage: "/hero_image.png"
+    heroImage: "/hero_image.png",
+    ctaText: "EXPLORE OUR JUDGMENT \u2192",
+    ctaLink: "#judgment",
   };
   let pdfs: any[] = [];
   let trustContent: any = {
@@ -54,14 +57,14 @@ export default async function Home() {
       {/* 5. HERO */}
       <section className="section hero home-hero-layout">
         <div className="hero-content">
-          <span className="eyebrow">FLOWTARIS</span>
+          <span className="eyebrow">{content.eyebrow || "FLOWTARIS"}</span>
           <h1 className="hero-headline section-heading">
             {formatText(content.heroTitle)}
           </h1>
           <p className="hero-supporting card-description">
             {formatText(content.heroSubtitle)}
           </p>
-          <a href="#judgment" className="cta-button primary">EXPLORE OUR JUDGMENT &rarr;</a>
+          <a href={content.ctaLink || "#judgment"} className="cta-button primary">{content.ctaText || "EXPLORE OUR JUDGMENT \u2192"}</a>
         </div>
         <div className="hero-image-wrapper">
           <img src={content.heroImage || "/hero_image.png"} alt="Flowtaris Modern Architecture" className="hero-image" />

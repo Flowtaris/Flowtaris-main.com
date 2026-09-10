@@ -1,46 +1,74 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
 
-export default function TrustEditor() {
+export default function TrustEditor({ site }: { site: string }) {
   const [trustTitle, setTrustTitle] = useState("");
   const [trustSystems, setTrustSystems] = useState<any[]>([]);
   const [newSystem, setNewSystem] = useState({ heading: "", description: "", items: "", ctaText: "", ctaLink: "" });
   const [editingSystemId, setEditingSystemId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { fetchData(); }, [site]);
 
   async function fetchData() {
-    if (!supabase) { setLoading(false); return; }
-    const { data } = await supabase.from("page_content").select("content").eq("id", "systems_of_trust").single();
-    if (data?.content) {
-      setTrustTitle(data.content.title || "");
-      setTrustSystems(data.content.systems || []);
-    } else {
-      setTrustTitle("THREE SYSTEMS OF TRUST");
-      setTrustSystems([
-        { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE →", ctaLink: "#judgment" },
-        { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE →", ctaLink: "#evidence" },
-        { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE →", ctaLink: "#leverage" }
-      ]);
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/content/${site}?table=page_content&id=systems_of_trust`);
+      const { data, message, error } = await res.json();
+      
+      if (data && data.length > 0 && data[0].content) {
+        setTrustTitle(data[0].content.title || "");
+        setTrustSystems(data[0].content.systems || []);
+      } else {
+        if (message) console.warn(message);
+        setTrustTitle("THREE SYSTEMS OF TRUST");
+        setTrustSystems([
+          { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE →", ctaLink: "#judgment" },
+          { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE →", ctaLink: "#evidence" },
+          { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE →", ctaLink: "#leverage" }
+        ]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch", err);
     }
     setLoading(false);
   }
 
   async function saveTrustContent() {
-    if (!supabase) return;
-    const { error } = await supabase.from("page_content").upsert({ id: "systems_of_trust", content: { title: trustTitle, systems: trustSystems } });
-    if (error) alert("Error saving: " + error.message);
-    else alert("Systems of Trust saved!");
+    try {
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          table: "page_content",
+          record: { id: "systems_of_trust", content: { title: trustTitle, systems: trustSystems }, updated_at: new Date().toISOString() }
+        })
+      });
+      const { error } = await res.json();
+      if (error) alert("Error saving: " + error);
+      else alert(`Systems of Trust saved to flowtaris.${site}!`);
+    } catch (err) {
+      alert("Network error while saving.");
+    }
   }
 
   async function saveTrustSystems(updatedSystems: any[]) {
-    if (!supabase) return;
-    const { error } = await supabase.from("page_content").upsert({ id: "systems_of_trust", content: { title: trustTitle, systems: updatedSystems } });
-    if (error) alert("Error saving: " + error.message);
-    else setTrustSystems(updatedSystems);
+    try {
+      const res = await fetch(`/api/content/${site}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          table: "page_content",
+          record: { id: "systems_of_trust", content: { title: trustTitle, systems: updatedSystems }, updated_at: new Date().toISOString() }
+        })
+      });
+      const { error } = await res.json();
+      if (error) alert("Error saving: " + error);
+      else setTrustSystems(updatedSystems);
+    } catch (err) {
+      alert("Network error while saving.");
+    }
   }
 
   function addTrustSystem() {
