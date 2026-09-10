@@ -32,6 +32,7 @@ export default function LeverageEditor({ site }: { site: string }) {
         operatingPrinciple: "LEVERAGE IS NOT ABOUT DOING MORE.\\nIT IS ABOUT MAKING THE SAME\\nCAPABILITY REACH FURTHER.",
         finalCta: { title: "HAVE AN OPPORTUNITY\\nTHAT NEEDS MORE CAPABILITY?", desc: "Let's determine whether\\nthe right leverage already exists.", cta: "REGISTER AN OPPORTUNITY →" }
       });
+      }
     } catch (err) {
       console.error(err);
     }
