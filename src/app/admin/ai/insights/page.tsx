@@ -19,8 +19,8 @@ function SortableInsightItem({ insight, onDelete }: { insight: any; onDelete: ()
 
   const richText = insight.rich_text || {}
   const image = richText.image || null
-  const category = richText.category || 'â€”'
-  const readTime = richText.readTime || 'â€”'
+  const category = richText.category || '"'
+  const readTime = richText.readTime || '"'
   const faqCount = (insight.faq_items || []).length
   const sectionCount = (richText.sections || []).length
 
@@ -58,7 +58,7 @@ function SortableInsightItem({ insight, onDelete }: { insight: any; onDelete: ()
                 </span>
                 {richText.featured && (
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-2 py-0.5 rounded-md">
-                    â­ Featured
+                     Featured
                   </span>
                 )}
               </div>
@@ -109,13 +109,13 @@ function SortableInsightItem({ insight, onDelete }: { insight: any; onDelete: ()
                 <Calendar className="w-3 h-3" /> {new Date(insight.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
               </span>
             )}
-            {readTime !== 'â€”' && (
+            {readTime !== '"' && (
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" /> {readTime}
               </span>
             )}
             <span className="flex items-center gap-1">
-              <Tag className="w-3 h-3" /> {sectionCount} sections Â· {faqCount} FAQs
+              <Tag className="w-3 h-3" /> {sectionCount} sections  {faqCount} FAQs
             </span>
           </div>
 
@@ -278,7 +278,7 @@ export default function InsightsAdminPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Insights & Blog</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            {insights.length} article{insights.length !== 1 ? 's' : ''} in the database â€” drag to reorder.
+            {insights.length} article{insights.length !== 1 ? 's' : ''} in the database " drag to reorder.
           </p>
         </div>
         <Link
@@ -292,7 +292,7 @@ export default function InsightsAdminPage() {
       {/* Floating Success Toast */}
       {success && (
         <div className="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg font-bold text-sm z-50 animate-in fade-in slide-in-from-bottom-4">
-          âœ“ {success}
+          " {success}
         </div>
       )}
 
@@ -372,17 +372,17 @@ export default function InsightsAdminPage() {
 
       {/* Legend / Field Map */}
       <div className="bg-violet-50 dark:bg-violet-900/20 border border-violet-200 dark:border-violet-700 rounded-2xl p-5 mb-8">
-        <h3 className="text-sm font-bold text-violet-700 dark:text-violet-300 mb-3">ðŸ“ Where each field appears on the live site</h3>
+        <h3 className="text-sm font-bold text-violet-700 dark:text-violet-300 mb-3">" Where each field appears on the live site</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs text-gray-600 dark:text-gray-400">
-          <div><strong className="text-gray-800 dark:text-gray-200">Title â†’</strong> Article page H1 heading + browser tab + article card</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Image â†’</strong> Article card thumbnail + article hero banner</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Category â†’</strong> Purple tag on card + sidebar filter group</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Excerpt â†’</strong> Preview text on article card (main insights page)</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Author â†’</strong> Card footer + article title area + author bio box</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Key Claims â†’</strong> "Key Takeaways" box at top of article</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Sections â†’</strong> Main article body blocks (heading + content)</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">FAQs â†’</strong> FAQ accordion at bottom of article + Google Schema</div>
-          <div><strong className="text-gray-800 dark:text-gray-200">Topic Clusters â†’</strong> Sidebar category filter on insights page</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Title '</strong> Article page H1 heading + browser tab + article card</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Image '</strong> Article card thumbnail + article hero banner</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Category '</strong> Purple tag on card + sidebar filter group</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Excerpt '</strong> Preview text on article card (main insights page)</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Author '</strong> Card footer + article title area + author bio box</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Key Claims '</strong> "Key Takeaways" box at top of article</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Sections '</strong> Main article body blocks (heading + content)</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">FAQs '</strong> FAQ accordion at bottom of article + Google Schema</div>
+          <div><strong className="text-gray-800 dark:text-gray-200">Topic Clusters '</strong> Sidebar category filter on insights page</div>
         </div>
       </div>
 

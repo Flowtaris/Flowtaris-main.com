@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useEffect, useState, useRef } from 'react'
 import { getSiteConfig, supabase } from '@/lib/supabase'
 import { Upload, X, Eye, EyeOff, RefreshCw, CheckCircle2, AlertCircle, ImageIcon, Type, Tag } from 'lucide-react'
@@ -540,7 +540,7 @@ function HeaderPreview({ brandName, badgeText, showLogo, logoUrl }: {
             )}
             <span className="flex items-center gap-2 ml-1">
               <span className="text-white font-semibold text-[13px] tracking-wide">{brandName || 'Flowtaris'}</span>
-              {/* Premium gold badge â€” matches live header */}
+              {/* Premium gold badge " matches live header */}
               <span className="inline-flex items-center gap-[3px] px-2 py-[3px] rounded-full bg-gradient-to-r from-[#D4A847]/20 via-[#f0c97a]/10 to-[#D4A847]/20 border border-[#D4A847]/40 text-[#f0c97a] text-[10px] font-bold tracking-widest uppercase shadow-[0_0_10px_rgba(212,168,71,0.2)]">
                 <span className="w-[4px] h-[4px] rounded-full bg-[#f0c97a] animate-pulse flex-shrink-0" />
                 {badgeText || '.ai'}
@@ -555,7 +555,7 @@ function HeaderPreview({ brandName, badgeText, showLogo, logoUrl }: {
           <div className="w-px h-4 bg-white/10" />
           <div className="flex items-center gap-1 px-3.5 py-1.5 rounded-full border border-[#D4A847]/20 bg-[#D4A847]/10">
             <span className="text-[#D4A847] text-[12px] font-semibold">Corporate</span>
-            <span className="text-[#D4A847]/50 text-[10px]">-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€â”€
+            <span className="text-[#D4A847]/50 text-[10px]">-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-""
 
 function TrustSignalsManager({
   signals,
@@ -844,7 +844,7 @@ export default function SiteConfigPage() {
       <div className="p-8 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-          <span>Loading site configurationâ€¦</span>
+          <span>Loading site configuration</span>
         </div>
       </div>
     )
@@ -873,7 +873,7 @@ export default function SiteConfigPage() {
 
       <form onSubmit={handleSubmit} className="space-y-2">
 
-        {/* -”€ SECTION 1: LOGO & HEADER APPEARANCE -”€ */}
+        {/* -" SECTION 1: LOGO & HEADER APPEARANCE -" */}
         <Section title="Logo & Header Appearance" icon={ImageIcon} accent="amber">
           <LogoManager
             logoUrl={config.logo_url}
@@ -924,7 +924,7 @@ export default function SiteConfigPage() {
           />
         </Section>
 
-        {/* -”€ SECTION 2: BASIC INFO -”€ */}
+        {/* -" SECTION 2: BASIC INFO -" */}
         <Section title="Site Identity & SEO Basics" icon={Tag} accent="blue">
           <Input
             id="site_name"
@@ -941,7 +941,7 @@ export default function SiteConfigPage() {
             onChange={v => update('site_url', v)}
             placeholder="https://flowtaris.ai"
             type="url"
-            hint="Canonical base URL â€” used for all absolute links and sitemaps"
+            hint="Canonical base URL " used for all absolute links and sitemaps"
           />
           <Input
             id="tagline"
@@ -949,7 +949,7 @@ export default function SiteConfigPage() {
             value={config.tagline}
             onChange={v => update('tagline', v)}
             placeholder="Enterprise AI Automation for Finance"
-            hint="Short value proposition â€” used in meta descriptions and hero text"
+            hint="Short value proposition " used in meta descriptions and hero text"
           />
           <FaviconUpload
             value={config.favicon_url}
@@ -957,7 +957,7 @@ export default function SiteConfigPage() {
           />
         </Section>
 
-        {/* -”€ SECTION 3: CONTACT -”€ */}
+        {/* -" SECTION 3: CONTACT -" */}
         <Section title="Contact & Legal" icon={Type} accent="purple">
           <div className="grid grid-cols-2 gap-4">
             <Input id="contact_email" label="Contact email" value={config.contact_email}
@@ -973,7 +973,7 @@ export default function SiteConfigPage() {
             onChange={v => update('cookie_policy_url', v)} placeholder="https://flowtaris.com/cookies" />
         </Section>
 
-        {/* -”€ SECTION 4: JSON CONFIGS -”€ */}
+        {/* -" SECTION 4: JSON CONFIGS -" */}
         <Section title="Navigation & Footer Config" icon={Tag} accent="purple">
           <Textarea id="navigation" label="Header Navigation (JSON)" value={config.navigation}
             onChange={v => update('navigation', v)} rows={4}
@@ -990,7 +990,7 @@ export default function SiteConfigPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION: NEWSLETTER CTA -”€ */}
+        {/* -" SECTION: NEWSLETTER CTA -" */}
         <Section title="Footer Newsletter CTA" icon={Tag} accent="amber">
           <Input id="newsletter_title" label="Newsletter Title"
             value={config.newsletter_title}
@@ -1019,11 +1019,11 @@ export default function SiteConfigPage() {
             placeholder='{"ga4_id":"G-XXXXXXXXXX"}' />
           <Textarea id="seo" label="SEO overrides (JSON)" value={config.seo}
             onChange={v => update('seo', v)} rows={6}
-            hint="Global SEO settings â€” default OG image, robots directives, etc."
+            hint="Global SEO settings " default OG image, robots directives, etc."
             placeholder='{"og_image":"/images/og-default.jpg"}' />
         </Section>
 
-        {/* -”€ SUBMIT -”€ */}
+        {/* -" SUBMIT -" */}
         <div className="sticky bottom-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
           <p className="text-xs text-gray-400">Changes take effect on next page load after saving.</p>
           <button
@@ -1039,7 +1039,7 @@ export default function SiteConfigPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Savingâ€¦
+                Saving
               </>
             ) : (
               <>

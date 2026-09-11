@@ -26,7 +26,7 @@ export function StringListEditor({ label, hint, value, onChange }: { label: stri
         {(value || []).map((item, i) => (
           <div key={i} className="flex gap-2">
             <input value={item} onChange={e => update(i, e.target.value)} className={inputCls + ' flex-1'} placeholder={`Item ${i + 1}`} />
-            <button type="button" onClick={() => remove(i)} className="px-3 py-2 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 text-sm font-bold hover:bg-red-200 transition">âœ•</button>
+            <button type="button" onClick={() => remove(i)} className="px-3 py-2 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 text-sm font-bold hover:bg-red-200 transition"></button>
           </div>
         ))}
         <button type="button" onClick={add} className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800/50 hover:bg-violet-100 dark:hover:bg-violet-900/40 rounded-xl text-sm font-bold transition-colors">
@@ -98,7 +98,7 @@ function InlineImageUploader({ value, onChange, label }: { value: string; onChan
 
   return (
     <div className="mt-3">
-      <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 block">{label || 'ðŸ“· Image (optional)'}</label>
+      <label className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5 block">{label || '" Image (optional)'}</label>
       <div className="flex items-start gap-3">
         {/* Upload square */}
         <div
@@ -141,10 +141,10 @@ function InlineImageUploader({ value, onChange, label }: { value: string; onChan
           />
           {value && (
             <button type="button" onClick={() => onChange('')} className="text-[10px] text-red-500 hover:text-red-700 font-semibold self-start">
-              âœ• Remove image
+               Remove image
             </button>
           )}
-          {uploadSuccess && <p className="text-[10px] text-green-600 dark:text-green-400 font-semibold">âœ“ Uploaded!</p>}
+          {uploadSuccess && <p className="text-[10px] text-green-600 dark:text-green-400 font-semibold">" Uploaded!</p>}
           {uploadError && <p className="text-[10px] text-red-600 dark:text-red-400 font-semibold">{uploadError}</p>}
         </div>
       </div>
@@ -169,7 +169,7 @@ export function KeyClaimsEditor({ value, onChange }: { value: KeyClaimItem[]; on
               <button type="button" onClick={() => remove(i)} className="text-red-500 text-xs hover:text-red-700 font-bold">Remove</button>
             </div>
             <input value={item.text} onChange={e => updateText(i, e.target.value)} className={inputCls} placeholder={`Key claim or data point ${i + 1}...`} />
-            <InlineImageUploader value={item.image || ''} onChange={v => updateImage(i, v)} label="ðŸ“Š Claim Image (optional â€” chart, stat visual, etc.)" />
+            <InlineImageUploader value={item.image || ''} onChange={v => updateImage(i, v)} label="" Claim Image (optional " chart, stat visual, etc.)" />
           </div>
         ))}
         <button type="button" onClick={add} className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800/50 hover:bg-violet-100 dark:hover:bg-violet-900/40 rounded-xl text-sm font-bold transition-colors">
@@ -199,7 +199,7 @@ export function SectionsEditor({ value, onChange }: { value: Section[]; onChange
             </div>
             <input value={section.title} onChange={e => update(i, 'title', e.target.value)} placeholder="Section Heading" className={inputCls} />
             <textarea value={section.content} onChange={e => update(i, 'content', e.target.value)} placeholder="Section content..." rows={6} className={textareaCls} />
-            <InlineImageUploader value={section.image || ''} onChange={v => update(i, 'image', v)} label="ðŸ–¼ï¸ Section Image (optional â€” illustration, diagram, etc.)" />
+            <InlineImageUploader value={section.image || ''} onChange={v => update(i, 'image', v)} label="- Section Image (optional " illustration, diagram, etc.)" />
           </div>
         ))}
         <button type="button" onClick={add} className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800/50 hover:bg-violet-100 dark:hover:bg-violet-900/40 rounded-xl text-sm font-bold transition-colors">
@@ -224,7 +224,7 @@ export function ResultsEditor({ value, onChange }: { value: ResultItem[]; onChan
           <div key={i} className="flex gap-2">
             <input value={res.metric} onChange={e => update(i, 'metric', e.target.value)} className={inputCls + ' flex-1'} placeholder="Metric (e.g. 50%)" />
             <input value={res.label} onChange={e => update(i, 'label', e.target.value)} className={inputCls + ' flex-[2]'} placeholder="Label (e.g. Reduction in manual processing)" />
-            <button type="button" onClick={() => remove(i)} className="px-3 py-2 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 text-sm font-bold hover:bg-red-200 transition">âœ•</button>
+            <button type="button" onClick={() => remove(i)} className="px-3 py-2 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 text-sm font-bold hover:bg-red-200 transition"></button>
           </div>
         ))}
         <button type="button" onClick={add} className="flex items-center gap-1 text-sm text-violet-600 dark:text-violet-400 hover:text-violet-800 font-semibold transition mt-2">
@@ -306,7 +306,7 @@ export function ImageUploader({ label, hint, value, onChange }: { label: string;
   return (
     <Field label={label} hint={hint}>
       <div className="flex items-start gap-4">
-        {/* Clickable square â€” Upload button lives inside here */}
+        {/* Clickable square " Upload button lives inside here */}
         <div
           role="button"
           tabIndex={0}
@@ -319,7 +319,7 @@ export function ImageUploader({ label, hint, value, onChange }: { label: string;
           {value ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={value} alt="Preview" className="w-full h-full object-cover" onError={() => setUploadError('Image failed to load â€” check the URL is correct.')} />
+              <img src={value} alt="Preview" className="w-full h-full object-cover" onError={() => setUploadError('Image failed to load " check the URL is correct.')} />
               {/* Re-upload overlay on hover */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center gap-1">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
@@ -345,7 +345,7 @@ export function ImageUploader({ label, hint, value, onChange }: { label: string;
         <div className="flex flex-col gap-2 flex-1">
           <input type="text" value={value || ''} onChange={e => { onChange(e.target.value); setUploadError(null); setUploadSuccess(false) }} placeholder="Or paste image URL..." className={inputCls} />
           {uploadSuccess && (
-            <p className="text-xs text-green-600 dark:text-green-400 font-semibold">âœ“ Image uploaded successfully! Click Save Changes to keep it.</p>
+            <p className="text-xs text-green-600 dark:text-green-400 font-semibold">" Image uploaded successfully! Click Save Changes to keep it.</p>
           )}
           {uploadError && (
             <p className="text-xs text-red-600 dark:text-red-400 font-semibold">{uploadError}</p>

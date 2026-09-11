@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
@@ -182,7 +182,7 @@ export const DEFAULT_CONTACT_DATA = {
     headline_part1: "Let's start",
     headline_highlight: 'something',
     headline_part2: 'real.',
-    description: "Every enterprise transformation begins with one conversation. Tell us where your finance ops hurt most â€” we'll show you exactly how AI removes it.",
+    description: "Every enterprise transformation begins with one conversation. Tell us where your finance ops hurt most " we'll show you exactly how AI removes it.",
     stats: [
       { value: '< 4 hrs', label: 'Avg Response' },
       { value: '3', label: 'Global Offices' },
@@ -190,8 +190,8 @@ export const DEFAULT_CONTACT_DATA = {
       { value: '50+', label: 'Team Members' },
     ],
     imageSrc: '/images/contact-hero.png',
-    imageAlt: 'Flowtaris global AI finance reach -–¶' },
-      { value: 'message', label: 'Send a Message', sub: 'Fill out our secure inquiry form and our team will get back to you within 4 hours.', icon: '-€“ 50,000 / year, 50,000 -€“ 500,000 / year, 500,000+ / year, Not Sure'
+    imageAlt: 'Flowtaris global AI finance reach --' },
+      { value: 'message', label: 'Send a Message', sub: 'Fill out our secure inquiry form and our team will get back to you within 4 hours.', icon: '-" 50,000 / year, 50,000 -" 500,000 / year, 500,000+ / year, Not Sure'
   },
   global_presence: {
     eyebrow: 'Global Presence',
@@ -211,9 +211,9 @@ export const DEFAULT_CONTACT_DATA = {
     eyebrow: 'Quick Answers',
     headline: 'Questions we get before the first call.',
     items: [
-      { q: 'How quickly can I get a live demo?', a: 'Within 1-€” no generic slide decks.' },
-      { q: 'What does implementation look like?', a: 'GenAI Document Intelligence: 3-€“12 weeks. We provide a dedicated engineer from day one.' },
-      { q: 'Do you offer a proof of concept?', a: 'Yes. Qualified enterprises can run a 4-week POC on their own live data with full platform access -€” no sales call required.',
+      { q: 'How quickly can I get a live demo?', a: 'Within 1-" no generic slide decks.' },
+      { q: 'What does implementation look like?', a: 'GenAI Document Intelligence: 3-"12 weeks. We provide a dedicated engineer from day one.' },
+      { q: 'Do you offer a proof of concept?', a: 'Yes. Qualified enterprises can run a 4-week POC on their own live data with full platform access -" no sales call required.',
     primary_cta: { label: 'Start Free Assessment', href: '/assessment' },
     secondary_cta: { label: 'Calculate ROI', href: '/roi-calculator' }
   }
@@ -315,7 +315,7 @@ export default function ContactConfigAdminPage() {
       <div className="p-12 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-amber-500 rounded-full animate-spin" />
-          <span>Loading Contact page configurationâ€¦</span>
+          <span>Loading Contact page configuration</span>
         </div>
       </div>
     )
@@ -342,7 +342,7 @@ export default function ContactConfigAdminPage() {
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition-colors shrink-0"
         >
           <Eye className="w-3.5 h-3.5" />
-          View Live Page â†—
+          View Live Page --
         </a>
       </div>
 
@@ -360,7 +360,7 @@ export default function ContactConfigAdminPage() {
 
       <form onSubmit={e => { e.preventDefault(); handleSave() }}>
 
-        {/* -”€ SECTION 1: HERO & METRICS -”€ */}
+        {/* -" SECTION 1: HERO & METRICS -" */}
         <Section title="Section 1: Hero & Metrics" description="Header banner with response guarantee, headline, stats, and graphic" icon={Sparkles} color="amber">
           <Field label="Response Guarantee Badge" hint="Appears at the top of the hero">
             <TextInput value={data.hero.badge} onChange={v => update('hero.badge', v)} placeholder="Response within 4 hours" />
@@ -445,7 +445,7 @@ export default function ContactConfigAdminPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 2: MEETING & INTENT -”€ */}
+        {/* -" SECTION 2: MEETING & INTENT -" */}
         <Section title="Section 2: Meeting Booking & Purpose Options" description="Calendly scheduling URL and inquiry intent options" icon={Calendar} color="blue">
           <Field label="Direct Calendly / Scheduler Booking URL" hint="Opens when users click 'Auto-Schedule a Meeting'">
             <TextInput value={data.meeting.calendly_url} onChange={v => update('meeting.calendly_url', v)} placeholder="https://calendly.com/flowtaris-info" />
@@ -486,7 +486,7 @@ export default function ContactConfigAdminPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 3: FORM DROPDOWN OPTIONS -”€ */}
+        {/* -" SECTION 3: FORM DROPDOWN OPTIONS -" */}
         <Section title="Section 3: Form Dropdown Options" description="ERP platforms and invoice volume tiers available in the contact form" icon={Building2} color="emerald">
           <Field label="Supported ERP Platforms (Comma-separated)" hint="Options in the 'Primary ERP Platform' dropdown">
             <TextArea
@@ -502,12 +502,12 @@ export default function ContactConfigAdminPage() {
               value={Array.isArray(data.form_options.invoice_volumes) ? data.form_options.invoice_volumes.join(', ') : data.form_options.invoice_volumes}
               onChange={v => update('form_options.invoice_volumes', v)}
               rows={2}
-              placeholder="Under 10,000 / year, 10,000 -€“ 100,000 / year, 100,000 â€“ 500,000 / year, 500,000+ / year, Not Sure"
+              placeholder="Under 10,000 / year, 10,000 -" 100,000 / year, 100,000 " 500,000 / year, 500,000+ / year, Not Sure"
             />
           </Field>
         </Section>
 
-        {/* -”€ SECTION 4: GLOBAL PRESENCE -”€ */}
+        {/* -" SECTION 4: GLOBAL PRESENCE -" */}
         <Section title="Section 4: Global Presence & Regional Offices" description="Regional operations cards (AMER, EMEA, APAC)" icon={Globe} color="purple">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <Field label="Section Eyebrow">
@@ -610,7 +610,7 @@ export default function ContactConfigAdminPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 5: TRUST SIGNALS -”€ */}
+        {/* -" SECTION 5: TRUST SIGNALS -" */}
         <Section title="Section 5: Trust Signals" description="3 security, speed, and scale guarantee cards" icon={Shield} color="blue">
           <div className="space-y-4">
             {data.trust_signals.map((signal, idx) => (
@@ -643,7 +643,7 @@ export default function ContactConfigAdminPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 6: FAQ ACCORDION -”€ */}
+        {/* -" SECTION 6: FAQ ACCORDION -" */}
         <Section title="Section 6: FAQ Accordion" description="Common pre-call questions and answers" icon={HelpCircle} color="amber">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <Field label="Section Eyebrow">
@@ -714,7 +714,7 @@ export default function ContactConfigAdminPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 7: BOTTOM CTA -”€ */}
+        {/* -" SECTION 7: BOTTOM CTA -" */}
         <Section title="Section 7: Bottom Self-Serve CTA" description="Bottom banner leading to self-serve assessment and calculator" icon={ArrowRight} color="slate">
           <Field label="Headline">
             <TextInput value={data.bottom_cta.headline} onChange={v => update('bottom_cta.headline', v)} placeholder="Prefer to start self-serve?" />
@@ -754,7 +754,7 @@ export default function ContactConfigAdminPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving Changesâ€¦
+                Saving Changes
               </>
             ) : (
               <>

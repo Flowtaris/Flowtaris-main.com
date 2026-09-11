@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
@@ -332,7 +332,7 @@ export default function HeroConfigPage() {
       <div className="p-8 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-          <span>Loading hero configurationâ€¦</span>
+          <span>Loading hero configuration</span>
         </div>
       </div>
     )
@@ -352,7 +352,7 @@ export default function HeroConfigPage() {
           </p>
         </div>
         <a href="/" target="_blank" rel="noopener noreferrer" className="shrink-0 text-xs text-blue-500 hover:text-blue-700 underline mt-1">
-          Preview on site â†’
+          Preview on site '
         </a>
       </div>
 
@@ -366,7 +366,7 @@ export default function HeroConfigPage() {
 
       <form onSubmit={e => { e.preventDefault(); handleSave() }} className="space-y-2">
 
-        {/* -”€ SECTION 1: HEADER CTAS -”€ */}
+        {/* -" SECTION 1: HEADER CTAS -" */}
         <Section title="Header Navigation Buttons" description="The action buttons fixed at the top right of the site" icon={Navigation} color="purple">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-4 rounded-xl border border-gray-100 dark:border-gray-700/50 bg-gray-50/50 dark:bg-gray-800/30">
@@ -401,7 +401,7 @@ export default function HeroConfigPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 2: HERO CONTENT -”€ */}
+        {/* -" SECTION 2: HERO CONTENT -" */}
         <Section title="Homepage Hero Content" description="The main background, titles, and text on the first screen" icon={Target} color="blue">
           <ImageUpload
             label="Hero Background Image"
@@ -428,7 +428,7 @@ export default function HeroConfigPage() {
           </Field>
         </Section>
 
-        {/* -”€ SECTION 3: HERO CTAS -”€ */}
+        {/* -" SECTION 3: HERO CTAS -" */}
         <Section title="Hero Action Buttons" description="The two big buttons under the hero text" icon={LinkIcon} color="emerald">
           <div className="grid grid-cols-2 gap-6">
             <div className="p-4 rounded-xl border border-amber-200 dark:border-amber-800/40 bg-amber-50/50 dark:bg-amber-900/20">
@@ -457,7 +457,7 @@ export default function HeroConfigPage() {
           </div>
         </Section>
 
-        {/* -”€ SECTION 4: STATS BAR -”€ */}
+        {/* -" SECTION 4: STATS BAR -" */}
         <Section title="Hero Stats Bar" description="The row of 4 large numbers displayed below the hero buttons" icon={Target} color="amber">
           <div className="space-y-3">
             {data.stats.map((stat, i) => (
@@ -585,7 +585,7 @@ export default function HeroConfigPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Savingâ€¦
+                Saving
               </>
             ) : (
               <>

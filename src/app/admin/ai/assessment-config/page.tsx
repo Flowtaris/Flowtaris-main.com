@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useState } from 'react'
 import {
@@ -138,14 +138,14 @@ function Section({
 
 // --- Default Assessment Data Structure --------------------------------------------------------------- FREE -- NO CARD REQUIRED',
     heading: 'Find out what your finance team is leaving on the table',
-    description: 'Answer 6 questions about your current setup and we will give you a specific, quantified breakdown of where you are losing money -€“100 score built from 6 dimensions of your finance operation, benchmarked against peers at your scale.' },
-      { id: '2', number: '02', title: 'A dollar figure on your inefficiency', body: 'We calculate your estimated annual bleed based on invoice volume, team size, and error rates -€“18 months.' },
+    description: 'Answer 6 questions about your current setup and we will give you a specific, quantified breakdown of where you are losing money -"100 score built from 6 dimensions of your finance operation, benchmarked against peers at your scale.' },
+      { id: '2', number: '02', title: 'A dollar figure on your inefficiency', body: 'We calculate your estimated annual bleed based on invoice volume, team size, and error rates -"18 months.' },
     ],
     ctaButtonText: 'Begin Assessment',
     confidentialityNote: 'Your answers are never sold or shared. We use them only to generate your report.',
   },
   step1Erp: {
-    stepEyebrow: 'Step 1 of 6 -€” this matters.',
+    stepEyebrow: 'Step 1 of 6 -" this matters.',
     erpList: [
       { value: 'NetSuite', abbr: 'NS', label: 'Oracle NetSuite', sub: 'Cloud ERP', accent: '#0ea5e9' },
       { value: 'SAP', abbr: 'SAP', label: 'SAP S/4HANA', sub: 'Hybrid ERP', accent: '#6366f1' },
@@ -155,7 +155,7 @@ function Section({
     ]
   },
   step2Pain: {
-    stepEyebrow: 'Step 2 of 6 -€” the cost estimates next to each one are real industry benchmarks.',
+    stepEyebrow: 'Step 2 of 6 -" the cost estimates next to each one are real industry benchmarks.',
     maxSelections: 3,
     painList: [
       { value: 'Manual data entry', label: 'Manual Invoice Processing', detail: 'Teams spending hours on data entry that should take seconds', metric: '$14.20', unit: '/ invoice', severity: 92, color: '#ef4444' },
@@ -167,9 +167,9 @@ function Section({
     ]
   },
   step3Volume: {
-    stepEyebrow: 'Step 3 of 6 -· Current State',
+    stepEyebrow: 'Step 3 of 6 - Current State',
     stepTitle: 'How does finance actually work at your company today?',
-    stepSubtitle: 'This tells us your automation ceiling â€” how much room there is to improve, and how fast.',
+    stepSubtitle: 'This tells us your automation ceiling " how much room there is to improve, and how fast.',
     stateList: [
       { value: 'Manual', label: 'Fully Manual', tag: 'Spreadsheets, email, and paper trails', level: 1 },
       { value: 'Partial', label: 'Some Automation', tag: 'Basic OCR or RPA, still lots of exceptions', level: 2 },
@@ -179,12 +179,12 @@ function Section({
     ]
   },
   step5Maturity: {
-    stepEyebrow: 'Step 5 of 6 -€” it just shapes how we\'d phase the work and what we\'d tackle first.',
+    stepEyebrow: 'Step 5 of 6 -" it just shapes how we\'d phase the work and what we\'d tackle first.',
     maturityList: [
       { value: 'Legacy', label: 'Legacy Core', tag: 'On-premise, pre-2018 ERP landscape', year: 'Pre-2018' },
-      { value: 'Hybrid', label: 'Hybrid Mix', tag: 'Some cloud, some legacy, not fully committed', year: '2018-· Timeline',
+      { value: 'Hybrid', label: 'Hybrid Mix', tag: 'Some cloud, some legacy, not fully committed', year: '2018- Timeline',
     stepTitle: 'What\'s driving the timing on this?',
-    stepSubtitle: 'This changes how we structure your roadmap -€” we use this to calibrate every recommendation to your actual platform constraints.' },
+    stepSubtitle: 'This changes how we structure your roadmap -" we use this to calibrate every recommendation to your actual platform constraints.' },
       { target: 'pain-section', text: 'Select your top pain points. We\'ll show industry cost benchmarks next to each one.' },
       { target: 'sidebar-score', text: 'Your AI Readiness Score updates live as you answer. It\'s based on real finance benchmarks.' },
     ],
@@ -203,9 +203,9 @@ function Section({
     kpiProfileLabel: 'Profile',
     kpiProfileUnit: 'tier',
     catQuickWinLabel: 'Quick Wins',
-    catQuickWinSub: '0-€“9 months',
+    catQuickWinSub: '0-"9 months',
     catInnovationLabel: 'Innovation',
-    catInnovationSub: '9-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€
+    catInnovationSub: '9-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"
 
 export default function AdminAssessmentConfigPage() {
   const [data, setData] = useState<AssessmentConfigData>(DEFAULT_ASSESSMENT_CONFIG)
@@ -313,7 +313,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       )}
 
-      {/* -”€ SECTION 1: INTRO & DELIVERABLES -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
+      {/* -" SECTION 1: INTRO & DELIVERABLES -"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-" */}
       <Section
         title="Step 0: Intro & Deliverables"
         description="Landing screen copy, top badge, primary headline, 3 walk-away deliverables, and confidentiality note."
@@ -326,7 +326,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.intro.eyebrowBadge}
                 onChange={v => setData(d => ({ ...d, intro: { ...d.intro, eyebrowBadge: v } }))}
-                placeholder="-· TAKES ~3 MINUTES Â· NO CARD REQUIRED"
+                placeholder="- TAKES ~3 MINUTES  NO CARD REQUIRED"
               />
             </Field>
 
@@ -409,7 +409,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 2: STEP 1 - ERP PLATFORMS -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
+      {/* -" SECTION 2: STEP 1 - ERP PLATFORMS -"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-"-" */}
       <Section
         title="Step 1: ERP Platforms"
         description="Configure the primary enterprise ERP options, abbreviations, sublabels, and brand accents."
@@ -422,7 +422,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.step1Erp.stepEyebrow}
                 onChange={v => setData(d => ({ ...d, step1Erp: { ...d.step1Erp, stepEyebrow: v } }))}
-                placeholder="Step 1 of 6 Â· ERP Platform"
+                placeholder="Step 1 of 6  ERP Platform"
               />
             </Field>
 
@@ -541,7 +541,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 3: STEP 2 - PAIN POINTS & BENCHMARKS -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€â”€ */}
+      {/* -" SECTION 3: STEP 2 - PAIN POINTS & BENCHMARKS -"-"-"-"-"-"-"-"-"-"-"" */}
       <Section
         title="Step 2: Friction Points & Cost Benchmarks"
         description="Manage the operational pain points, benchmark figures, severity ratings, and color markers."
@@ -554,7 +554,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.step2Pain.stepEyebrow}
                 onChange={v => setData(d => ({ ...d, step2Pain: { ...d.step2Pain, stepEyebrow: v } }))}
-                placeholder="Step 2 of 6 Â· Pain Points"
+                placeholder="Step 2 of 6  Pain Points"
               />
             </Field>
 
@@ -580,7 +580,7 @@ export default function AdminAssessmentConfigPage() {
             <TextInput
               value={data.step2Pain.stepSubtitle}
               onChange={v => setData(d => ({ ...d, step2Pain: { ...d.step2Pain, stepSubtitle: v } }))}
-              placeholder="Pick up to 3. Be honest â€” the cost estimates next to each one are real..."
+              placeholder="Pick up to 3. Be honest " the cost estimates next to each one are real..."
             />
           </Field>
 
@@ -717,7 +717,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 4: STEP 3 - VOLUME & CALCULATION BENCHMARKS -”€-”€-”€-”€-”€-”€-”€-”€â”€ */}
+      {/* -" SECTION 4: STEP 3 - VOLUME & CALCULATION BENCHMARKS -"-"-"-"-"-"-"-"" */}
       <Section
         title="Step 3: Volume & Annual Bleed Benchmarks"
         description="Configure unit cost rates, savings multipliers, and live benchmark subtext."
@@ -730,7 +730,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.step3Volume.stepEyebrow}
                 onChange={v => setData(d => ({ ...d, step3Volume: { ...d.step3Volume, stepEyebrow: v } }))}
-                placeholder="Step 3 of 6 Â· Volume"
+                placeholder="Step 3 of 6  Volume"
               />
             </Field>
 
@@ -816,7 +816,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 5: STEP 4 - CURRENT AUTOMATION STATE -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
+      {/* -" SECTION 5: STEP 4 - CURRENT AUTOMATION STATE -"-"-"-"-"-"-"-"-"-"-"-" */}
       <Section
         title="Step 4: Current Automation State"
         description="Edit the 5 current-state operational maturity options and ladder bar levels."
@@ -829,7 +829,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.step4State.stepEyebrow}
                 onChange={v => setData(d => ({ ...d, step4State: { ...d.step4State, stepEyebrow: v } }))}
-                placeholder="Step 4 of 6 Â· Current State"
+                placeholder="Step 4 of 6  Current State"
               />
             </Field>
 
@@ -923,7 +923,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 6: STEP 5 - TECH MATURITY LANDSCAPE -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
+      {/* -" SECTION 6: STEP 5 - TECH MATURITY LANDSCAPE -"-"-"-"-"-"-"-"-"-"-"-" */}
       <Section
         title="Step 5: Tech Stack Maturity Era"
         description="Configure the architecture maturity cards (Legacy, Hybrid, Modern, AI Pilot)."
@@ -936,7 +936,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.step5Maturity.stepEyebrow}
                 onChange={v => setData(d => ({ ...d, step5Maturity: { ...d.step5Maturity, stepEyebrow: v } }))}
-                placeholder="Step 5 of 6 Â· Tech Maturity"
+                placeholder="Step 5 of 6  Tech Maturity"
               />
             </Field>
 
@@ -1028,7 +1028,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 7: STEP 6 - TIMELINE & URGENCY -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€â”€ */}
+      {/* -" SECTION 7: STEP 6 - TIMELINE & URGENCY -"-"-"-"-"-"-"-"-"-"-"-"-"-"" */}
       <Section
         title="Step 6: Timeline & Urgency Signals"
         description="Configure the 4 timeline urgency signals (Exploring, Budget Approved, Audit-Driven, Board Mandate)."
@@ -1041,7 +1041,7 @@ export default function AdminAssessmentConfigPage() {
               <TextInput
                 value={data.step6Urgency.stepEyebrow}
                 onChange={v => setData(d => ({ ...d, step6Urgency: { ...d.step6Urgency, stepEyebrow: v } }))}
-                placeholder="Step 6 of 6 Â· Timeline"
+                placeholder="Step 6 of 6  Timeline"
               />
             </Field>
 
@@ -1161,7 +1161,7 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* -”€ SECTION 8: GUIDED TOUR & LEAD CAPTURE -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
+      {/* -" SECTION 8: GUIDED TOUR & LEAD CAPTURE -"-"-"-"-"-"-"-"-"-"-"-"-"-"-" */}
       <Section
         title="Guided Tour & Email Report Lead Capture"
         description="Manage floating guided tour tips, result page headings, and email capture form text."
@@ -1196,9 +1196,9 @@ export default function AdminAssessmentConfigPage() {
             />
           </Field>
 
-          {/* -”€ Results Header Label -”€ */}
+          {/* -" Results Header Label -" */}
           <div className="mt-4 border-t border-gray-100 dark:border-gray-700/60 pt-4">
-            <Label>Results Page â€” Header &amp; Score Card Labels</Label>
+            <Label>Results Page " Header &amp; Score Card Labels</Label>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
               <Field label="Assessment Complete Label">
                 <TextInput
@@ -1207,21 +1207,21 @@ export default function AdminAssessmentConfigPage() {
                   placeholder="Assessment complete"
                 />
               </Field>
-              <Field label="Score Card â€” Score Label">
+              <Field label="Score Card " Score Label">
                 <TextInput
                   value={data.tourAndResults.scoreLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, scoreLabel: v } }))}
                   placeholder="Score"
                 />
               </Field>
-              <Field label="Score Card â€” Savings Label">
+              <Field label="Score Card " Savings Label">
                 <TextInput
                   value={data.tourAndResults.estSavingsLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, estSavingsLabel: v } }))}
                   placeholder="Est. savings"
                 />
               </Field>
-              <Field label="Score Card â€” Per Year Label">
+              <Field label="Score Card " Per Year Label">
                 <TextInput
                   value={data.tourAndResults.perYearLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, perYearLabel: v } }))}
@@ -1231,60 +1231,60 @@ export default function AdminAssessmentConfigPage() {
             </div>
           </div>
 
-          {/* -”€ KPI Cards -”€ */}
+          {/* -" KPI Cards -" */}
           <div className="mt-4 border-t border-gray-100 dark:border-gray-700/60 pt-4">
-            <Label>Results Page â€” KPI Cards</Label>
+            <Label>Results Page " KPI Cards</Label>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-3">
-              <Field label="KPI 1 â€” Label">
+              <Field label="KPI 1 " Label">
                 <TextInput
                   value={data.tourAndResults.kpiOpportunitiesLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiOpportunitiesLabel: v } }))}
                   placeholder="Opportunities"
                 />
               </Field>
-              <Field label="KPI 1 â€” Unit">
+              <Field label="KPI 1 " Unit">
                 <TextInput
                   value={data.tourAndResults.kpiOpportunitiesUnit}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiOpportunitiesUnit: v } }))}
                   placeholder="found"
                 />
               </Field>
-              <Field label="KPI 2 â€” Label">
+              <Field label="KPI 2 " Label">
                 <TextInput
                   value={data.tourAndResults.kpiQuickWinsLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiQuickWinsLabel: v } }))}
                   placeholder="Quick Wins"
                 />
               </Field>
-              <Field label="KPI 2 â€” Unit">
+              <Field label="KPI 2 " Unit">
                 <TextInput
                   value={data.tourAndResults.kpiQuickWinsUnit}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiQuickWinsUnit: v } }))}
                   placeholder="this quarter"
                 />
               </Field>
-              <Field label="KPI 3 â€” Label">
+              <Field label="KPI 3 " Label">
                 <TextInput
                   value={data.tourAndResults.kpiFastestPaybackLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiFastestPaybackLabel: v } }))}
                   placeholder="Fastest Payback"
                 />
               </Field>
-              <Field label="KPI 3 â€” Unit">
+              <Field label="KPI 3 " Unit">
                 <TextInput
                   value={data.tourAndResults.kpiFastestPaybackUnit}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiFastestPaybackUnit: v } }))}
                   placeholder="to value"
                 />
               </Field>
-              <Field label="KPI 4 â€” Label">
+              <Field label="KPI 4 " Label">
                 <TextInput
                   value={data.tourAndResults.kpiProfileLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiProfileLabel: v } }))}
                   placeholder="Profile"
                 />
               </Field>
-              <Field label="KPI 4 â€” Unit">
+              <Field label="KPI 4 " Unit">
                 <TextInput
                   value={data.tourAndResults.kpiProfileUnit}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, kpiProfileUnit: v } }))}
@@ -1294,83 +1294,83 @@ export default function AdminAssessmentConfigPage() {
             </div>
           </div>
 
-          {/* -”€ Roadmap Category Labels -”€ */}
+          {/* -" Roadmap Category Labels -" */}
           <div className="mt-4 border-t border-gray-100 dark:border-gray-700/60 pt-4">
             <Label>Roadmap Categories (Quick Wins / Strategic / Innovation)</Label>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
-              <Field label="Category 1 â€” Label">
+              <Field label="Category 1 " Label">
                 <TextInput
                   value={data.tourAndResults.catQuickWinLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, catQuickWinLabel: v } }))}
                   placeholder="Quick Wins"
                 />
               </Field>
-              <Field label="Category 1 â€” Timeline">
+              <Field label="Category 1 " Timeline">
                 <TextInput
                   value={data.tourAndResults.catQuickWinSub}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, catQuickWinSub: v } }))}
-                  placeholder="0â€“3 months"
+                  placeholder="0"3 months"
                 />
               </Field>
               <div />
-              <Field label="Category 2 â€” Label">
+              <Field label="Category 2 " Label">
                 <TextInput
                   value={data.tourAndResults.catStrategicLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, catStrategicLabel: v } }))}
                   placeholder="Strategic"
                 />
               </Field>
-              <Field label="Category 2 â€” Timeline">
+              <Field label="Category 2 " Timeline">
                 <TextInput
                   value={data.tourAndResults.catStrategicSub}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, catStrategicSub: v } }))}
-                  placeholder="3â€“9 months"
+                  placeholder="3"9 months"
                 />
               </Field>
               <div />
-              <Field label="Category 3 â€” Label">
+              <Field label="Category 3 " Label">
                 <TextInput
                   value={data.tourAndResults.catInnovationLabel}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, catInnovationLabel: v } }))}
                   placeholder="Innovation"
                 />
               </Field>
-              <Field label="Category 3 â€” Timeline">
+              <Field label="Category 3 " Timeline">
                 <TextInput
                   value={data.tourAndResults.catInnovationSub}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, catInnovationSub: v } }))}
-                  placeholder="9â€“18 months"
+                  placeholder="9"18 months"
                 />
               </Field>
             </div>
           </div>
 
-          {/* -”€ CTA Cards -”€ */}
+          {/* -" CTA Cards -" */}
           <div className="mt-4 border-t border-gray-100 dark:border-gray-700/60 pt-4">
             <Label>CTA Cards (Bottom of Results Page)</Label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-              <Field label="CTA 1 â€” Title (ROI Calculator)">
+              <Field label="CTA 1 " Title (ROI Calculator)">
                 <TextInput
                   value={data.tourAndResults.ctaRoiTitle}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, ctaRoiTitle: v } }))}
                   placeholder="Full ROI Calculator"
                 />
               </Field>
-              <Field label="CTA 1 â€” Subtitle">
+              <Field label="CTA 1 " Subtitle">
                 <TextInput
                   value={data.tourAndResults.ctaRoiSubtitle}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, ctaRoiSubtitle: v } }))}
                   placeholder="Build a 3-year financial model"
                 />
               </Field>
-              <Field label="CTA 2 â€” Title (Contact)">
+              <Field label="CTA 2 " Title (Contact)">
                 <TextInput
                   value={data.tourAndResults.ctaContactTitle}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, ctaContactTitle: v } }))}
                   placeholder="Talk to the team"
                 />
               </Field>
-              <Field label="CTA 2 â€” Subtitle">
+              <Field label="CTA 2 " Subtitle">
                 <TextInput
                   value={data.tourAndResults.ctaContactSubtitle}
                   onChange={v => setData(d => ({ ...d, tourAndResults: { ...d.tourAndResults, ctaContactSubtitle: v } }))}
