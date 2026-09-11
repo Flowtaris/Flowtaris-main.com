@@ -65,7 +65,7 @@ export function FaqEditor({ value, onChange }: { value: FAQ[]; onChange: (v: FAQ
   )
 }
 
-// â”€â”€ Inline Image Uploader (compact, for embedding inside list items) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Inline Image Uploader (compact, for embedding inside list items) 
 function InlineImageUploader({ value, onChange, label }: { value: string; onChange: (v: string) => void; label?: string }) {
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
@@ -152,7 +152,7 @@ function InlineImageUploader({ value, onChange, label }: { value: string; onChan
   )
 }
 
-// â”€â”€ Key Claims Editor (with per-item images) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Key Claims Editor (with per-item images) 
 export type KeyClaimItem = { text: string; image?: string }
 export function KeyClaimsEditor({ value, onChange }: { value: KeyClaimItem[]; onChange: (v: KeyClaimItem[]) => void }) {
   const add = () => onChange([...(value || []), { text: '', image: '' }])
@@ -180,7 +180,7 @@ export function KeyClaimsEditor({ value, onChange }: { value: KeyClaimItem[]; on
   )
 }
 
-// â”€â”€ Sections Editor (with per-section images) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Sections Editor (with per-section images) 
 type Section = { id: string; title: string; content: string; image?: string }
 export function SectionsEditor({ value, onChange }: { value: Section[]; onChange: (v: Section[]) => void }) {
   const add = () => onChange([...(value || []), { id: `section-${(value || []).length + 1}`, title: '', content: '', image: '' }])

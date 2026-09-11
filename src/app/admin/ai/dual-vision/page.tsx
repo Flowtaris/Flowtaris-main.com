@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
@@ -6,7 +6,7 @@ import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ImageIcon, X, Layers, Plus, Trash2
 } from 'lucide-react'
 
-// â”€â”€ Shared primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Shared primitives ---------------------------------------------------------------------------------------
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label htmlFor={htmlFor} className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
@@ -55,7 +55,7 @@ const TextArea = ({
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Collapsible Section Wrapper ------------------------------------------------------------------------
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -94,7 +94,7 @@ function Section({
   )
 }
 
-// â”€â”€ Image Upload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Image Upload ---------------------------------------------------------------------------------------------
 
 function ImageUpload({
   label, value, onChange, hint,
@@ -162,7 +162,7 @@ function ImageUpload({
   )
 }
 
-// â”€â”€ Pillar Editor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Pillar Editor ---------------------------------------------------------------------------------------------
 
 function PillarEditor({
   pillars, onChange, color,
@@ -215,7 +215,7 @@ function PillarEditor({
   )
 }
 
-// â”€â”€ Stat Editor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Stat Editor ------------------------------------------------------------------------------------------------
 
 function StatEditor({ stats, onChange }: { stats: any[]; onChange: (s: any[]) => void }) {
   const add = () => onChange([...stats, { label: 'New', sub: 'Stat' }])
@@ -256,14 +256,10 @@ function StatEditor({ stats, onChange }: { stats: any[]; onChange: (s: any[]) =>
   )
 }
 
-// â”€â”€ Default data (mirrors DualVisionSection defaults) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-
-const DEFAULT_DATA = {
-  eyebrow: 'One Brand Â· Two Disciplines',
+// --- Default data (mirrors DualVisionSection defaults) -------------------------------------- Two Disciplines',
   heading1: 'Enterprise Mastery Meets',
   heading2: 'AI Intelligence',
-  intro: 'Flowtaris.ai was built to amplify Flowtaris.com â€” not compete with it. Two disciplines. One brand. The trust of decades of enterprise work, now accelerated by AI that actually works inside your ERP.',
-  unifyingText: 'Flowtaris AI does not replace what Flowtaris.com has built â€” it deepens it. Our AI products inherit the same governance controls, implementation expertise, and enterprise trust model that our clients across 40+ countries depend on. This is AI with accountability, not a proof-of-concept.',
+  intro: 'Flowtaris.ai was built to amplify Flowtaris.com -€” it deepens it. Our AI products inherit the same governance controls, implementation expertise, and enterprise trust model that our clients across 40+ countries depend on. This is AI with accountability, not a proof-of-concept.',
   stats: [
     { label: '40+', sub: 'Countries' },
     { label: '200+', sub: 'Enterprises' },
@@ -281,30 +277,15 @@ const DEFAULT_DATA = {
     ctaLabel: 'Explore Flowtaris.com',
     ctaHref: 'https://flowtaris.com',
     pillars: [
-      { number: '01', title: 'Global ERP Implementation', subtitle: 'The world trusts our hands-on expertise', body: 'Flowtaris.com delivers decade-deep ERP implementations across NetSuite, SAP, Workday, and Coupa â€” in 40+ countries. We are the partner enterprises call when execution cannot fail.', tag: 'Enterprise Operations' },
-      { number: '02', title: 'Governance by Design', subtitle: 'SOC 2 Â· GDPR Â· ISO 27001 baked in', body: 'Compliance is structural at Flowtaris â€” not bolted on. Every process, integration, and workflow ships with enterprise-grade controls, audit trails, and regulatory documentation.', tag: 'Risk & Compliance' },
-      { number: '03', title: 'Long-Term Strategic Partnership', subtitle: 'Compounding value, not one-time projects', body: 'We build lasting finance operations foundations â€” continuous optimization roadmaps that compound ROI year over year, turning your finance function into a strategic business asset.', tag: 'Advisory & Growth' },
-    ],
-  },
-  right: {
-    domain: 'flowtaris.ai',
-    domainHref: '/assessment',
-    headline1: 'The AI Intelligence',
-    headline2: 'Layer Unlocked',
-    intro: 'Built on the same enterprise trust foundation as Flowtaris.com â€” Flowtaris AI adds autonomous agents, predictive intelligence, and GenAI document processing to the ERP systems your team already runs.',
+      { number: '01', title: 'Global ERP Implementation', subtitle: 'The world trusts our hands-on expertise', body: 'Flowtaris.com delivers decade-deep ERP implementations across NetSuite, SAP, Workday, and Coupa -· GDPR -€” not bolted on. Every process, integration, and workflow ships with enterprise-grade controls, audit trails, and regulatory documentation.', tag: 'Risk & Compliance' },
+      { number: '03', title: 'Long-Term Strategic Partnership', subtitle: 'Compounding value, not one-time projects', body: 'We build lasting finance operations foundations -€” Flowtaris AI adds autonomous agents, predictive intelligence, and GenAI document processing to the ERP systems your team already runs.',
     imageSrc: '/images/ai-vision.png',
     imageAlt: 'Flowtaris AI intelligence layer with golden neural network',
     ctaLabel: 'Assess Your AI Readiness',
     ctaHref: '/assessment',
     pillars: [
-      { number: '01', title: 'Autonomous Finance Agents', subtitle: 'AI that acts â€” not just advises', body: 'AI agents embedded in your existing ERP handle AP, AR, invoice matching, and close cycles end-to-end. The same systems your team uses â€” now running themselves, backed by Flowtaris governance.', tag: 'Agentic Automation' },
-      { number: '02', title: 'Predictive Intelligence', subtitle: 'From lagging reports to leading signals', body: 'Real-time cash flow forecasting, vendor risk scoring, and spend anomaly detection â€” surfacing what matters before it becomes a problem. Built on the same trusted data layer as flowtaris.com.', tag: 'Finance Intelligence' },
-      { number: '03', title: 'GenAI Document Processing', subtitle: '99.8% accuracy Â· zero templates', body: 'Classify, extract, and route any financial document at enterprise scale. The same rigorous accuracy our implementation teams demand â€” now automated with large-language-model intelligence.', tag: 'Document AI' },
-    ],
-  },
-}
-
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+      { number: '01', title: 'Autonomous Finance Agents', subtitle: 'AI that acts -€” now running themselves, backed by Flowtaris governance.', tag: 'Agentic Automation' },
+      { number: '02', title: 'Predictive Intelligence', subtitle: 'From lagging reports to leading signals', body: 'Real-time cash flow forecasting, vendor risk scoring, and spend anomaly detection -· zero templates', body: 'Classify, extract, and route any financial document at enterprise scale. The same rigorous accuracy our implementation teams demand -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€
 
 export default function DualVisionAdminPage() {
   const [data, setData] = useState(DEFAULT_DATA)
@@ -414,7 +395,7 @@ export default function DualVisionAdminPage() {
         <div>
           <p className="text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">How this section looks on the homepage</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-            <strong>Top:</strong> Eyebrow badge â†’ Main headline â†’ Intro paragraph.<br />
+            <strong>Top:</strong> Eyebrow badge -†’ Intro paragraph.<br />
             <strong>Middle:</strong> Two columns. LEFT = flowtaris.com (white/blue tones). RIGHT = flowtaris.ai (gold tones). Each has: a header image, headline, body text, 3 pillar cards, and a CTA button.<br />
             <strong>Bottom:</strong> Unifying statement + stats strip.
           </p>
@@ -423,7 +404,7 @@ export default function DualVisionAdminPage() {
 
       <form onSubmit={e => { e.preventDefault(); handleSave() }} className="space-y-2">
 
-        {/* â”€â”€ SECTION 1: Top Header â”€â”€ */}
+        {/* -”€ SECTION 1: Top Header -”€ */}
         <Section title="Section Header" description="The eyebrow badge, main headline, and intro paragraph at the top center" icon={Layers} color="blue">
           <Field label="Eyebrow badge text" id="eyebrow" hint="Short label shown inside the gold pill badge at the very top">
             <TextInput id="eyebrow" value={data.eyebrow} onChange={v => update('eyebrow', v)} placeholder="One Brand Â· Two Disciplines" />
@@ -441,7 +422,7 @@ export default function DualVisionAdminPage() {
           </Field>
         </Section>
 
-        {/* â”€â”€ SECTION 2: LEFT PANEL â”€â”€ */}
+        {/* -”€ SECTION 2: LEFT PANEL -”€ */}
         <Section title="Left Panel â€” flowtaris.com" description="The white/blue side representing the enterprise ERP operations story" icon={Layers} color="blue">
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Field label="Domain label" hint="Text shown on the badge over the image">
@@ -487,7 +468,7 @@ export default function DualVisionAdminPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 3: RIGHT PANEL â”€â”€ */}
+        {/* -”€ SECTION 3: RIGHT PANEL -”€ */}
         <Section title="Right Panel â€” flowtaris.ai" description="The gold side representing the AI intelligence story" icon={Layers} color="amber">
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Field label="Domain label" hint="Text shown on the gold badge over the image">
@@ -533,7 +514,7 @@ export default function DualVisionAdminPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 4: BOTTOM STRIP â”€â”€ */}
+        {/* -”€ SECTION 4: BOTTOM STRIP -”€ */}
         <Section title="Bottom Unifying Strip" description="The text and stats bar shown below both panels" icon={Layers} color="emerald">
           <Field label="Unifying statement" hint="This ties both sides together. Appears bottom-left. 2â€“3 sentences.">
             <TextArea value={data.unifyingText} onChange={v => update('unifyingText', v)} rows={3} />

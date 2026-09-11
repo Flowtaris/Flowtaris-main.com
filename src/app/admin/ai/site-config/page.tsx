@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 import { useEffect, useState, useRef } from 'react'
 import { getSiteConfig, supabase } from '@/lib/supabase'
 import { Upload, X, Eye, EyeOff, RefreshCw, CheckCircle2, AlertCircle, ImageIcon, Type, Tag } from 'lucide-react'
 
-// â”€â”€ Shared UI primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Shared UI primitives ---------------------------------------------------------------------------------
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label htmlFor={htmlFor} className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
@@ -64,7 +64,7 @@ const Textarea = ({
   </div>
 )
 
-// â”€â”€ Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Section Wrapper ------------------------------------------------------------------------------------------
 
 const Section = ({ title, icon: Icon, children, accent = 'blue' }: {
   title: string; icon: React.ElementType; children: React.ReactNode; accent?: string
@@ -90,7 +90,7 @@ const Section = ({ title, icon: Icon, children, accent = 'blue' }: {
   )
 }
 
-// â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Types ---------------------------------------------------------------------------------------------------------
 
 type SiteConfigFormData = {
   site_name: string
@@ -152,7 +152,7 @@ const DEFAULTS: SiteConfigFormData = {
   newsletter_button_text: 'Subscribe',
 }
 
-// â”€â”€ Logo Upload Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Logo Upload Component ---------------------------------------------------------------------------------
 
 function LogoManager({
   logoUrl,
@@ -404,7 +404,7 @@ function LogoManager({
   )
 }
 
-// â”€â”€ Favicon Upload Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Favicon Upload Component ---------------------------------------------------------------------------
 
 function FaviconUpload({
   value,
@@ -512,7 +512,7 @@ function FaviconUpload({
   )
 }
 
-// â”€â”€ Header Live Preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Header Live Preview ------------------------------------------------------------------------------------
 
 function HeaderPreview({ brandName, badgeText, showLogo, logoUrl }: {
   brandName: string; badgeText: string; showLogo: boolean; logoUrl: string
@@ -555,15 +555,7 @@ function HeaderPreview({ brandName, badgeText, showLogo, logoUrl }: {
           <div className="w-px h-4 bg-white/10" />
           <div className="flex items-center gap-1 px-3.5 py-1.5 rounded-full border border-[#D4A847]/20 bg-[#D4A847]/10">
             <span className="text-[#D4A847] text-[12px] font-semibold">Corporate</span>
-            <span className="text-[#D4A847]/50 text-[10px]">â†—</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// â”€â”€ Trust Signals Manager â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            <span className="text-[#D4A847]/50 text-[10px]">-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€â”€
 
 function TrustSignalsManager({
   signals,
@@ -712,7 +704,7 @@ function TrustSignalsManager({
   )
 }
 
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Main Page ---------------------------------------------------------------------------------------------------
 
 export default function SiteConfigPage() {
   const [config, setConfig] = useState<SiteConfigFormData>(DEFAULTS)
@@ -881,7 +873,7 @@ export default function SiteConfigPage() {
 
       <form onSubmit={handleSubmit} className="space-y-2">
 
-        {/* â”€â”€ SECTION 1: LOGO & HEADER APPEARANCE â”€â”€ */}
+        {/* -”€ SECTION 1: LOGO & HEADER APPEARANCE -”€ */}
         <Section title="Logo & Header Appearance" icon={ImageIcon} accent="amber">
           <LogoManager
             logoUrl={config.logo_url}
@@ -932,7 +924,7 @@ export default function SiteConfigPage() {
           />
         </Section>
 
-        {/* â”€â”€ SECTION 2: BASIC INFO â”€â”€ */}
+        {/* -”€ SECTION 2: BASIC INFO -”€ */}
         <Section title="Site Identity & SEO Basics" icon={Tag} accent="blue">
           <Input
             id="site_name"
@@ -965,7 +957,7 @@ export default function SiteConfigPage() {
           />
         </Section>
 
-        {/* â”€â”€ SECTION 3: CONTACT â”€â”€ */}
+        {/* -”€ SECTION 3: CONTACT -”€ */}
         <Section title="Contact & Legal" icon={Type} accent="purple">
           <div className="grid grid-cols-2 gap-4">
             <Input id="contact_email" label="Contact email" value={config.contact_email}
@@ -981,7 +973,7 @@ export default function SiteConfigPage() {
             onChange={v => update('cookie_policy_url', v)} placeholder="https://flowtaris.com/cookies" />
         </Section>
 
-        {/* â”€â”€ SECTION 4: JSON CONFIGS â”€â”€ */}
+        {/* -”€ SECTION 4: JSON CONFIGS -”€ */}
         <Section title="Navigation & Footer Config" icon={Tag} accent="purple">
           <Textarea id="navigation" label="Header Navigation (JSON)" value={config.navigation}
             onChange={v => update('navigation', v)} rows={4}
@@ -998,7 +990,7 @@ export default function SiteConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION: NEWSLETTER CTA â”€â”€ */}
+        {/* -”€ SECTION: NEWSLETTER CTA -”€ */}
         <Section title="Footer Newsletter CTA" icon={Tag} accent="amber">
           <Input id="newsletter_title" label="Newsletter Title"
             value={config.newsletter_title}
@@ -1031,7 +1023,7 @@ export default function SiteConfigPage() {
             placeholder='{"og_image":"/images/og-default.jpg"}' />
         </Section>
 
-        {/* â”€â”€ SUBMIT â”€â”€ */}
+        {/* -”€ SUBMIT -”€ */}
         <div className="sticky bottom-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
           <p className="text-xs text-gray-400">Changes take effect on next page load after saving.</p>
           <button

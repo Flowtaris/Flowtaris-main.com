@@ -1,10 +1,10 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ImageIcon, Target, Plus, Trash2, Home, Link as LinkIcon, Navigation, Shield } from 'lucide-react'
 
-// â”€â”€ Shared primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Shared primitives ---------------------------------------------------------------------------------------
 
 const Label = ({ children, htmlFor, className = '' }: { children: React.ReactNode; htmlFor?: string; className?: string }) => (
   <label htmlFor={htmlFor} className={`block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5 ${className}`}>
@@ -53,7 +53,7 @@ const TextArea = ({
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Collapsible Section Wrapper ------------------------------------------------------------------------
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -92,7 +92,7 @@ function Section({
   )
 }
 
-// â”€â”€ Image Upload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Image Upload ---------------------------------------------------------------------------------------------
 
 function ImageUpload({
   label, value, onChange, hint,
@@ -160,7 +160,7 @@ function ImageUpload({
   )
 }
 
-// â”€â”€ Default data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Default data ---------------------------------------------------------------------------------------------
 
 const DEFAULT_DATA = {
   header_ctas: {
@@ -190,7 +190,7 @@ const DEFAULT_DATA = {
   }
 }
 
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Main Page ---------------------------------------------------------------------------------------------------
 
 export default function HeroConfigPage() {
   const [data, setData] = useState(DEFAULT_DATA)
@@ -366,7 +366,7 @@ export default function HeroConfigPage() {
 
       <form onSubmit={e => { e.preventDefault(); handleSave() }} className="space-y-2">
 
-        {/* â”€â”€ SECTION 1: HEADER CTAS â”€â”€ */}
+        {/* -”€ SECTION 1: HEADER CTAS -”€ */}
         <Section title="Header Navigation Buttons" description="The action buttons fixed at the top right of the site" icon={Navigation} color="purple">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-4 rounded-xl border border-gray-100 dark:border-gray-700/50 bg-gray-50/50 dark:bg-gray-800/30">
@@ -401,7 +401,7 @@ export default function HeroConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 2: HERO CONTENT â”€â”€ */}
+        {/* -”€ SECTION 2: HERO CONTENT -”€ */}
         <Section title="Homepage Hero Content" description="The main background, titles, and text on the first screen" icon={Target} color="blue">
           <ImageUpload
             label="Hero Background Image"
@@ -428,7 +428,7 @@ export default function HeroConfigPage() {
           </Field>
         </Section>
 
-        {/* â”€â”€ SECTION 3: HERO CTAS â”€â”€ */}
+        {/* -”€ SECTION 3: HERO CTAS -”€ */}
         <Section title="Hero Action Buttons" description="The two big buttons under the hero text" icon={LinkIcon} color="emerald">
           <div className="grid grid-cols-2 gap-6">
             <div className="p-4 rounded-xl border border-amber-200 dark:border-amber-800/40 bg-amber-50/50 dark:bg-amber-900/20">
@@ -457,7 +457,7 @@ export default function HeroConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 4: STATS BAR â”€â”€ */}
+        {/* -”€ SECTION 4: STATS BAR -”€ */}
         <Section title="Hero Stats Bar" description="The row of 4 large numbers displayed below the hero buttons" icon={Target} color="amber">
           <div className="space-y-3">
             {data.stats.map((stat, i) => (

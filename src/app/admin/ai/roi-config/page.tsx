@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import {
@@ -6,7 +6,7 @@ import {
   Sliders, Database, TrendingUp, DollarSign, Activity, PieChart, BarChart3
 } from 'lucide-react'
 
-// â”€â”€ Shared UI Primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Shared UI Primitives ---------------------------------------------------------------------------------
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label htmlFor={htmlFor} className="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider mb-1.5">
@@ -39,7 +39,7 @@ const TextInput = ({
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --- Collapsible Section Wrapper ------------------------------------------------------------------------
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -204,7 +204,7 @@ export default function AdminROIConfigPage() {
         </div>
       )}
 
-      {/* â”€â”€ GLOBAL SHUTDOWN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* -”€ GLOBAL SHUTDOWN -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
       <div className="bg-white dark:bg-gray-800 border border-red-200 dark:border-red-900/50 rounded-2xl p-6 shadow-sm mb-6 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
@@ -232,7 +232,7 @@ export default function AdminROIConfigPage() {
         </button>
       </div>
 
-      {/* â”€â”€ SECTION 1: TOP CONTROLS & DROPDOWNS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* -”€ SECTION 1: TOP CONTROLS & DROPDOWNS -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
       <Section
         title="Top Controls & Dropdowns"
         description="Configure the labels for the ERP and Use Case dropdowns, plus the list of supported platforms."
@@ -361,7 +361,7 @@ export default function AdminROIConfigPage() {
         </div>
       </Section>
 
-      {/* â”€â”€ SECTION 2: COST OF INACTION BREAKDOWN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* -”€ SECTION 2: COST OF INACTION BREAKDOWN -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
       <Section
         title="Cost of Inaction Breakdown"
         description="Configure titles and labels for the left-side cost metrics."
@@ -413,7 +413,7 @@ export default function AdminROIConfigPage() {
         </div>
       </Section>
 
-      {/* â”€â”€ SECTION 3: 3-YEAR PROJECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* -”€ SECTION 3: 3-YEAR PROJECTION -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€â”€ */}
       <Section
         title="3-Year Projection Chart"
         description="Configure the labels for the projection chart area."
@@ -444,7 +444,7 @@ export default function AdminROIConfigPage() {
         </div>
       </Section>
 
-      {/* â”€â”€ SECTION 4: MARKET TICKER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* -”€ SECTION 4: MARKET TICKER -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€â”€ */}
       <Section
         title="Live Market Ticker"
         description="The animated ticker running at the top of the ROI calculator."
@@ -507,7 +507,7 @@ export default function AdminROIConfigPage() {
         </div>
       </Section>
 
-      {/* â”€â”€ SECTION 5: BOTTOM METRICS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/* -”€ SECTION 5: BOTTOM METRICS -”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€-”€ */}
       <Section
         title="Bottom Summary & CTA"
         description="Labels for the final metrics and the email export form."

@@ -1,1 +1,11 @@
-{"buildCommand": "next build"}
+{
+  "build": {
+    "env": {
+      "NEXT_TURBOPACK": "0",
+      "TURBOPACK": "0"
+    }
+  },
+  "env": {
+    "NEXT_TURBOPACK": "0"
+  }
+}

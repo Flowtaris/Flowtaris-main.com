@@ -6,7 +6,7 @@ import {
   Settings, CheckSquare, Activity, FileText, Share2, Shield, Layout
 } from 'lucide-react'
 
-// â”€â”€ Shared primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Shared primitives 
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
@@ -40,7 +40,7 @@ const Textarea = ({ value, onChange, placeholder, rows = 3 }: { value: string; o
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Collapsible Section Wrapper 
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -90,7 +90,7 @@ function Section({
   )
 }
 
-// â”€â”€ Default Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Default Data 
 
 const DEFAULT_HEADER = {
   eyebrow: 'Platform Capabilities',
@@ -112,7 +112,7 @@ const DEFAULT_CAPABILITIES = [
 const CAP_ICONS = [FileText, CheckSquare, Activity, Share2, Settings, Shield]
 const CAP_COLORS = ['indigo', 'amber', 'emerald', 'violet', 'rose', 'cyan']
 
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Main Page 
 
 export default function CapabilitiesConfigPage() {
   const [header, setHeader] = useState(DEFAULT_HEADER)
