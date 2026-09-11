@@ -1,1 +1,1 @@
-{"buildCommand": "next build --no-turbo"}
+{"buildCommand": "next build"}
