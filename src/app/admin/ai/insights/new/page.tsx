@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 
 import { 
   Field, inputCls, textareaCls, StringListEditor, FaqEditor, SectionsEditor, ImageUploader, KeyClaimsEditor, KeyClaimItem 
-} from '../../components/AdminEditors'
+} from '@/app/admin/ai/components/AdminEditors'
 
 type FAQ = { question: string; answer: string }
 type Section = { id: string; title: string; content: string; image?: string }
