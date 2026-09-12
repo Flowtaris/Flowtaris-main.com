@@ -205,7 +205,7 @@ export const DEFAULT_ABOUT_DATA = {
     statements: [
       {
         title: 'Every invoice should understand itself.',
-        description: "Not just extracted " understood. Context, intent, exceptions, and nuance. That's the difference between legacy template OCR and our GenAI models. It is the difference between 70% automation and 95%."
+        description: "Not just extracted - understood. Context, intent, exceptions, and nuance. That's the difference between legacy template OCR and our GenAI models. It is the difference between 70% automation and 95%.",
       },
       {
         title: 'Your ERP should answer your questions.',

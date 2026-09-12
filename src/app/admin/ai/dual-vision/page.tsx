@@ -256,10 +256,12 @@ function StatEditor({ stats, onChange }: { stats: any[]; onChange: (s: any[]) =>
   )
 }
 
-// --- Default data (mirrors DualVisionSection defaults) -------------------------------------- Two Disciplines',
+// --- Default data (mirrors DualVisionSection defaults) --------------------------------------
+const DEFAULT_DATA = {
+  eyebrow: 'Two Disciplines',
   heading1: 'Enterprise Mastery Meets',
   heading2: 'AI Intelligence',
-  intro: 'Flowtaris.ai was built to amplify Flowtaris.com -" it deepens it. Our AI products inherit the same governance controls, implementation expertise, and enterprise trust model that our clients across 40+ countries depend on. This is AI with accountability, not a proof-of-concept.',
+  intro: 'Flowtaris.ai was built to amplify Flowtaris.com - it deepens it. Our AI products inherit the same governance controls, implementation expertise, and enterprise trust model that our clients across 40+ countries depend on. This is AI with accountability, not a proof-of-concept.',
   stats: [
     { label: '40+', sub: 'Countries' },
     { label: '200+', sub: 'Enterprises' },

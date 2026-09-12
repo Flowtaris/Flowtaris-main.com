@@ -136,10 +136,15 @@ function Section({
   )
 }
 
-// --- Default Assessment Data Structure --------------------------------------------------------------- FREE -- NO CARD REQUIRED',
+// --- Default Assessment Data Structure ------------------------------------------------
+const DEFAULT_DATA = {
+  hero: {
+    eyebrow: 'FREE -- NO CARD REQUIRED',
     heading: 'Find out what your finance team is leaving on the table',
-    description: 'Answer 6 questions about your current setup and we will give you a specific, quantified breakdown of where you are losing money -"100 score built from 6 dimensions of your finance operation, benchmarked against peers at your scale.' },
-      { id: '2', number: '02', title: 'A dollar figure on your inefficiency', body: 'We calculate your estimated annual bleed based on invoice volume, team size, and error rates -"18 months.' },
+    description: 'Answer 6 questions about your current setup and we will give you a specific, quantified breakdown of where you are losing money.',
+    bullets: [
+      { id: '1', number: '01', title: 'A diagnostic score out of 100', body: 'A 0-100 score built from 6 dimensions of your finance operation, benchmarked against peers at your scale.' },
+      { id: '2', number: '02', title: 'A dollar figure on your inefficiency', body: 'We calculate your estimated annual bleed based on invoice volume, team size, and error rates over 18 months.' },
     ],
     ctaButtonText: 'Begin Assessment',
     confidentialityNote: 'Your answers are never sold or shared. We use them only to generate your report.',

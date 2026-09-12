@@ -135,7 +135,7 @@ const DEFAULT_HEADER = {
   eyebrow: 'The Flowtaris Intelligence Suite',
   headline_1: 'Stop guessing.',
   headline_2: 'Start calculating.',
-  description: "Four enterprise-grade tools " built on real benchmarks " that prove AI's financial impact before you sign a contract.",
+  description: "Four enterprise-grade tools - built on real benchmarks - that prove AI's financial impact before you sign a contract.",
 }
 
 const TOOL_ICONS = [Zap, BarChart2, TrendingDown, FlaskConical]

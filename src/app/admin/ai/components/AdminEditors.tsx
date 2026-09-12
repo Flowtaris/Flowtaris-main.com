@@ -169,7 +169,7 @@ export function KeyClaimsEditor({ value, onChange }: { value: KeyClaimItem[]; on
               <button type="button" onClick={() => remove(i)} className="text-red-500 text-xs hover:text-red-700 font-bold">Remove</button>
             </div>
             <input value={item.text} onChange={e => updateText(i, e.target.value)} className={inputCls} placeholder={`Key claim or data point ${i + 1}...`} />
-            <InlineImageUploader value={item.image || ''} onChange={v => updateImage(i, v)} label="" Claim Image (optional " chart, stat visual, etc.)" />
+            <InlineImageUploader value={item.image || ''} onChange={v => updateImage(i, v)} label="Claim Image (optional - chart, stat visual, etc.)" />
           </div>
         ))}
         <button type="button" onClick={add} className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-violet-50 dark:bg-violet-900/20 text-violet-700 dark:text-violet-400 border border-violet-200 dark:border-violet-800/50 hover:bg-violet-100 dark:hover:bg-violet-900/40 rounded-xl text-sm font-bold transition-colors">

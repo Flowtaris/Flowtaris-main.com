@@ -209,7 +209,7 @@ export default function NewPlatformPage() {
           options={MATURITY_OPTIONS}
         />
         <SimpleInput
-          label="Logo Emoji (e.g., ', ", )"
+          label="Logo Emoji (e.g., 🚀, 💬)"
           value={formData.logo_emoji}
           onChange={(e) => handleChange('logo_emoji', e.target.value)}
         />

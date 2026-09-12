@@ -182,7 +182,7 @@ export const DEFAULT_CONTACT_DATA = {
     headline_part1: "Let's start",
     headline_highlight: 'something',
     headline_part2: 'real.',
-    description: "Every enterprise transformation begins with one conversation. Tell us where your finance ops hurt most " we'll show you exactly how AI removes it.",
+    description: "Every enterprise transformation begins with one conversation. Tell us where your finance ops hurt most - we'll show you exactly how AI removes it.",
     stats: [
       { value: '< 4 hrs', label: 'Avg Response' },
       { value: '3', label: 'Global Offices' },
