@@ -6,7 +6,7 @@ import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ImageIcon, X, Layers, Plus, Trash2
 } from 'lucide-react'
 
-// â”€â”€ Shared primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Shared primitives --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label htmlFor={htmlFor} className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
@@ -55,7 +55,7 @@ const TextArea = ({
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Collapsible Section Wrapper --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -94,7 +94,7 @@ function Section({
   )
 }
 
-// â”€â”€ Image Upload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Image Upload --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function ImageUpload({
   label, value, onChange, hint,
@@ -162,7 +162,7 @@ function ImageUpload({
   )
 }
 
-// â”€â”€ Pillar Editor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Pillar Editor --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function PillarEditor({
   pillars, onChange, color,
@@ -215,7 +215,7 @@ function PillarEditor({
   )
 }
 
-// â”€â”€ Stat Editor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Stat Editor --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function StatEditor({ stats, onChange }: { stats: any[]; onChange: (s: any[]) => void }) {
   const add = () => onChange([...stats, { label: 'New', sub: 'Stat' }])
@@ -256,14 +256,14 @@ function StatEditor({ stats, onChange }: { stats: any[]; onChange: (s: any[]) =>
   )
 }
 
-// â”€â”€ Default data (mirrors DualVisionSection defaults) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Default data (mirrors DualVisionSection defaults) --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const DEFAULT_DATA = {
-  eyebrow: 'One Brand Â· Two Disciplines',
+  eyebrow: 'One Brand ---- Two Disciplines',
   heading1: 'Enterprise Mastery Meets',
   heading2: 'AI Intelligence',
-  intro: 'Flowtaris.ai was built to amplify Flowtaris.com â€” not compete with it. Two disciplines. One brand. The trust of decades of enterprise work, now accelerated by AI that actually works inside your ERP.',
-  unifyingText: 'Flowtaris AI does not replace what Flowtaris.com has built â€” it deepens it. Our AI products inherit the same governance controls, implementation expertise, and enterprise trust model that our clients across 40+ countries depend on. This is AI with accountability, not a proof-of-concept.',
+  intro: 'Flowtaris.ai was built to amplify Flowtaris.com -----" not compete with it. Two disciplines. One brand. The trust of decades of enterprise work, now accelerated by AI that actually works inside your ERP.',
+  unifyingText: 'Flowtaris AI does not replace what Flowtaris.com has built -----" it deepens it. Our AI products inherit the same governance controls, implementation expertise, and enterprise trust model that our clients across 40+ countries depend on. This is AI with accountability, not a proof-of-concept.',
   stats: [
     { label: '40+', sub: 'Countries' },
     { label: '200+', sub: 'Enterprises' },
@@ -281,9 +281,9 @@ const DEFAULT_DATA = {
     ctaLabel: 'Explore Flowtaris.com',
     ctaHref: 'https://flowtaris.com',
     pillars: [
-      { number: '01', title: 'Global ERP Implementation', subtitle: 'The world trusts our hands-on expertise', body: 'Flowtaris.com delivers decade-deep ERP implementations across NetSuite, SAP, Workday, and Coupa â€” in 40+ countries. We are the partner enterprises call when execution cannot fail.', tag: 'Enterprise Operations' },
-      { number: '02', title: 'Governance by Design', subtitle: 'SOC 2 Â· GDPR Â· ISO 27001 baked in', body: 'Compliance is structural at Flowtaris â€” not bolted on. Every process, integration, and workflow ships with enterprise-grade controls, audit trails, and regulatory documentation.', tag: 'Risk & Compliance' },
-      { number: '03', title: 'Long-Term Strategic Partnership', subtitle: 'Compounding value, not one-time projects', body: 'We build lasting finance operations foundations â€” continuous optimization roadmaps that compound ROI year over year, turning your finance function into a strategic business asset.', tag: 'Advisory & Growth' },
+      { number: '01', title: 'Global ERP Implementation', subtitle: 'The world trusts our hands-on expertise', body: 'Flowtaris.com delivers decade-deep ERP implementations across NetSuite, SAP, Workday, and Coupa -----" in 40+ countries. We are the partner enterprises call when execution cannot fail.', tag: 'Enterprise Operations' },
+      { number: '02', title: 'Governance by Design', subtitle: 'SOC 2 ---- GDPR ---- ISO 27001 baked in', body: 'Compliance is structural at Flowtaris -----" not bolted on. Every process, integration, and workflow ships with enterprise-grade controls, audit trails, and regulatory documentation.', tag: 'Risk & Compliance' },
+      { number: '03', title: 'Long-Term Strategic Partnership', subtitle: 'Compounding value, not one-time projects', body: 'We build lasting finance operations foundations -----" continuous optimization roadmaps that compound ROI year over year, turning your finance function into a strategic business asset.', tag: 'Advisory & Growth' },
     ],
   },
   right: {
@@ -291,20 +291,20 @@ const DEFAULT_DATA = {
     domainHref: '/assessment',
     headline1: 'The AI Intelligence',
     headline2: 'Layer Unlocked',
-    intro: 'Built on the same enterprise trust foundation as Flowtaris.com â€” Flowtaris AI adds autonomous agents, predictive intelligence, and GenAI document processing to the ERP systems your team already runs.',
+    intro: 'Built on the same enterprise trust foundation as Flowtaris.com -----" Flowtaris AI adds autonomous agents, predictive intelligence, and GenAI document processing to the ERP systems your team already runs.',
     imageSrc: '/images/ai-vision.png',
     imageAlt: 'Flowtaris AI intelligence layer with golden neural network',
     ctaLabel: 'Assess Your AI Readiness',
     ctaHref: '/assessment',
     pillars: [
-      { number: '01', title: 'Autonomous Finance Agents', subtitle: 'AI that acts â€” not just advises', body: 'AI agents embedded in your existing ERP handle AP, AR, invoice matching, and close cycles end-to-end. The same systems your team uses â€” now running themselves, backed by Flowtaris governance.', tag: 'Agentic Automation' },
-      { number: '02', title: 'Predictive Intelligence', subtitle: 'From lagging reports to leading signals', body: 'Real-time cash flow forecasting, vendor risk scoring, and spend anomaly detection â€” surfacing what matters before it becomes a problem. Built on the same trusted data layer as flowtaris.com.', tag: 'Finance Intelligence' },
-      { number: '03', title: 'GenAI Document Processing', subtitle: '99.8% accuracy Â· zero templates', body: 'Classify, extract, and route any financial document at enterprise scale. The same rigorous accuracy our implementation teams demand â€” now automated with large-language-model intelligence.', tag: 'Document AI' },
+      { number: '01', title: 'Autonomous Finance Agents', subtitle: 'AI that acts -----" not just advises', body: 'AI agents embedded in your existing ERP handle AP, AR, invoice matching, and close cycles end-to-end. The same systems your team uses -----" now running themselves, backed by Flowtaris governance.', tag: 'Agentic Automation' },
+      { number: '02', title: 'Predictive Intelligence', subtitle: 'From lagging reports to leading signals', body: 'Real-time cash flow forecasting, vendor risk scoring, and spend anomaly detection -----" surfacing what matters before it becomes a problem. Built on the same trusted data layer as flowtaris.com.', tag: 'Finance Intelligence' },
+      { number: '03', title: 'GenAI Document Processing', subtitle: '99.8% accuracy ---- zero templates', body: 'Classify, extract, and route any financial document at enterprise scale. The same rigorous accuracy our implementation teams demand -----" now automated with large-language-model intelligence.', tag: 'Document AI' },
     ],
   },
 }
 
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Main Page --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 export default function DualVisionAdminPage() {
   const [data, setData] = useState(DEFAULT_DATA)
@@ -373,7 +373,7 @@ export default function DualVisionAdminPage() {
       <div className="p-8 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-amber-500 rounded-full animate-spin" />
-          <span>Loading dual vision configurationâ€¦</span>
+          <span>Loading dual vision configuration-------</span>
         </div>
       </div>
     )
@@ -396,7 +396,7 @@ export default function DualVisionAdminPage() {
           </p>
         </div>
         <a href="/" target="_blank" rel="noopener noreferrer" className="shrink-0 text-xs text-blue-500 hover:text-blue-700 underline mt-1">
-          Preview on site â†’
+          Preview on site -----'
         </a>
       </div>
 
@@ -410,11 +410,11 @@ export default function DualVisionAdminPage() {
 
       {/* Visual reference hint */}
       <div className="mb-6 p-4 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 flex items-start gap-3">
-        <div className="text-2xl shrink-0">ðŸ—ºï¸</div>
+        <div className="text-2xl shrink-0">-------------</div>
         <div>
           <p className="text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">How this section looks on the homepage</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-            <strong>Top:</strong> Eyebrow badge â†’ Main headline â†’ Intro paragraph.<br />
+            <strong>Top:</strong> Eyebrow badge -----' Main headline -----' Intro paragraph.<br />
             <strong>Middle:</strong> Two columns. LEFT = flowtaris.com (white/blue tones). RIGHT = flowtaris.ai (gold tones). Each has: a header image, headline, body text, 3 pillar cards, and a CTA button.<br />
             <strong>Bottom:</strong> Unifying statement + stats strip.
           </p>
@@ -423,26 +423,26 @@ export default function DualVisionAdminPage() {
 
       <form onSubmit={e => { e.preventDefault(); handleSave() }} className="space-y-2">
 
-        {/* â”€â”€ SECTION 1: Top Header â”€â”€ */}
+        {/* --"-----"--- SECTION 1: Top Header --"-----"--- */}
         <Section title="Section Header" description="The eyebrow badge, main headline, and intro paragraph at the top center" icon={Layers} color="blue">
           <Field label="Eyebrow badge text" id="eyebrow" hint="Short label shown inside the gold pill badge at the very top">
-            <TextInput id="eyebrow" value={data.eyebrow} onChange={v => update('eyebrow', v)} placeholder="One Brand Â· Two Disciplines" />
+            <TextInput id="eyebrow" value={data.eyebrow} onChange={v => update('eyebrow', v)} placeholder="One Brand ---- Two Disciplines" />
           </Field>
           <div className="grid grid-cols-2 gap-3">
-            <Field label="Headline â€” Line 1 (white)" id="heading1">
+            <Field label="Headline -----" Line 1 (white)" id="heading1">
               <TextInput id="heading1" value={data.heading1} onChange={v => update('heading1', v)} placeholder="Enterprise Mastery Meets" />
             </Field>
-            <Field label="Headline â€” Line 2 (gold gradient)" id="heading2">
+            <Field label="Headline -----" Line 2 (gold gradient)" id="heading2">
               <TextInput id="heading2" value={data.heading2} onChange={v => update('heading2', v)} placeholder="AI Intelligence" />
             </Field>
           </div>
-          <Field label="Intro paragraph" id="intro" hint="Appears below the headline. Keep this 2â€“3 sentences.">
+          <Field label="Intro paragraph" id="intro" hint="Appears below the headline. Keep this 2-----"3 sentences.">
             <TextArea id="intro" value={data.intro} onChange={v => update('intro', v)} rows={3} />
           </Field>
         </Section>
 
-        {/* â”€â”€ SECTION 2: LEFT PANEL â”€â”€ */}
-        <Section title="Left Panel â€” flowtaris.com" description="The white/blue side representing the enterprise ERP operations story" icon={Layers} color="blue">
+        {/* --"-----"--- SECTION 2: LEFT PANEL --"-----"--- */}
+        <Section title="Left Panel -----" flowtaris.com" description="The white/blue side representing the enterprise ERP operations story" icon={Layers} color="blue">
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Field label="Domain label" hint="Text shown on the badge over the image">
               <TextInput value={data.left.domain} onChange={v => update('left.domain', v)} placeholder="flowtaris.com" />
@@ -452,14 +452,14 @@ export default function DualVisionAdminPage() {
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <Field label="Headline â€” Line 1 (white bold)">
+            <Field label="Headline -----" Line 1 (white bold)">
               <TextInput value={data.left.headline1} onChange={v => update('left.headline1', v)} placeholder="The Enterprise" />
             </Field>
-            <Field label="Headline â€” Line 2 (muted)">
+            <Field label="Headline -----" Line 2 (muted)">
               <TextInput value={data.left.headline2} onChange={v => update('left.headline2', v)} placeholder="Operations Backbone" />
             </Field>
           </div>
-          <Field label="Intro paragraph" hint="2â€“3 sentences below the headline">
+          <Field label="Intro paragraph" hint="2-----"3 sentences below the headline">
             <TextArea value={data.left.intro} onChange={v => update('left.intro', v)} rows={3} />
           </Field>
           <div className="grid grid-cols-2 gap-3 mb-4">
@@ -474,7 +474,7 @@ export default function DualVisionAdminPage() {
             label="Header Image"
             value={data.left.imageSrc}
             onChange={v => update('left.imageSrc', v)}
-            hint="Ideal size: 1200Ã—600px. Shows at top of the left panel."
+            hint="Ideal size: 1200---600px. Shows at top of the left panel."
           />
           <Field label="Image Alt Text (SEO)" hint="Describe the image for search engines and screen readers">
             <TextInput value={data.left.imageAlt} onChange={v => update('left.imageAlt', v)} placeholder="Flowtaris enterprise ERP operations..." />
@@ -487,8 +487,8 @@ export default function DualVisionAdminPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 3: RIGHT PANEL â”€â”€ */}
-        <Section title="Right Panel â€” flowtaris.ai" description="The gold side representing the AI intelligence story" icon={Layers} color="amber">
+        {/* --"-----"--- SECTION 3: RIGHT PANEL --"-----"--- */}
+        <Section title="Right Panel -----" flowtaris.ai" description="The gold side representing the AI intelligence story" icon={Layers} color="amber">
           <div className="grid grid-cols-2 gap-3 mb-4">
             <Field label="Domain label" hint="Text shown on the gold badge over the image">
               <TextInput value={data.right.domain} onChange={v => update('right.domain', v)} placeholder="flowtaris.ai" />
@@ -498,10 +498,10 @@ export default function DualVisionAdminPage() {
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <Field label="Headline â€” Line 1 (gold gradient)">
+            <Field label="Headline -----" Line 1 (gold gradient)">
               <TextInput value={data.right.headline1} onChange={v => update('right.headline1', v)} placeholder="The AI Intelligence" />
             </Field>
-            <Field label="Headline â€” Line 2 (white bold)">
+            <Field label="Headline -----" Line 2 (white bold)">
               <TextInput value={data.right.headline2} onChange={v => update('right.headline2', v)} placeholder="Layer Unlocked" />
             </Field>
           </div>
@@ -520,7 +520,7 @@ export default function DualVisionAdminPage() {
             label="Header Image"
             value={data.right.imageSrc}
             onChange={v => update('right.imageSrc', v)}
-            hint="Ideal size: 1200Ã—600px. Shows at top of the right (gold) panel."
+            hint="Ideal size: 1200---600px. Shows at top of the right (gold) panel."
           />
           <Field label="Image Alt Text (SEO)">
             <TextInput value={data.right.imageAlt} onChange={v => update('right.imageAlt', v)} placeholder="Flowtaris AI intelligence layer..." />
@@ -528,14 +528,14 @@ export default function DualVisionAdminPage() {
 
           <div className="mt-5">
             <Label>Pillar Cards (max 3 recommended)</Label>
-            <p className="text-xs text-gray-400 mb-3">Same as the left side â€” tag, title, subtitle, description rows shown in gold styling.</p>
+            <p className="text-xs text-gray-400 mb-3">Same as the left side -----" tag, title, subtitle, description rows shown in gold styling.</p>
             <PillarEditor pillars={data.right.pillars} onChange={v => update('right.pillars', v)} color="amber" />
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 4: BOTTOM STRIP â”€â”€ */}
+        {/* --"-----"--- SECTION 4: BOTTOM STRIP --"-----"--- */}
         <Section title="Bottom Unifying Strip" description="The text and stats bar shown below both panels" icon={Layers} color="emerald">
-          <Field label="Unifying statement" hint="This ties both sides together. Appears bottom-left. 2â€“3 sentences.">
+          <Field label="Unifying statement" hint="This ties both sides together. Appears bottom-left. 2-----"3 sentences.">
             <TextArea value={data.unifyingText} onChange={v => update('unifyingText', v)} rows={3} />
           </Field>
           <div className="mt-2">
@@ -556,7 +556,7 @@ export default function DualVisionAdminPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Savingâ€¦
+                Saving-------
               </>
             ) : (
               <>

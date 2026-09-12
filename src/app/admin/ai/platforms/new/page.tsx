@@ -173,7 +173,7 @@ export default function NewPlatformPage() {
           New Platform
         </h1>
         <a href="/admin/platforms" className="text-sm text-brand-cyan-600 hover:text-brand-cyan-700">
-          â† Back to Platforms
+          ------- Back to Platforms
         </a>
       </div>
 
@@ -209,7 +209,7 @@ export default function NewPlatformPage() {
           options={MATURITY_OPTIONS}
         />
         <SimpleInput
-          label="Logo Emoji (e.g., ðŸ’», ðŸ“Š, âš¡)"
+          label="Logo Emoji (e.g., ----'--, ----"--, ------)"
           value={formData.logo_emoji}
           onChange={(e) => handleChange('logo_emoji', e.target.value)}
         />

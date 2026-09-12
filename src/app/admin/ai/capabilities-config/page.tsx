@@ -6,7 +6,7 @@ import {
   Settings, CheckSquare, Activity, FileText, Share2, Shield, Layout
 } from 'lucide-react'
 
-// â”€â”€ Shared primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Shared primitives --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
@@ -40,7 +40,7 @@ const Textarea = ({ value, onChange, placeholder, rows = 3 }: { value: string; o
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Collapsible Section Wrapper --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -90,7 +90,7 @@ function Section({
   )
 }
 
-// â”€â”€ Default Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Default Data --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const DEFAULT_HEADER = {
   eyebrow: 'Platform Capabilities',
@@ -101,18 +101,18 @@ const DEFAULT_HEADER = {
 }
 
 const DEFAULT_CAPABILITIES = [
-  { slug: 'genai-document-intelligence', category: 'Document Processing', name: 'GenAI Document Intelligence', accent: '#6366f1', problem: 'Finance teams lose 23 hours per week manually keying invoices, POs, and receipts into the ERP.', how: 'Our GenAI model extracts, classifies and validates every field across 140+ document types â€” at human-level context, machine-level speed.', metric: '99.4%', metricLabel: 'extraction accuracy across 2.1M documents processed', ctaLabel: 'See how it works', ctaUrl: '/capabilities/genai-document-intelligence' },
+  { slug: 'genai-document-intelligence', category: 'Document Processing', name: 'GenAI Document Intelligence', accent: '#6366f1', problem: 'Finance teams lose 23 hours per week manually keying invoices, POs, and receipts into the ERP.', how: 'Our GenAI model extracts, classifies and validates every field across 140+ document types -----" at human-level context, machine-level speed.', metric: '99.4%', metricLabel: 'extraction accuracy across 2.1M documents processed', ctaLabel: 'See how it works', ctaUrl: '/capabilities/genai-document-intelligence' },
   { slug: 'autonomous-workflow-engine', category: 'Process Automation', name: 'Autonomous Workflow Engine', accent: '#f59e0b', problem: 'Exception queues grow faster than your team can clear them, stalling approvals for days.', how: 'Flowtaris maps every approval path, learns from past decisions, and auto-resolves exceptions using configurable rule trees and AI judgement.', metric: '91%', metricLabel: 'of exceptions auto-resolved without human touch', ctaLabel: 'See how it works', ctaUrl: '/capabilities/autonomous-workflow-engine' },
-  { slug: 'predictive-analytics', category: 'Finance Intelligence', name: 'Predictive Analytics', accent: '#10b981', problem: 'Cash flow surprises kill quarter-ends. By the time the ERP shows the gap, it is already too late.', how: 'We train rolling forecast models on your historical transactions, GL patterns, and external signals â€” surfacing gaps 45 days before they materialise.', metric: '88%', metricLabel: 'forecast accuracy with 45-day early warning window', ctaLabel: 'See how it works', ctaUrl: '/capabilities/predictive-analytics' },
-  { slug: 'conversational-erp', category: 'Human-Computer Interaction', name: 'Conversational ERP Interface', accent: '#8b5cf6', problem: 'Your ERP system requires a certification to run a simple vendor aging report.', how: 'Ask in plain English. Flowtaris translates natural language into ERP queries, runs them, and returns structured answers â€” no training required.', metric: '74%', metricLabel: 'reduction in ERP-related support tickets in 60 days', ctaLabel: 'See how it works', ctaUrl: '/capabilities/conversational-erp' },
-  { slug: 'integration-health-monitoring', category: 'Observability', name: 'Integration Health Monitoring', accent: '#f43f5e', problem: 'Data sync failures between NetSuite and Coupa go undetected for hours, corrupting downstream reports.', how: 'We instrument every API call, data pipeline, and sync job with real-time health probes â€” alerting your team and auto-healing common failure patterns.', metric: '52m to 4m', metricLabel: 'mean time to detect across 340+ monitored integrations', ctaLabel: 'See how it works', ctaUrl: '/capabilities/integration-health-monitoring' },
-  { slug: 'ai-governance-compliance', category: 'Risk and Compliance', name: 'AI Governance and Compliance', accent: '#06b6d4', problem: 'Auditors ask how the AI made a decision. Most enterprise AI platforms have no answer.', how: 'Every AI action in Flowtaris produces an immutable, human-readable audit record â€” decision path, confidence score, data inputs, and user override log.', metric: '100%', metricLabel: 'decision traceability. SOC 2 Type II architecture.', ctaLabel: 'See how it works', ctaUrl: '/capabilities/ai-governance-compliance' },
+  { slug: 'predictive-analytics', category: 'Finance Intelligence', name: 'Predictive Analytics', accent: '#10b981', problem: 'Cash flow surprises kill quarter-ends. By the time the ERP shows the gap, it is already too late.', how: 'We train rolling forecast models on your historical transactions, GL patterns, and external signals -----" surfacing gaps 45 days before they materialise.', metric: '88%', metricLabel: 'forecast accuracy with 45-day early warning window', ctaLabel: 'See how it works', ctaUrl: '/capabilities/predictive-analytics' },
+  { slug: 'conversational-erp', category: 'Human-Computer Interaction', name: 'Conversational ERP Interface', accent: '#8b5cf6', problem: 'Your ERP system requires a certification to run a simple vendor aging report.', how: 'Ask in plain English. Flowtaris translates natural language into ERP queries, runs them, and returns structured answers -----" no training required.', metric: '74%', metricLabel: 'reduction in ERP-related support tickets in 60 days', ctaLabel: 'See how it works', ctaUrl: '/capabilities/conversational-erp' },
+  { slug: 'integration-health-monitoring', category: 'Observability', name: 'Integration Health Monitoring', accent: '#f43f5e', problem: 'Data sync failures between NetSuite and Coupa go undetected for hours, corrupting downstream reports.', how: 'We instrument every API call, data pipeline, and sync job with real-time health probes -----" alerting your team and auto-healing common failure patterns.', metric: '52m to 4m', metricLabel: 'mean time to detect across 340+ monitored integrations', ctaLabel: 'See how it works', ctaUrl: '/capabilities/integration-health-monitoring' },
+  { slug: 'ai-governance-compliance', category: 'Risk and Compliance', name: 'AI Governance and Compliance', accent: '#06b6d4', problem: 'Auditors ask how the AI made a decision. Most enterprise AI platforms have no answer.', how: 'Every AI action in Flowtaris produces an immutable, human-readable audit record -----" decision path, confidence score, data inputs, and user override log.', metric: '100%', metricLabel: 'decision traceability. SOC 2 Type II architecture.', ctaLabel: 'See how it works', ctaUrl: '/capabilities/ai-governance-compliance' },
 ]
 
 const CAP_ICONS = [FileText, CheckSquare, Activity, Share2, Settings, Shield]
 const CAP_COLORS = ['indigo', 'amber', 'emerald', 'violet', 'rose', 'cyan']
 
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Main Page --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 export default function CapabilitiesConfigPage() {
   const [header, setHeader] = useState(DEFAULT_HEADER)
@@ -174,7 +174,7 @@ export default function CapabilitiesConfigPage() {
       <div className="p-8 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-          <span>Loading Capabilities Section configurationâ€¦</span>
+          <span>Loading Capabilities Section configuration-------</span>
         </div>
       </div>
     )
@@ -191,7 +191,7 @@ export default function CapabilitiesConfigPage() {
           <h1 className="text-2xl font-black text-gray-900 dark:text-gray-50">Capabilities Config</h1>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 pl-13">
-          Manage the &ldquo;Here is exactly how we do it.&rdquo; section â€” section headline and all 6 capability cards.
+          Manage the &ldquo;Here is exactly how we do it.&rdquo; section -----" section headline and all 6 capability cards.
         </p>
       </div>
 
@@ -220,11 +220,11 @@ export default function CapabilitiesConfigPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label>Headline â€” Line 1 (white text)</Label>
+                <Label>Headline -----" Line 1 (white text)</Label>
                 <TextInput value={header.headline_1} onChange={v => setHeader(p => ({ ...p, headline_1: v }))} placeholder="Here is exactly" />
               </div>
               <div>
-                <Label>Headline â€” Line 2 (gradient colour)</Label>
+                <Label>Headline -----" Line 2 (gradient colour)</Label>
                 <TextInput value={header.headline_2} onChange={v => setHeader(p => ({ ...p, headline_2: v }))} placeholder="how we do it." />
               </div>
             </div>
@@ -239,7 +239,7 @@ export default function CapabilitiesConfigPage() {
           </div>
         </Section>
 
-        {/* 2â€“7. One collapsible per capability */}
+        {/* 2-----"7. One collapsible per capability */}
         {capabilities.map((cap, i) => {
           const Icon = CAP_ICONS[i]
           const color = CAP_COLORS[i]
@@ -316,7 +316,7 @@ export default function CapabilitiesConfigPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Savingâ€¦
+                Saving-------
               </>
             ) : (
               <>

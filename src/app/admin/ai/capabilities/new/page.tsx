@@ -188,7 +188,7 @@ export default function NewCapabilityPage() {
           New AI Capability
         </h1>
         <a href="/admin/capabilities" className="text-sm text-brand-cyan-600 hover:text-brand-cyan-700">
-          â† Back to Capabilities
+          ------- Back to Capabilities
         </a>
       </div>
 

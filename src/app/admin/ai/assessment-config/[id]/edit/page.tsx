@@ -93,7 +93,7 @@ export default function NewAssessmentConfigPage() {
           New Assessment Config
         </h1>
         <a href="/admin/assessment-config" className="text-sm text-brand-cyan-600 hover:text-brand-cyan-700">
-          â† Back to Assessment Configs
+          ------- Back to Assessment Configs
         </a>
       </div>
 

@@ -7,7 +7,7 @@ import {
   Users, Sparkles, Shield, Cpu, ExternalLink, RefreshCw, FileText, ArrowRight, Eye
 } from 'lucide-react'
 
-// â”€â”€ Shared UI Primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Shared UI Primitives --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label htmlFor={htmlFor} className="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider mb-1.5">
@@ -56,7 +56,7 @@ const TextArea = ({
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Collapsible Section Wrapper --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function Section({
   title, description, icon: Icon, color = 'amber', defaultOpen = true, children,
@@ -108,7 +108,7 @@ function Section({
   )
 }
 
-// â”€â”€ Image Upload Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Image Upload Component --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function ImageUpload({
   label, value, onChange, hint,
@@ -174,7 +174,7 @@ function ImageUpload({
   )
 }
 
-// â”€â”€ Default Data Structure â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Default Data Structure --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 export const DEFAULT_ABOUT_DATA = {
   hero: {
@@ -205,7 +205,7 @@ export const DEFAULT_ABOUT_DATA = {
     statements: [
       {
         title: 'Every invoice should understand itself.',
-        description: "Not just extracted â€” understood. Context, intent, exceptions, and nuance. That's the difference between legacy template OCR and our GenAI models. It is the difference between 70% automation and 95%."
+        description: "Not just extracted -----" understood. Context, intent, exceptions, and nuance. That's the difference between legacy template OCR and our GenAI models. It is the difference between 70% automation and 95%."
       },
       {
         title: 'Your ERP should answer your questions.',
@@ -249,8 +249,8 @@ export const DEFAULT_ABOUT_DATA = {
     rows: [
       { label: 'ERP Knowledge', generic: 'Read the API docs', ours: 'Built 200+ customizations' },
       { label: 'Finance DNA', generic: 'Trained on public data', ours: 'Built by former controllers & Big 4' },
-      { label: 'Accuracy', generic: '70â€“85% (Template OCR)', ours: '99.5%+ (GenAI Understanding)' },
-      { label: 'Implementation', generic: '12â€“18 months', ours: '<90 days to first value' },
+      { label: 'Accuracy', generic: '70-----"85% (Template OCR)', ours: '99.5%+ (GenAI Understanding)' },
+      { label: 'Implementation', generic: '12-----"18 months', ours: '<90 days to first value' },
       { label: 'Integration', generic: 'Surface connectors', ours: 'Native to NetSuite & Coupa' },
       { label: 'Governance', generic: 'In roadmap', ours: 'EU AI Act ready, full audit trails' }
     ]
@@ -315,7 +315,7 @@ export const DEFAULT_ABOUT_DATA = {
 
 export type AboutConfigData = typeof DEFAULT_ABOUT_DATA
 
-// â”€â”€ Main Page Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Main Page Component --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 export default function AboutConfigPage() {
   const [data, setData] = useState<AboutConfigData>(DEFAULT_ABOUT_DATA)
@@ -413,7 +413,7 @@ export default function AboutConfigPage() {
       <div className="p-12 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-amber-500 rounded-full animate-spin" />
-          <span>Loading About page configurationâ€¦</span>
+          <span>Loading About page configuration-------</span>
         </div>
       </div>
     )
@@ -440,7 +440,7 @@ export default function AboutConfigPage() {
           className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition-colors shrink-0"
         >
           <Eye className="w-3.5 h-3.5" />
-          View Live Page â†—
+          View Live Page ------
         </a>
       </div>
 
@@ -458,7 +458,7 @@ export default function AboutConfigPage() {
 
       <form onSubmit={e => { e.preventDefault(); handleSave() }}>
 
-        {/* â”€â”€ SECTION 1: HERO & METRICS â”€â”€ */}
+        {/* --"-----"--- SECTION 1: HERO & METRICS --"-----"--- */}
         <Section title="Section 1: Hero & Key Metrics" description="Top banner with conviction statement, CTAs, and 4 high-impact metric counters" icon={Sparkles} color="amber">
           <Field label="Eyebrow Badge Text" hint="Shown in gold caps at the top of the hero">
             <TextInput value={data.hero.eyebrow} onChange={v => update('hero.eyebrow', v)} placeholder="The Intelligence Engine" />
@@ -552,7 +552,7 @@ export default function AboutConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 2: THE MANIFESTO â”€â”€ */}
+        {/* --"-----"--- SECTION 2: THE MANIFESTO --"-----"--- */}
         <Section title="Section 2: The Manifesto" description="3 core enterprise tenets paired with platform screenshot" icon={FileText} color="blue">
           <ImageUpload
             label="Manifesto Graphic Image"
@@ -598,7 +598,7 @@ export default function AboutConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 3: THE ORIGIN STORY â”€â”€ */}
+        {/* --"-----"--- SECTION 3: THE ORIGIN STORY --"-----"--- */}
         <Section title="Section 3: The Origin Story" description="From Consulting to Product timeline steps ('19, '23, '24, '25)" icon={Sparkles} color="emerald">
           <Field label="Section Title">
             <TextInput value={data.origin_story.title} onChange={v => update('origin_story.title', v)} placeholder="From Consulting to Product" />
@@ -681,7 +681,7 @@ export default function AboutConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 4: THE UNFAIR ADVANTAGE â”€â”€ */}
+        {/* --"-----"--- SECTION 4: THE UNFAIR ADVANTAGE --"-----"--- */}
         <Section title="Section 4: The Unfair Advantage (Comparison Matrix)" description="Direct comparison table vs generic horizontal AI vendors" icon={Shield} color="purple">
           <Field label="Section Title">
             <TextInput value={data.unfair_advantage.title} onChange={v => update('unfair_advantage.title', v)} placeholder="The Unfair Advantage" />
@@ -766,7 +766,7 @@ export default function AboutConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 5: ZERO-TRUST ARCHITECTURE & PRINCIPLES â”€â”€ */}
+        {/* --"-----"--- SECTION 5: ZERO-TRUST ARCHITECTURE & PRINCIPLES --"-----"--- */}
         <Section title="Section 5: Zero-Trust Architecture & Principles" description="3-layer architecture cards & 4 non-negotiable principles" icon={Cpu} color="blue">
           <Field label="Architecture Title">
             <TextInput value={data.architecture.title} onChange={v => update('architecture.title', v)} placeholder="Zero-Trust Architecture." />
@@ -851,7 +851,7 @@ export default function AboutConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 6: THE PEOPLE â”€â”€ */}
+        {/* --"-----"--- SECTION 6: THE PEOPLE --"-----"--- */}
         <Section title="Section 6: The People ('Built by the Best')" description="Team persona cards highlighting finance, ML, and platform experts" icon={Users} color="amber">
           <Field label="Section Title">
             <TextInput value={data.team.title} onChange={v => update('team.title', v)} placeholder="Built by the Best" />
@@ -951,7 +951,7 @@ export default function AboutConfigPage() {
           </div>
         </Section>
 
-        {/* â”€â”€ SECTION 7: THE BRIDGE TO .COM â”€â”€ */}
+        {/* --"-----"--- SECTION 7: THE BRIDGE TO .COM --"-----"--- */}
         <Section title="Section 7: The Bridge to .com" description="Bottom banner linking back to Flowtaris parent organization" icon={ArrowRight} color="slate">
           <ImageUpload
             label="Flowtaris Logo Image"
@@ -988,7 +988,7 @@ export default function AboutConfigPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving Changesâ€¦
+                Saving Changes-------
               </>
             ) : (
               <>

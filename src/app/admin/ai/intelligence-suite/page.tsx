@@ -6,7 +6,7 @@ import {
   Zap, BarChart2, TrendingDown, FlaskConical, Layout, BarChart3, Trash2, Plus
 } from 'lucide-react'
 
-// â”€â”€ Shared primitives â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Shared primitives --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const Label = ({ children }: { children: React.ReactNode }) => (
   <label className="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1.5">
@@ -40,7 +40,7 @@ const Textarea = ({ value, onChange, placeholder, rows = 3 }: { value: string; o
   />
 )
 
-// â”€â”€ Collapsible Section Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Collapsible Section Wrapper --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -86,14 +86,14 @@ function Section({
   )
 }
 
-// â”€â”€ Default Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Default Data --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 const DEFAULT_TOOLS = [
   {
     id: 'assessment', tab: 'AI Readiness Score',
     tagline: 'AI Readiness Assessment', ctaLabel: 'Take the Assessment', ctaHref: '/assessment',
     headline: '6 questions. Your personalized AI roadmap.',
-    description: 'Answer 6 questions about your ERP stack, pain points, and team â€” receive a scored roadmap categorising your highest-ROI opportunities into Quick Wins, Strategic plays, and Innovation bets.',
+    description: 'Answer 6 questions about your ERP stack, pain points, and team -----" receive a scored roadmap categorising your highest-ROI opportunities into Quick Wins, Strategic plays, and Innovation bets.',
     metrics: [
       { v: '~4 min', l: 'Completion' }, { v: '6', l: 'Steps' },
       { v: '3', l: 'Score Tiers' }, { v: 'Free', l: 'Cost' },
@@ -113,7 +113,7 @@ const DEFAULT_TOOLS = [
     id: 'inaction', tab: 'Cost of Waiting',
     tagline: 'Cost of Inaction Engine', ctaLabel: 'Calculate My Delay Cost', ctaHref: '/cost-of-inaction',
     headline: 'Every day of delay costs money. See yours live.',
-    description: 'Built for CFOs and board decks. Calculates monthly revenue leakage, compliance risk exposure, 3-year competitive gap, and the cost of a 6-month delay â€” in your local currency.',
+    description: 'Built for CFOs and board decks. Calculates monthly revenue leakage, compliance risk exposure, 3-year competitive gap, and the cost of a 6-month delay -----" in your local currency.',
     metrics: [
       { v: 'Live', l: 'Leakage Calc' }, { v: 'Quantified', l: 'Compliance' },
       { v: 'Included', l: '3-Yr Model' }, { v: 'Board PDF', l: 'Output' },
@@ -123,7 +123,7 @@ const DEFAULT_TOOLS = [
     id: 'lab', tab: 'Innovation Lab',
     tagline: 'Flowtaris Innovation Lab', ctaLabel: 'Explore the Lab', ctaHref: '/innovation-lab',
     headline: 'Where R&D becomes your competitive edge.',
-    description: '6 active research tracks â€” from Conversational ERP at 92% NL-to-SQL accuracy to GenAI Document Understanding at 99.5%+ to Agentic Workflow Orchestration. Battle-tested before reaching your ERP.',
+    description: '6 active research tracks -----" from Conversational ERP at 92% NL-to-SQL accuracy to GenAI Document Understanding at 99.5%+ to Agentic Workflow Orchestration. Battle-tested before reaching your ERP.',
     metrics: [
       { v: '6 active', l: 'Research Tracks' }, { v: '99.5%+', l: 'Doc AI' },
       { v: '15+', l: 'Languages' }, { v: '78%', l: 'Agentic' },
@@ -135,7 +135,7 @@ const DEFAULT_HEADER = {
   eyebrow: 'The Flowtaris Intelligence Suite',
   headline_1: 'Stop guessing.',
   headline_2: 'Start calculating.',
-  description: "Four enterprise-grade tools â€” built on real benchmarks â€” that prove AI's financial impact before you sign a contract.",
+  description: "Four enterprise-grade tools -----" built on real benchmarks -----" that prove AI's financial impact before you sign a contract.",
 }
 
 const TOOL_ICONS = [Zap, BarChart2, TrendingDown, FlaskConical]
@@ -150,7 +150,7 @@ const DEFAULT_STATS = [
   { v: 'Free',  l: 'All Tools, No Signup' },
 ]
 
-// â”€â”€ Main Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// --"-----"--- Main Page --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
 
 export default function IntelligenceSuiteConfigPage() {
   const [header, setHeader] = useState(DEFAULT_HEADER)
@@ -227,7 +227,7 @@ export default function IntelligenceSuiteConfigPage() {
       <div className="p-8 flex items-center justify-center min-h-64">
         <div className="flex items-center gap-3 text-gray-500">
           <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-          <span>Loading Intelligence Suite configurationâ€¦</span>
+          <span>Loading Intelligence Suite configuration-------</span>
         </div>
       </div>
     )
@@ -244,7 +244,7 @@ export default function IntelligenceSuiteConfigPage() {
           <h1 className="text-2xl font-black text-gray-900 dark:text-gray-50">Intelligence Suite Config</h1>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 pl-13">
-          Manage the &ldquo;Stop guessing. Start calculating.&rdquo; section â€” section headline and all 4 tool tabs.
+          Manage the &ldquo;Stop guessing. Start calculating.&rdquo; section -----" section headline and all 4 tool tabs.
         </p>
       </div>
 
@@ -273,11 +273,11 @@ export default function IntelligenceSuiteConfigPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label>Headline â€” Line 1 (white text)</Label>
+                <Label>Headline -----" Line 1 (white text)</Label>
                 <TextInput value={header.headline_1} onChange={v => setHeader(p => ({ ...p, headline_1: v }))} placeholder="Stop guessing." />
               </div>
               <div>
-                <Label>Headline â€” Line 2 (gradient colour)</Label>
+                <Label>Headline -----" Line 2 (gradient colour)</Label>
                 <TextInput value={header.headline_2} onChange={v => setHeader(p => ({ ...p, headline_2: v }))} placeholder="Start calculating." />
               </div>
             </div>
@@ -288,7 +288,7 @@ export default function IntelligenceSuiteConfigPage() {
           </div>
         </Section>
 
-        {/* 2â€“5. One collapsible per tool tab */}
+        {/* 2-----"5. One collapsible per tool tab */}
         {tools.map((tool, i) => {
           const Icon = TOOL_ICONS[i]
           const color = TOOL_COLORS[i]
@@ -395,7 +395,7 @@ export default function IntelligenceSuiteConfigPage() {
             {saving ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Savingâ€¦
+                Saving-------
               </>
             ) : (
               <>
