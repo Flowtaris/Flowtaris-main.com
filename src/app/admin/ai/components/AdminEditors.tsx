@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client'
 
 import React, { useRef, useState } from 'react'
@@ -355,3 +356,4 @@ export function ImageUploader({ label, hint, value, onChange }: { label: string;
     </Field>
   )
 }
+

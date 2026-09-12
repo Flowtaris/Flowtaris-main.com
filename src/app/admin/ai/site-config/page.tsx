@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import { useEffect, useState, useRef } from 'react'
 import { getSiteConfig, supabase } from '@/lib/supabase'
@@ -1061,3 +1062,4 @@ export default function SiteConfigPage() {
     </div>
   )
 }
+

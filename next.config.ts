@@ -22,7 +22,6 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
-    turbopack: false,
     serverActions: {
       bodySizeLimit: '10mb',
     },
