@@ -39,11 +39,17 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set('Content-Security-Policy', strictCspHeader)
 
   // 3. Initialize response with the new headers
-  let supabaseResponse = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  })
+  let supabaseResponse = request.headers.get('host') === 'admin.pixenox.com'
+    ? NextResponse.rewrite(new URL(`/admin${request.nextUrl.pathname}`, request.url), {
+        request: {
+          headers: requestHeaders,
+        },
+      })
+    : NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      })
   
   // Set the CSP on the response as well
   supabaseResponse.headers.set('Content-Security-Policy', strictCspHeader)
@@ -61,11 +67,17 @@ export async function proxy(request: NextRequest) {
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
           // Re-instantiate the response with updated cookies, ensuring requestHeaders are still passed
-          supabaseResponse = NextResponse.next({
-            request: {
-              headers: requestHeaders,
-            },
-          })
+          supabaseResponse = request.headers.get('host') === 'admin.pixenox.com'
+            ? NextResponse.rewrite(new URL(`/admin${request.nextUrl.pathname}`, request.url), {
+                request: {
+                  headers: requestHeaders,
+                },
+              })
+            : NextResponse.next({
+                request: {
+                  headers: requestHeaders,
+                },
+              })
           // Re-apply CSP to the new response
           supabaseResponse.headers.set('Content-Security-Policy', strictCspHeader)
           supabaseResponse.headers.set('x-nonce', nonce)
