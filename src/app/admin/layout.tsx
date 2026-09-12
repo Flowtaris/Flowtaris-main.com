@@ -15,8 +15,14 @@ export default async function AdminLayout({
     redirect('/admin-login')
   }
   
-  // For role-based access, you might fetch from a users table
-  const role = user.user_metadata?.role || 'super_admin'
+  // Enforce role-based access
+  const role = user.user_metadata?.role;
+  
+  if (role !== 'admin' && role !== 'super_admin') {
+    // If they log in but don't have an admin role, redirect them out
+    redirect('/')
+  }
+  
   const userName = user.email || 'Admin User'
 
   return (
