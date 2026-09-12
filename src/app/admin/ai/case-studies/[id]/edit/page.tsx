@@ -19,9 +19,9 @@ function SortableCaseStudyItem({ cs, onDelete }: { cs: any; onDelete: () => void
 
   const content = cs.content_data || {}
   const heroImage = content.heroImage || null
-  const sector = content.sector || '"'
-  const timeline = content.timeline || '"'
-  const teamSize = content.teamSize || '"'
+  const sector = content.sector || 'â€”'
+  const timeline = content.timeline || 'â€”'
+  const teamSize = content.teamSize || 'â€”'
 
   return (
     <div ref={setNodeRef} style={style} className={`bg-white dark:bg-gray-800 rounded-2xl border ${isDragging ? 'border-violet-500 shadow-xl opacity-80' : 'border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md'} transition overflow-hidden`}>
@@ -57,7 +57,7 @@ function SortableCaseStudyItem({ cs, onDelete }: { cs: any; onDelete: () => void
                 </span>
                 {content.confidential && (
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-2 py-0.5 rounded-md">
-                     Confidential
+                    â­ Confidential
                   </span>
                 )}
               </div>
@@ -118,7 +118,7 @@ export default function CaseStudiesAdmin() {
     badgeText: 'VERIFIED CUSTOMER RESULTS',
     titleLine1: 'Real Transformations.',
     titleLine2: 'Measured Results.',
-    subtitle: 'Three enterprise deployments across NetSuite, SAP, Coupa, and Workday " with real before/after data, full technical architectures, and team testimonials. Client names anonymized per confidentiality agreements.',
+    subtitle: 'Three enterprise deployments across NetSuite, SAP, Coupa, and Workday â€” with real before/after data, full technical architectures, and team testimonials. Client names anonymized per confidentiality agreements.',
     metric1Value: '$27M+', metric1Label: 'Combined Value Delivered',
     metric2Value: '5', metric2Label: 'Enterprise Deployments',
     metric3Value: '<8 wks', metric3Label: 'Average Time to Value',
@@ -162,7 +162,7 @@ export default function CaseStudiesAdmin() {
           badgeText: 'VERIFIED CUSTOMER RESULTS',
           titleLine1: 'Real Transformations.',
           titleLine2: 'Measured Results.',
-          subtitle: 'Three enterprise deployments across NetSuite, SAP, Coupa, and Workday " with real before/after data, full technical architectures, and team testimonials. Client names anonymized per confidentiality agreements.',
+          subtitle: 'Three enterprise deployments across NetSuite, SAP, Coupa, and Workday â€” with real before/after data, full technical architectures, and team testimonials. Client names anonymized per confidentiality agreements.',
           metric1Value: '$27M+', metric1Label: 'Combined Value Delivered',
           metric2Value: '5', metric2Label: 'Enterprise Deployments',
           metric3Value: '<8 wks', metric3Label: 'Average Time to Value',
@@ -254,7 +254,7 @@ export default function CaseStudiesAdmin() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Case Studies</h1>
-          <p className="text-gray-500 dark:text-gray-400">{caseStudies.length} case {caseStudies.length === 1 ? 'study' : 'studies'} in the database " drag to reorder.</p>
+          <p className="text-gray-500 dark:text-gray-400">{caseStudies.length} case {caseStudies.length === 1 ? 'study' : 'studies'} in the database â€” drag to reorder.</p>
         </div>
         <Link 
           href="/admin/case-studies/new"

@@ -96,7 +96,7 @@ export default function NewRoiConfigPage() {
           New ROI Config
         </h1>
         <a href="/admin/roi-config" className="text-sm text-brand-cyan-600 hover:text-brand-cyan-700">
-           Back to ROI Configs
+          â† Back to ROI Configs
         </a>
       </div>
 
