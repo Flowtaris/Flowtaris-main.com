@@ -10,7 +10,7 @@ type FAQ = { question: string; answer: string }
 type Section = { id: string; title: string; content: string; image?: string }
 
 
-// --"-----"-----"--- Page --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
+//  Page 
 
 export default function NewInsightPage() {
   const router = useRouter()
@@ -93,9 +93,9 @@ export default function NewInsightPage() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">New Insight Article</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Fill in all fields -----" every section reflects in the live article page.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Fill in all fields  every section reflects in the live article page.</p>
         </div>
-        <a href="/admin/insights" className="text-sm text-violet-600 hover:underline">------- Back to Insights</a>
+        <a href="/admin/insights" className="text-sm text-violet-600 hover:underline"> Back to Insights</a>
       </div>
 
       {error && <div className="bg-red-50 dark:bg-red-900/40 border border-red-400 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg mb-6 text-sm">{error}</div>}
@@ -103,9 +103,9 @@ export default function NewInsightPage() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
 
-        {/* --"-----"--- SECTION: CORE IDENTITY --"-----"--- */}
+        {/*  SECTION: CORE IDENTITY  */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-5">----"--- Core Identity</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-5"> Core Identity</h2>
 
           <Field label="Article Title *" hint="Appears as the large H1 heading on the article page and as the browser tab title.">
             <input value={title} onChange={e => setTitle(e.target.value)} required className={inputCls} placeholder="e.g. State of AI Automation in Enterprise Finance 2025" />
@@ -142,9 +142,9 @@ export default function NewInsightPage() {
           </div>
         </div>
 
-        {/* --"-----"--- SECTION: VISUALS --"-----"--- */}
+        {/*  SECTION: VISUALS  */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400 mb-5">------------- Hero Image</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-sky-600 dark:text-sky-400 mb-5"> Hero Image</h2>
 
           <ImageUploader 
             label="Image URL" 
@@ -154,9 +154,9 @@ export default function NewInsightPage() {
           />
         </div>
 
-        {/* --"-----"--- SECTION: AUTHOR --"-----"--- */}
+        {/*  SECTION: AUTHOR  */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-5">----'-- Author Details</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-5"> Author Details</h2>
 
           <Field label="Author Name" hint="Shown below the article title and on the article card (e.g. 'Dr. Sarah Chen').">
             <input value={author} onChange={e => setAuthor(e.target.value)} className={inputCls} placeholder="e.g. Dr. Sarah Chen" />
@@ -171,9 +171,9 @@ export default function NewInsightPage() {
           </Field>
         </div>
 
-        {/* --"-----"--- SECTION: CONTENT --"-----"--- */}
+        {/*  SECTION: CONTENT  */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-5">----"-- Article Content</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-5"> Article Content</h2>
 
           <Field label="Excerpt / Summary *" hint="The preview text shown on the article card on the main Insights page. Keep it to 2-3 compelling sentences (max 300 chars).">
             <textarea value={excerpt} onChange={e => setExcerpt(e.target.value)} required rows={3} className={textareaCls} placeholder="A compelling 2-3 sentence summary that appears on the insight card..." />
@@ -184,9 +184,9 @@ export default function NewInsightPage() {
           <SectionsEditor value={sections} onChange={setSections} />
         </div>
 
-        {/* --"-----"--- SECTION: SEO & AEO --"-----"--- */}
+        {/*  SECTION: SEO & AEO  */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
-          <h2 className="text-sm font-bold uppercase tracking-widest text-rose-600 dark:text-rose-400 mb-5">----"-- SEO & Answer Engine Optimization (AEO)</h2>
+          <h2 className="text-sm font-bold uppercase tracking-widest text-rose-600 dark:text-rose-400 mb-5"> SEO & Answer Engine Optimization (AEO)</h2>
 
           <FaqEditor value={faqs} onChange={setFaqs} />
 

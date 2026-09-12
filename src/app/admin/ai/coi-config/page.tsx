@@ -6,7 +6,7 @@ import {
   Sliders, Database, TrendingUp, AlertTriangle, Shield, FileText, DollarSign, Activity, Target
 } from 'lucide-react'
 
-// --"-----"--- Shared UI Primitives --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
+//  Shared UI Primitives 
 
 const Label = ({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) => (
   <label htmlFor={htmlFor} className="block text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider mb-1.5">
@@ -56,7 +56,7 @@ const Textarea = ({
   />
 )
 
-// --"-----"--- Collapsible Section Wrapper --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"---
+//  Collapsible Section Wrapper 
 
 function Section({
   title, description, icon: Icon, color = 'blue', defaultOpen = true, children,
@@ -222,7 +222,7 @@ export default function AdminCOIConfigPage() {
         </div>
       )}
 
-      {/* --"-----"--- GLOBAL SHUTDOWN --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  GLOBAL SHUTDOWN  */}
       <div className="bg-white dark:bg-gray-800 border border-red-200 dark:border-red-900/50 rounded-2xl p-6 shadow-sm mb-6 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
@@ -250,7 +250,7 @@ export default function AdminCOIConfigPage() {
         </button>
       </div>
 
-      {/* --"-----"--- SECTION 1: DEFAULT INPUT VALUES --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 1: DEFAULT INPUT VALUES  */}
       <Section
         title="Default Operational Metrics"
         description="Set the default values for the slider inputs when a user lands on the page."
@@ -291,7 +291,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 2: DEFAULT RISK FACTORS --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 2: DEFAULT RISK FACTORS  */}
       <Section
         title="Default Risk Factors"
         description="Set the default selections for market pressure and compliance requirements."
@@ -337,7 +337,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 3: PLATFORMS --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 3: PLATFORMS  */}
       <Section
         title="Platforms"
         description="Configure the list of supported ERP platforms."
@@ -391,7 +391,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 4: RIGHT PANEL - SYNTHESIS --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 4: RIGHT PANEL - SYNTHESIS  */}
       <Section title="Executive Synthesis" description="Configure the top narrative paragraph on the right side." icon={FileText} color="blue" defaultOpen={false}>
         <div className="space-y-4 pt-2">
           <Field label="Heading">
@@ -406,7 +406,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 5: RIGHT PANEL - MAIN HEADER --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 5: RIGHT PANEL - MAIN HEADER  */}
       <Section title="Main Financial Leakage Header" description="Configure the massive number headline and disclaimers." icon={DollarSign} color="amber" defaultOpen={false}>
         <div className="space-y-4 pt-2">
           <Field label="Eyebrow Text (Above Number)">
@@ -421,7 +421,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 6: RIGHT PANEL - BREAKDOWN CARDS --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 6: RIGHT PANEL - BREAKDOWN CARDS  */}
       <Section title="Component Breakdown Cards" description="Configure the three metric cards." icon={Activity} color="indigo" defaultOpen={false}>
         <div className="space-y-8 pt-2">
           <Field label="Section Heading">
@@ -450,7 +450,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 7: RIGHT PANEL - COST OF DELAY --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 7: RIGHT PANEL - COST OF DELAY  */}
       <Section title="Cost of Delay Scenario" description="Configure the time machine / scenario section." icon={AlertCircle} color="slate" defaultOpen={false}>
         <div className="space-y-4 pt-2">
           <Field label="Heading"><TextInput value={data.rightSide.costOfDelay.heading} onChange={v => setData(d => ({ ...d, rightSide: { ...d.rightSide, costOfDelay: { ...d.rightSide.costOfDelay, heading: v } } }))} /></Field>
@@ -462,7 +462,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- SECTION 8: RIGHT PANEL - CTA --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  SECTION 8: RIGHT PANEL - CTA  */}
       <Section title="Final Call to Action" description="Configure the booking request section." icon={Target} color="emerald" defaultOpen={false}>
         <div className="space-y-4 pt-2">
           <Field label="Heading"><TextInput value={data.rightSide.cta.heading} onChange={v => setData(d => ({ ...d, rightSide: { ...d.rightSide, cta: { ...d.rightSide.cta, heading: v } } }))} /></Field>
@@ -471,7 +471,7 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/* --"-----"--- Sticky Save Bar --"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"-----"--- */}
+      {/*  Sticky Save Bar  */}
       <div className="fixed bottom-0 left-0 lg:left-64 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-end z-40">
         <div className="max-w-5xl w-full mx-auto flex items-center justify-between">
           <div className="text-sm text-gray-500 font-medium">
