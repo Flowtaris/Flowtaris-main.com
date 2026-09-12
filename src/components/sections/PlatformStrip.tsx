@@ -47,7 +47,7 @@ export function PlatformStrip({
 
     const absD = Math.abs(dist)
 
-    // Visibility cutoff — only show ±3 from center
+    // Visibility cutoff  only show 3 from center
     if (absD > 3) return { display: 'none' as const }
 
     const translateX  = dist * 180     // horizontal spacing (px)

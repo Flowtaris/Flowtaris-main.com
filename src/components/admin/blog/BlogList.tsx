@@ -7,7 +7,7 @@ import { Blog } from '@/types/database'
 import { Plus, ArrowRight, Trash2, Edit3, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
-// ─── Add Blog Form ────────────────────────────────────────────────
+//  Add Blog Form 
 function AddBlogForm({ onAdded }: { onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
@@ -84,7 +84,7 @@ function AddBlogForm({ onAdded }: { onAdded: () => void }) {
           className="flex items-center gap-1.5 bg-navy-950 hover:bg-navy-800 text-white text-sm px-4 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
         >
           {isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Plus className="w-3.5 h-3.5" />}
-          {isPending ? 'Creating…' : 'Create Blog Post'}
+          {isPending ? 'Creating' : 'Create Blog Post'}
         </button>
         <button
           type="button"
@@ -98,7 +98,7 @@ function AddBlogForm({ onAdded }: { onAdded: () => void }) {
   )
 }
 
-// ─── Blog Card ────────────────────────────────────────────────────
+//  Blog Card 
 function BlogCard({ blog, onDeleted }: { blog: Blog; onDeleted: () => void }) {
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
@@ -154,7 +154,7 @@ function BlogCard({ blog, onDeleted }: { blog: Blog; onDeleted: () => void }) {
   )
 }
 
-// ─── Main Component ──────────────────────────────────────────────────
+//  Main Component 
 export function BlogList({ initialBlogs }: { initialBlogs: Blog[] }) {
   const [blogs, setBlogs] = useState(initialBlogs)
   const router = useRouter()

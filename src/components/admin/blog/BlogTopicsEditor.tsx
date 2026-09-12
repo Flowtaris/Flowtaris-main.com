@@ -233,7 +233,7 @@ function TopicRow({ topic, onDeleted }: { topic: BlogTopic; onDeleted: () => voi
             className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded-lg font-medium disabled:opacity-50"
           >
             <Check className="w-3.5 h-3.5" />
-            {saving ? 'Saving…' : 'Save Changes'}
+            {saving ? 'Saving' : 'Save Changes'}
           </button>
           <button
             onClick={() => {
@@ -537,7 +537,7 @@ function AddTopicForm({ blogId, onAdded }: { blogId: string; onAdded: () => void
           className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded-lg font-medium disabled:opacity-50"
         >
           <Check className="w-3.5 h-3.5" />
-          {saving ? 'Adding…' : 'Save Topic'}
+          {saving ? 'Adding' : 'Save Topic'}
         </button>
         <button
           type="button"

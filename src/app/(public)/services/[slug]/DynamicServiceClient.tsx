@@ -76,9 +76,9 @@ export function DynamicServiceClient({
         }
       `}} />
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
+      {/* 
           1. THE HERO SECTION
-          ───────────────────────────────────────────────────────────────────────────── */}
+           */}
       <section 
         className="relative pt-[100px] pb-24 overflow-hidden transition-colors duration-500"
         style={{ backgroundColor: bgColor }}
@@ -134,9 +134,9 @@ export function DynamicServiceClient({
         </div>
       </section>
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
+      {/* 
           3. BENEFITS (WHY CHOOSE)
-          ───────────────────────────────────────────────────────────────────────────── */}
+           */}
       {whyChoose?.length > 0 && (
         <section id="benefits" className="py-24 bg-white">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
@@ -175,9 +175,9 @@ export function DynamicServiceClient({
         </section>
       )}
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
+      {/* 
           4. BUSINESS SUITE
-          ───────────────────────────────────────────────────────────────────────────── */}
+           */}
       {businessItems?.length > 0 && (
         <section 
           id="features" 
@@ -244,9 +244,9 @@ export function DynamicServiceClient({
         </section>
       )}
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
+      {/* 
           5. ERP ARCHITECTURE / METHODOLOGY
-          ───────────────────────────────────────────────────────────────────────────── */}
+           */}
       {erpCards?.length > 0 && (
         <section id="methodology" className="py-28 bg-[#F8FAFC] border-t border-slate-200">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
@@ -299,9 +299,9 @@ export function DynamicServiceClient({
         </section>
       )}
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
+      {/* 
           6. DEEP MODULE EXPERTISE
-          ───────────────────────────────────────────────────────────────────────────── */}
+           */}
       {deepModules?.length > 0 && (
         <section className="py-28 bg-white border-t border-slate-200">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-16">

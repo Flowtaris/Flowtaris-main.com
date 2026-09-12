@@ -23,13 +23,13 @@ const leadSchema = z.object({
 // Rate limiting: simple in-memory for edge (replace with Upstash for production)
 const submissions = new Map<string, number>()
 
-// ─── GET handler removed for security (SEC-03) ───
+//  GET handler removed for security (SEC-03) 
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
 
-    // ── Validate payload using Zod ───────────────────────────────────────
+    //  Validate payload using Zod 
     const parsedResult = leadSchema.safeParse(body)
     if (!parsedResult.success) {
       return NextResponse.json({ error: parsedResult.error.issues[0]?.message || 'Validation failed' }, { status: 400 })
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       hcaptcha_token,
     } = parsedResult.data
 
-    // ── Rate limiting — 20 second cooldown per IP ──────────────────────
+    //  Rate limiting  20 second cooldown per IP 
     const ip = req.headers.get('x-forwarded-for') ?? req.headers.get('x-real-ip') ?? 'unknown'
     const now = Date.now()
     const last = submissions.get(ip) ?? 0
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     }
     submissions.set(ip, now)
 
-    // ── hCaptcha verification ──────────────────────────────────────────
+    //  hCaptcha verification 
     if (hcaptcha_token && process.env.HCAPTCHA_SECRET_KEY) {
       const verifyRes = await fetch('https://hcaptcha.com/siteverify', {
         method: 'POST',
@@ -68,16 +68,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // ── Send notification email via Resend ────────────────────────────
+    //  Send notification email via Resend 
     if (process.env.RESEND_API_KEY) {
       const emailHtml = `
         <h2>New ${form_type} from Flowtaris.com</h2>
         <table cellpadding="8" style="border-collapse:collapse">
           <tr><td><strong>Name</strong></td><td>${name}</td></tr>
-          <tr><td><strong>Company</strong></td><td>${company ?? '—'}</td></tr>
+          <tr><td><strong>Company</strong></td><td>${company ?? ''}</td></tr>
           <tr><td><strong>Email</strong></td><td>${work_email}</td></tr>
-          <tr><td><strong>Phone</strong></td><td>${phone ?? '—'}</td></tr>
-          <tr><td><strong>Project Details</strong></td><td>${question ?? '—'}</td></tr>
+          <tr><td><strong>Phone</strong></td><td>${phone ?? ''}</td></tr>
+          <tr><td><strong>Project Details</strong></td><td>${question ?? ''}</td></tr>
         </table>
       `
 
@@ -90,7 +90,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           from: process.env.NOTIFICATION_EMAIL_FROM ?? 'noreply@flowtaris.com',
           to: (process.env.NOTIFICATION_EMAIL_TO ?? 'info@flowtaris.com').split(',').map(email => email.trim()),
-          subject: `New ${form_type} — ${name} from ${company ?? 'Unknown Company'}`,
+          subject: `New ${form_type}  ${name} from ${company ?? 'Unknown Company'}`,
           html: emailHtml,
         }),
       })

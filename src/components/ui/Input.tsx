@@ -1,9 +1,9 @@
 import { forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 
-/* ════════════════════════════════════════════════════════
+/* 
    INPUT
-   ════════════════════════════════════════════════════════ */
+    */
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
@@ -53,9 +53,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input'
 
-/* ════════════════════════════════════════════════════════
+/* 
    TEXTAREA
-   ════════════════════════════════════════════════════════ */
+    */
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
@@ -104,9 +104,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
 Textarea.displayName = 'Textarea'
 
-/* ════════════════════════════════════════════════════════
+/* 
    SELECT
-   ════════════════════════════════════════════════════════ */
+    */
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string

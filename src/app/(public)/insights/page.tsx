@@ -71,7 +71,7 @@ export default async function InsightsPage() {
                 href={`/insights/${featured.slug}`}
                 className="group grid grid-cols-1 lg:grid-cols-5 gap-8 card p-8 overflow-hidden"
               >
-                {/* Featured visual placeholder — gold gradient panel */}
+                {/* Featured visual placeholder  gold gradient panel */}
                 <div className="lg:col-span-2 rounded-xl bg-gradient-to-br from-navy-900 to-navy-700
                                 min-h-[200px] flex items-center justify-center relative overflow-hidden">
                   <div
@@ -212,7 +212,7 @@ export default async function InsightsPage() {
                 href="/contact"
                 className="text-sm text-gold-500 hover:text-gold-400 font-medium transition-colors"
               >
-                Subscribe for updates →
+                Subscribe for updates 
               </Link>
             </AnimatedSection>
           )}

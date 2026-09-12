@@ -17,10 +17,10 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   if (!service) return { title: 'Service | Flowtaris' }
 
   const heroData = (service as any).services_hero?.[0] || (service as any).services_hero
-  const description = heroData?.normal_description || `${service.name} — Enterprise implementation, consulting, and managed support by Flowtaris.`
+  const description = heroData?.normal_description || `${service.name}  Enterprise implementation, consulting, and managed support by Flowtaris.`
 
   return {
-    title: `${service.name} | Flowtaris — Enterprise ERP Consulting`,
+    title: `${service.name} | Flowtaris  Enterprise ERP Consulting`,
     description,
     alternates: {
       canonical: `https://www.flowtaris.com/services/${slug}`,
@@ -118,7 +118,7 @@ export default async function ServiceSlugPage(props: { params: Promise<{ slug: s
   ])
 
   const heroData = hero as any
-  const serviceDescription = heroData?.normal_description || `${service.name} — Enterprise implementation, consulting, and managed support by Flowtaris.`
+  const serviceDescription = heroData?.normal_description || `${service.name}  Enterprise implementation, consulting, and managed support by Flowtaris.`
   const serviceJsonLd = serviceSchema(service.name, serviceDescription, `/services/${slug}`)
 
   return (

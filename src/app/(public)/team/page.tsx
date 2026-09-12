@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { organizationSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Our Team — Flowtaris ERP Consultants',
+  title: 'Our Team  Flowtaris ERP Consultants',
   description: 'Meet the certified ERP architects and Big 4 alumni driving Flowtaris implementations across NetSuite, Coupa, SAP, and Workday.'
 }
 

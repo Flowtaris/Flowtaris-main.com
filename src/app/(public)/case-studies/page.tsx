@@ -5,13 +5,13 @@ import { InteractiveCaseList } from '@/components/sections/InteractiveCaseList'
 import { FeaturedShowcase } from '@/components/sections/FeaturedShowcase'
 
 export const metadata: Metadata = {
-  title: 'Client Case Studies — Flowtaris ERP Solutions',
+  title: 'Client Case Studies  Flowtaris ERP Solutions',
   description: 'Read how Flowtaris engineers complex NetSuite, Coupa, and Workday architectures for high-growth enterprises.',
   alternates: {
     canonical: 'https://www.flowtaris.com/case-studies',
   },
   openGraph: {
-    title: 'Client Case Studies — Flowtaris ERP Solutions',
+    title: 'Client Case Studies  Flowtaris ERP Solutions',
     description: 'Read how Flowtaris engineers complex NetSuite, Coupa, and Workday architectures for high-growth enterprises.',
     url: 'https://www.flowtaris.com/case-studies',
     type: 'website',

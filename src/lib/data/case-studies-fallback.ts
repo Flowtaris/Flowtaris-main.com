@@ -36,7 +36,7 @@ export const FALLBACK_STUDIES = [
       'Flowtaris designed and deployed a MuleSoft-based event-driven integration layer that streams Workday headcount events to SAP in real-time. Cost centre provisioning, payroll journal posting and headcount reporting are now fully automated.',
     metrics: [
       { label: 'Data Accuracy Improved', value: '99.9', unit: '%' },
-      { label: 'Payroll Reconciliation Time', value: '5 days', unit: ' → 2 hrs' },
+      { label: 'Payroll Reconciliation Time', value: '5 days', unit: '  2 hrs' },
       { label: 'Manual Interventions/Month', value: '0', unit: '' },
     ],
     is_featured: true,
@@ -59,7 +59,7 @@ export const FALLBACK_STUDIES = [
       'Flowtaris executed a full Coupa Procure-to-Pay deployment, building customised approval chains per business unit, automated three-way matching, and a self-service supplier portal. The Oracle ERP integration was built using Coupa Open Business Network connectors.',
     metrics: [
       { label: 'Cost Savings Identified', value: '$12', unit: 'M' },
-      { label: 'Supplier Onboarding Time', value: '45 days', unit: ' → 3 days' },
+      { label: 'Supplier Onboarding Time', value: '45 days', unit: '  3 days' },
       { label: 'Invoice Processing Cost', value: '70', unit: '% reduction' },
     ],
     is_featured: false,

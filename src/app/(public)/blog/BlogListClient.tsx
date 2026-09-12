@@ -112,7 +112,7 @@ export function BlogListClient({ initialPosts, allCategories }: { initialPosts: 
                     </div>
                     <div className="flex flex-col">
                       <span className="text-sm font-bold text-[#0A1628]">{featuredPost.author}</span>
-                      <span className="text-xs text-slate-500 font-semibold">{featuredPost.authorDesignation} • {featuredPost.date}</span>
+                      <span className="text-xs text-slate-500 font-semibold">{featuredPost.authorDesignation}  {featuredPost.date}</span>
                     </div>
                   </div>
                   

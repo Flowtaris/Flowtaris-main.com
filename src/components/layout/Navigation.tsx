@@ -17,9 +17,9 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 
 const INTEGRATIONS_LIST = [
   { title: 'Coupa to NetSuite', icon: ArrowLeftRight, desc: 'Procurement to GL journal automation.', detailTitle: 'Procurement to GL', detailDesc: 'Procurement-to-GL journal automation with full reconciliation and audit trail.', color: '#4F46E5', href: '/integrations/procurement-to-GL' },
-  { title: 'Workday to NetSuite', icon: Database, desc: 'HCM Sync & Payroll automation.', detailTitle: 'HCM Sync', detailDesc: 'Payroll journal entry automation from HCM to ERP — eliminating manual finance work.', color: '#E11D48', href: '/integrations/hcm-sync' },
+  { title: 'Workday to NetSuite', icon: Database, desc: 'HCM Sync & Payroll automation.', detailTitle: 'HCM Sync', detailDesc: 'Payroll journal entry automation from HCM to ERP  eliminating manual finance work.', color: '#E11D48', href: '/integrations/hcm-sync' },
   { title: 'Coupa to SAP', icon: Layers, desc: 'Procurement workflow sync.', detailTitle: 'IDoc Management', detailDesc: 'Procurement workflow sync between Coupa and SAP S/4HANA with IDoc management.', color: '#E8A020', href: '/integrations/idoc-management' },
-  { title: 'Ironclad to Coupa', icon: Webhook, desc: 'Contract lifecycle automation.', detailTitle: 'Contract Lifecycle', detailDesc: 'Contract lifecycle to procurement workflow — automated supplier onboarding.', color: '#059669', href: '/integrations/contract-lifecycle' },
+  { title: 'Ironclad to Coupa', icon: Webhook, desc: 'Contract lifecycle automation.', detailTitle: 'Contract Lifecycle', detailDesc: 'Contract lifecycle to procurement workflow  automated supplier onboarding.', color: '#059669', href: '/integrations/contract-lifecycle' },
   { title: 'Workday to Coupa', icon: Network, desc: 'Employee provisioning.', detailTitle: 'Identity Provisioning', detailDesc: 'Employee provisioning and access management automation across HR and procurement.', color: '#7C3AED', href: '/integrations/identity-provisioning' },
   { title: 'Zylo to ERP', icon: Zap, desc: 'SaaS governance automation.', detailTitle: 'SaaS Governance', detailDesc: 'SaaS portfolio governance and software asset management automation.', color: '#0284C7', href: '/integrations/saas-governance' },
 ]
@@ -32,9 +32,9 @@ const NAV_LINKS = [
   { label: 'FAQ', href: '/faq' },
 ]
 
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 // The Ultra-Premium "Command Center" Mega Menu (Flowtaris Brand Colors)
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter: () => void, onLeave: () => void, dynamicServices?: any[] }) {
   const shouldReduceMotion = useReducedMotion()
   const motionProps = shouldReduceMotion
@@ -125,7 +125,7 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
         }}
       />
 
-      {/* ── Left Block: The Morphing Hero Card (Col Span 4) ── */}
+      {/*  Left Block: The Morphing Hero Card (Col Span 4)  */}
       <motion.div {...(shouldReduceMotion ? motionProps : { variants: itemVariants })} className="flex-[1.1] relative">
         <Link
           href="/services"
@@ -174,7 +174,7 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
         </Link>
       </motion.div>
 
-      {/* ── Middle Block: The Grid (Col Span 5) ── */}
+      {/*  Middle Block: The Grid (Col Span 5)  */}
       <div
         className="flex-[1.5] grid grid-cols-2 grid-rows-3 gap-2 relative z-10"
         onMouseLeave={() => setHoveredIdx(null)}
@@ -228,9 +228,9 @@ function CommandCenterMenu({ onEnter, onLeave, dynamicServices = [] }: { onEnter
   )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 // Integrations Mega Menu
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: () => void }) {
   const shouldReduceMotion = useReducedMotion()
   const motionProps = shouldReduceMotion
@@ -380,9 +380,9 @@ function IntegrationsMenu({ onEnter, onLeave }: { onEnter: () => void, onLeave: 
   )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 // Main Navigation Component
-// ─────────────────────────────────────────────────────────────────────────────
+// 
 export function Navigation({ dynamicServices = [], settings = { company_name: 'Flowtaris', logo_url: '/images/logo.png' } }: { dynamicServices?: any[], settings?: Record<string, string> }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)

@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 const sections = [
-  { label: "Hero", href: "/admin/co/page", desc: "Hero section — main landing banner" },
+  { label: "Hero", href: "/admin/co/page", desc: "Hero section  main landing banner" },
   { label: "Judgment", href: "/admin/co/JudgmentEditor", desc: "Judgment page content" },
   { label: "Judgment Slugs", href: "/admin/co/JudgmentSlugsEditor", desc: "Individual judgment entries" },
   { label: "Leverage", href: "/admin/co/LeverageEditor", desc: "Leverage model and alliances" },

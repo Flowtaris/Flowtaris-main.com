@@ -4,7 +4,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
   title: 'Terms of Use | Flowtaris',
-  description: 'Flowtaris Terms of Use — the terms and conditions governing your use of the Flowtaris website.',
+  description: 'Flowtaris Terms of Use  the terms and conditions governing your use of the Flowtaris website.',
   robots: { index: false, follow: false },
 }
 
@@ -38,7 +38,7 @@ export default function TermsOfUsePage() {
 
             <h2>Intellectual Property</h2>
             <p>
-              All content on this website — including text, graphics, logos, images, and software —
+              All content on this website  including text, graphics, logos, images, and software 
               is the property of Flowtaris and is protected by intellectual property laws. You may
               not reproduce, distribute, or create derivative works without written permission.
             </p>

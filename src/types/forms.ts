@@ -47,8 +47,8 @@ export const SERVICE_OPTIONS = [
 /** Timeline options for forms */
 export const TIMELINE_OPTIONS = [
   { label: 'Immediate (< 1 month)', value: 'immediate' },
-  { label: 'Short-term (1–3 months)', value: 'short-term' },
-  { label: 'Medium-term (3–6 months)', value: 'medium-term' },
+  { label: 'Short-term (13 months)', value: 'short-term' },
+  { label: 'Medium-term (36 months)', value: 'medium-term' },
   { label: 'Long-term (6+ months)', value: 'long-term' },
   { label: 'Just exploring', value: 'exploring' },
 ] as const
@@ -56,9 +56,9 @@ export const TIMELINE_OPTIONS = [
 /** Budget range options */
 export const BUDGET_OPTIONS = [
   { label: 'Under $25,000', value: 'under-25k' },
-  { label: '$25,000 – $50,000', value: '25k-50k' },
-  { label: '$50,000 – $100,000', value: '50k-100k' },
-  { label: '$100,000 – $250,000', value: '100k-250k' },
+  { label: '$25,000  $50,000', value: '25k-50k' },
+  { label: '$50,000  $100,000', value: '50k-100k' },
+  { label: '$100,000  $250,000', value: '100k-250k' },
   { label: '$250,000+', value: '250k-plus' },
   { label: 'Not sure yet', value: 'not-sure' },
 ] as const

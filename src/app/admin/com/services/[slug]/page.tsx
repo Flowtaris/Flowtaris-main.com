@@ -79,7 +79,7 @@ export default async function AdminServiceDetailPage({
 
       {/* Tabbed sections */}
       <ServicesSectionTabs tabs={tabs}>
-        {/* ── 1. HERO ───────────────────────────────────────── */}
+        {/*  1. HERO  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Hero Section</h2>
@@ -90,7 +90,7 @@ export default async function AdminServiceDetailPage({
           <ServicesHeroEditor serviceId={serviceId} initialData={heroData ?? null} />
         </div>
 
-        {/* ── 2. WHY CHOOSE SERVICE ─────────────────────────── */}
+        {/*  2. WHY CHOOSE SERVICE  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Why Choose Service</h2>
@@ -101,7 +101,7 @@ export default async function AdminServiceDetailPage({
           <ServicesWhyChooseEditor serviceId={serviceId} initialCards={whyChooseData ?? []} />
         </div>
 
-        {/* ── 3. BUSINESS MANAGEMENT SUITE ──────────────────── */}
+        {/*  3. BUSINESS MANAGEMENT SUITE  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">A Complete Business Management Suite</h2>
@@ -116,7 +116,7 @@ export default async function AdminServiceDetailPage({
           />
         </div>
 
-        {/* ── 4. ERP ARCHITECTURE ───────────────────────────── */}
+        {/*  4. ERP ARCHITECTURE  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Engineering the ERP Architecture</h2>
@@ -131,7 +131,7 @@ export default async function AdminServiceDetailPage({
           />
         </div>
 
-        {/* ── 5. DEEP MODULE EXPERTISE ──────────────────────── */}
+        {/*  5. DEEP MODULE EXPERTISE  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Deep Module Expertise</h2>

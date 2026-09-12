@@ -76,8 +76,8 @@ export async function submitApplication(data: FormData) {
       <table cellpadding="8" style="border-collapse:collapse">
         <tr><td><strong>Applicant Name</strong></td><td>${name}</td></tr>
         <tr><td><strong>Email</strong></td><td>${email}</td></tr>
-        <tr><td><strong>Phone</strong></td><td>${phone ?? '—'}</td></tr>
-        <tr><td><strong>Message</strong></td><td>${message ?? '—'}</td></tr>
+        <tr><td><strong>Phone</strong></td><td>${phone ?? ''}</td></tr>
+        <tr><td><strong>Message</strong></td><td>${message ?? ''}</td></tr>
       </table>
       <p>Log in to the Flowtaris admin panel to view the application and download the resume.</p>
     `
@@ -92,7 +92,7 @@ export async function submitApplication(data: FormData) {
       body: JSON.stringify({
         from: process.env.NOTIFICATION_EMAIL_FROM ?? 'noreply@flowtaris.com',
         to: (process.env.NOTIFICATION_EMAIL_TO ?? 'info@flowtaris.com').split(',').map((e: string) => e.trim()),
-        subject: `New Job Application: ${positionName} — ${name}`,
+        subject: `New Job Application: ${positionName}  ${name}`,
         html: adminEmailHtml,
       }),
     }).catch((err) => console.error('[Resend Admin Error]', err))

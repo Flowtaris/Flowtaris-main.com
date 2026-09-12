@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
-      {/* Article header — dark */}
+      {/* Article header  dark */}
       <div className="bg-grid-navy pt-10 pb-14">
         <div className="container-content">
           <Link
@@ -237,7 +237,7 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 
-/** Server-side markdown renderer — no 'use client' needed */
+/** Server-side markdown renderer  no 'use client' needed */
 async function ContentRenderer({ content }: { content: string }) {
   const { marked } = await import('marked')
   const DOMPurify = (await import('isomorphic-dompurify')).default

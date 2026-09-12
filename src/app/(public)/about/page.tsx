@@ -6,14 +6,14 @@ import { createClient } from '@/lib/supabase/server'
 import { organizationSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: "About Flowtaris — Enterprise ERP Consulting Experts",
-  description: "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks.",
+  title: "About Flowtaris  Enterprise ERP Consulting Experts",
+  description: "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipelineeliminating manual finance bottlenecks.",
   alternates: {
     canonical: 'https://www.flowtaris.com/about',
   },
   openGraph: {
-    title: "About Flowtaris — Enterprise ERP Consulting Experts",
-    description: "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks.",
+    title: "About Flowtaris  Enterprise ERP Consulting Experts",
+    description: "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipelineeliminating manual finance bottlenecks.",
     url: "https://www.flowtaris.com/about",
     type: "website"
   }
@@ -35,7 +35,7 @@ export default async function AboutPage() {
 
   // Fallbacks if data is not yet set
   const heroTitle = heroData?.title || "Enterprise ERP will not be run by disjointed tools. It will be run by integrated architecture."
-  const heroDescription = heroData?.description || "Flowtaris is the specialized consulting workforce that architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks forever."
+  const heroDescription = heroData?.description || "Flowtaris is the specialized consulting workforce that architects your NetSuite, Coupa, and Workday systems into a single, seamless pipelineeliminating manual finance bottlenecks forever."
   const heroImage = heroData?.image_url || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1200"
 
   const topics = topicsData && topicsData.length > 0 ? topicsData : []
@@ -74,15 +74,15 @@ export default async function AboutPage() {
                 "@type": "AboutPage",
                 "@id": "https://www.flowtaris.com/about/#webpage",
                 "url": "https://www.flowtaris.com/about",
-                "name": "About Flowtaris — Enterprise ERP Consulting Experts",
-                "description": "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipeline—eliminating manual finance bottlenecks."
+                "name": "About Flowtaris  Enterprise ERP Consulting Experts",
+                "description": "Flowtaris architects your NetSuite, Coupa, and Workday systems into a single, seamless pipelineeliminating manual finance bottlenecks."
               }
             ]
           })
         }}
       />
 
-      {/* ── Section 1: Cinematic Hero (50/50 Split) ── */}
+      {/*  Section 1: Cinematic Hero (50/50 Split)  */}
       <section className="min-h-[80vh] flex flex-col justify-center pt-24 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Typography */}
@@ -109,7 +109,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ── Dynamic Topics Sections ── */}
+      {/*  Dynamic Topics Sections  */}
       {topics.map((topic, index) => (
         <section key={topic.id} className="py-24 px-6 lg:px-12 max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -154,14 +154,14 @@ export default async function AboutPage() {
                 <p>Flowtaris was founded in 2021 in London by a specialized team of former Big 4 ERP implementation leaders. We witnessed the same failure patterns repeating across complex Fortune 500 deployments: poorly mapped charts of accounts, hardcoded integration logic, and ignored change management.</p>
                 <p>Massive systems integrators consistently deployed core ERPs like SAP S/4HANA or NetSuite OneWorld, only to leave behind fragile, manual CSV uploads and broken REST APIs that required armies of administrators to maintain.</p>
                 <p>Standard deployment isn't enough for high-growth companies (50-2000 employees). Organizations need deep, technical ERP specialists holding active NetSuite ERP Consultant and Coupa Platform certifications who understand complex API limits, SuiteTalk, and native Web Services.</p>
-                <p>Today, Flowtaris operates globally as the premier  systems integration consultancy exclusively focused on the NetSuite, Coupa, SAP, and Workday ecosystem—engineering highly secure architectures managing billions in transaction flows for innovative B2B enterprises.</p>
+                <p>Today, Flowtaris operates globally as the premier  systems integration consultancy exclusively focused on the NetSuite, Coupa, SAP, and Workday ecosystemengineering highly secure architectures managing billions in transaction flows for innovative B2B enterprises.</p>
               </div>
             </div>
           </section>
         </>
       )}
 
-      {/* ── Section 4: Investor / Client Trust ── */}
+      {/*  Section 4: Investor / Client Trust  */}
       <section className="py-32 px-6 lg:px-12 max-w-[1400px] mx-auto text-center border-t border-slate-200 mt-20">
         <h2 className="text-2xl font-bold text-[#0A1628] tracking-tight mb-16" style={{ fontFamily: 'var(--font-sora)' }}>
           {trustedHeading}
@@ -183,7 +183,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* ── Section 5: Bottom CTA ── */}
+      {/*  Section 5: Bottom CTA  */}
       <section className="py-32 bg-white text-center rounded-t-[40px] border-t border-slate-200">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-4xl md:text-5xl font-bold text-[#0A1628] mb-10 tracking-tight" style={{ fontFamily: 'var(--font-sora)' }}>

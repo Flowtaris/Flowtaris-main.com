@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-// ─── Case Studies Registry ─────────────────────────────────────────
+//  Case Studies Registry 
 
 export async function addCaseStudy(title: string, slug: string) {
   const supabase = await createClient()
@@ -39,7 +39,7 @@ export async function deleteCaseStudy(id: string) {
   revalidatePath('/case-studies')
 }
 
-// ─── Case Studies Hero ──────────────────────────────────────────────
+//  Case Studies Hero 
 
 export async function upsertCaseStudyHero(
   caseStudyId: string,
@@ -83,7 +83,7 @@ export async function upsertCaseStudyHero(
   revalidatePath('/admin/case-studies/[slug]', 'page')
 }
 
-// ─── Case Studies Industry ──────────────────────────────────────────
+//  Case Studies Industry 
 
 export async function addCaseStudyIndustry(caseStudyId: string, name: string) {
   const supabase = await createClient()
@@ -117,7 +117,7 @@ export async function deleteCaseStudyIndustry(id: string) {
   revalidatePath('/admin/case-studies/[slug]', 'page')
 }
 
-// ─── Case Studies Solutions ─────────────────────────────────────────
+//  Case Studies Solutions 
 
 export async function addCaseStudySolution(caseStudyId: string, name: string) {
   const supabase = await createClient()
@@ -151,7 +151,7 @@ export async function deleteCaseStudySolution(id: string) {
   revalidatePath('/admin/case-studies/[slug]', 'page')
 }
 
-// ─── Case Studies Tech Stack ────────────────────────────────────────
+//  Case Studies Tech Stack 
 
 export async function addCaseStudyTechStack(caseStudyId: string, name: string) {
   const supabase = await createClient()
@@ -185,7 +185,7 @@ export async function deleteCaseStudyTechStack(id: string) {
   revalidatePath('/admin/case-studies/[slug]', 'page')
 }
 
-// ─── Case Studies Topics ────────────────────────────────────────────
+//  Case Studies Topics 
 
 export async function addCaseStudyTopic(caseStudyId: string, topic: string, description: string) {
   const supabase = await createClient()

@@ -4,7 +4,7 @@ const sites = [
   {
     id: "com",
     name: "Flowtaris.com",
-    description: "Main commercial website — hero, services, blog, careers, case studies, testimonials and more.",
+    description: "Main commercial website  hero, services, blog, careers, case studies, testimonials and more.",
     href: "/admin/com",
     accentBg: "linear-gradient(135deg, #1D4ED8, #1e3a8a)",
     accent: "#2563EB",
@@ -14,7 +14,7 @@ const sites = [
   {
     id: "co",
     name: "Flowtaris.co",
-    description: "Trust infrastructure — principles, leverage, judgment, resources and trust network.",
+    description: "Trust infrastructure  principles, leverage, judgment, resources and trust network.",
     href: "/admin/co",
     accentBg: "linear-gradient(135deg, #334155, #0f172a)",
     accent: "#475569",
@@ -24,7 +24,7 @@ const sites = [
   {
     id: "ai",
     name: "Flowtaris.ai",
-    description: "AI intelligence platform — capabilities, case studies, insights, and AI configuration.",
+    description: "AI intelligence platform  capabilities, case studies, insights, and AI configuration.",
     href: "/admin/ai",
     accentBg: "linear-gradient(135deg, #7C3AED, #4c1d95)",
     accent: "#7C3AED",

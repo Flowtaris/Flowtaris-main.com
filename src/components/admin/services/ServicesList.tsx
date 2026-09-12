@@ -8,7 +8,7 @@ import { Plus, ArrowRight, Trash2, Globe, Loader2, GripVertical } from 'lucide-r
 import Link from 'next/link'
 import { Reorder } from 'framer-motion'
 
-// ─── Add Service Form ────────────────────────────────────────────────
+//  Add Service Form 
 function AddServiceForm({ onAdded }: { onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
@@ -85,7 +85,7 @@ function AddServiceForm({ onAdded }: { onAdded: () => void }) {
           className="flex items-center gap-1.5 bg-navy-950 hover:bg-navy-800 text-white text-sm px-4 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
         >
           {isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Plus className="w-3.5 h-3.5" />}
-          {isPending ? 'Creating…' : 'Create Service'}
+          {isPending ? 'Creating' : 'Create Service'}
         </button>
         <button
           type="button"
@@ -99,7 +99,7 @@ function AddServiceForm({ onAdded }: { onAdded: () => void }) {
   )
 }
 
-// ─── Service Card ────────────────────────────────────────────────────
+//  Service Card 
 function ServiceCard({ service, onDeleted }: { service: Service; onDeleted: () => void }) {
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
@@ -155,7 +155,7 @@ function ServiceCard({ service, onDeleted }: { service: Service; onDeleted: () =
   )
 }
 
-// ─── Main Component ──────────────────────────────────────────────────
+//  Main Component 
 export function ServicesList({ initialServices }: { initialServices: Service[] }) {
   const [services, setServices] = useState(initialServices)
   const [isSaving, setIsSaving] = useState(false)

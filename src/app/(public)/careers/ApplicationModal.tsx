@@ -79,7 +79,7 @@ export default function ApplicationModal({ career, onClose }: ApplicationModalPr
             Apply for {career.position_name}
           </h2>
           <p className="text-slate-500 text-sm font-medium">
-            {career.category} · {career.location} — {career.employment_type}
+            {career.category}  {career.location}  {career.employment_type}
           </p>
         </div>
 

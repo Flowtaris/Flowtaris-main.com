@@ -8,27 +8,30 @@ function getAiClient() {
   return createClient(url, key);
 }
 
-export async function GET(_req: NextRequest, ctx: { params: { id: string } }) {
+export async function GET(_req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
   const client = getAiClient();
   if (!client) return NextResponse.json({ error: "Missing AI credentials" }, { status: 500 });
-  const { data, error } = await client.from("insights").select("*").eq("id", ctx.params.id).single();
+  const params = await ctx.params;
+  const { data, error } = await client.from("insights").select("*").eq("id", params.id).single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ data });
 }
 
-export async function PUT(req: NextRequest, ctx: { params: { id: string } }) {
+export async function PUT(req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
   const client = getAiClient();
   if (!client) return NextResponse.json({ error: "Missing AI credentials" }, { status: 500 });
   const body = await req.json();
-  const { data, error } = await client.from("insights").update(body).eq("id", ctx.params.id).select();
+  const params = await ctx.params;
+  const { data, error } = await client.from("insights").update(body).eq("id", params.id).select();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ data });
 }
 
-export async function DELETE(_req: NextRequest, ctx: { params: { id: string } }) {
+export async function DELETE(_req: NextRequest, ctx: { params: Promise<{ id: string }> }) {
   const client = getAiClient();
   if (!client) return NextResponse.json({ error: "Missing AI credentials" }, { status: 500 });
-  const { error } = await client.from("insights").delete().eq("id", ctx.params.id);
+  const params = await ctx.params;
+  const { error } = await client.from("insights").delete().eq("id", params.id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ success: true });
 }

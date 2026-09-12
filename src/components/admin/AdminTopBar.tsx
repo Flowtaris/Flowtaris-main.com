@@ -15,7 +15,7 @@ export function AdminTopBar({ userName, role }: Props) {
       <div className="flex-1">
         <a href="/" target="_blank" rel="noreferrer"
            className="text-xs text-slate-500 hover:text-slate-600 transition-colors">
-          ← View Public Site
+           View Public Site
         </a>
       </div>
       <div className="flex items-center gap-3">

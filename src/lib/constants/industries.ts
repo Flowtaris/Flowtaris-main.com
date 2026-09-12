@@ -21,7 +21,7 @@ export const INDUSTRIES: Industry[] = [
     title: 'ERP and Integration Consulting for',
     titleHighlight: 'Technology Companies.',
     description: 'NetSuite, Coupa and enterprise integrations for high-growth technology and SaaS organizations.',
-    answerParagraph: 'Flowtaris helps technology and SaaS companies implement, integrate and optimize the ERP and procurement systems that support rapid growth — from Series B startups scaling their finance operations to enterprise software companies running multi-entity NetSuite environments. We deliver NetSuite implementations, Coupa procurement automation, Workday integrations and finance automation built for the pace and complexity of technology businesses.',
+    answerParagraph: 'Flowtaris helps technology and SaaS companies implement, integrate and optimize the ERP and procurement systems that support rapid growth  from Series B startups scaling their finance operations to enterprise software companies running multi-entity NetSuite environments. We deliver NetSuite implementations, Coupa procurement automation, Workday integrations and finance automation built for the pace and complexity of technology businesses.',
     challenges: [
       'Multi-entity NetSuite environments across subsidiaries',
       'Coupa procurement scaling with headcount growth',
@@ -102,7 +102,7 @@ export const INDUSTRIES: Industry[] = [
     title: 'Audit-Ready ERP Consulting for',
     titleHighlight: 'Financial Services Firms.',
     description: 'SOX-ready ERP implementations and integrations for private equity, asset management and financial services organizations.',
-    answerParagraph: 'Flowtaris provides ERP consulting for financial services organizations — including private equity portfolio companies, asset management firms and financial services businesses — that require SOX-compliant, audit-ready ERP and procurement environments. We implement NetSuite with strong financial controls, configure Coupa for compliant procurement, and deliver integrations that satisfy internal audit and regulatory requirements.',
+    answerParagraph: 'Flowtaris provides ERP consulting for financial services organizations  including private equity portfolio companies, asset management firms and financial services businesses  that require SOX-compliant, audit-ready ERP and procurement environments. We implement NetSuite with strong financial controls, configure Coupa for compliant procurement, and deliver integrations that satisfy internal audit and regulatory requirements.',
     challenges: [
       'SOX compliance requirements across ERP and procurement',
       'Multi-entity financial consolidation in NetSuite',
@@ -129,7 +129,7 @@ export const INDUSTRIES: Industry[] = [
     title: 'ERP Consulting for',
     titleHighlight: 'Professional Services Firms.',
     description: 'NetSuite and Coupa consulting for consulting firms, law firms, staffing companies and professional services organizations.',
-    answerParagraph: 'Flowtaris delivers ERP and procurement consulting for professional services firms — including management consulting firms, law firms, staffing companies and IT services businesses. We implement NetSuite for project-based billing and finance, configure Coupa for professional services procurement, and build the integrations that connect HR, finance and procurement systems for services businesses.',
+    answerParagraph: 'Flowtaris delivers ERP and procurement consulting for professional services firms  including management consulting firms, law firms, staffing companies and IT services businesses. We implement NetSuite for project-based billing and finance, configure Coupa for professional services procurement, and build the integrations that connect HR, finance and procurement systems for services businesses.',
     challenges: [
       'Project-based revenue recognition in NetSuite',
       'Contractor and vendor procurement in Coupa',

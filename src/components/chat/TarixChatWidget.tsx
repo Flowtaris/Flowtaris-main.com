@@ -141,7 +141,7 @@ export function TarixChatWidget({ whatsappNumber = "1234567890" }: { whatsappNum
     if (isOpen && messages.length === 0) {
       setResumeTooltip(false)
       enqueueBotMessages([
-        { text: "Hi! I'm Tarix 👋\n\nI can help you with:", delay: 400 },
+        { text: "Hi! I'm Tarix \n\nI can help you with:", delay: 400 },
         {
           text: "What would you like to explore today?",
           type: "options",

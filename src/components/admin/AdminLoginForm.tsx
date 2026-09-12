@@ -94,7 +94,7 @@ export function AdminLoginForm() {
             id="password"
             type={showPwd ? 'text' : 'password'}
             autoComplete="current-password"
-            placeholder="••••••••••••"
+            placeholder=""
             disabled={isSubmitting}
             aria-invalid={!!errors.password}
             aria-describedby={errors.password ? 'password-error' : undefined}

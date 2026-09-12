@@ -58,7 +58,7 @@ export default async function AdminAboutPage() {
       </div>
 
       <ServicesSectionTabs tabs={tabs}>
-        {/* ── 1. HERO ───────────────────────────────────────── */}
+        {/*  1. HERO  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Hero Section</h2>
@@ -69,7 +69,7 @@ export default async function AdminAboutPage() {
           <AboutHeroEditor initialData={heroData ?? null} />
         </div>
 
-        {/* ── 2. TOPICS ─────────────────────────────────────── */}
+        {/*  2. TOPICS  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Topics</h2>
@@ -80,7 +80,7 @@ export default async function AdminAboutPage() {
           <AboutTopicsEditor initialTopics={topicsData ?? []} />
         </div>
 
-        {/* ── 3. TRUSTED ────────────────────────────────────── */}
+        {/*  3. TRUSTED  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Trusted Partners</h2>

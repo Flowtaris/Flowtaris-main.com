@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 /**
- * Consultation form — primary lead capture
+ * Consultation form  primary lead capture
  */
 export const consultationFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -21,7 +21,7 @@ export const consultationFormSchema = z.object({
 export type ConsultationFormData = z.infer<typeof consultationFormSchema>
 
 /**
- * Proposal request form — detailed lead capture
+ * Proposal request form  detailed lead capture
  */
 export const proposalFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -42,7 +42,7 @@ export const proposalFormSchema = z.object({
 export type ProposalFormData = z.infer<typeof proposalFormSchema>
 
 /**
- * General inquiry form — simple contact
+ * General inquiry form  simple contact
  */
 export const inquiryFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -58,7 +58,7 @@ export const inquiryFormSchema = z.object({
 export type InquiryFormData = z.infer<typeof inquiryFormSchema>
 
 /**
- * Resource gate form — gated content download
+ * Resource gate form  gated content download
  */
 export const resourceGateFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),

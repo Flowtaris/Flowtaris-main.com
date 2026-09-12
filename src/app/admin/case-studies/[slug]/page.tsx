@@ -44,11 +44,11 @@ export default async function AdminCaseStudyDetailPage({
                 ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                 : 'bg-slate-100 text-slate-500 border border-slate-200'
             }`}>
-              {caseStudy.status === 'published' ? '● Published' : '○ Draft'}
+              {caseStudy.status === 'published' ? ' Published' : ' Draft'}
             </span>
             {caseStudy.is_featured && (
               <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-gold-50 text-gold-700 border border-gold-200">
-                ★ Featured
+                 Featured
               </span>
             )}
           </div>

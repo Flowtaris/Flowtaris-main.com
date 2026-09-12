@@ -4,7 +4,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Flowtaris',
-  description: 'Flowtaris Privacy Policy — how we collect, use and protect your personal information.',
+  description: 'Flowtaris Privacy Policy  how we collect, use and protect your personal information.',
   robots: { index: false, follow: false },
 }
 

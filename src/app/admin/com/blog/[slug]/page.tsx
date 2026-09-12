@@ -74,7 +74,7 @@ export default async function AdminBlogDetailPage({
 
       {/* Tabbed sections */}
       <BlogSectionTabs tabs={tabs}>
-        {/* ── 1. HERO ───────────────────────────────────────── */}
+        {/*  1. HERO  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Hero Section & Categories</h2>
@@ -90,7 +90,7 @@ export default async function AdminBlogDetailPage({
           />
         </div>
 
-        {/* ── 2. TOPICS ─────────────────────────── */}
+        {/*  2. TOPICS  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Topics & Content</h2>
@@ -101,7 +101,7 @@ export default async function AdminBlogDetailPage({
           <BlogTopicsEditor blogId={blogId} initialTopics={topicsData ?? []} />
         </div>
 
-        {/* ── 3. FAQS ──────────────────── */}
+        {/*  3. FAQS  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Frequently Asked Questions</h2>

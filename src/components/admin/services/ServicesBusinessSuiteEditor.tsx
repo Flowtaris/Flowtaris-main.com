@@ -11,7 +11,7 @@ import {
 import { ServicesBusinessSuiteMain, ServicesBusinessSuiteItem } from '@/types/database'
 import { ImageUpload } from '@/components/admin/ImageUpload'
 
-// ─── Section description editor ─────────────────────────────────────
+//  Section description editor 
 function SuiteMainEditor({ serviceId, initialData }: { serviceId: string; initialData: ServicesBusinessSuiteMain | null }) {
   const [smallDesc, setSmallDesc] = useState(initialData?.small_description ?? '')
   const [saving, setSaving] = useState(false)
@@ -60,7 +60,7 @@ function SuiteMainEditor({ serviceId, initialData }: { serviceId: string; initia
   )
 }
 
-// ─── Sub-section item row ────────────────────────────────────────────
+//  Sub-section item row 
 function ItemRow({ item, onDeleted }: { item: ServicesBusinessSuiteItem; onDeleted: () => void }) {
   const [editing, setEditing] = useState(false)
   const [title, setTitle] = useState(item.title)
@@ -134,7 +134,7 @@ function ItemRow({ item, onDeleted }: { item: ServicesBusinessSuiteItem; onDelet
         <div className="flex items-center gap-3">
           <button onClick={save} disabled={saving} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50">
             <Check className="w-3.5 h-3.5" />
-            {saving ? 'Saving…' : 'Save'}
+            {saving ? 'Saving' : 'Save'}
           </button>
           <button onClick={() => { setEditing(false); setTitle(item.title); setDescription(item.description ?? ''); setImageUrl(item.image_url ?? '') }} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100">
             <X className="w-3.5 h-3.5" />
@@ -172,7 +172,7 @@ function ItemRow({ item, onDeleted }: { item: ServicesBusinessSuiteItem; onDelet
   )
 }
 
-// ─── Add item form ───────────────────────────────────────────────────
+//  Add item form 
 function AddItemForm({ serviceId, onAdded }: { serviceId: string; onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState('')
@@ -232,7 +232,7 @@ function AddItemForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
       <div className="flex items-center gap-3">
         <button type="submit" disabled={saving} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50">
           <Plus className="w-3.5 h-3.5" />
-          {saving ? 'Adding…' : 'Add Sub-Section'}
+          {saving ? 'Adding' : 'Add Sub-Section'}
         </button>
         <button type="button" onClick={() => setOpen(false)} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100">
           <X className="w-3.5 h-3.5" />
@@ -244,7 +244,7 @@ function AddItemForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
   )
 }
 
-// ─── Main export ─────────────────────────────────────────────────────
+//  Main export 
 export function ServicesBusinessSuiteEditor({
   serviceId,
   initialMain,

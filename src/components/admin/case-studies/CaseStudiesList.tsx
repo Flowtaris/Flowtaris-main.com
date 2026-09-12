@@ -7,7 +7,7 @@ import { CaseStudy } from '@/types/database'
 import { Plus, ArrowRight, Trash2, Globe, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
-// ─── Add Case Study Form ────────────────────────────────────────────────
+//  Add Case Study Form 
 function AddCaseStudyForm({ onAdded }: { onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState('')
@@ -84,7 +84,7 @@ function AddCaseStudyForm({ onAdded }: { onAdded: () => void }) {
           className="flex items-center gap-1.5 bg-navy-950 hover:bg-navy-800 text-white text-sm px-4 py-2 rounded-lg font-medium disabled:opacity-50 transition-colors"
         >
           {isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Plus className="w-3.5 h-3.5" />}
-          {isPending ? 'Creating…' : 'Create Case Study'}
+          {isPending ? 'Creating' : 'Create Case Study'}
         </button>
         <button
           type="button"
@@ -98,7 +98,7 @@ function AddCaseStudyForm({ onAdded }: { onAdded: () => void }) {
   )
 }
 
-// ─── Case Study Card ────────────────────────────────────────────────────
+//  Case Study Card 
 function CaseStudyCard({ caseStudy, onDeleted }: { caseStudy: CaseStudy; onDeleted: () => void }) {
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
@@ -154,7 +154,7 @@ function CaseStudyCard({ caseStudy, onDeleted }: { caseStudy: CaseStudy; onDelet
   )
 }
 
-// ─── Main Component ──────────────────────────────────────────────────
+//  Main Component 
 export function CaseStudiesList({ initialCaseStudies }: { initialCaseStudies: CaseStudy[] }) {
   const [caseStudies, setCaseStudies] = useState(initialCaseStudies)
   const router = useRouter()

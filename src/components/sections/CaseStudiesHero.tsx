@@ -43,7 +43,7 @@ export function CaseStudiesHero() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed"
           >
-            Every case study here represents a high-stakes enterprise engagement — complex systems, demanding timelines, and real business outcomes. These are not estimates. These are results.
+            Every case study here represents a high-stakes enterprise engagement  complex systems, demanding timelines, and real business outcomes. These are not estimates. These are results.
           </motion.p>
         </div>
       </div>

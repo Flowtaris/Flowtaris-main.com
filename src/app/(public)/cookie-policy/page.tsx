@@ -4,7 +4,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export const metadata: Metadata = {
   title: 'Cookie Policy | Flowtaris',
-  description: 'Flowtaris Cookie Policy — how we use cookies and similar technologies on our website.',
+  description: 'Flowtaris Cookie Policy  how we use cookies and similar technologies on our website.',
   robots: { index: false, follow: false },
 }
 

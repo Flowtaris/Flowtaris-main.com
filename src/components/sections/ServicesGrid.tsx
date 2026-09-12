@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection, StaggeredGrid } from '@/components/ui/AnimatedSection'
 
-// Mini architectural SVG for each service — unique, technical, not generic
+// Mini architectural SVG for each service  unique, technical, not generic
 const ServiceVisuals = {
   netsuite: () => (
     <svg viewBox="0 0 56 56" fill="none" className="w-14 h-14 group-hover:drop-shadow-[0_0_8px_rgba(232,160,32,0.3)] transition-all">

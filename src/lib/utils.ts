@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { format, parseISO } from 'date-fns'
 
 /**
- * Merge Tailwind classes with clsx — prevents class conflicts
+ * Merge Tailwind classes with clsx  prevents class conflicts
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -37,7 +37,7 @@ export function readingTime(content: string): number {
  */
 export function truncate(str: string, length: number): string {
   if (str.length <= length) return str
-  return str.slice(0, length).trimEnd() + '…'
+  return str.slice(0, length).trimEnd() + ''
 }
 
 /**

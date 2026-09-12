@@ -7,7 +7,7 @@ const DEFAULTS = {
   heroTitle: "WE DON'T JUST\nDELIVER SYSTEMS.\nWE MAKE THE\nDECISIONS BEHIND THEM\nVISIBLE.",
   heroSubtitle: "Engineering complex systems for companies where reliability, judgment, and execution matter.",
   heroImage: "/hero_image.png",
-  ctaText: "EXPLORE OUR JUDGMENT →",
+  ctaText: "EXPLORE OUR JUDGMENT ",
   ctaLink: "#judgment",
 };
 
@@ -175,7 +175,7 @@ export default function HeroEditor({ site }: { site: string }) {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28, alignItems: "start" }}>
 
-        {/* ── Left Column: Form Fields ── */}
+        {/*  Left Column: Form Fields  */}
         <div style={{ background: "#fff", borderRadius: 12, padding: 28, boxShadow: "0 1px 3px rgba(0,0,0,0.05)", border: "1px solid #E5E7EB" }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, color: "#111827", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #F3F4F6" }}>Content Fields</h2>
 
@@ -224,7 +224,7 @@ export default function HeroEditor({ site }: { site: string }) {
               value={ctaText}
               onChange={(e) => setCtaText(e.target.value)}
               style={inputStyle}
-              placeholder="e.g. EXPLORE OUR JUDGMENT →"
+              placeholder="e.g. EXPLORE OUR JUDGMENT "
             />
             <p style={hintStyle}>The label on the call-to-action button.</p>
           </div>
@@ -295,7 +295,7 @@ export default function HeroEditor({ site }: { site: string }) {
           </div>
         </div>
 
-        {/* ── Right Column: Live Preview ── */}
+        {/*  Right Column: Live Preview  */}
         <div style={{ background: "#fff", borderRadius: 12, padding: 28, boxShadow: "0 1px 3px rgba(0,0,0,0.05)", border: "1px solid #E5E7EB", position: "sticky", top: 20 }}>
           <h2 style={{ fontSize: 16, fontWeight: 600, color: "#111827", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #F3F4F6" }}>Live Preview</h2>
 

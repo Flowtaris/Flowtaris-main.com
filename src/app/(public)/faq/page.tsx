@@ -29,7 +29,7 @@ const FALLBACK_FAQS = [
   },
   {
     question: 'How long does a typical ERP implementation take?',
-    answer: 'Implementation timelines vary based on scope and complexity. A focused NetSuite module deployment typically takes 8–14 weeks. Full multi-subsidiary ERP implementations or complex cross-platform integrations can range from 4 to 12 months. We provide detailed project plans during the scoping phase.',
+    answer: 'Implementation timelines vary based on scope and complexity. A focused NetSuite module deployment typically takes 814 weeks. Full multi-subsidiary ERP implementations or complex cross-platform integrations can range from 4 to 12 months. We provide detailed project plans during the scoping phase.',
   },
   {
     question: 'Does Flowtaris provide post-go-live support?',

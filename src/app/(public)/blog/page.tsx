@@ -4,13 +4,13 @@ import { BlogListClient } from './BlogListClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog & Insights — Flowtaris',
+  title: 'Blog & Insights  Flowtaris',
   description: 'Read the latest insights on NetSuite customization, Coupa optimizations, and enterprise integrations from our certified ERP architects.',
   alternates: {
     canonical: 'https://www.flowtaris.com/blog',
   },
   openGraph: {
-    title: 'Blog & Insights — Flowtaris',
+    title: 'Blog & Insights  Flowtaris',
     description: 'Read the latest insights on NetSuite customization, Coupa optimizations, and enterprise integrations from our certified ERP architects.',
     url: 'https://www.flowtaris.com/blog',
     type: 'website'

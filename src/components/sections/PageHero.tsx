@@ -43,7 +43,7 @@ export function PageHero({
         dark ? 'bg-grid-navy relative overflow-hidden' : 'bg-surface'
       )}
     >
-      {/* Decorative gradient orb — dark version only */}
+      {/* Decorative gradient orb  dark version only */}
       {dark && (
         <>
           <div

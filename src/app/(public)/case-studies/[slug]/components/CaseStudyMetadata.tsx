@@ -21,7 +21,7 @@ export function CaseStudyMetadata({
                 {industries.map(i => (
                   <span key={i} className="text-base font-semibold text-gray-900">{i}</span>
                 ))}
-                {industries.length === 0 && <span className="text-sm text-gray-400">—</span>}
+                {industries.length === 0 && <span className="text-sm text-gray-400"></span>}
               </div>
             </div>
 
@@ -34,7 +34,7 @@ export function CaseStudyMetadata({
                     {s}
                   </span>
                 ))}
-                {services.length === 0 && <span className="text-sm text-gray-400">—</span>}
+                {services.length === 0 && <span className="text-sm text-gray-400"></span>}
               </div>
             </div>
 
@@ -46,7 +46,7 @@ export function CaseStudyMetadata({
                     {p}
                   </span>
                 ))}
-                {platforms.length === 0 && <span className="text-sm text-gray-400">—</span>}
+                {platforms.length === 0 && <span className="text-sm text-gray-400"></span>}
               </div>
             </div>
 

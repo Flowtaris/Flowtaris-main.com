@@ -3,7 +3,7 @@ import CareersListClient from './CareersListClient'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Careers — Flowtaris',
+  title: 'Careers  Flowtaris',
   description: 'Join the Flowtaris team. View our open job positions and apply today.',
 }
 

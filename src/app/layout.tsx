@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         url: 'https://www.flowtaris.com/og-default.png',
         width: 1200,
         height: 630,
-        alt: 'Flowtaris — Enterprise ERP Consulting',
+        alt: 'Flowtaris  Enterprise ERP Consulting',
       },
     ],
   },

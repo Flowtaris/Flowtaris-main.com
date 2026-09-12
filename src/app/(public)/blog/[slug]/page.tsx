@@ -64,7 +64,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   return (
     <main className="bg-white min-h-screen font-sans text-slate-800">
       
-      {/* ── HERO SECTION ── */}
+      {/*  HERO SECTION  */}
       <section className="w-full bg-gradient-to-b from-slate-50 to-white pt-32 pb-16 lg:pt-40 lg:pb-24 border-b border-slate-100">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -112,7 +112,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      {/* ── BODY SECTION ── */}
+      {/*  BODY SECTION  */}
       <section className="max-w-[1200px] mx-auto px-6 lg:px-12 py-16 lg:py-24">
         <div className="flex flex-col relative">
           
@@ -182,7 +182,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      {/* ── SIMILAR BLOGS SECTION ── */}
+      {/*  SIMILAR BLOGS SECTION  */}
       {similarBlogs.length > 0 && (
         <section className="bg-slate-50 border-t border-slate-200 py-20">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-12">

@@ -19,7 +19,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Flowtaris — Enterprise ERP & Integration Consulting',
+    absolute: 'Flowtaris  Enterprise ERP & Integration Consulting',
   },
   description:
     'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.flowtaris.com',
   },
   openGraph: {
-    title: 'Flowtaris — Enterprise ERP & Integration Consulting',
+    title: 'Flowtaris  Enterprise ERP & Integration Consulting',
     description:
       'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
     url: 'https://www.flowtaris.com',

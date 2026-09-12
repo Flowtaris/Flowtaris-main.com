@@ -17,7 +17,7 @@ export function AboutTrustedEditor({ initialHeading, initialPartners }: Props) {
   const [message, setMessage] = useState('')
   const [isPending, setIsPending] = useState(false)
 
-  // ── Heading save ────────────────────────────────────────────────────────────
+  //  Heading save 
   async function saveHeading() {
     setIsPending(true)
     setMessage('')
@@ -31,7 +31,7 @@ export function AboutTrustedEditor({ initialHeading, initialPartners }: Props) {
     }
   }
 
-  // ── Add new partner ─────────────────────────────────────────────────────────
+  //  Add new partner 
   async function addPartner() {
     setIsPending(true)
     setMessage('')
@@ -48,7 +48,7 @@ export function AboutTrustedEditor({ initialHeading, initialPartners }: Props) {
     }
   }
 
-  // ── Update partner field inline ─────────────────────────────────────────────
+  //  Update partner field inline 
   function handlePartnerChange(id: string, field: 'name' | 'label' | 'image_url', value: string) {
     setPartners((prev) =>
       prev.map((p) => (p.id === id ? { ...p, [field]: value } : p))
@@ -69,7 +69,7 @@ export function AboutTrustedEditor({ initialHeading, initialPartners }: Props) {
     }
   }
 
-  // ── Delete partner ──────────────────────────────────────────────────────────
+  //  Delete partner 
   async function removePartner(id: string) {
     setIsPending(true)
     setMessage('')
@@ -103,7 +103,7 @@ export function AboutTrustedEditor({ initialHeading, initialPartners }: Props) {
             disabled={isPending}
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors disabled:opacity-50 whitespace-nowrap"
           >
-            {isPending ? 'Saving…' : 'Save Heading'}
+            {isPending ? 'Saving' : 'Save Heading'}
           </button>
         </div>
       </div>

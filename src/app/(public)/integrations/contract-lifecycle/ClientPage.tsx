@@ -20,7 +20,7 @@ export default function ContractLifecyclePage({ integration }: { integration: an
   return (
     <main className="bg-[#FAFAFA] min-h-screen text-zinc-900 selection:bg-zinc-900 selection:text-white font-sans overflow-hidden">
       
-      {/* ── ULTRA-REFINED HERO ── */}
+      {/*  ULTRA-REFINED HERO  */}
       <section className="relative pt-40 pb-32 border-b border-zinc-200/50">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(0,0,0,0.03)_0%,transparent_100%)] pointer-events-none" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent" />
@@ -183,7 +183,7 @@ export default function ContractLifecyclePage({ integration }: { integration: an
         </div>
       </section>
 
-      {/* ── SIMPLE GRID FEATURES ── */}
+      {/*  SIMPLE GRID FEATURES  */}
       <section className="py-24 bg-white border-t border-zinc-200">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           <div className="mb-16 max-w-2xl">
@@ -216,7 +216,7 @@ export default function ContractLifecyclePage({ integration }: { integration: an
         </div>
       </section>
 
-      {/* ── HIGH-FIDELITY LIFECYCLE ── */}
+      {/*  HIGH-FIDELITY LIFECYCLE  */}
       <section className="py-32 bg-white border-t border-zinc-200 relative">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
           
@@ -225,7 +225,7 @@ export default function ContractLifecyclePage({ integration }: { integration: an
               Execution trace.
             </h2>
             <p className="text-lg text-zinc-500">
-              A transparent view into the exact lifecycle of a transaction—from signature to supplier activation.
+              A transparent view into the exact lifecycle of a transactionfrom signature to supplier activation.
             </p>
           </div>
 
@@ -378,7 +378,7 @@ Content-Type: application/json
         </div>
       </section>
 
-      {/* ── BOTTOM CTA ── */}
+      {/*  BOTTOM CTA  */}
       <section className="py-32 bg-white relative">
         <div className="max-w-[800px] mx-auto px-6 text-center">
           <h2 className="text-4xl font-medium tracking-tight text-zinc-900 mb-6" style={{ fontFamily: 'var(--font-sora)' }}>

@@ -6,13 +6,13 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import { breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Contact Flowtaris — Book an ERP Consultation',
+  title: 'Contact Flowtaris  Book an ERP Consultation',
   description: 'Book a consultation, request a proposal or get in touch with the Flowtaris enterprise ERP and integration consulting team.',
   alternates: {
     canonical: 'https://www.flowtaris.com/contact',
   },
   openGraph: {
-    title: 'Contact Flowtaris — Book an ERP Consultation',
+    title: 'Contact Flowtaris  Book an ERP Consultation',
     description: 'Book a consultation, request a proposal or get in touch with the Flowtaris enterprise ERP and integration consulting team.',
     url: 'https://www.flowtaris.com/contact',
     type: 'website',
@@ -23,7 +23,7 @@ const contactOptions = [
   {
     icon:        Calendar,
     title:       'Book a Consultation',
-    description: 'Schedule a 30–45 minute call with a certified ERP consultant to discuss your requirements.',
+    description: 'Schedule a 3045 minute call with a certified ERP consultant to discuss your requirements.',
     value:       'consultation',
   },
   {

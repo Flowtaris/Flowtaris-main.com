@@ -9,7 +9,7 @@ import { RelatedCaseStudies } from './components/RelatedCaseStudies'
 
 export const revalidate = 3600
 
-// ─── Metadata ─────────────────────────────────────────────────────────
+//  Metadata 
 export async function generateMetadata({
   params,
 }: {
@@ -44,7 +44,7 @@ export async function generateMetadata({
   }
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────
+//  Page 
 export default async function CaseStudyPage({
   params,
 }: {

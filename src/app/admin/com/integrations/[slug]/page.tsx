@@ -69,7 +69,7 @@ export default async function AdminIntegrationDetailPage({
 
       {/* Tabbed sections */}
       <ServicesSectionTabs tabs={tabs}>
-        {/* ── 1. HERO ───────────────────────────────────────── */}
+        {/*  1. HERO  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Hero Section</h2>
@@ -80,7 +80,7 @@ export default async function AdminIntegrationDetailPage({
           <IntegrationsHeroEditor integrationId={integrationId} initialData={heroData ?? null} />
         </div>
 
-        {/* ── 2. SECURITY PRECISION ─────────────────────────── */}
+        {/*  2. SECURITY PRECISION  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Security Precision (Grid Features)</h2>
@@ -95,7 +95,7 @@ export default async function AdminIntegrationDetailPage({
           />
         </div>
 
-        {/* ── 3. EXECUTION TRACE ────────────────────────────── */}
+        {/*  3. EXECUTION TRACE  */}
         <div>
           <div className="mb-5">
             <h2 className="text-base font-bold text-slate-800">Execution Trace</h2>

@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils'
 
-/* ════════════════════════════════════════════════════════
-   CARD — Base card component
-   ════════════════════════════════════════════════════════ */
+/* 
+   CARD  Base card component
+    */
 
 interface CardProps {
   children: React.ReactNode
@@ -43,9 +43,9 @@ export function Card({
   )
 }
 
-/* ════════════════════════════════════════════════════════
-   STAT CARD — For displaying metrics
-   ════════════════════════════════════════════════════════ */
+/* 
+   STAT CARD  For displaying metrics
+    */
 
 interface StatCardProps {
   value: string

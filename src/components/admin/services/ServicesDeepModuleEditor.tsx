@@ -9,7 +9,7 @@ import {
 } from '@/app/actions/services-actions'
 import { ServicesDeepModule } from '@/types/database'
 
-// ─── Card row ─────────────────────────────────────────────────────────
+//  Card row 
 function CardRow({ card, onDeleted }: { card: ServicesDeepModule; onDeleted: () => void }) {
   const [editing, setEditing] = useState(false)
   const [title, setTitle] = useState(card.title)
@@ -67,7 +67,7 @@ function CardRow({ card, onDeleted }: { card: ServicesDeepModule; onDeleted: () 
         <div className="flex items-center gap-3">
           <button onClick={save} disabled={saving} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50">
             <Check className="w-3.5 h-3.5" />
-            {saving ? 'Saving…' : 'Save'}
+            {saving ? 'Saving' : 'Save'}
           </button>
           <button onClick={() => { setEditing(false); setTitle(card.title); setSmallDesc(card.small_description ?? '') }} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100">
             <X className="w-3.5 h-3.5" />
@@ -100,7 +100,7 @@ function CardRow({ card, onDeleted }: { card: ServicesDeepModule; onDeleted: () 
   )
 }
 
-// ─── Add card form ─────────────────────────────────────────────────────
+//  Add card form 
 function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState('')
@@ -148,7 +148,7 @@ function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
       <div className="flex items-center gap-3">
         <button type="submit" disabled={saving} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50">
           <Plus className="w-3.5 h-3.5" />
-          {saving ? 'Adding…' : 'Add Card'}
+          {saving ? 'Adding' : 'Add Card'}
         </button>
         <button type="button" onClick={() => setOpen(false)} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100">
           <X className="w-3.5 h-3.5" />
@@ -160,7 +160,7 @@ function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
   )
 }
 
-// ─── Main export ──────────────────────────────────────────────────────
+//  Main export 
 export function ServicesDeepModuleEditor({ serviceId, initialCards }: { serviceId: string; initialCards: ServicesDeepModule[] }) {
   const [cards, setCards] = useState(initialCards)
 

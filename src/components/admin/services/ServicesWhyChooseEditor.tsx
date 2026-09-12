@@ -9,7 +9,7 @@ import {
 } from '@/app/actions/services-actions'
 import { ServicesWhyChoose } from '@/types/database'
 
-// ─── Inline edit row ───────────────────────────────────────────────
+//  Inline edit row 
 function CardRow({ card, onDeleted }: { card: ServicesWhyChoose; onDeleted: () => void }) {
   const [editing, setEditing] = useState(false)
   const [mainDesc, setMainDesc] = useState(card.main_description)
@@ -74,7 +74,7 @@ function CardRow({ card, onDeleted }: { card: ServicesWhyChoose; onDeleted: () =
             className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50"
           >
             <Check className="w-3.5 h-3.5" />
-            {saving ? 'Saving…' : 'Save'}
+            {saving ? 'Saving' : 'Save'}
           </button>
           <button
             onClick={() => { setEditing(false); setMainDesc(card.main_description); setSmallDesc(card.small_description ?? '') }}
@@ -119,7 +119,7 @@ function CardRow({ card, onDeleted }: { card: ServicesWhyChoose; onDeleted: () =
   )
 }
 
-// ─── Add form ───────────────────────────────────────────────────────
+//  Add form 
 function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [mainDesc, setMainDesc] = useState('')
@@ -187,7 +187,7 @@ function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
           className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50"
         >
           <Plus className="w-3.5 h-3.5" />
-          {saving ? 'Adding…' : 'Add Card'}
+          {saving ? 'Adding' : 'Add Card'}
         </button>
         <button
           type="button"
@@ -203,7 +203,7 @@ function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
   )
 }
 
-// ─── Main export ────────────────────────────────────────────────────
+//  Main export 
 export function ServicesWhyChooseEditor({ serviceId, initialCards }: { serviceId: string; initialCards: ServicesWhyChoose[] }) {
   const [cards, setCards] = useState(initialCards)
 

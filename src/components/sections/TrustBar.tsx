@@ -2,7 +2,7 @@
 
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
-// Custom SVG illustrations — purposely engineered-looking
+// Custom SVG illustrations  purposely engineered-looking
 function CertificationIllustration() {
   return (
     <svg viewBox="0 0 64 64" fill="none" className="w-12 h-12">
@@ -87,7 +87,7 @@ export function TrustBar({ dark: _dark = false }: { dark?: boolean }) {
     <section style={{ background: '#060D1A', borderTop: '1px solid rgba(232,160,32,0.1)', borderBottom: '1px solid rgba(232,160,32,0.1)' }}>
       <div className="container-content py-16">
         <AnimatedSection>
-          {/* Connecting line — desktop only */}
+          {/* Connecting line  desktop only */}
           <div className="hidden lg:block relative mb-8">
             <div className="absolute top-1/2 left-16 right-16 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(232,160,32,0.2), rgba(232,160,32,0.4), rgba(232,160,32,0.2), transparent)' }} />
           </div>

@@ -125,7 +125,7 @@ const COMPARISONS = {
     },
     features: [
       { category: 'Financial Accounting', systemA: 'Universal Journal provides a single source of truth, but configuration is notoriously rigid.', systemB: 'Industry-leading financial consolidation, multi-ledger agility, and seamless EPM integration.', winner: 'B' },
-      { category: 'Manufacturing & Supply Chain', systemA: 'Unrivaled depth. Advanced Available-to-Promise (aATP), detailed MRP, and complex plant maintenance.', systemB: 'Strong, but often requires significant configuration to match SAP’s out-of-the-box manufacturing depth.', winner: 'A' },
+      { category: 'Manufacturing & Supply Chain', systemA: 'Unrivaled depth. Advanced Available-to-Promise (aATP), detailed MRP, and complex plant maintenance.', systemB: 'Strong, but often requires significant configuration to match SAPs out-of-the-box manufacturing depth.', winner: 'A' },
       { category: 'Cloud Modernization', systemA: 'Many customers still rely on hybrid or private cloud (RISE with SAP) due to complex legacy customizations.', systemB: 'True multi-tenant SaaS. All customers on the same version, receiving automatic quarterly updates.', winner: 'B' },
     ],
     integration: {
@@ -225,7 +225,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       
-      {/* ── HERO SECTION ── */}
+      {/*  HERO SECTION  */}
       <section className="relative pt-12 pb-20 border-b border-zinc-200/60 bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_center,rgba(0,0,0,0.02)_0%,transparent_100%)] pointer-events-none" />
         <div className="max-w-[1000px] mx-auto px-6 relative z-10 text-center">
@@ -243,7 +243,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* ── EXECUTIVE SUMMARY ── */}
+      {/*  EXECUTIVE SUMMARY  */}
       <section className="py-16">
         <div className="max-w-[1000px] mx-auto px-6">
           <div className="bg-white p-8 md:p-12 rounded-[2rem] border border-zinc-200 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] relative overflow-hidden group">
@@ -256,7 +256,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* ── WHEN TO CHOOSE MATRIX ── */}
+      {/*  WHEN TO CHOOSE MATRIX  */}
       <section className="py-8">
         <div className="max-w-[1000px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* System A Card */}
@@ -290,7 +290,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* ── ARCHITECTURE & TCO GRID ── */}
+      {/*  ARCHITECTURE & TCO GRID  */}
       <section className="py-16">
         <div className="max-w-[1000px] mx-auto px-6 space-y-6">
           <div className="bg-zinc-900 rounded-[2rem] p-10 text-white shadow-xl relative overflow-hidden">
@@ -326,7 +326,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* ── BATTLE GRID (FEATURE BY FEATURE) ── */}
+      {/*  BATTLE GRID (FEATURE BY FEATURE)  */}
       <section className="py-12">
         <div className="max-w-[1000px] mx-auto px-6">
           <h3 className="text-3xl font-medium text-center text-zinc-900 mb-12" style={{ fontFamily: 'var(--font-sora)' }}>Feature by Feature</h3>
@@ -362,7 +362,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* ── THE INTEGRATION FACTOR ── */}
+      {/*  THE INTEGRATION FACTOR  */}
       <section className="py-16">
         <div className="max-w-[1000px] mx-auto px-6">
           <div className="bg-[#0A1628] rounded-[2rem] p-10 md:p-16 border border-zinc-800 shadow-2xl relative overflow-hidden group">
@@ -395,7 +395,7 @@ export default async function CompareSlugPage({ params }: { params: Promise<{ sl
         </div>
       </section>
 
-      {/* ── THE VERDICT ── */}
+      {/*  THE VERDICT  */}
       <section className="py-8">
         <div className="max-w-[800px] mx-auto px-6 text-center">
           <div className="w-16 h-16 rounded-full bg-zinc-100 flex items-center justify-center mx-auto mb-6">

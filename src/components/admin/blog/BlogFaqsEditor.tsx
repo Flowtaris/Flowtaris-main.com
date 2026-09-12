@@ -84,7 +84,7 @@ function FaqRow({ faq, onDeleted }: { faq: BlogFaq; onDeleted: () => void }) {
             className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50"
           >
             <Check className="w-3.5 h-3.5" />
-            {saving ? 'Saving…' : 'Save'}
+            {saving ? 'Saving' : 'Save'}
           </button>
           <button
             onClick={() => {
@@ -218,7 +218,7 @@ function AddFaqForm({ blogId, onAdded }: { blogId: string; onAdded: () => void }
           className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50"
         >
           <Plus className="w-3.5 h-3.5" />
-          {saving ? 'Adding…' : 'Add FAQ'}
+          {saving ? 'Adding' : 'Add FAQ'}
         </button>
         <button
           type="button"

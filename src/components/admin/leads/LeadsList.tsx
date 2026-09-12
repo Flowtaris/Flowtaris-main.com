@@ -100,8 +100,8 @@ function LeadRow({ lead, onUpdate, onDelete }: { lead: Lead, onUpdate: () => voi
               <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Contact Details</h4>
               <p className="text-slate-600"><span className="font-medium">Name:</span> {lead.name}</p>
               <p className="text-slate-600"><span className="font-medium">Email:</span> <a href={`mailto:${lead.work_email}`} className="text-blue-600 hover:underline">{lead.work_email}</a></p>
-              <p className="text-slate-600"><span className="font-medium">Company:</span> {lead.company || '—'}</p>
-              <p className="text-slate-600"><span className="font-medium">Preferred Contact:</span> {lead.preferred_contact || '—'}</p>
+              <p className="text-slate-600"><span className="font-medium">Company:</span> {lead.company || ''}</p>
+              <p className="text-slate-600"><span className="font-medium">Preferred Contact:</span> {lead.preferred_contact || ''}</p>
             </div>
             
             {(lead.platform || lead.service_needed || lead.project_timeline || lead.team_size) && (

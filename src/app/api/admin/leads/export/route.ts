@@ -36,7 +36,7 @@ export async function GET() {
     const strValue = String(value)
     const dangerous = ['=', '+', '-', '@', '\t', '\r']
     if (dangerous.some(char => strValue.startsWith(char))) {
-      return `'${strValue}` // prefix with apostrophe — Excel treats it as text
+      return `'${strValue}` // prefix with apostrophe  Excel treats it as text
     }
     return strValue.includes(',') || strValue.includes('"') || strValue.includes('\n')
       ? `"${strValue.replace(/"/g, '""')}"` : strValue

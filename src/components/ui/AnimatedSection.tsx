@@ -4,9 +4,9 @@ import { useRef } from 'react'
 import { motion, useInView, Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-/* ════════════════════════════════════════════════════════
-   ANIMATED SECTION — Scroll-triggered reveal (Robust)
-   ════════════════════════════════════════════════════════ */
+/* 
+   ANIMATED SECTION  Scroll-triggered reveal (Robust)
+    */
 
 interface AnimatedSectionProps {
   children: React.ReactNode
@@ -48,9 +48,9 @@ export function AnimatedSection({
   )
 }
 
-/* ════════════════════════════════════════════════════════
-   STAGGERED GRID — Children animate in sequence
-   ════════════════════════════════════════════════════════ */
+/* 
+   STAGGERED GRID  Children animate in sequence
+    */
 
 interface StaggeredGridProps {
   children: React.ReactNode

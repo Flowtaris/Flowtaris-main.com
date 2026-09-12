@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { absoluteUrl } from '@/lib/utils'
 
-/* ════════════════════════════════════════════════════════
+/* 
    SIMPLE METADATA GENERATOR (synchronous)
    Used by all page stubs from Prompt 2.
-   ════════════════════════════════════════════════════════ */
+    */
 
 interface SimpleMetadataParams {
   title: string
@@ -54,10 +54,10 @@ export function generatePageMetadata({
   }
 }
 
-/* ════════════════════════════════════════════════════════
+/* 
    SUPABASE-DRIVEN METADATA GENERATOR (async)
    Used when per-page SEO overrides are needed from the CMS.
-   ════════════════════════════════════════════════════════ */
+    */
 
 interface SupabaseMetadataOptions {
   pageSlug: string

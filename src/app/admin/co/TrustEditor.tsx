@@ -24,9 +24,9 @@ export default function TrustEditor({ site }: { site: string }) {
         if (message) console.warn(message);
         setTrustTitle("THREE SYSTEMS OF TRUST");
         setTrustSystems([
-          { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE →", ctaLink: "#judgment" },
-          { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE →", ctaLink: "#evidence" },
-          { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE →", ctaLink: "#leverage" }
+          { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE ", ctaLink: "#judgment" },
+          { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE ", ctaLink: "#evidence" },
+          { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE ", ctaLink: "#leverage" }
         ]);
       }
     } catch (err) {
@@ -129,7 +129,7 @@ export default function TrustEditor({ site }: { site: string }) {
           </div>
           <div>
             <label style={{ display: "block", marginBottom: 8, fontSize: 14, fontWeight: 500, color: "#374151" }}>CTA Text</label>
-            <input type="text" value={newSystem.ctaText} onChange={(e) => setNewSystem({...newSystem, ctaText: e.target.value})} style={{ width: "100%", background: "#F9FAFB", border: "1px solid #D1D5DB", padding: "10px 12px", borderRadius: 6, fontSize: 14 }} placeholder="e.g. EXPLORE →" />
+            <input type="text" value={newSystem.ctaText} onChange={(e) => setNewSystem({...newSystem, ctaText: e.target.value})} style={{ width: "100%", background: "#F9FAFB", border: "1px solid #D1D5DB", padding: "10px 12px", borderRadius: 6, fontSize: 14 }} placeholder="e.g. EXPLORE " />
           </div>
           <div>
             <label style={{ display: "block", marginBottom: 8, fontSize: 14, fontWeight: 500, color: "#374151" }}>CTA Link</label>

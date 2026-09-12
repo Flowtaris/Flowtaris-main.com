@@ -163,7 +163,7 @@ export default function PrinciplesEditor({ site }: { site: string }) {
                 context: ["This principle emerged from a specific scenario we encountered."],
                 decision: { main: "Decision details pending.", supporting: "" },
                 alternativesRejected: [{ number: "01", title: "Status Quo", reason: "Inaction was not an option." }],
-                outcome: { metrics: [{ value: "—", label: "Pending" }], timeframe: "—", caveats: [] },
+                outcome: { metrics: [{ value: "", label: "Pending" }], timeframe: "", caveats: [] },
                 principle: draft.principleStatement,
               }
             }
@@ -360,7 +360,7 @@ export default function PrinciplesEditor({ site }: { site: string }) {
               {logs.map((log: any, idx: number) => {
                 if (!log.principle?.statement) return null;
                 const yearMatch = log.date?.match(/\d{4}/);
-                const year = yearMatch ? yearMatch[0] : "—";
+                const year = yearMatch ? yearMatch[0] : "";
                 return (
                   <div
                     key={log.slug || idx}
@@ -377,15 +377,15 @@ export default function PrinciplesEditor({ site }: { site: string }) {
                     <div>
                       <div style={{ fontWeight: 500, color: "#111827", fontSize: 14, marginBottom: 2 }}>
                         {log.principle.statement.length > 60
-                          ? log.principle.statement.substring(0, 60) + "…"
+                          ? log.principle.statement.substring(0, 60) + ""
                           : log.principle.statement}
                       </div>
                       <div style={{ fontSize: 12, color: "#9CA3AF" }}>
-                        {log.title} · {log.author || "—"}
+                        {log.title}  {log.author || ""}
                       </div>
                     </div>
                     <span style={{ fontSize: 12, color: "#6B7280", background: "#F3F4F6", padding: "4px 8px", borderRadius: 4, textAlign: "center", width: "fit-content" }}>
-                      {(log.principle.category || "—").toUpperCase()}
+                      {(log.principle.category || "").toUpperCase()}
                     </span>
                     <span style={{ fontSize: 13, color: "#6B7280" }}>{year}</span>
                     <div style={{ display: "flex", gap: 6 }}>
@@ -522,8 +522,8 @@ function defaultPageData() {
     explore: { title: "EXPLORE PRINCIPLES" },
     featured: { label: "FEATURED PRINCIPLE" },
     indexSection: { title: "PRINCIPLES" },
-    judgmentConnection: { title: "EVERY PRINCIPLE HAS A HISTORY.", desc: "READ THE DECISIONS\\nTHAT CREATED THEM.", cta: "EXPLORE JUDGMENT →" },
-    evidenceConnection: { title: "PRINCIPLES → DECISIONS → EVIDENCE", steps: [{ label: "What we believe", color: "default" }, { label: "What we decided", color: "default" }, { label: "How we operate", color: "accent" }], cta: "EXPLORE EVIDENCE →" },
+    judgmentConnection: { title: "EVERY PRINCIPLE HAS A HISTORY.", desc: "READ THE DECISIONS\\nTHAT CREATED THEM.", cta: "EXPLORE JUDGMENT " },
+    evidenceConnection: { title: "PRINCIPLES  DECISIONS  EVIDENCE", steps: [{ label: "What we believe", color: "default" }, { label: "What we decided", color: "default" }, { label: "How we operate", color: "accent" }], cta: "EXPLORE EVIDENCE " },
     closing: { title: "PRINCIPLES AREN'T PROMISES.", desc: "THEY'RE THE PATTERNS WE KEEP\\nAFTER THE DECISION IS MADE." }
   };
 }

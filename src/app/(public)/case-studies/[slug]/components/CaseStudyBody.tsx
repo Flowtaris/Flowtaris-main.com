@@ -31,7 +31,7 @@ export function CaseStudyBody({
                 {industries.map(i => (
                   <span key={i} className="text-[13px] font-bold text-gray-700 bg-gray-100/80 border border-gray-200/60 px-4 py-2 rounded-lg">{i}</span>
                 ))}
-                {industries.length === 0 && <span className="text-sm text-gray-400">—</span>}
+                {industries.length === 0 && <span className="text-sm text-gray-400"></span>}
               </div>
             </div>
 
@@ -44,7 +44,7 @@ export function CaseStudyBody({
                     <span>{s}</span>
                   </li>
                 ))}
-                {services.length === 0 && <span className="text-sm text-gray-400">—</span>}
+                {services.length === 0 && <span className="text-sm text-gray-400"></span>}
               </ul>
             </div>
 
@@ -56,7 +56,7 @@ export function CaseStudyBody({
                     {p}
                   </span>
                 ))}
-                {platforms.length === 0 && <span className="text-sm text-gray-400">—</span>}
+                {platforms.length === 0 && <span className="text-sm text-gray-400"></span>}
               </div>
             </div>
             

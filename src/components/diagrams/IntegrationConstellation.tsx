@@ -5,9 +5,9 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Text, Stars } from '@react-three/drei'
 import * as THREE from 'three'
 
-// ────────────────────────────────────────────────────────
-// Planet data — solar system style
-// ────────────────────────────────────────────────────────
+// 
+// Planet data  solar system style
+// 
 const PLANETS = [
   {
     name:       'NetSuite',
@@ -89,9 +89,9 @@ const PLANETS = [
   },
 ]
 
-// ────────────────────────────────────────────────────────
-// Orbit ring (decorative — shows the orbital path)
-// ────────────────────────────────────────────────────────
+// 
+// Orbit ring (decorative  shows the orbital path)
+// 
 function OrbitPath({ a, b, tilt }: { a: number; b: number; tilt: number }) {
   const points = useMemo(() => {
     const pts: THREE.Vector3[] = []
@@ -116,9 +116,9 @@ function OrbitPath({ a, b, tilt }: { a: number; b: number; tilt: number }) {
   )
 }
 
-// ────────────────────────────────────────────────────────
+// 
 // Single planet
-// ────────────────────────────────────────────────────────
+// 
 function Planet({ data }: { data: typeof PLANETS[number] }) {
   const meshRef  = useRef<THREE.Mesh>(null)
   const groupRef = useRef<THREE.Group>(null)
@@ -180,9 +180,9 @@ function Planet({ data }: { data: typeof PLANETS[number] }) {
   )
 }
 
-// ────────────────────────────────────────────────────────
-// Asteroid belt — particle ring
-// ────────────────────────────────────────────────────────
+// 
+// Asteroid belt  particle ring
+// 
 const ASTEROID_POSITIONS = (() => {
   const count = 600
   const pos   = new Float32Array(count * 3)
@@ -213,10 +213,10 @@ function AsteroidBelt() {
   )
 }
 
-// ────────────────────────────────────────────────────────
-// Center sun — the Flowtaris node
+// 
+// Center sun  the Flowtaris node
 // Interactive: hover enlarges + shows FLOWTARIS text
-// ────────────────────────────────────────────────────────
+// 
 function SunNode() {
   const meshRef   = useRef<THREE.Mesh>(null)
   const coronaRef = useRef<THREE.Mesh>(null)
@@ -314,9 +314,9 @@ function SunNode() {
   )
 }
 
-// ────────────────────────────────────────────────────────
+// 
 // Full scene
-// ────────────────────────────────────────────────────────
+// 
 function SolarScene() {
   const systemRef = useRef<THREE.Group>(null)
 
@@ -346,9 +346,9 @@ function SolarScene() {
   )
 }
 
-// ────────────────────────────────────────────────────────
+// 
 // Static SVG fallback (mobile / no WebGL)
-// ────────────────────────────────────────────────────────
+// 
 function StaticFallback() {
   return (
     <div className="w-full h-full flex items-center justify-center min-h-[380px]">
@@ -383,9 +383,9 @@ function StaticFallback() {
   )
 }
 
-// ────────────────────────────────────────────────────────
-// Main export — client-side WebGL detection
-// ────────────────────────────────────────────────────────
+// 
+// Main export  client-side WebGL detection
+// 
 export function IntegrationConstellation() {
   const [mounted,  setMounted]  = useState(false)
   const [hasWebGL, setHasWebGL] = useState(false)

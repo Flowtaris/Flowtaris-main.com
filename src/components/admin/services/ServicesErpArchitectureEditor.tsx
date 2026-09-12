@@ -10,7 +10,7 @@ import {
 } from '@/app/actions/services-actions'
 import { ServicesErpArchitectureMain, ServicesErpArchitectureCard } from '@/types/database'
 
-// ─── Section description editor ──────────────────────────────────────
+//  Section description editor 
 function ErpMainEditor({ serviceId, initialData }: { serviceId: string; initialData: ServicesErpArchitectureMain | null }) {
   const [smallDesc, setSmallDesc] = useState(initialData?.small_description ?? '')
   const [saving, setSaving] = useState(false)
@@ -57,7 +57,7 @@ function ErpMainEditor({ serviceId, initialData }: { serviceId: string; initialD
   )
 }
 
-// ─── Tags input ───────────────────────────────────────────────────────
+//  Tags input 
 function TagsInput({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
   const [input, setInput] = useState('')
 
@@ -102,7 +102,7 @@ function TagsInput({ value, onChange }: { value: string[]; onChange: (v: string[
   )
 }
 
-// ─── Card row ─────────────────────────────────────────────────────────
+//  Card row 
 function CardRow({
   card,
   onDeleted,
@@ -178,7 +178,7 @@ function CardRow({
         <div className="flex items-center gap-3">
           <button onClick={save} disabled={saving} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50">
             <Check className="w-3.5 h-3.5" />
-            {saving ? 'Saving…' : 'Save'}
+            {saving ? 'Saving' : 'Save'}
           </button>
           <button onClick={() => { setEditing(false); setTitle(card.title); setDescription(card.description ?? ''); setTags(card.tags ?? []); setPriority(card.priority) }} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100">
             <X className="w-3.5 h-3.5" />
@@ -219,7 +219,7 @@ function CardRow({
   )
 }
 
-// ─── Add card form ────────────────────────────────────────────────────
+//  Add card form 
 function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () => void }) {
   const [open, setOpen] = useState(false)
   const [title, setTitle] = useState('')
@@ -280,7 +280,7 @@ function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
       <div className="flex items-center gap-3">
         <button type="submit" disabled={saving} className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded-lg font-medium disabled:opacity-50">
           <Plus className="w-3.5 h-3.5" />
-          {saving ? 'Adding…' : 'Add Card'}
+          {saving ? 'Adding' : 'Add Card'}
         </button>
         <button type="button" onClick={() => setOpen(false)} className="flex items-center gap-1.5 text-slate-500 hover:text-slate-700 text-xs px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100">
           <X className="w-3.5 h-3.5" />
@@ -292,7 +292,7 @@ function AddCardForm({ serviceId, onAdded }: { serviceId: string; onAdded: () =>
   )
 }
 
-// ─── Main export ──────────────────────────────────────────────────────
+//  Main export 
 export function ServicesErpArchitectureEditor({
   serviceId,
   initialMain,
@@ -335,7 +335,7 @@ export function ServicesErpArchitectureEditor({
           <h3 className="text-sm font-bold text-slate-700 flex items-center gap-2">
             <span className="w-5 h-5 bg-orange-100 text-orange-600 rounded text-[10px] flex items-center justify-center font-bold">C</span>
             ERP Architecture Cards
-            <span className="ml-1 text-xs text-slate-500 font-normal">(sorted by priority, high → low)</span>
+            <span className="ml-1 text-xs text-slate-500 font-normal">(sorted by priority, high  low)</span>
           </h3>
         </div>
         <div className="space-y-3">
