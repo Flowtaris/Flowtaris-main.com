@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function ResourcesEditor({ site }: { site: string }) {
   const [pdfs, setPdfs] = useState<any[]>([]);
@@ -8,9 +8,7 @@ export default function ResourcesEditor({ site }: { site: string }) {
   const [newPdfUrl, setNewPdfUrl] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, [site]);
-
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/content/${site}?table=pdf_documents`);
@@ -20,7 +18,9 @@ export default function ResourcesEditor({ site }: { site: string }) {
       console.error(e);
     }
     setLoading(false);
-  }
+  }, [site]);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   async function addPdf() {
     if (!newPdfTitle || !newPdfUrl) { alert("Please enter title and URL for the PDF."); return; }

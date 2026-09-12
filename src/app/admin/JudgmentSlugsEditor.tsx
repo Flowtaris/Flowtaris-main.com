@@ -9,23 +9,24 @@ export default function JudgmentSlugsEditor({ site }: { site: string }) {
   const [isSlugLoading, setIsSlugLoading] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchLogs(); }, [site]);
-
-  async function fetchLogs() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
-      const { data } = await res.json();
-      if (data && data.length > 0 && data[0].content?.logs) {
-        setDecisionLogs(data[0].content.logs);
-      } else {
-        setDecisionLogs([]);
+  useEffect(() => {
+    async function fetchLogs() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
+        const { data } = await res.json();
+        if (data && data.length > 0 && data[0].content?.logs) {
+          setDecisionLogs(data[0].content.logs);
+        } else {
+          setDecisionLogs([]);
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
+      setLoading(false);
     }
-    setLoading(false);
-  }
+    fetchLogs();
+  }, [site]);
 
   async function loadSlugContent(slug: string) {
     if (!slug) { setSelectedSlug(""); setSlugData(null); return; }

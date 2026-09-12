@@ -16,32 +16,31 @@ export default function PrinciplesEditor({ site }: { site: string }) {
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [draft, setDraft] = useState<any>(null);
 
-  useEffect(() => { fetchAll(); }, [site]);
-
-  async function fetchAll() {
-    setLoading(true);
-    try {
-      const [pageRes, judgRes] = await Promise.all([
-        fetch(`/api/content/${site}?table=page_content&id=principles`).then(r => r.json()),
-        fetch(`/api/content/${site}?table=page_content&id=judgment`).then(r => r.json())
-      ]);
-      
-      if (pageRes.data && pageRes.data.length > 0 && pageRes.data[0].content) {
-        setPageData(pageRes.data[0].content);
-      } else {
-        setPageData(defaultPageData());
+  useEffect(() => {
+    async function fetchAll() {
+      setLoading(true);
+      try {
+        const [pageRes, judgRes] = await Promise.all([
+          fetch(`/api/content/${site}?table=page_content&id=principles`).then(r => r.json()),
+          fetch(`/api/content/${site}?table=page_content&id=judgment`).then(r => r.json())
+        ]);
+        if (pageRes.data && pageRes.data.length > 0 && pageRes.data[0].content) {
+          setPageData(pageRes.data[0].content);
+        } else {
+          setPageData(defaultPageData());
+        }
+        if (judgRes.data && judgRes.data.length > 0 && judgRes.data[0].content) {
+          setJudgmentData(judgRes.data[0].content);
+        } else {
+          setJudgmentData({ logs: [] });
+        }
+      } catch (err) {
+        console.error(err);
       }
-      
-      if (judgRes.data && judgRes.data.length > 0 && judgRes.data[0].content) {
-        setJudgmentData(judgRes.data[0].content);
-      } else {
-        setJudgmentData({ logs: [] });
-      }
-    } catch (err) {
-      console.error(err);
+      setLoading(false);
     }
-    setLoading(false);
-  }
+    fetchAll();
+  }, [site]);
 
   const logs = useMemo(() => (judgmentData?.logs || []), [judgmentData]);
   const principlesLogs = useMemo(() => logs.filter((l: any) => l.principle?.statement), [logs]);
@@ -163,7 +162,7 @@ export default function PrinciplesEditor({ site }: { site: string }) {
                 context: ["This principle emerged from a specific scenario we encountered."],
                 decision: { main: "Decision details pending.", supporting: "" },
                 alternativesRejected: [{ number: "01", title: "Status Quo", reason: "Inaction was not an option." }],
-                outcome: { metrics: [{ value: "—", label: "Pending" }], timeframe: "—", caveats: [] },
+                outcome: { metrics: [{ value: "--", label: "Pending" }], timeframe: "--", caveats: [] },
                 principle: draft.principleStatement,
               }
             }
@@ -360,7 +359,7 @@ export default function PrinciplesEditor({ site }: { site: string }) {
               {logs.map((log: any, idx: number) => {
                 if (!log.principle?.statement) return null;
                 const yearMatch = log.date?.match(/\d{4}/);
-                const year = yearMatch ? yearMatch[0] : "—";
+                const year = yearMatch ? yearMatch[0] : "--";
                 return (
                   <div
                     key={log.slug || idx}
@@ -381,11 +380,11 @@ export default function PrinciplesEditor({ site }: { site: string }) {
                           : log.principle.statement}
                       </div>
                       <div style={{ fontSize: 12, color: "#9CA3AF" }}>
-                        {log.title} · {log.author || "—"}
+                        {log.title} · {log.author || "--"}
                       </div>
                     </div>
                     <span style={{ fontSize: 12, color: "#6B7280", background: "#F3F4F6", padding: "4px 8px", borderRadius: 4, textAlign: "center", width: "fit-content" }}>
-                      {(log.principle.category || "—").toUpperCase()}
+                      {(log.principle.category || "--").toUpperCase()}
                     </span>
                     <span style={{ fontSize: 13, color: "#6B7280" }}>{year}</span>
                     <div style={{ display: "flex", gap: 6 }}>

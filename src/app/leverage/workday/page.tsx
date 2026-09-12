@@ -258,7 +258,7 @@ export default function WorkdayAlliancePage() {
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', maxWidth: '800px' }}>
           {[
-            { id: 1, text: "Your Workday implementation is working — but the systems around it are becoming the bottleneck." },
+            { id: 1, text: "Your Workday implementation is working -- but the systems around it are becoming the bottleneck." },
             { id: 2, text: "The question isn't whether Workday can integrate with the system. It's which integration pattern makes sense for the operating model." },
             { id: 3, text: "Before adding another integration, let's map what belongs in Workday, what belongs outside it, and where the boundary should sit." }
           ].map((prompt, index) => (

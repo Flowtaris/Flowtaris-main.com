@@ -7,23 +7,24 @@ export default function WorkdayEditor({ site }: { site: string }) {
   const [newSpecialist, setNewSpecialist] = useState({ name: "", role: "", specialty: "", certs: "", link: "" });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, [site]);
-
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=workday_specialists`);
-      const { data } = await res.json();
-      if (data && data.length > 0 && data[0].content?.specialists) {
-        setSpecialists(data[0].content.specialists);
-      } else {
-        setSpecialists([]);
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=workday_specialists`);
+        const { data } = await res.json();
+        if (data && data.length > 0 && data[0].content?.specialists) {
+          setSpecialists(data[0].content.specialists);
+        } else {
+          setSpecialists([]);
+        }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
+      setLoading(false);
     }
-    setLoading(false);
-  }
+    fetchData();
+  }, [site]);
 
   async function saveSpecialists(updated: any[]) {
     try {

@@ -9,31 +9,31 @@ export default function TrustEditor({ site }: { site: string }) {
   const [editingSystemId, setEditingSystemId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, [site]);
-
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=systems_of_trust`);
-      const { data, message, error } = await res.json();
-      
-      if (data && data.length > 0 && data[0].content) {
-        setTrustTitle(data[0].content.title || "");
-        setTrustSystems(data[0].content.systems || []);
-      } else {
-        if (message) console.warn(message);
-        setTrustTitle("THREE SYSTEMS OF TRUST");
-        setTrustSystems([
-          { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE →", ctaLink: "#judgment" },
-          { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE →", ctaLink: "#evidence" },
-          { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE →", ctaLink: "#leverage" }
-        ]);
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=systems_of_trust`);
+        const { data, message } = await res.json();
+        if (data && data.length > 0 && data[0].content) {
+          setTrustTitle(data[0].content.title || "");
+          setTrustSystems(data[0].content.systems || []);
+        } else {
+          if (message) console.warn(message);
+          setTrustTitle("THREE SYSTEMS OF TRUST");
+          setTrustSystems([
+            { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE →", ctaLink: "#judgment" },
+            { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE →", ctaLink: "#evidence" },
+            { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE →", ctaLink: "#leverage" }
+          ]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch", err);
       }
-    } catch (err) {
-      console.error("Failed to fetch", err);
+      setLoading(false);
     }
-    setLoading(false);
-  }
+    fetchData();
+  }, [site]);
 
   async function saveTrustContent() {
     try {

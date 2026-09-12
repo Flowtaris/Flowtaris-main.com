@@ -187,7 +187,7 @@ export default function SecurityDossierPage() {
                 { name: "Business Continuity Plan", updated: "FEB 2026", action: "VIEW" },
                 { name: "Access Control Policy", updated: "FEB 2026", action: "VIEW" },
                 { name: "Security Overview", updated: "JAN 2026", action: "VIEW" },
-                { name: "SOC 2 Report", updated: "—", action: "REQUEST" }
+                { name: "SOC 2 Report", updated: "--", action: "REQUEST" }
               ].map((doc, i) => (
                 <tr key={i} className="ev-tr">
                   <td className="ev-td ev-td-name" style={{ fontSize: '1.125rem' }}>{doc.name}</td>

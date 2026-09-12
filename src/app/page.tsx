@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import Image from 'next/image';
 
 export const revalidate = 0;
 
@@ -67,7 +68,7 @@ export default async function Home() {
           <a href={content.ctaLink || "#judgment"} className="cta-button primary">{content.ctaText || "EXPLORE OUR JUDGMENT \u2192"}</a>
         </div>
         <div className="hero-image-wrapper">
-          <img src={content.heroImage || "/hero_image.png"} alt="Flowtaris Modern Architecture" className="hero-image" />
+          <Image src={content.heroImage || "/hero_image.png"} alt="Flowtaris Modern Architecture" className="hero-image" width={800} height={600} priority />
         </div>
       </section>
 

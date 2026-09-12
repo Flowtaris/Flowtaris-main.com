@@ -7,37 +7,36 @@ export default function LeverageEditor({ site }: { site: string }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=leverage`);
+        const { data: resData } = await res.json();
+        if (resData && resData.length > 0 && resData[0].content) {
+          setData(resData[0].content);
+        } else {
+          // Default template
+          setData({
+            hero: { eyebrow: "LEVERAGE", title: "HOW WE SCALE\\nWITHOUT SCALING\\nCOMPLEXITY.", subtitle: "The platforms, partnerships and specialist\\nrelationships that extend what Flowtaris\\ncan deliver.", stats: ["03 STRATEGIC ALLIANCES", "ACTIVE NETWORK"] },
+            leverageModel: { title: "HOW WE CREATE LEVERAGE", items: [{ title: "PLATFORMS", desc: "Technology platforms that allow\\nus to solve complex problems faster." }, { title: "PARTNERS", desc: "Strategic relationships that expand\\ncapability and reach." }, { title: "PEOPLE", desc: "Specialists who bring depth where\\ngeneral capability isn't enough." }] },
+            strategicAlliances: { title: "STRATEGIC ALLIANCES", alliances: [{ num: "01", name: "NETSUITE", desc: "ERP implementation, integration and platform engineering.", status: "[ IN DEVELOPMENT ]", href: "/leverage/netsuite" }, { num: "02", name: "COUPA", desc: "Procurement platform engineering, integration and optimization.", status: "[ IN DEVELOPMENT ]", href: "/leverage/coupa" }, { num: "03", name: "WORKDAY", desc: "Enterprise platform integration, engineering and delivery.", status: "[ IN DEVELOPMENT ]", href: "/leverage/workday" }] },
+            partnershipsChange: { title: "PARTNERSHIPS SHOULD CHANGE\\nTHE OUTCOME.", subtitle: "Not the logo wall.", withoutLeverage: ["Client problem", "Flowtaris capability", "Limited delivery boundary"], withLeverage: ["Client problem", "Flowtaris", "Strategic platform / partner", "Specialist capability", "Larger solution surface"] },
+            capabilityMap: { title: "CAPABILITY MAP", capabilities: [{ name: "Architecture", f: "\u2713", p: "\u2713", s: "\u2715" }, { name: "Integration", f: "\u2713", p: "\u2713", s: "\u2715" }, { name: "Platform Engineering", f: "\u2713", p: "\u2713", s: "\u2715" }, { name: "Data Engineering", f: "\u2713", p: "\u2715", s: "\u2713" }, { name: "ERP", f: "\u2715", p: "\u2713", s: "\u2713" }, { name: "Procurement", f: "\u2715", p: "\u2713", s: "\u2713" }, { name: "AI / Automation", f: "\u2713", p: "\u2715", s: "\u2713" }] },
+            partnerRegistration: { label: "PARTNER DEAL REGISTRATION", title: "HAVE AN OPPORTUNITY?", desc: "Register it once.\\nWe'll route it to the appropriate Flowtaris\\nteam and partner relationship.", cta: "REGISTER AN OPPORTUNITY \u2192" },
+            partnerPipeline: { title: "PARTNER PIPELINE", desc: "PIPELINE DATA\\nCOMING ONLINE" },
+            specialistNetwork: { label: "SPECIALIST NETWORK", title: "WHEN DEPTH MATTERS,\\nBRING IN THE RIGHT PERSON.", desc: "A curated network of specialists\\nacross platforms, engineering,\\ndata and enterprise operations.", cta: "EXPLORE SPECIALISTS \u2192", categories: [{ label: "ERP", items: ["NetSuite", "SAP", "Workday"] }, { label: "DATA", items: ["Data Engineering", "Analytics", "AI"] }, { label: "OPERATIONS", items: ["Transformation", "Architecture", "Program Leadership"] }] },
+            flowtarisNetwork: { title: "THE FLOWTARIS NETWORK", domains: [{ ext: ".CO", desc: "TRUST INFRASTRUCTURE" }, { ext: ".COM", desc: "Company / commercial presence" }, { ext: ".AI", desc: "AI systems / intelligence" }, { ext: ".NET", desc: "Client / operational infrastructure" }] },
+            operatingPrinciple: "LEVERAGE IS NOT ABOUT DOING MORE.\\nIT IS ABOUT MAKING THE SAME\\nCAPABILITY REACH FURTHER.",
+            finalCta: { title: "HAVE AN OPPORTUNITY\\nTHAT NEEDS MORE CAPABILITY?", desc: "Let's determine whether\\nthe right leverage already exists.", cta: "REGISTER AN OPPORTUNITY \u2192" }
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+      setLoading(false);
+    }
     fetchData();
   }, [site]);
-
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=leverage`);
-      const { data: resData } = await res.json();
-      if (resData && resData.length > 0 && resData[0].content) {
-        setData(resData[0].content);
-    } else {
-      // Default template
-      setData({
-        hero: { eyebrow: "LEVERAGE", title: "HOW WE SCALE\\nWITHOUT SCALING\\nCOMPLEXITY.", subtitle: "The platforms, partnerships and specialist\\nrelationships that extend what Flowtaris\\ncan deliver.", stats: ["03 STRATEGIC ALLIANCES", "ACTIVE NETWORK"] },
-        leverageModel: { title: "HOW WE CREATE LEVERAGE", items: [{ title: "PLATFORMS", desc: "Technology platforms that allow\\nus to solve complex problems faster." }, { title: "PARTNERS", desc: "Strategic relationships that expand\\ncapability and reach." }, { title: "PEOPLE", desc: "Specialists who bring depth where\\ngeneral capability isn't enough." }] },
-        strategicAlliances: { title: "STRATEGIC ALLIANCES", alliances: [{ num: "01", name: "NETSUITE", desc: "ERP implementation, integration and platform engineering.", status: "[ IN DEVELOPMENT ]", href: "/leverage/netsuite" }, { num: "02", name: "COUPA", desc: "Procurement platform engineering, integration and optimization.", status: "[ IN DEVELOPMENT ]", href: "/leverage/coupa" }, { num: "03", name: "WORKDAY", desc: "Enterprise platform integration, engineering and delivery.", status: "[ IN DEVELOPMENT ]", href: "/leverage/workday" }] },
-        partnershipsChange: { title: "PARTNERSHIPS SHOULD CHANGE\\nTHE OUTCOME.", subtitle: "Not the logo wall.", withoutLeverage: ["Client problem", "Flowtaris capability", "Limited delivery boundary"], withLeverage: ["Client problem", "Flowtaris", "Strategic platform / partner", "Specialist capability", "Larger solution surface"] },
-        capabilityMap: { title: "CAPABILITY MAP", capabilities: [{ name: "Architecture", f: "✓", p: "✓", s: "✕" }, { name: "Integration", f: "✓", p: "✓", s: "✕" }, { name: "Platform Engineering", f: "✓", p: "✓", s: "✕" }, { name: "Data Engineering", f: "✓", p: "✕", s: "✓" }, { name: "ERP", f: "✕", p: "✓", s: "✓" }, { name: "Procurement", f: "✕", p: "✓", s: "✓" }, { name: "AI / Automation", f: "✓", p: "✕", s: "✓" }] },
-        partnerRegistration: { label: "PARTNER DEAL REGISTRATION", title: "HAVE AN OPPORTUNITY?", desc: "Register it once.\\nWe'll route it to the appropriate Flowtaris\\nteam and partner relationship.", cta: "REGISTER AN OPPORTUNITY →" },
-        partnerPipeline: { title: "PARTNER PIPELINE", desc: "PIPELINE DATA\\nCOMING ONLINE" },
-        specialistNetwork: { label: "SPECIALIST NETWORK", title: "WHEN DEPTH MATTERS,\\nBRING IN THE RIGHT PERSON.", desc: "A curated network of specialists\\nacross platforms, engineering,\\ndata and enterprise operations.", cta: "EXPLORE SPECIALISTS →", categories: [{ label: "ERP", items: ["NetSuite", "SAP", "Workday"] }, { label: "DATA", items: ["Data Engineering", "Analytics", "AI"] }, { label: "OPERATIONS", items: ["Transformation", "Architecture", "Program Leadership"] }] },
-        flowtarisNetwork: { title: "THE FLOWTARIS NETWORK", domains: [{ ext: ".CO", desc: "TRUST INFRASTRUCTURE" }, { ext: ".COM", desc: "Company / commercial presence" }, { ext: ".AI", desc: "AI systems / intelligence" }, { ext: ".NET", desc: "Client / operational infrastructure" }] },
-        operatingPrinciple: "LEVERAGE IS NOT ABOUT DOING MORE.\\nIT IS ABOUT MAKING THE SAME\\nCAPABILITY REACH FURTHER.",
-        finalCta: { title: "HAVE AN OPPORTUNITY\\nTHAT NEEDS MORE CAPABILITY?", desc: "Let's determine whether\\nthe right leverage already exists.", cta: "REGISTER AN OPPORTUNITY →" }
-      });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    setLoading(false);
-  }
 
   async function save() {
     try {

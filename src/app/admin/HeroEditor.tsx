@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const DEFAULTS = {
   eyebrow: "FLOWTARIS",
@@ -23,7 +24,36 @@ export default function HeroEditor({ site }: { site: string }) {
   const [saving, setSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
-  useEffect(() => { fetchData(); }, [site]);
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=home`);
+        const { data, message } = await res.json();
+        if (data && data.length > 0 && data[0].content) {
+          setEyebrow(data[0].content.eyebrow || DEFAULTS.eyebrow);
+          setHeroTitle(data[0].content.heroTitle || DEFAULTS.heroTitle);
+          setHeroSubtitle(data[0].content.heroSubtitle || DEFAULTS.heroSubtitle);
+          setHeroImage(data[0].content.heroImage || DEFAULTS.heroImage);
+          setCtaText(data[0].content.ctaText || DEFAULTS.ctaText);
+          setCtaLink(data[0].content.ctaLink || DEFAULTS.ctaLink);
+        } else {
+          if (message) console.warn(message);
+          setEyebrow(DEFAULTS.eyebrow);
+          setHeroTitle(DEFAULTS.heroTitle);
+          setHeroSubtitle(DEFAULTS.heroSubtitle);
+          setHeroImage(DEFAULTS.heroImage);
+          setCtaText(DEFAULTS.ctaText);
+          setCtaLink(DEFAULTS.ctaLink);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [site]);
 
   // Clear save status after 4 seconds
   useEffect(() => {
@@ -33,29 +63,7 @@ export default function HeroEditor({ site }: { site: string }) {
     }
   }, [saveStatus]);
 
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=home`);
-      const { data, message, error } = await res.json();
-      
-      if (data && data.length > 0 && data[0].content) {
-        setEyebrow(data[0].content.eyebrow || DEFAULTS.eyebrow);
-        setHeroTitle(data[0].content.heroTitle || DEFAULTS.heroTitle);
-        setHeroSubtitle(data[0].content.heroSubtitle || DEFAULTS.heroSubtitle);
-        setHeroImage(data[0].content.heroImage || DEFAULTS.heroImage);
-        setCtaText(data[0].content.ctaText || DEFAULTS.ctaText);
-        setCtaLink(data[0].content.ctaLink || DEFAULTS.ctaLink);
-      } else {
-        if (message) console.warn(message);
-        resetToDefaults();
-      }
-    } catch (err) {
-      console.error("Failed to fetch", err);
-      resetToDefaults();
-    }
-    setLoading(false);
-  }
+
 
   async function save() {
     setSaving(true);
@@ -247,7 +255,7 @@ export default function HeroEditor({ site }: { site: string }) {
             <label style={labelStyle}>Hero Image</label>
             {heroImage ? (
               <div>
-                <img src={heroImage} alt="Hero Preview" style={{ width: "100%", maxHeight: 180, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB", marginBottom: 10 }} />
+                <Image src={heroImage} alt="Hero Preview" width={800} height={180} unoptimized style={{ width: "100%", maxHeight: 180, objectFit: "cover", borderRadius: 8, border: "1px solid #E5E7EB", marginBottom: 10 }} />
                 <div style={{ display: "flex", gap: 10 }}>
                   <button onClick={handleRemoveImage} style={{ background: "#FEE2E2", color: "#B91C1C", padding: "7px 14px", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 13, fontWeight: 500 }}>Remove</button>
                   <label style={{ background: "#F3F4F6", color: "#374151", padding: "7px 14px", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 13, fontWeight: 500, display: "inline-block" }}>
@@ -335,7 +343,7 @@ export default function HeroEditor({ site }: { site: string }) {
             {/* Preview: Image */}
             {heroImage && (
               <div style={{ marginTop: 12 }}>
-                <img src={heroImage} alt="Hero" style={{ width: "100%", borderRadius: 8, objectFit: "cover", maxHeight: 200 }} />
+                <Image src={heroImage} alt="Hero" width={800} height={200} unoptimized style={{ width: "100%", borderRadius: 8, objectFit: "cover", maxHeight: 200 }} />
               </div>
             )}
           </div>

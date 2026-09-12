@@ -11,31 +11,31 @@ export default function JudgmentEditor({ site }: { site: string }) {
   const [editingLogId, setEditingLogId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, [site]);
-
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
-      const { data, message, error } = await res.json();
-      
-      if (data && data.length > 0 && data[0].content) {
-        setJudgmentTitle(data[0].content.title || "");
-        setJudgmentSubtitle(data[0].content.subtitle || "");
-        setJudgmentDescription(data[0].content.description || "");
-        setDecisionLogs(data[0].content.logs || []);
-      } else {
-        if (message) console.warn(message);
-        setJudgmentTitle("HOW WE THINK.");
-        setJudgmentSubtitle("Written by the people making the decisions.");
-        setJudgmentDescription("Decisions made under pressure.\\nWhat we chose. What we rejected.\\nWhat happened next.");
-        setDecisionLogs([]);
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
+        const { data, message } = await res.json();
+        if (data && data.length > 0 && data[0].content) {
+          setJudgmentTitle(data[0].content.title || "");
+          setJudgmentSubtitle(data[0].content.subtitle || "");
+          setJudgmentDescription(data[0].content.description || "");
+          setDecisionLogs(data[0].content.logs || []);
+        } else {
+          if (message) console.warn(message);
+          setJudgmentTitle("HOW WE THINK.");
+          setJudgmentSubtitle("Written by the people making the decisions.");
+          setJudgmentDescription("Decisions made under pressure.\\nWhat we chose. What we rejected.\\nWhat happened next.");
+          setDecisionLogs([]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch", err);
       }
-    } catch (err) {
-      console.error("Failed to fetch", err);
+      setLoading(false);
     }
-    setLoading(false);
-  }
+    fetchData();
+  }, [site]);
 
   async function saveJudgmentContent() {
     try {
