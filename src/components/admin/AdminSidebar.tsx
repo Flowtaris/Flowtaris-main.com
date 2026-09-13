@@ -20,28 +20,28 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Dashboard',    href: '/admin',              icon: LayoutDashboard, roles: ['super_admin', 'content_manager', 'seo_manager', 'lead_manager'] },
-  { label: 'Hero Section', href: '/admin/hero',         icon: Star,            roles: ['super_admin', 'content_manager'] },
-  { label: 'Technologies', href: '/admin/technologies', icon: Cpu,             roles: ['super_admin', 'content_manager'] },
-  { label: 'Services',     href: '/admin/services',     icon: Database,        roles: ['super_admin', 'content_manager'] },
-  { label: 'Why Choose Us',href: '/admin/why-choose-us',icon: Users,           roles: ['super_admin', 'content_manager'] },
-  { label: 'Testimonials', href: '/admin/testimonials', icon: Star,            roles: ['super_admin', 'content_manager'] },
-  { label: 'Integrations', href: '/admin/integrations', icon: Link2,           roles: ['super_admin', 'content_manager'] },
-  { label: 'Capabilities', href: '/admin/management-capabilities', icon: Star, roles: ['super_admin', 'content_manager'] },
-  { label: 'About',        href: '/admin/about',        icon: Info,            roles: ['super_admin', 'content_manager'] },
-  { label: 'Contact Forms',href: '/admin/leads',        icon: Users,           roles: ['super_admin', 'lead_manager'] },
-  { label: 'Career Submissions', href: '/admin/job-applications', icon: Briefcase, roles: ['super_admin', 'content_manager'] },
-  { label: 'Blog',         href: '/admin/blog',         icon: BookOpen,        roles: ['super_admin', 'content_manager'] },
-  { label: 'Blog Categories', href: '/admin/blog-categories', icon: FolderOpen, roles: ['super_admin', 'content_manager'] },
-  { label: 'Careers',      href: '/admin/careers',      icon: Users,           roles: ['super_admin', 'content_manager'] },
-  { label: 'Case Studies', href: '/admin/case-studies',  icon: Star,            roles: ['super_admin', 'content_manager'] },
-  { label: 'Resources',    href: '/admin/resources',    icon: FolderOpen,      roles: ['super_admin', 'content_manager'] },
-  { label: 'FAQs',         href: '/admin/faqs',         icon: HelpCircle,      roles: ['super_admin', 'content_manager', 'seo_manager'] },
-  { label: 'SEO',          href: '/admin/seo',          icon: Search,          roles: ['super_admin', 'seo_manager'] },
-  { label: 'Media',        href: '/admin/media',        icon: ImageIcon,       roles: ['super_admin', 'content_manager'] },
-  { label: 'Settings',     href: '/admin/settings',     icon: Settings,        roles: ['super_admin'] },
-  { label: 'Users',        href: '/admin/users',        icon: Shield,          roles: ['super_admin'] },
-  { label: 'Audit Log',    href: '/admin/audit-log',    icon: FileText,        roles: ['super_admin'] },
+  { label: 'Dashboard',    href: '/admin',              icon: LayoutDashboard, roles: ['admin', 'super_admin', 'content_manager', 'seo_manager', 'lead_manager'] },
+  { label: 'Hero Section', href: '/admin/hero',         icon: Star,            roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Technologies', href: '/admin/technologies', icon: Cpu,             roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Services',     href: '/admin/services',     icon: Database,        roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Why Choose Us',href: '/admin/why-choose-us',icon: Users,           roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Testimonials', href: '/admin/testimonials', icon: Star,            roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Integrations', href: '/admin/integrations', icon: Link2,           roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Capabilities', href: '/admin/management-capabilities', icon: Star, roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'About',        href: '/admin/about',        icon: Info,            roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Contact Forms',href: '/admin/leads',        icon: Users,           roles: ['admin', 'super_admin', 'lead_manager'] },
+  { label: 'Career Submissions', href: '/admin/job-applications', icon: Briefcase, roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Blog',         href: '/admin/blog',         icon: BookOpen,        roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Blog Categories', href: '/admin/blog-categories', icon: FolderOpen, roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Careers',      href: '/admin/careers',      icon: Users,           roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Case Studies', href: '/admin/case-studies',  icon: Star,            roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Resources',    href: '/admin/resources',    icon: FolderOpen,      roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'FAQs',         href: '/admin/faqs',         icon: HelpCircle,      roles: ['admin', 'super_admin', 'content_manager', 'seo_manager'] },
+  { label: 'SEO',          href: '/admin/seo',          icon: Search,          roles: ['admin', 'super_admin', 'seo_manager'] },
+  { label: 'Media',        href: '/admin/media',        icon: ImageIcon,       roles: ['admin', 'super_admin', 'content_manager'] },
+  { label: 'Settings',     href: '/admin/settings',     icon: Settings,        roles: ['admin', 'super_admin'] },
+  { label: 'Users',        href: '/admin/users',        icon: Shield,          roles: ['admin', 'super_admin'] },
+  { label: 'Audit Log',    href: '/admin/audit-log',    icon: FileText,        roles: ['admin', 'super_admin'] },
 ]
 
 import { adminSignOut } from '@/app/actions/auth-actions'
@@ -55,7 +55,8 @@ export function AdminSidebar({ role }: { role: string }) {
     try {
       const res = await adminSignOut()
       if (res?.success) {
-        window.location.href = '/admin/login'
+        const target = window.location.hostname === 'admin.flowtaris.com' ? '/login' : '/admin/login'
+        window.location.href = target
       }
     } catch (err: any) {
       console.warn('Failed to sign out:', err?.message || err)

@@ -3,6 +3,7 @@ import { User } from 'lucide-react'
 interface Props { userName: string; role: string }
 
 const roleLabels: Record<string, string> = {
+  admin:           'Admin',
   super_admin:     'Super Admin',
   content_manager: 'Content Manager',
   seo_manager:     'SEO Manager',

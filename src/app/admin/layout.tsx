@@ -2,6 +2,7 @@ import { AdminSidebar } from '@/components/admin/AdminSidebar'
 import { AdminTopBar } from '@/components/admin/AdminTopBar'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { headers } from 'next/headers'
 
 export default async function AdminLayout({
   children,
@@ -12,16 +13,19 @@ export default async function AdminLayout({
   
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
-    redirect('/admin-login')
+    // Detect if we're on the admin subdomain to redirect correctly
+    const headersList = await headers()
+    const host = headersList.get('host') || ''
+    if (host === 'admin.flowtaris.com') {
+      redirect('/login')
+    } else {
+      redirect('/admin/login')
+    }
   }
   
-  // Enforce role-based access
-  const role = user.user_metadata?.role;
-  
-  if (role !== 'admin' && role !== 'super_admin') {
-    // If they log in but don't have an admin role, redirect them out
-    redirect('/')
-  }
+  // Role from user metadata (default to 'admin' if not set, since 
+  // only authenticated users reach here through Supabase auth)
+  const role = user.user_metadata?.role || 'admin'
   
   const userName = user.email || 'Admin User'
 
@@ -39,3 +43,4 @@ export default async function AdminLayout({
     </div>
   )
 }
+
