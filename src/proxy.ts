@@ -94,9 +94,21 @@ export async function proxy(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   // 6. Protect admin routes
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    if (!user && request.nextUrl.pathname !== '/admin-login' && request.nextUrl.pathname !== '/admin/login') {
-      const loginUrl = new URL('/admin/login', request.url)
+  const isAdminHost = request.headers.get('host') === 'admin.flowtaris.com'
+  const isTargetingAdmin = isAdminHost || request.nextUrl.pathname.startsWith('/admin')
+  
+  // If this is an admin route, enforce authentication
+  if (isTargetingAdmin) {
+    // The actual path the user is seeing in their browser
+    const currentPath = request.nextUrl.pathname
+    
+    // Allow access to login pages without auth
+    const isLoginPage = currentPath === '/login' || currentPath === '/admin/login' || currentPath === '/admin-login'
+    
+    if (!user && !isLoginPage) {
+      // If on the admin domain, redirect to /login. If on the main domain, redirect to /admin/login
+      const loginPath = isAdminHost ? '/login' : '/admin/login'
+      const loginUrl = new URL(loginPath, request.url)
       return NextResponse.redirect(loginUrl)
     }
   }
