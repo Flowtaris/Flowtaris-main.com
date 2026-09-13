@@ -39,8 +39,9 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set('Content-Security-Policy', strictCspHeader)
 
   // 3. Initialize response with the new headers
+  const rewritePath = request.nextUrl.pathname === '/' ? '/admin' : `/admin${request.nextUrl.pathname}`
   let supabaseResponse = request.headers.get('host') === 'admin.flowtaris.com'
-    ? NextResponse.rewrite(new URL(`/admin${request.nextUrl.pathname}`, request.url), {
+    ? NextResponse.rewrite(new URL(rewritePath, request.url), {
         request: {
           headers: requestHeaders,
         },
@@ -67,8 +68,9 @@ export async function proxy(request: NextRequest) {
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
           // Re-instantiate the response with updated cookies, ensuring requestHeaders are still passed
+          const cookieRewritePath = request.nextUrl.pathname === '/' ? '/admin' : `/admin${request.nextUrl.pathname}`
           supabaseResponse = request.headers.get('host') === 'admin.flowtaris.com'
-            ? NextResponse.rewrite(new URL(`/admin${request.nextUrl.pathname}`, request.url), {
+            ? NextResponse.rewrite(new URL(cookieRewritePath, request.url), {
                 request: {
                   headers: requestHeaders,
                 },
