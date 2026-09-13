@@ -1,14 +1,14 @@
 import Link from "next/link"
 
 const sections = [
-  { label: "Hero", href: "/admin/co/page", desc: "Hero section  main landing banner" },
-  { label: "Judgment", href: "/admin/co/JudgmentEditor", desc: "Judgment page content" },
-  { label: "Judgment Slugs", href: "/admin/co/JudgmentSlugsEditor", desc: "Individual judgment entries" },
-  { label: "Leverage", href: "/admin/co/LeverageEditor", desc: "Leverage model and alliances" },
-  { label: "Principles", href: "/admin/co/PrinciplesEditor", desc: "Operating principles" },
-  { label: "Resources", href: "/admin/co/ResourcesEditor", desc: "Resource library" },
-  { label: "Trust", href: "/admin/co/TrustEditor", desc: "Trust infrastructure" },
-  { label: "Workday", href: "/admin/co/WorkdayEditor", desc: "Workday integration section" },
+  { label: "Hero", href: "/admin/co/hero", desc: "Hero section  main landing banner" },
+  { label: "Judgment", href: "/admin/co/judgment", desc: "Judgment page content" },
+  { label: "Judgment Slugs", href: "/admin/co/judgment-slugs", desc: "Individual judgment entries" },
+  { label: "Leverage", href: "/admin/co/leverage", desc: "Leverage model and alliances" },
+  { label: "Principles", href: "/admin/co/principles", desc: "Operating principles" },
+  { label: "Resources", href: "/admin/co/resources", desc: "Resource library" },
+  { label: "Trust", href: "/admin/co/trust", desc: "Trust infrastructure" },
+  { label: "Workday", href: "/admin/co/workday", desc: "Workday integration section" },
 ]
 
 export default function CoDashboard() {
