@@ -43,7 +43,10 @@ export function AdminLoginForm() {
       if (res?.error) {
         setServerError(res.error)
       } else if (res?.success) {
-        window.location.assign('/admin') // Use window.location.assign for a full reload to ensure server components fetch the new session cookie properly
+        // If on the admin subdomain, root '/' rewrites to '/admin' internally. 
+        // Otherwise, explicitly go to '/admin'.
+        const target = window.location.hostname === 'admin.flowtaris.com' ? '/' : '/admin'
+        window.location.assign(target)
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err)
