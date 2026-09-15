@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 function getAiClient() {
   const url = process.env.SUPABASE_URL_AI || "";
@@ -12,13 +12,15 @@ function getAiClient() {
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const { unstable_noStore } = require('next/cache');
-  unstable_noStore();
   const client = getAiClient();
   if (!client) return NextResponse.json({ error: "Missing AI Supabase credentials" }, { status: 500 });
   const { data, error } = await client.from("site_config").select("*").limit(1).single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json(data ?? {});
+  
+  const response = NextResponse.json(data ?? {});
+  // Prevent any CDN or browser caching of this route
+  response.headers.set('Cache-Control', 'no-store, max-age=0');
+  return response;
 }
 
 export async function POST(request: NextRequest) {
@@ -30,10 +32,11 @@ export async function POST(request: NextRequest) {
     const id = current?.id || "00000000-0000-0000-0000-000000000001";
     const { error } = await client.from("site_config").update(body).eq("id", id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    
     try { 
-      const { revalidatePath } = require('next/cache');
       revalidatePath('/', 'layout');
     } catch {}
+    
     return NextResponse.json({ success: true });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
