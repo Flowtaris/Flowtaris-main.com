@@ -35,7 +35,7 @@ const getLayoutData = unstable_cache(
     return { dynamicServices, settingsData, socialLinks }
   },
   ['layout-data-cache'],
-  { revalidate: 60, tags: ['layout-data'] }
+  { revalidate: 5, tags: ['layout-data'] }
 )
 
 export default async function PublicLayout({

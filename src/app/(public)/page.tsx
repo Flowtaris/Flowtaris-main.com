@@ -6,6 +6,8 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { CapabilitiesBanner } from '@/components/sections/CapabilitiesBanner'
 import { CapabilitiesConfigSection } from '@/components/sections/CapabilitiesConfigSection'
 
+export const revalidate = 5;
+
 import { CaseStudyHighlights } from '@/components/sections/CaseStudyHighlights'
 import { IntegrationShowcase } from '@/components/sections/IntegrationShowcase'
 import { HowWeWorkSection } from '@/components/sections/HowWeWorkSection'
