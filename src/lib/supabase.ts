@@ -1,9 +1,9 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 // Environment variables for admin panel
-const supabaseUrl = process.env.SUPABASE_URL_AI || ''
-const supabaseAnonKey = process.env.SUPABASE_SERVICE_KEY_AI || ''
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_KEY_AI || ''
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_KEY_COM || ''
 
 // Mock client for build time when env vars are not available
 function createMockClient(): SupabaseClient {
