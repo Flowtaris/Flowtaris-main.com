@@ -81,14 +81,27 @@ export default function HeroEditor({ site }: { site: string }) {
           }
         }),
       });
+      
+      let errorMsg = null;
+      if (!res.ok) {
+        try {
+          const errData = await res.json();
+          errorMsg = errData.error || `HTTP Error ${res.status}`;
+        } catch {
+          errorMsg = await res.text();
+        }
+        throw new Error(errorMsg || "Unknown server error");
+      }
+
       const { error } = await res.json();
       if (error) {
         setSaveStatus({ type: "error", message: "Error saving: " + error });
       } else {
         setSaveStatus({ type: "success", message: `Hero content saved! Changes will appear on flowtaris.${site}.` });
       }
-    } catch (err) {
-      setSaveStatus({ type: "error", message: "Network error while saving." });
+    } catch (err: any) {
+      console.error(err);
+      setSaveStatus({ type: "error", message: err.message || "Network error while saving." });
     }
     setSaving(false);
   }
