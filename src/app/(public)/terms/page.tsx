@@ -13,8 +13,14 @@ export const revalidate = 0;
 
 
 export default async function TermsOfUsePage() {
-  const siteConfig = await getSiteConfig()
-  const termsConfig = (siteConfig as any)?.terms_config || {}
+  let siteConfig = null
+  try {
+    siteConfig = await getSiteConfig()
+  } catch (err) {
+    console.error("Failed to fetch site config:", err)
+  }
+  
+  const termsConfig = siteConfig ? (siteConfig as any).terms_config : null
 
   // Fallback to static text if not configured
   const title = termsConfig?.title || 'Terms of Use'

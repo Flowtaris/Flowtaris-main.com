@@ -13,8 +13,14 @@ export const revalidate = 0;
 
 
 export default async function PrivacyPolicyPage() {
-  const siteConfig = await getSiteConfig()
-  const privacyConfig = (siteConfig as any).privacy_config
+  let siteConfig = null
+  try {
+    siteConfig = await getSiteConfig()
+  } catch (err) {
+    console.error("Failed to fetch site config:", err)
+  }
+  
+  const privacyConfig = siteConfig ? (siteConfig as any).privacy_config : null
 
   // Fallback to static text if not configured
   const title = privacyConfig?.title || 'Privacy Policy'
