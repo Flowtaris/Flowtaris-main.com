@@ -4,6 +4,7 @@ import { Accordion } from '@/components/ui/Accordion'
 import { WhyChooseUsSection } from '@/components/sections/WhyChooseUsSection'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { CapabilitiesBanner } from '@/components/sections/CapabilitiesBanner'
+import { CapabilitiesConfigSection } from '@/components/sections/CapabilitiesConfigSection'
 
 import { CaseStudyHighlights } from '@/components/sections/CaseStudyHighlights'
 import { IntegrationShowcase } from '@/components/sections/IntegrationShowcase'
@@ -17,26 +18,40 @@ import SchemaInjector from '@/components/SchemaInjector'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { createClient } from '@/lib/supabase/server'
 
-export const metadata: Metadata = {
-  title: {
-    absolute: 'Flowtaris  Enterprise ERP & Integration Consulting',
-  },
-  description:
-    'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
-  alternates: {
-    canonical: 'https://www.flowtaris.com',
-  },
-  openGraph: {
-    title: 'Flowtaris  Enterprise ERP & Integration Consulting',
-    description:
-      'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
-    url: 'https://www.flowtaris.com',
-    type: 'website',
-  },
+import { getSiteConfig } from '@/lib/supabase'
+
+export async function generateMetadata(): Promise<Metadata> {
+  let config = null
+  try {
+    config = await getSiteConfig()
+  } catch (err) {
+    console.error('Failed to fetch site config for homepage metadata:', err)
+  }
+
+  const siteName = config?.site_name || 'Flowtaris'
+  const tagline = config?.tagline || 'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.'
+  const siteUrl = config?.site_url || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.flowtaris.com'
+
+  return {
+    title: {
+      absolute: `${siteName}  Enterprise ERP & Integration Consulting`,
+    },
+    description: tagline,
+    alternates: {
+      canonical: siteUrl,
+    },
+    openGraph: {
+      title: `${siteName}  Enterprise ERP & Integration Consulting`,
+      description: tagline,
+      url: siteUrl,
+      type: 'website',
+    },
+  }
 }
 
 export default async function HomePage() {
   const supabase = await createClient()
+  const aiConfig = await getSiteConfig().catch(() => null)
 
   const [
     { data: heroData },
@@ -184,6 +199,9 @@ export default async function HomePage() {
         <TestimonialsSection testimonials={testimonials} />
       )}
       <CapabilitiesBanner />
+      {aiConfig?.capabilities_section_config && (
+        <CapabilitiesConfigSection config={aiConfig.capabilities_section_config} />
+      )}
 
       <Suspense fallback={
         <section className="section bg-surface">

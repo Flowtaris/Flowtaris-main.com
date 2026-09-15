@@ -169,6 +169,8 @@ export interface ROICConfig {
 
 // Helper functions for CRUD operations
 export async function getSiteConfig() {
+  const { unstable_noStore } = require('next/cache')
+  unstable_noStore()
   const client = createAdminClient()
   const { data, error } = await client.from('site_config').select('*').single()
   if (error) throw error

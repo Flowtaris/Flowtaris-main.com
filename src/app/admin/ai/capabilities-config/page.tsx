@@ -2,6 +2,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp,
   Settings, CheckSquare, Activity, FileText, Share2, Shield, Layout
@@ -126,8 +128,8 @@ export default function CapabilitiesConfigPage() {
     fetch('/api/ai/site-config')
       .then(r => r.json())
       .then(cfg => {
-        if (cfg?.capabilitiesSectionConfig) {
-          const saved = cfg.capabilitiesSectionConfig
+        if (cfg?.capabilities_section_config) {
+          const saved = cfg.capabilities_section_config
           if (saved.header) setHeader(prev => ({ ...prev, ...saved.header }))
           if (saved.capabilities && Array.isArray(saved.capabilities)) {
             setCapabilities(prev => prev.map((t, i) => ({
@@ -184,16 +186,19 @@ export default function CapabilitiesConfigPage() {
   return (
     <div className="max-w-4xl mx-auto p-6">
       {/* Page Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg">
-            <Layout className="w-5 h-5 text-white" />
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg">
+              <Layout className="w-5 h-5 text-white" />
+            </div>
+            <h1 className="text-2xl font-black text-gray-900 dark:text-gray-50">Capabilities Config</h1>
           </div>
-          <h1 className="text-2xl font-black text-gray-900 dark:text-gray-50">Capabilities Config</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 pl-13">
+            Manage the &ldquo;Here is exactly how we do it.&rdquo; section  section headline and all 6 capability cards.
+          </p>
         </div>
-        <p className="text-sm text-gray-500 dark:text-gray-400 pl-13">
-          Manage the &ldquo;Here is exactly how we do it.&rdquo; section  section headline and all 6 capability cards.
-        </p>
+        <ViewLiveButton href="/" />
       </div>
 
       {/* Status Banner */}
@@ -254,6 +259,15 @@ export default function CapabilitiesConfigPage() {
               defaultOpen={i === 0}
             >
               <div className="space-y-4">
+                <div className="flex justify-end mb-2">
+                  <a 
+                    href={`/admin/ai/capabilities-config/${cap.slug}`} 
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/30 dark:hover:bg-blue-900/50 text-blue-700 dark:text-blue-400 rounded-lg text-xs font-semibold transition-colors"
+                  >
+                    <Settings className="w-3.5 h-3.5" />
+                    Edit Details Page
+                  </a>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label>Category / Badge</Label>
@@ -306,30 +320,13 @@ export default function CapabilitiesConfigPage() {
           )
         })}
 
-        {/* Sticky Save Button */}
-        <div className="sticky bottom-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
-          <p className="text-xs text-gray-400">Changes go live within ~60 seconds after cache revalidation.</p>
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 transition-all disabled:opacity-60"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Save Configuration
-              </>
-            )}
-          </button>
-        </div>
+        {/* Floating Save Bar */}
+        <FloatingSaveBar type="submit" saving={saving} />
 
       </form>
     </div>
   )
 }
+
+
 

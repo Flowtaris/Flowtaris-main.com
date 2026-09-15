@@ -1,7 +1,10 @@
 // @ts-nocheck
 'use client';
 import { useEffect, useState, useRef } from 'react'
-import { getSiteConfig, supabase } from '@/lib/supabase'
+import { getSiteConfig } from '@/lib/supabase'
+import { uploadImageToServer } from '@/lib/uploadImage'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import { Upload, X, Eye, EyeOff, RefreshCw, CheckCircle2, AlertCircle, ImageIcon, Type, Tag } from 'lucide-react'
 
 //  Shared UI primitives 
@@ -180,18 +183,7 @@ function LogoManager({
     if (!file) return
     setUploading(true)
     try {
-      const fileExt = file.name.split('.').pop()
-      const fileName = `logo-${Date.now()}.${fileExt}`
-      const { data, error } = await supabase.storage
-        .from('assets')
-        .upload(fileName, file)
-      
-      if (error) throw error
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('assets')
-        .getPublicUrl(fileName)
-        
+      const publicUrl = await uploadImageToServer(file)
       onLogoChange(publicUrl)
       setUrlInput(publicUrl)
       setInputMode('preview')
@@ -423,11 +415,7 @@ function FaviconUpload({
     if (!file) return
     setUploading(true)
     try {
-      const fileExt = file.name.split('.').pop()
-      const fileName = `favicon-${Date.now()}.${fileExt}`
-      const { error } = await supabase.storage.from('assets').upload(fileName, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(fileName)
+      const publicUrl = await uploadImageToServer(file)
       onChange(publicUrl)
       setPreviewError(false)
     } catch (err) {
@@ -596,18 +584,7 @@ function TrustSignalsManager({
     if (!file) return
     setUploadingIndex(index)
     try {
-      const fileExt = file.name.split('.').pop()
-      const fileName = `trust-badge-${Date.now()}.${fileExt}`
-      const { data, error } = await supabase.storage
-        .from('assets')
-        .upload(fileName, file)
-      
-      if (error) throw error
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('assets')
-        .getPublicUrl(fileName)
-        
+      const publicUrl = await uploadImageToServer(file)
       handleUpdate(index, 'imageUrl', publicUrl)
     } catch (err) {
       console.error(err)
@@ -729,8 +706,9 @@ export default function SiteConfigPage() {
     const fetchConfig = async () => {
       try {
         setLoading(true)
-        const data = await getSiteConfig()
-        if (data) {
+        const res = await fetch('/api/ai/site-config')
+        if (res.ok) {
+          const data = await res.json()
           const newConfig = {
             site_name: data.site_name || DEFAULTS.site_name,
             site_url: data.site_url || DEFAULTS.site_url,
@@ -861,9 +839,12 @@ export default function SiteConfigPage() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Site Configuration</h1>
-        <p className="text-sm text-gray-500 mt-1">Manage your brand identity, header appearance, and global settings.</p>
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Site Configuration</h1>
+          <p className="text-sm text-gray-500 mt-1">Manage your brand identity, header appearance, and global settings.</p>
+        </div>
+        <ViewLiveButton href="/" />
       </div>
 
       {/* Status messages */}
@@ -1033,31 +1014,7 @@ export default function SiteConfigPage() {
         </Section>
 
         {/*  SUBMIT  */}
-        <div className="sticky bottom-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
-          <p className="text-xs text-gray-400">Changes take effect on next page load after saving.</p>
-          <button
-            type="submit"
-            disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl
-              bg-gradient-to-r from-blue-600 to-blue-700
-              hover:from-blue-500 hover:to-blue-600
-              text-white text-sm font-bold shadow-lg shadow-blue-500/20
-              disabled:opacity-50 disabled:cursor-not-allowed
-              transition-all duration-200"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Save Configuration
-              </>
-            )}
-          </button>
-        </div>
+        <FloatingSaveBar type="submit" saving={saving} />
       </form>
     </div>
   )

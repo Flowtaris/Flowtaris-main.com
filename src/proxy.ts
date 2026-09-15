@@ -1,7 +1,6 @@
-import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
-export async function proxy(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // 0. Intercept legacy URLs and tracking query parameters with a 410 Gone
   const { pathname, searchParams } = request.nextUrl
   if (
@@ -58,66 +57,7 @@ export async function proxy(request: NextRequest) {
   supabaseResponse.headers.set('Content-Security-Policy', strictCspHeader)
   supabaseResponse.headers.set('x-nonce', nonce)
 
-  // 4. Setup Supabase Client
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-          // Re-instantiate the response with updated cookies, ensuring requestHeaders are still passed
-          const cp = request.nextUrl.pathname
-          const cookieRewritePath = cp.startsWith('/admin') ? cp : (cp === '/' ? '/admin' : `/admin${cp}`)
-          
-          supabaseResponse = request.headers.get('host') === 'admin.flowtaris.com'
-            ? NextResponse.rewrite(new URL(cookieRewritePath, request.url), {
-                request: {
-                  headers: requestHeaders,
-                },
-              })
-            : NextResponse.next({
-                request: {
-                  headers: requestHeaders,
-                },
-              })
-          // Re-apply CSP to the new response
-          supabaseResponse.headers.set('Content-Security-Policy', strictCspHeader)
-          supabaseResponse.headers.set('x-nonce', nonce)
-          
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-
-  // 5. Refresh session if expired
-  const { data: { user } } = await supabase.auth.getUser()
-
-  // 6. Protect admin routes
-  const isAdminHost = request.headers.get('host') === 'admin.flowtaris.com'
-  const isTargetingAdmin = isAdminHost || request.nextUrl.pathname.startsWith('/admin')
-  
-  // If this is an admin route, enforce authentication
-  if (isTargetingAdmin) {
-    // The actual path the user is seeing in their browser
-    const currentPath = request.nextUrl.pathname
-    
-    // Allow access to login pages without auth
-    const isLoginPage = currentPath === '/login' || currentPath === '/admin/login' || currentPath === '/admin-login'
-    
-    if (!user && !isLoginPage) {
-      // If on the admin domain, redirect to /login. If on the main domain, redirect to /admin/login
-      const loginPath = isAdminHost ? '/login' : '/admin/login'
-      const loginUrl = new URL(loginPath, request.url)
-      return NextResponse.redirect(loginUrl)
-    }
-  }
+  // Authentication removed — all routes are accessible without login
 
   return supabaseResponse
 }

@@ -2,7 +2,9 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { supabase } from '@/lib/supabase'
+import { uploadImageToServer } from '@/lib/uploadImage'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import { CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ImageIcon, Target, Plus, Trash2, Home, Link as LinkIcon, Navigation, Shield } from 'lucide-react'
 
 //  Shared primitives 
@@ -105,15 +107,11 @@ function ImageUpload({
   const handleFile = async (file: File) => {
     setUploading(true)
     try {
-      const ext = file.name.split('.').pop()
-      const name = `hero-${Date.now()}.${ext}`
-      const { error } = await supabase.storage.from('assets').upload(name, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(name)
+      const publicUrl = await uploadImageToServer(file)
       onChange(publicUrl)
       setPreviewError(false)
     } catch (e) {
-      alert('Upload failed. Check your Supabase storage bucket permissions.')
+      alert('Upload failed. Please try again or paste a URL.')
     } finally {
       setUploading(false)
     }
@@ -206,16 +204,16 @@ export default function HeroConfigPage() {
     fetch('/api/ai/site-config')
       .then(r => r.json())
       .then(cfg => {
-        if (cfg?.trustSignals) {
-          setTrustSignals(cfg.trustSignals)
+        if (cfg?.trust_signals) {
+          setTrustSignals(cfg.trust_signals)
         }
-        if (cfg?.heroConfig) {
+        if (cfg?.hero_config) {
           setData(prev => ({
             ...prev,
-            header_ctas: { ...prev.header_ctas, ...(cfg.heroConfig.header_ctas || {}) },
-            hero: { ...prev.hero, ...(cfg.heroConfig.hero || {}) },
-            stats: cfg.heroConfig.stats || prev.stats,
-            trust_signals_section: cfg.heroConfig.trust_signals_section || prev.trust_signals_section
+            header_ctas: { ...prev.header_ctas, ...(cfg.hero_config.header_ctas || {}) },
+            hero: { ...prev.hero, ...(cfg.hero_config.hero || {}) },
+            stats: cfg.hero_config.stats || prev.stats,
+            trust_signals_section: cfg.hero_config.trust_signals_section || prev.trust_signals_section
           }))
         }
       })
@@ -292,14 +290,10 @@ export default function HeroConfigPage() {
   const handleTrustSignalFile = async (index: number, file: File) => {
     setSignalUploading(prev => ({ ...prev, [index]: true }))
     try {
-      const ext = file.name.split('.').pop()
-      const name = `trust-signal-${Date.now()}.${ext}`
-      const { error } = await supabase.storage.from('assets').upload(name, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(name)
+      const publicUrl = await uploadImageToServer(file)
       updateTrustSignal(index, 'imageUrl', publicUrl)
     } catch {
-      alert('Upload failed. Check your Supabase storage bucket permissions.')
+      alert('Upload failed. Please try again or paste a URL.')
     } finally {
       setSignalUploading(prev => ({ ...prev, [index]: false }))
     }
@@ -352,9 +346,7 @@ export default function HeroConfigPage() {
             Manage the content for the sticky top navigation bar and the main hero section of the homepage.
           </p>
         </div>
-        <a href="/" target="_blank" rel="noopener noreferrer" className="shrink-0 text-xs text-blue-500 hover:text-blue-700 underline mt-1">
-          Preview on site 
-        </a>
+        <ViewLiveButton href="/" />
       </div>
 
       {/* Status */}
@@ -575,30 +567,12 @@ export default function HeroConfigPage() {
           </div>
         </Section>
 
-        {/* Save Button */}
-        <div className="sticky bottom-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
-          <p className="text-xs text-gray-400">Changes are saved to the database and go live within ~60 seconds after cache revalidation.</p>
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all disabled:opacity-60"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Save Changes
-              </>
-            )}
-          </button>
-        </div>
+        {/* Floating Save Bar */}
+        <FloatingSaveBar type="submit" saving={saving} label="Save Changes" />
 
       </form>
     </div>
   )
 }
+
 

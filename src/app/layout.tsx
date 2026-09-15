@@ -31,59 +31,74 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ['400'],
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.flowtaris.com'),
-  title: {
-    default: 'Flowtaris',
-    template: '%s | Flowtaris',
-  },
-  description:
-    'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
-  keywords: [
-    'ERP consulting',
-    'NetSuite consulting',
-    'Coupa consulting',
-    'ERP integrations',
-    'enterprise automation',
-    'SAP consulting',
-    'Workday integrations',
-    'managed ERP support',
-  ],
-  authors: [{ name: 'Flowtaris', url: 'https://www.flowtaris.com' }],
-  creator: 'Flowtaris',
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://www.flowtaris.com',
-    siteName: 'Flowtaris',
-    title: 'Flowtaris',
-    description:
-      'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.',
-    images: [
-      {
-        url: 'https://www.flowtaris.com/og-default.png',
-        width: 1200,
-        height: 630,
-        alt: 'Flowtaris  Enterprise ERP Consulting',
-      },
+import { getSiteConfig } from '@/lib/supabase'
+
+export async function generateMetadata(): Promise<Metadata> {
+  let config = null
+  try {
+    config = await getSiteConfig()
+  } catch (err) {
+    console.error('Failed to fetch site config for metadata:', err)
+  }
+
+  const siteName = config?.site_name || 'Flowtaris'
+  const tagline = config?.tagline || 'Flowtaris delivers secure, scalable and audit-ready ERP consulting, integrations and automation across NetSuite, Coupa, SAP, Workday and enterprise platforms.'
+  const siteUrl = config?.site_url || process.env.NEXT_PUBLIC_SITE_URL || 'https://www.flowtaris.com'
+  const favicon = config?.favicon_url || undefined
+
+  return {
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: siteName,
+      template: `%s | ${siteName}`,
+    },
+    description: tagline,
+    icons: favicon ? { icon: favicon, shortcut: favicon, apple: favicon } : undefined,
+    keywords: [
+      'ERP consulting',
+      'NetSuite consulting',
+      'Coupa consulting',
+      'ERP integrations',
+      'enterprise automation',
+      'SAP consulting',
+      'Workday integrations',
+      'managed ERP support',
     ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@flowtaris',
-    creator: '@flowtaris',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    authors: [{ name: siteName, url: siteUrl }],
+    creator: siteName,
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: siteUrl,
+      siteName: siteName,
+      title: siteName,
+      description: tagline,
+      images: [
+        {
+          url: config?.logo_url || 'https://www.flowtaris.com/og-default.png',
+          width: 1200,
+          height: 630,
+          alt: `${siteName} Enterprise ERP Consulting`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@flowtaris',
+      creator: '@flowtaris',
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
+  }
 }
 
 import { headers } from 'next/headers'
@@ -138,3 +153,4 @@ export default async function RootLayout({
     </html>
   )
 }
+

@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { Menu, Users, Layout, Settings, Activity, BarChart2, FileText, Award, ClipboardList, Folder, Calendar, Shield, MessageCircle, Layers, Target, Zap, DollarSign, Mail, AlertTriangle } from 'lucide-react'
+import { Menu, Users, Share2, Layout, Settings, Activity, BarChart2, FileText, Award, ClipboardList, Folder, Calendar, Shield, MessageCircle, Layers, Target, Zap, DollarSign, Mail, AlertTriangle } from 'lucide-react'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900 overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+      <aside className="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto flex flex-col">
         <div className="p-6">
           <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
             Flowtaris.AI Admin
@@ -49,6 +49,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             >
               <Target className="mr-3 h-4 w-4" />
               Hero & Header Config
+            </Link>
+
+            <Link
+              href="/admin/ai/social-links-config"
+              className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+            >
+              <Share2 className="mr-3 h-4 w-4" />
+              Social Links Config
             </Link>
 
 
@@ -123,16 +131,35 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <AlertTriangle className="mr-3 h-4 w-4" />
               Cost of Inaction Config
             </Link>
+                      <Link
+              href="/admin/ai/privacy-config"
+              className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+            >
+              <Shield className="mr-3 h-4 w-4" />
+              Privacy Policy Config
+            </Link>
+
+            <Link
+              href="/admin/ai/terms-config"
+              className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+            >
+              <FileText className="mr-3 h-4 w-4" />
+              Terms of Service Config
+            </Link>
           </nav>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 overflow-y-auto">
+      <main className="flex-1 p-6 pb-40 overflow-y-auto">
         <div className="max-w-7xl mx-auto w-full">
           {children}
+          {/* Global spacer for FloatingSaveBar */}
+          <div className="h-32 w-full flex-shrink-0" aria-hidden="true" />
         </div>
       </main>
     </div>
   )
 }
+
+

@@ -2,6 +2,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, Plus, Trash2,
   Sliders, Database, TrendingUp, DollarSign, Activity, PieChart, BarChart3
@@ -117,10 +119,10 @@ export default function AdminROIConfigPage() {
         const res = await fetch('/api/ai/site-config')
         if (res.ok) {
           const cfg = await res.json()
-          if (cfg?.roiCalculatorConfig) {
+          if (cfg?.roi_calculator_config) {
             setData(d => ({
               ...d,
-              ...cfg.roiCalculatorConfig
+              ...cfg.roi_calculator_config
             }))
           }
         }
@@ -187,6 +189,7 @@ export default function AdminROIConfigPage() {
             Customize the live ROI projections, dropdown options, and metric labels shown on the <a href="/roi-calculator" target="_blank" className="text-emerald-600 underline font-medium hover:text-emerald-700">/roi-calculator</a> page.
           </p>
         </div>
+        <ViewLiveButton href="/roi-calculator" />
       </div>
 
       {/* Save Notification */}
@@ -559,41 +562,10 @@ export default function AdminROIConfigPage() {
           </div>
         </div>
       </Section>
-      {/* Save Button */}
-      <div className="sticky bottom-0 bg-gray-50/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-50 rounded-t-xl">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Changes are saved to the database and go live immediately.
-        </p>
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <a
-            href="/roi-calculator"
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 sm:flex-initial text-center px-6 py-2.5 text-sm font-semibold rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm transition-colors"
-          >
-            Preview Live
-          </a>
-          <button
-            type="button"
-            onClick={() => handleSave()}
-            disabled={saving}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-8 py-2.5 text-sm font-bold rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/20 active:scale-95 disabled:opacity-60 transition-all cursor-pointer"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>Saving...</span>
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Save Changes</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
+      {/* Floating Save Bar */}
+      <FloatingSaveBar onSave={() => handleSave()} saving={saving} label="Save Changes" />
     </div>
   )
 }
+
 

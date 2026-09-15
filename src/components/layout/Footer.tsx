@@ -67,8 +67,8 @@ const getSocialIcon = (link: SocialLink) => {
 
 const FOOTER_LINKS = [
   { label: 'FAQ', href: '/faq' },
-  { label: 'Privacy Policy', href: '/privacy-policy' },
-  { label: 'Terms & Conditions', href: '/terms-of-use' },
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms & Conditions', href: '/terms' },
 ]
 
 import { SocialLink } from '@/types/database'

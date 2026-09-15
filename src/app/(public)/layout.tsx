@@ -44,11 +44,39 @@ export default async function PublicLayout({
   children: React.ReactNode
 }) {
   const { dynamicServices, settingsData, socialLinks } = await getLayoutData()
+  let aiConfig = null
+  try {
+    const { getSiteConfig } = await import('@/lib/supabase')
+    aiConfig = await getSiteConfig()
+  } catch (err) {
+    console.error('Failed to fetch AI site config:', err)
+  }
 
   const settingsMap = (settingsData || []).reduce((acc: any, curr: any) => {
     acc[curr.key] = curr.value
     return acc
   }, {})
+
+  // Override with AI Config so changes in /admin/ai/site-config reflect here
+  let finalSocialLinks = socialLinks || []
+
+  if (aiConfig) {
+    if (aiConfig.site_name) settingsMap.company_name = aiConfig.site_name
+    if (aiConfig.logo_url) settingsMap.logo_url = aiConfig.logo_url
+    
+    // Override Social Links
+    if (aiConfig.social_links_config && Array.isArray(aiConfig.social_links_config)) {
+      finalSocialLinks = aiConfig.social_links_config
+        .filter((l: any) => l.isActive)
+        .map((l: any) => ({
+          id: l.id,
+          platform_name: l.platform,
+          url: l.url,
+          icon_svg: null,
+          is_active: l.isActive
+        }))
+    }
+  }
 
   return (
     <div className="relative min-h-screen bg-white flex flex-col">
@@ -64,7 +92,7 @@ export default async function PublicLayout({
 
       {/* Footer in normal document flow */}
       <div className="w-full">
-        <Footer settings={settingsMap} socialLinks={socialLinks || []} />
+        <Footer settings={settingsMap} socialLinks={finalSocialLinks} />
       </div>
 
       <ChatWrapper whatsappNumber={settingsMap['whatsapp_number'] || settingsMap['phone_number'] || '919391274394'} />

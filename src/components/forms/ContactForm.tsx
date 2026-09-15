@@ -232,7 +232,7 @@ export function ContactForm() {
           )}
         </button>
         <p className="text-center text-xs text-slate-400 mt-4">
-          By submitting, you agree to our <a href="/privacy-policy" className="underline hover:text-slate-600">Privacy Policy</a>.
+          By submitting, you agree to our <a href="/privacy" className="underline hover:text-slate-600">Privacy Policy</a>.
         </p>
       </form>
     </div>

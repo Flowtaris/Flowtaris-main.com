@@ -2,6 +2,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, Plus, Trash2,
   Sliders, Database, TrendingUp, AlertTriangle, Shield, FileText, DollarSign, Activity, Target
@@ -134,13 +136,13 @@ export default function AdminCOIConfigPage() {
         const res = await fetch('/api/ai/site-config')
         if (res.ok) {
           const cfg = await res.json()
-          if (cfg?.coiCalculatorConfig) {
+          if (cfg?.coi_calculator_config) {
             setData(d => ({
               ...d,
-              ...cfg.coiCalculatorConfig,
+              ...cfg.coi_calculator_config,
               rightSide: {
                 ...d.rightSide,
-                ...(cfg.coiCalculatorConfig.rightSide || {})
+                ...(cfg.coi_calculator_config.rightSide || {})
               }
             }))
           }
@@ -205,6 +207,7 @@ export default function AdminCOIConfigPage() {
             Customize the default parameters, options, and risk factors for the <a href="/cost-of-inaction" target="_blank" className="text-amber-600 underline font-medium hover:text-amber-700">/cost-of-inaction</a> page.
           </p>
         </div>
+        <ViewLiveButton href="/cost-of-inaction" />
       </div>
 
       {/* Save Notification */}
@@ -472,32 +475,10 @@ export default function AdminCOIConfigPage() {
         </div>
       </Section>
 
-      {/*  Sticky Save Bar  */}
-      <div className="fixed bottom-0 left-0 lg:left-64 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-end z-40">
-        <div className="max-w-5xl w-full mx-auto flex items-center justify-between">
-          <div className="text-sm text-gray-500 font-medium">
-            Cost of Inaction Configuration
-          </div>
-          <button
-            onClick={handleSave}
-            disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-white transition-all
-              bg-amber-600 hover:bg-amber-700 hover:shadow-lg hover:shadow-amber-500/20 active:scale-[0.98]
-              disabled:opacity-50 disabled:pointer-events-none"
-          >
-            {saving ? (
-              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-            ) : (
-              <CheckCircle2 className="w-5 h-5" />
-            )}
-            {saving ? 'Saving...' : 'Save Configuration'}
-          </button>
-        </div>
-      </div>
+      {/* Floating Save Bar */}
+      <FloatingSaveBar onSave={handleSave} saving={saving} />
     </div>
   )
 }
+
 

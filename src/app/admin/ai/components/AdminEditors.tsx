@@ -2,7 +2,7 @@
 'use client'
 
 import React, { useRef, useState } from 'react'
-import { supabase } from '@/lib/supabase'
+import { uploadImageToServer } from '@/lib/uploadImage'
 
 export const inputCls = 'w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 transition'
 export const textareaCls = inputCls + ' resize-y'
@@ -80,11 +80,7 @@ function InlineImageUploader({ value, onChange, label }: { value: string; onChan
     setUploadError(null)
     setUploadSuccess(false)
     try {
-      const fileExt = file.name.split('.').pop()
-      const fileName = `admin-upload-${Date.now()}.${fileExt}`
-      const { error } = await supabase.storage.from('assets').upload(fileName, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(fileName)
+      const publicUrl = await uploadImageToServer(file)
       onChange(publicUrl)
       setUploadSuccess(true)
       setTimeout(() => setUploadSuccess(false), 3000)
@@ -286,11 +282,7 @@ export function ImageUploader({ label, hint, value, onChange }: { label: string;
     setUploadError(null)
     setUploadSuccess(false)
     try {
-      const fileExt = file.name.split('.').pop()
-      const fileName = `admin-upload-${Date.now()}.${fileExt}`
-      const { error } = await supabase.storage.from('assets').upload(fileName, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(fileName)
+      const publicUrl = await uploadImageToServer(file)
       onChange(publicUrl)
       setUploadSuccess(true)
       setTimeout(() => setUploadSuccess(false), 3000)

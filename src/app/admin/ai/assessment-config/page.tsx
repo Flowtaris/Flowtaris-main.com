@@ -2,6 +2,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, Plus, Trash2,
   Sparkles, Layers, Sliders, Database, Gauge, HelpCircle, Mail,
@@ -365,16 +367,16 @@ export default function AdminAssessmentConfigPage() {
         const res = await fetch('/api/ai/site-config')
         if (res.ok) {
           const cfg = await res.json()
-          if (cfg?.assessmentConfig) {
+          if (cfg?.assessment_config) {
             setData({
-              intro: { ...DEFAULT_ASSESSMENT_CONFIG.intro, ...cfg.assessmentConfig.intro },
-              step1Erp: { ...DEFAULT_ASSESSMENT_CONFIG.step1Erp, ...cfg.assessmentConfig.step1Erp },
-              step2Pain: { ...DEFAULT_ASSESSMENT_CONFIG.step2Pain, ...cfg.assessmentConfig.step2Pain },
-              step3Volume: { ...DEFAULT_ASSESSMENT_CONFIG.step3Volume, ...cfg.assessmentConfig.step3Volume, benchmarks: { ...DEFAULT_ASSESSMENT_CONFIG.step3Volume.benchmarks, ...cfg.assessmentConfig.step3Volume?.benchmarks } },
-              step4State: { ...DEFAULT_ASSESSMENT_CONFIG.step4State, ...cfg.assessmentConfig.step4State },
-              step5Maturity: { ...DEFAULT_ASSESSMENT_CONFIG.step5Maturity, ...cfg.assessmentConfig.step5Maturity },
-              step6Urgency: { ...DEFAULT_ASSESSMENT_CONFIG.step6Urgency, ...cfg.assessmentConfig.step6Urgency },
-              tourAndResults: { ...DEFAULT_ASSESSMENT_CONFIG.tourAndResults, ...cfg.assessmentConfig.tourAndResults },
+              intro: { ...DEFAULT_ASSESSMENT_CONFIG.intro, ...cfg.assessment_config.intro },
+              step1Erp: { ...DEFAULT_ASSESSMENT_CONFIG.step1Erp, ...cfg.assessment_config.step1Erp },
+              step2Pain: { ...DEFAULT_ASSESSMENT_CONFIG.step2Pain, ...cfg.assessment_config.step2Pain },
+              step3Volume: { ...DEFAULT_ASSESSMENT_CONFIG.step3Volume, ...cfg.assessment_config.step3Volume, benchmarks: { ...DEFAULT_ASSESSMENT_CONFIG.step3Volume.benchmarks, ...cfg.assessment_config.step3Volume?.benchmarks } },
+              step4State: { ...DEFAULT_ASSESSMENT_CONFIG.step4State, ...cfg.assessment_config.step4State },
+              step5Maturity: { ...DEFAULT_ASSESSMENT_CONFIG.step5Maturity, ...cfg.assessment_config.step5Maturity },
+              step6Urgency: { ...DEFAULT_ASSESSMENT_CONFIG.step6Urgency, ...cfg.assessment_config.step6Urgency },
+              tourAndResults: { ...DEFAULT_ASSESSMENT_CONFIG.tourAndResults, ...cfg.assessment_config.tourAndResults },
             })
           }
         }
@@ -1556,67 +1558,10 @@ export default function AdminAssessmentConfigPage() {
         </div>
       </Section>
 
-      {/* Floating Sticky Save Bar at Bottom */}
-      <div className="sticky bottom-4 z-40 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-4 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-          <Sparkles className="w-4 h-4 text-blue-500" />
-          <span>Updates publish to <a href="/assessment" target="_blank" className="font-bold underline text-blue-600">/assessment</a> immediately.</span>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => handleSave()}
-          disabled={saving}
-          className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg shadow-blue-500/20 active:scale-95 disabled:opacity-50 transition-all cursor-pointer"
-        >
-          {saving ? (
-            <>
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span>Saving...</span>
-            </>
-          ) : (
-            <>
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Save Changes</span>
-            </>
-          )}
-        </button>
-      </div>
-      {/* Save Button */}
-      <div className="sticky bottom-0 bg-gray-50/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 z-50 rounded-t-xl">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Changes are saved to the database and go live immediately.
-        </p>
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-          <a
-            href="/assessment"
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 sm:flex-initial text-center px-6 py-2.5 text-sm font-semibold rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-sm transition-colors"
-          >
-            Preview Live
-          </a>
-          <button
-            type="button"
-            onClick={() => handleSave()}
-            disabled={saving}
-            className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-8 py-2.5 text-sm font-bold rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 active:scale-95 disabled:opacity-60 transition-all cursor-pointer"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>Saving...</span>
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Save Changes</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
+      {/* Floating Save Bar */}
+      <FloatingSaveBar onSave={() => handleSave()} saving={saving} label="Save Changes" />
     </div>
   )
 }
+
 

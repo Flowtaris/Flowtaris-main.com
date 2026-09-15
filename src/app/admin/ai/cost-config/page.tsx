@@ -2,6 +2,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import { Save, Loader2, DollarSign, Settings, ChevronDown, ChevronUp, CheckCircle2, AlertCircle } from 'lucide-react'
 
 // UI Components
@@ -155,11 +157,14 @@ export default function CostConfigAdminPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-32">
-      <div className="mb-10">
-        <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Cost of Waiting Config</h1>
-        <p className="mt-2 text-gray-500 dark:text-gray-400 text-lg mb-6">
-          Manage the live ticker, messaging, and CTAs for the bottom "Cost of Waiting" section.
-        </p>
+      <div className="mb-10 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Cost of Waiting Config</h1>
+          <p className="mt-2 text-gray-500 dark:text-gray-400 text-lg mb-6">
+            Manage the live ticker, messaging, and CTAs for the bottom "Cost of Waiting" section.
+          </p>
+        </div>
+        <ViewLiveButton href="/" />
         
         {status && (
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${status.type === 'success' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-red-50 text-red-600 border border-red-200'}`}>
@@ -229,18 +234,7 @@ export default function CostConfigAdminPage() {
       </Section>
 
       {/* Floating Save Bar */}
-      <div className="fixed bottom-0 left-0 lg:left-64 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-end z-40">
-        <div className="max-w-5xl w-full mx-auto flex justify-end">
-          <button
-            onClick={handleSave}
-            disabled={isSaving}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg shadow-blue-500/30 transition-all disabled:opacity-70"
-          >
-            {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-            {isSaving ? 'Saving...' : 'Save Configuration'}
-          </button>
-        </div>
-      </div>
+      <FloatingSaveBar onSave={handleSave} saving={isSaving} />
     </div>
   )
 }

@@ -2,6 +2,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp,
   Zap, BarChart2, TrendingDown, FlaskConical, Layout, BarChart3, Trash2, Plus
@@ -237,16 +239,19 @@ export default function IntelligenceSuiteConfigPage() {
   return (
     <div className="max-w-4xl mx-auto p-6">
       {/* Page Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg">
-            <Zap className="w-5 h-5 text-white" />
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <h1 className="text-2xl font-black text-gray-900 dark:text-gray-50">Intelligence Suite Config</h1>
           </div>
-          <h1 className="text-2xl font-black text-gray-900 dark:text-gray-50">Intelligence Suite Config</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 pl-13">
+            Manage the &ldquo;Stop guessing. Start calculating.&rdquo; section  section headline and all 4 tool tabs.
+          </p>
         </div>
-        <p className="text-sm text-gray-500 dark:text-gray-400 pl-13">
-          Manage the &ldquo;Stop guessing. Start calculating.&rdquo; section  section headline and all 4 tool tabs.
-        </p>
+        <ViewLiveButton href="/" />
       </div>
 
       {/* Status Banner */}
@@ -385,27 +390,8 @@ export default function IntelligenceSuiteConfigPage() {
           </div>
         </Section>
 
-        {/* Sticky Save Button */}
-        <div className="sticky bottom-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
-          <p className="text-xs text-gray-400">Changes go live within ~60 seconds after cache revalidation.</p>
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 transition-all disabled:opacity-60"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Save Configuration
-              </>
-            )}
-          </button>
-        </div>
+        {/* Floating Save Bar */}
+        <FloatingSaveBar type="submit" saving={saving} />
 
       </form>
     </div>

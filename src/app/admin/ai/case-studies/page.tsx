@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
 import { BookOpen, Clock, Users, Pencil, Trash2, Plus, ExternalLink, GripVertical, ChevronDown, ChevronUp, Save, Folder } from 'lucide-react'
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable'
@@ -67,7 +68,7 @@ function SortableCaseStudyItem({ cs, onDelete }: { cs: any; onDelete: () => void
             {/* Actions */}
             <div className="flex items-center gap-2 shrink-0">
               <a
-                href={`/case-studies/${cs.slug}`}
+                href={`https://flowtaris.ai/case-studies/${cs.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg text-gray-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/30 transition"
@@ -76,7 +77,7 @@ function SortableCaseStudyItem({ cs, onDelete }: { cs: any; onDelete: () => void
                 <ExternalLink className="w-4 h-4" />
               </a>
               <Link
-                href={`/admin/case-studies/${cs.id}/edit`}
+                href={`/admin/ai/case-studies/${cs.id}/edit`}
                 className="p-2 rounded-lg text-gray-400 hover:text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/30 transition"
                 title="Edit case study"
               >
@@ -139,8 +140,8 @@ export default function CaseStudiesAdmin() {
     try {
       const res = await fetch('/api/ai/case-studies')
       if (!res.ok) throw new Error('Failed to fetch case studies')
-      const data = await res.json()
-      setcaseStudies(data)
+      const json = await res.json()
+      setcaseStudies(json.data || [])
     } catch (err: any) {
       setError('Could not load case studies. Ensure database is connected.')
     } finally {
@@ -256,13 +257,16 @@ export default function CaseStudiesAdmin() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Case Studies</h1>
           <p className="text-gray-500 dark:text-gray-400">{caseStudies.length} case {caseStudies.length === 1 ? 'study' : 'studies'} in the database  drag to reorder.</p>
         </div>
-        <Link 
-          href="/admin/case-studies/new"
-          className="inline-flex items-center justify-center px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl font-medium transition"
-        >
-          <Plus className="w-5 h-5 mr-2" />
-          New Case Study
-        </Link>
+        <div className="flex items-center gap-3">
+          <ViewLiveButton href="/case-studies" />
+          <Link 
+            href="/admin/ai/case-studies/new/edit"
+            className="inline-flex items-center justify-center px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl font-medium transition"
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            New Case Study
+          </Link>
+        </div>
       </div>
 
       {error && (
@@ -361,7 +365,7 @@ export default function CaseStudiesAdmin() {
           <BookOpen className="w-12 h-12 text-gray-300 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">No case studies yet</h3>
           <p className="text-gray-500 dark:text-gray-400 mb-6">Create your first case study to get started.</p>
-          <Link href="/admin/case-studies/new" className="inline-flex items-center px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl font-medium transition">
+          <Link href="/admin/ai/case-studies/new/edit" className="inline-flex items-center px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl font-medium transition">
             <Plus className="w-5 h-5 mr-2" /> Create Case Study
           </Link>
         </div>
@@ -414,3 +418,4 @@ export default function CaseStudiesAdmin() {
     </div>
   )
 }
+

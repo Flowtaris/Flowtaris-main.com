@@ -2,7 +2,9 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { supabase } from '@/lib/supabase'
+import { uploadImageToServer } from '@/lib/uploadImage'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ImageIcon, X, Layers, Plus, Trash2
 } from 'lucide-react'
@@ -107,15 +109,11 @@ function ImageUpload({
   const handleFile = async (file: File) => {
     setUploading(true)
     try {
-      const ext = file.name.split('.').pop()
-      const name = `vision-${Date.now()}.${ext}`
-      const { error } = await supabase.storage.from('assets').upload(name, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(name)
+      const publicUrl = await uploadImageToServer(file)
       onChange(publicUrl)
       setPreviewError(false)
     } catch (e) {
-      alert('Upload failed. Check your Supabase storage bucket permissions.')
+      alert('Upload failed. Please try again or paste a URL.')
     } finally {
       setUploading(false)
     }
@@ -396,9 +394,7 @@ export default function DualVisionAdminPage() {
             and the <strong>flowtaris.ai</strong> intelligence story on the right.
           </p>
         </div>
-        <a href="/" target="_blank" rel="noopener noreferrer" className="shrink-0 text-xs text-blue-500 hover:text-blue-700 underline mt-1">
-          Preview on site 
-        </a>
+        <ViewLiveButton href="/" />
       </div>
 
       {/* Status */}
@@ -546,27 +542,8 @@ export default function DualVisionAdminPage() {
           </div>
         </Section>
 
-        {/* Save Button */}
-        <div className="sticky bottom-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-6 flex items-center justify-between">
-          <p className="text-xs text-gray-400">Changes are saved to the database and go live within ~60 seconds after cache revalidation.</p>
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-sm shadow-lg shadow-amber-500/20 hover:brightness-105 transition-all disabled:opacity-60"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Save Changes
-              </>
-            )}
-          </button>
-        </div>
+        {/* Floating Save Bar */}
+        <FloatingSaveBar type="submit" saving={saving} label="Save Changes" />
 
       </form>
     </div>

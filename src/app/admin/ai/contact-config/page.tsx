@@ -2,7 +2,9 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { supabase } from '@/lib/supabase'
+import { uploadImageToServer } from '@/lib/uploadImage'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
+import { FloatingSaveBar } from '@/app/admin/ai/components/FloatingSaveBar'
 import {
   CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ImageIcon, Plus, Trash2,
   Mail, Calendar, Globe, HelpCircle, Shield, ArrowRight, Eye, Sparkles, Building2
@@ -121,15 +123,11 @@ function ImageUpload({
   const handleFile = async (file: File) => {
     setUploading(true)
     try {
-      const ext = file.name.split('.').pop()
-      const name = `contact-${Date.now()}.${ext}`
-      const { error } = await supabase.storage.from('assets').upload(name, file)
-      if (error) throw error
-      const { data: { publicUrl } } = supabase.storage.from('assets').getPublicUrl(name)
+      const publicUrl = await uploadImageToServer(file)
       onChange(publicUrl)
       setPreviewError(false)
     } catch (e) {
-      alert('Upload failed. You can paste an image URL directly instead.')
+      alert('Upload failed. Please try again or paste a URL.')
     } finally {
       setUploading(false)
     }
@@ -253,8 +251,8 @@ export default function ContactConfigAdminPage() {
     fetch('/api/ai/site-config')
       .then(r => r.json())
       .then(cfg => {
-        if (cfg?.contactConfig) {
-          const cc = cfg.contactConfig
+        if (cfg?.contact_config) {
+          const cc = cfg.contact_config
           setData({
             hero: {
               ...DEFAULT_CONTACT_DATA.hero,
@@ -355,15 +353,7 @@ export default function ContactConfigAdminPage() {
             Manage the hero banner, meeting links, regional offices, ERP options, trust badges, and FAQs on the public <strong>/contact</strong> page.
           </p>
         </div>
-        <a
-          href="/contact"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition-colors shrink-0"
-        >
-          <Eye className="w-3.5 h-3.5" />
-          View Live Page 
-        </a>
+        <ViewLiveButton href="/contact" />
       </div>
 
       {/* Status Feedback */}
@@ -761,32 +751,12 @@ export default function ContactConfigAdminPage() {
           </div>
         </Section>
 
-        {/* Sticky Save Bar */}
-        <div className="sticky bottom-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 -mx-6 px-6 py-4 mt-8 flex items-center justify-between z-30 shadow-lg">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            Changes will update <strong>/contact</strong> immediately after saving.
-          </p>
-          <button
-            type="submit"
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold text-sm shadow-lg shadow-amber-500/25 hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-60"
-          >
-            {saving ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                Saving Changes
-              </>
-            ) : (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Save Contact Config
-              </>
-            )}
-          </button>
-        </div>
+        {/* Floating Save Bar */}
+        <FloatingSaveBar type="submit" saving={saving} label="Save Contact Config" />
 
       </form>
     </div>
   )
 }
+
 

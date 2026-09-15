@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { ViewLiveButton } from '@/app/admin/ai/components/ViewLiveButton'
 import { BookOpen, Clock, Calendar, Tag, Pencil, Trash2, Plus, ExternalLink, GripVertical, ChevronDown, ChevronUp, Save } from 'lucide-react'
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable'
@@ -68,7 +69,7 @@ function SortableInsightItem({ insight, onDelete }: { insight: any; onDelete: ()
             {/* Actions */}
             <div className="flex items-center gap-2 shrink-0">
               <a
-                href={`/insights/${insight.slug}`}
+                href={`https://flowtaris.ai/insights/${insight.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg text-gray-400 hover:text-sky-600 hover:bg-sky-50 dark:hover:bg-sky-900/30 transition"
@@ -77,7 +78,7 @@ function SortableInsightItem({ insight, onDelete }: { insight: any; onDelete: ()
                 <ExternalLink className="w-4 h-4" />
               </a>
               <Link
-                href={`/admin/insights/${insight.id}/edit`}
+                href={`/admin/ai/insights/${insight.id}/edit`}
                 className="p-2 rounded-lg text-gray-400 hover:text-violet-600 hover:bg-violet-50 dark:hover:bg-violet-900/30 transition"
                 title="Edit article"
               >
@@ -153,8 +154,8 @@ export default function InsightsAdminPage() {
       setLoading(true)
       const res = await fetch('/api/ai/insights')
       if (!res.ok) throw new Error('Failed to fetch insights')
-      const data = await res.json()
-      setInsights(data || [])
+      const json = await res.json()
+      setInsights(json.data || [])
     } catch (err: any) {
       setError('Failed to load insights. Check your Supabase connection.')
     } finally {
@@ -281,12 +282,15 @@ export default function InsightsAdminPage() {
             {insights.length} article{insights.length !== 1 ? 's' : ''} in the database  drag to reorder.
           </p>
         </div>
-        <Link
-          href="/admin/insights/new"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-sm font-bold transition shadow-md"
-        >
-          <Plus className="w-4 h-4" /> New Article
-        </Link>
+        <div className="flex items-center gap-3">
+          <ViewLiveButton href="/insights" />
+          <Link
+            href="/admin/ai/insights/new"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-sm font-bold transition shadow-md"
+          >
+            <Plus className="w-4 h-4" /> New Article
+          </Link>
+        </div>
       </div>
 
       {/* Floating Success Toast */}
@@ -390,7 +394,7 @@ export default function InsightsAdminPage() {
         <div className="text-center py-20 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl">
           <BookOpen className="w-10 h-10 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
           <p className="text-gray-500 dark:text-gray-400 font-medium mb-4">No insights in the database yet.</p>
-          <Link href="/admin/insights/new" className="inline-flex items-center gap-2 text-sm text-violet-600 dark:text-violet-400 hover:underline font-semibold">
+          <Link href="/admin/ai/insights/new" className="inline-flex items-center gap-2 text-sm text-violet-600 dark:text-violet-400 hover:underline font-semibold">
             <Plus className="w-4 h-4" /> Create your first article
           </Link>
         </div>
@@ -436,3 +440,4 @@ export default function InsightsAdminPage() {
     </div>
   )
 }
+
