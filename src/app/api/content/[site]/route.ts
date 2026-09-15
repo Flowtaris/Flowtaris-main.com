@@ -22,8 +22,8 @@ function getClient(site: string) {
   return createClient(config.url, config.key);
 }
 
-export async function GET(req: NextRequest, { params }: { params: { site: string } }) {
-  const { site } = params;
+export async function GET(req: NextRequest, { params }: { params: Promise<{ site: string }> }) {
+  const { site } = await params;
   const { searchParams } = new URL(req.url);
   const table = searchParams.get('table') || 'page_content';
   const id = searchParams.get('id');
@@ -43,8 +43,8 @@ export async function GET(req: NextRequest, { params }: { params: { site: string
   return NextResponse.json({ data });
 }
 
-export async function POST(req: NextRequest, { params }: { params: { site: string } }) {
-  const { site } = params;
+export async function POST(req: NextRequest, { params }: { params: Promise<{ site: string }> }) {
+  const { site } = await params;
   let body;
   try {
     body = await req.json();
@@ -61,8 +61,8 @@ export async function POST(req: NextRequest, { params }: { params: { site: strin
   return NextResponse.json({ data });
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { site: string } }) {
-  const { site } = params;
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ site: string }> }) {
+  const { site } = await params;
   const { searchParams } = new URL(req.url);
   const table = searchParams.get('table');
   const id = searchParams.get('id');
