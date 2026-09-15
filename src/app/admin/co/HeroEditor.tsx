@@ -37,7 +37,7 @@ export default function HeroEditor({ site }: { site: string }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=home`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=home`);
       const { data, message, error } = await res.json();
       
       if (data && data.length > 0 && data[0].content) {
@@ -62,7 +62,7 @@ export default function HeroEditor({ site }: { site: string }) {
     setSaving(true);
     setSaveStatus(null);
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

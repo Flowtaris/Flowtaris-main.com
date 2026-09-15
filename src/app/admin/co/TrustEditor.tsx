@@ -14,7 +14,7 @@ export default function TrustEditor({ site }: { site: string }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=systems_of_trust`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=systems_of_trust`);
       const { data, message, error } = await res.json();
       
       if (data && data.length > 0 && data[0].content) {
@@ -37,7 +37,7 @@ export default function TrustEditor({ site }: { site: string }) {
 
   async function saveTrustContent() {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -55,7 +55,7 @@ export default function TrustEditor({ site }: { site: string }) {
 
   async function saveTrustSystems(updatedSystems: any[]) {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

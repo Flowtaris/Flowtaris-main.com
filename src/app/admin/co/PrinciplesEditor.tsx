@@ -22,8 +22,8 @@ export default function PrinciplesEditor({ site }: { site: string }) {
     setLoading(true);
     try {
       const [pageRes, judgRes] = await Promise.all([
-        fetch(`/api/admin-content/${site}?table=page_content&id=principles`).then(r => r.json()),
-        fetch(`/api/admin-content/${site}?table=page_content&id=judgment`).then(r => r.json())
+        fetch(`/api/content/${site}?table=page_content&id=principles`).then(r => r.json()),
+        fetch(`/api/content/${site}?table=page_content&id=judgment`).then(r => r.json())
       ]);
       
       if (pageRes.data && pageRes.data.length > 0 && pageRes.data[0].content) {
@@ -49,7 +49,7 @@ export default function PrinciplesEditor({ site }: { site: string }) {
   // --- Save helpers ---
   async function savePageContent() {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "page_content", record: { id: "principles", content: pageData, updated_at: new Date().toISOString() } })
@@ -63,7 +63,7 @@ export default function PrinciplesEditor({ site }: { site: string }) {
   async function saveJudgmentLogs(updatedLogs: any[]) {
     try {
       const content = { ...judgmentData, logs: updatedLogs };
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "page_content", record: { id: "judgment", content, updated_at: new Date().toISOString() } })
@@ -139,11 +139,11 @@ export default function PrinciplesEditor({ site }: { site: string }) {
     // Also ensure the slug page exists
     try {
       const slugId = `judgment_slug_${draft.slug}`;
-      const slugRes = await fetch(`/api/admin-content/${site}?table=page_content&id=${slugId}`);
+      const slugRes = await fetch(`/api/content/${site}?table=page_content&id=${slugId}`);
       const slugJson = await slugRes.json();
       const existing = slugJson.data && slugJson.data.length > 0;
       if (!existing) {
-        await fetch(`/api/admin-content/${site}`, {
+        await fetch(`/api/content/${site}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

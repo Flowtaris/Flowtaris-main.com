@@ -12,7 +12,7 @@ export default function WorkdayEditor({ site }: { site: string }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=workday_specialists`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=workday_specialists`);
       const { data } = await res.json();
       if (data && data.length > 0 && data[0].content?.specialists) {
         setSpecialists(data[0].content.specialists);
@@ -27,7 +27,7 @@ export default function WorkdayEditor({ site }: { site: string }) {
 
   async function saveSpecialists(updated: any[]) {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "page_content", record: { id: "workday_specialists", content: { specialists: updated }, updated_at: new Date().toISOString() } })

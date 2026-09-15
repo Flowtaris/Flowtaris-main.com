@@ -16,7 +16,7 @@ export default function JudgmentEditor({ site }: { site: string }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=judgment`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
       const { data, message, error } = await res.json();
       
       if (data && data.length > 0 && data[0].content) {
@@ -39,7 +39,7 @@ export default function JudgmentEditor({ site }: { site: string }) {
 
   async function saveJudgmentContent() {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -57,7 +57,7 @@ export default function JudgmentEditor({ site }: { site: string }) {
 
   async function saveDecisionLogs(updatedLogs: any[]) {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

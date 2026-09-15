@@ -14,7 +14,7 @@ export default function JudgmentSlugsEditor({ site }: { site: string }) {
   async function fetchLogs() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=judgment`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment`);
       const { data } = await res.json();
       if (data && data.length > 0 && data[0].content?.logs) {
         setDecisionLogs(data[0].content.logs);
@@ -32,7 +32,7 @@ export default function JudgmentSlugsEditor({ site }: { site: string }) {
     setSelectedSlug(slug);
     setIsSlugLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=judgment_slug_${slug}`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=judgment_slug_${slug}`);
       const { data } = await res.json();
       if (data && data.length > 0 && data[0].content) {
         setSlugData(data[0].content);
@@ -77,7 +77,7 @@ export default function JudgmentSlugsEditor({ site }: { site: string }) {
   async function saveSlugContent() {
     if (!selectedSlug || !slugData) return;
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

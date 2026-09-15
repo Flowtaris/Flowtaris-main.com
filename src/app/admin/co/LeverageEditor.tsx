@@ -13,7 +13,7 @@ export default function LeverageEditor({ site }: { site: string }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=page_content&id=leverage`);
+      const res = await fetch(`/api/content/${site}?table=page_content&id=leverage`);
       const { data: resData } = await res.json();
       if (resData && resData.length > 0 && resData[0].content) {
         setData(resData[0].content);
@@ -41,7 +41,7 @@ export default function LeverageEditor({ site }: { site: string }) {
 
   async function save() {
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "page_content", record: { id: "leverage", content: data, updated_at: new Date().toISOString() } })

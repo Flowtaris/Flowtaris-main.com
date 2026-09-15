@@ -13,7 +13,7 @@ export default function ResourcesEditor({ site }: { site: string }) {
   async function fetchData() {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=pdf_documents`);
+      const res = await fetch(`/api/content/${site}?table=pdf_documents`);
       const { data } = await res.json();
       if (data) setPdfs(data);
     } catch (e) {
@@ -25,7 +25,7 @@ export default function ResourcesEditor({ site }: { site: string }) {
   async function addPdf() {
     if (!newPdfTitle || !newPdfUrl) { alert("Please enter title and URL for the PDF."); return; }
     try {
-      const res = await fetch(`/api/admin-content/${site}`, {
+      const res = await fetch(`/api/content/${site}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table: "pdf_documents", record: { title: newPdfTitle, url: newPdfUrl } })
@@ -38,7 +38,7 @@ export default function ResourcesEditor({ site }: { site: string }) {
 
   async function deletePdf(id: string) {
     try {
-      const res = await fetch(`/api/admin-content/${site}?table=pdf_documents&id=${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/content/${site}?table=pdf_documents&id=${id}`, { method: "DELETE" });
       const { error } = await res.json();
       if (error) throw new Error(error);
       fetchData();
