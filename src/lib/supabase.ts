@@ -3,7 +3,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 // Environment variables for admin panel
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_KEY_COM || ''
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_KEY_CO || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 // Mock client for build time when env vars are not available
 function createMockClient(): SupabaseClient {
@@ -169,8 +169,8 @@ export interface ROICConfig {
 
 // Helper functions for CRUD operations
 export async function getSiteConfig() {
-  const { unstable_noStore } = require('next/cache')
-  unstable_noStore()
+  // const { unstable_noStore } = require('next/cache')
+  // unstable_noStore()
   const client = createAdminClient()
   const { data, error } = await client.from('site_config').select('*').single()
   if (error) throw error
@@ -453,4 +453,4 @@ export async function updateROICConfig(data: Partial<ROICConfig>) {
     .single()
   if (error) throw error
   return updatedData
-}
+}
