@@ -9,33 +9,43 @@ export default function TrustEditor({ site }: { site: string }) {
   const [editingSystemId, setEditingSystemId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { fetchData(); }, [site]);
-
-  async function fetchData() {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/content/${site}?table=page_content&id=systems_of_trust`);
-      const { data, message, error } = await res.json();
-      
-      if (data && data.length > 0 && data[0].content) {
-        setTrustTitle(data[0].content.title || "");
-        setTrustSystems(data[0].content.systems || []);
-      } else {
-        if (message) console.warn(message);
-        setTrustTitle("THREE SYSTEMS OF TRUST");
-        setTrustSystems([
-          { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE ", ctaLink: "#judgment" },
-          { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE ", ctaLink: "#evidence" },
-          { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE ", ctaLink: "#leverage" }
-        ]);
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/content/${site}?table=page_content&id=systems_of_trust`);
+        const { data, message } = await res.json();
+        if (data && data.length > 0 && data[0].content) {
+          setTrustTitle(data[0].content.title || "");
+          setTrustSystems(data[0].content.systems || []);
+        } else {
+          if (message) console.warn(message);
+          setTrustTitle("THREE SYSTEMS OF TRUST");
+          setTrustSystems([
+            { id: "1", heading: "JUDGMENT", description: "How we think.", items: ["Decision logs", "Principles"], ctaText: "EXPLORE →", ctaLink: "#judgment" },
+            { id: "2", heading: "EVIDENCE", description: "How we operate.", items: ["Governance", "Security"], ctaText: "EXPLORE →", ctaLink: "#evidence" },
+            { id: "3", heading: "LEVERAGE", description: "How we scale.", items: ["Partnerships", "Alliances"], ctaText: "EXPLORE →", ctaLink: "#leverage" }
+          ]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch", err);
       }
-    } catch (err) {
-      console.error("Failed to fetch", err);
+      setLoading(false);
     }
-    setLoading(false);
-  }
+    fetchData();
+  }, [site]);
+
+  const [saveStatus, setSaveStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  useEffect(() => {
+    if (saveStatus) {
+      const timer = setTimeout(() => setSaveStatus(null), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [saveStatus]);
 
   async function saveTrustContent() {
+    setSaveStatus(null);
     try {
       const res = await fetch(`/api/content/${site}`, {
         method: "POST",
@@ -45,15 +55,19 @@ export default function TrustEditor({ site }: { site: string }) {
           record: { id: "systems_of_trust", content: { title: trustTitle, systems: trustSystems }, updated_at: new Date().toISOString() }
         })
       });
+      if (!res.ok) {
+        throw new Error(`HTTP Error ${res.status}`);
+      }
       const { error } = await res.json();
-      if (error) alert("Error saving: " + error);
-      else alert(`Systems of Trust saved to flowtaris.${site}!`);
-    } catch (err) {
-      alert("Network error while saving.");
+      if (error) setSaveStatus({ type: "error", message: "Error saving: " + error });
+      else setSaveStatus({ type: "success", message: `Systems of Trust saved to flowtaris.${site}!` });
+    } catch (err: any) {
+      setSaveStatus({ type: "error", message: err.message || "Network error while saving." });
     }
   }
 
   async function saveTrustSystems(updatedSystems: any[]) {
+    setSaveStatus(null);
     try {
       const res = await fetch(`/api/content/${site}`, {
         method: "POST",
@@ -63,11 +77,17 @@ export default function TrustEditor({ site }: { site: string }) {
           record: { id: "systems_of_trust", content: { title: trustTitle, systems: updatedSystems }, updated_at: new Date().toISOString() }
         })
       });
+      if (!res.ok) {
+        throw new Error(`HTTP Error ${res.status}`);
+      }
       const { error } = await res.json();
-      if (error) alert("Error saving: " + error);
-      else setTrustSystems(updatedSystems);
-    } catch (err) {
-      alert("Network error while saving.");
+      if (error) setSaveStatus({ type: "error", message: "Error saving: " + error });
+      else {
+        setTrustSystems(updatedSystems);
+        setSaveStatus({ type: "success", message: `System changes saved to flowtaris.${site}!` });
+      }
+    } catch (err: any) {
+      setSaveStatus({ type: "error", message: err.message || "Network error while saving." });
     }
   }
 
@@ -104,6 +124,22 @@ export default function TrustEditor({ site }: { site: string }) {
     <div style={{ maxWidth: 900 }}>
       <h1 style={{ fontSize: 24, fontWeight: "bold", color: "#111827", marginBottom: 24 }}>Systems of Trust</h1>
       
+      {/* Save Status Banner */}
+      {saveStatus && (
+        <div style={{
+          padding: "12px 16px",
+          borderRadius: 8,
+          marginBottom: 20,
+          fontSize: 14,
+          fontWeight: 500,
+          background: saveStatus.type === "success" ? "#ECFDF5" : "#FEF2F2",
+          color: saveStatus.type === "success" ? "#065F46" : "#991B1B",
+          border: `1px solid ${saveStatus.type === "success" ? "#A7F3D0" : "#FECACA"}`,
+        }}>
+          {saveStatus.message}
+        </div>
+      )}
+
       <div style={{ background: "#fff", borderRadius: 12, padding: 32, boxShadow: "0 1px 3px rgba(0,0,0,0.05)", border: "1px solid #E5E7EB", marginBottom: 32 }}>
         <h2 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16 }}>Section Title</h2>
         <div style={{ marginBottom: 16 }}>
@@ -129,7 +165,7 @@ export default function TrustEditor({ site }: { site: string }) {
           </div>
           <div>
             <label style={{ display: "block", marginBottom: 8, fontSize: 14, fontWeight: 500, color: "#374151" }}>CTA Text</label>
-            <input type="text" value={newSystem.ctaText} onChange={(e) => setNewSystem({...newSystem, ctaText: e.target.value})} style={{ width: "100%", background: "#F9FAFB", border: "1px solid #D1D5DB", padding: "10px 12px", borderRadius: 6, fontSize: 14 }} placeholder="e.g. EXPLORE " />
+            <input type="text" value={newSystem.ctaText} onChange={(e) => setNewSystem({...newSystem, ctaText: e.target.value})} style={{ width: "100%", background: "#F9FAFB", border: "1px solid #D1D5DB", padding: "10px 12px", borderRadius: 6, fontSize: 14 }} placeholder="e.g. EXPLORE →" />
           </div>
           <div>
             <label style={{ display: "block", marginBottom: 8, fontSize: 14, fontWeight: 500, color: "#374151" }}>CTA Link</label>
