@@ -15,6 +15,10 @@ function getClient(site: string) {
       url: process.env.SUPABASE_URL_AI || '',
       key: process.env.SUPABASE_SERVICE_KEY_AI || '',
     },
+    net: {
+      url: process.env.SUPABASE_URL_NET || '',
+      key: process.env.SUPABASE_SERVICE_KEY_NET || '',
+    },
   };
 
   const config = SITE_CONFIG[site];
