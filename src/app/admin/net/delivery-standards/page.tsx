@@ -20,6 +20,9 @@ export default function DeliveryAdminPage() {
       })
       .then((json) => {
         if (json && json.error) throw new Error(json.error);
+        if (!json.deliveryStandards) {
+          json.deliveryStandards = { hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""}, manifesto:{title:"",paragraphs:[]}, nodes:[], faqs:[] };
+        }
         setData(json);
         setLoading(false);
       })
