@@ -20,6 +20,11 @@ export default function ObservatoryAdminPage() {
       })
       .then((json) => {
         if (json && json.error) throw new Error(json.error);
+        if (!json.observatory) json.observatory = {};
+        json.observatory.hero = json.observatory.hero || {badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""};
+        json.observatory.architecture = json.observatory.architecture || {title:"",paragraphs:[]};
+        json.observatory.gridNodes = json.observatory.gridNodes || [];
+        json.observatory.faqs = json.observatory.faqs || [];
         setData(json);
         setLoading(false);
       })

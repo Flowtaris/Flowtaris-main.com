@@ -20,6 +20,11 @@ export default function ROILedgerAdminPage() {
       })
       .then((json) => {
         if (json && json.error) throw new Error(json.error);
+        if (!json.roiLedger) json.roiLedger = {};
+        json.roiLedger.hero = json.roiLedger.hero || {badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""};
+        json.roiLedger.philosophy = json.roiLedger.philosophy || {title:"",paragraphs:[]};
+        json.roiLedger.facts = json.roiLedger.facts || [];
+        json.roiLedger.faqs = json.roiLedger.faqs || [];
         setData(json);
         setLoading(false);
       })

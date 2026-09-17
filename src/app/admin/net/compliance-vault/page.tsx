@@ -20,6 +20,12 @@ export default function ComplianceAdminPage() {
       })
       .then((json) => {
         if (json && json.error) throw new Error(json.error);
+        if (!json.complianceVault) json.complianceVault = {};
+        json.complianceVault.hero = json.complianceVault.hero || {badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""};
+        json.complianceVault.philosophy = json.complianceVault.philosophy || {title:"",paragraphs:[]};
+        json.complianceVault.policies = json.complianceVault.policies || [];
+        json.complianceVault.faqs = json.complianceVault.faqs || [];
+        json.complianceVault.telemetry = json.complianceVault.telemetry || {title:"",logs:[]};
         setData(json);
         setLoading(false);
       })
