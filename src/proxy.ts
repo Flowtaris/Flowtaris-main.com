@@ -39,7 +39,8 @@ export function proxy(request: NextRequest) {
 
   // 3. Initialize response with the new headers
   const p = request.nextUrl.pathname
-  const rewritePath = p.startsWith('/admin') ? p : (p === '/' ? '/admin' : `/admin${p}`)
+  // Don't rewrite API routes — they must resolve to /api/*, not /admin/api/*
+  const rewritePath = p.startsWith('/admin') || p.startsWith('/api/') ? p : (p === '/' ? '/admin' : `/admin${p}`)
   
   let supabaseResponse = request.headers.get('host') === 'admin.flowtaris.com'
     ? NextResponse.rewrite(new URL(rewritePath, request.url), {
