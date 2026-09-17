@@ -1,15 +1,30 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import { revalidatePath } from 'next/cache';
+import { createClient } from '@supabase/supabase-js';
 
-const CMS_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'cms.json');
+const supabaseUrl = process.env.SUPABASE_URL_NET || '';
+const supabaseKey = process.env.SUPABASE_SERVICE_KEY_NET || '';
 
 export async function GET() {
   try {
-    const fileContents = fs.readFileSync(CMS_FILE_PATH, 'utf8');
-    const data = JSON.parse(fileContents);
-    return NextResponse.json(data);
+    if (!supabaseUrl || !supabaseKey) {
+      return NextResponse.json({ error: 'Missing credentials for .net' }, { status: 500 });
+    }
+
+    const client = createClient(supabaseUrl, supabaseKey);
+    const { data, error } = await client.from('page_content').select('*').eq('id', 'net-cms').single();
+
+    if (data && data.content) {
+      return NextResponse.json(data.content);
+    }
+
+    // Fallback: fetch default from GitHub if DB is empty
+    const fallbackRes = await fetch('https://raw.githubusercontent.com/Flowtaris/net_flowtaris/main/src/data/cms.json');
+    if (fallbackRes.ok) {
+      const fallbackData = await fallbackRes.json();
+      return NextResponse.json(fallbackData);
+    }
+
+    return NextResponse.json({ error: 'No data found' }, { status: 404 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to read CMS data' }, { status: 500 });
   }
@@ -17,13 +32,22 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const content = await request.json();
     
-    // Save to the JSON file
-    fs.writeFileSync(CMS_FILE_PATH, JSON.stringify(data, null, 2), 'utf8');
-    
-    // Force Next.js to revalidate the home page so changes show instantly
-    revalidatePath('/');
+    if (!supabaseUrl || !supabaseKey) {
+      return NextResponse.json({ error: 'Missing credentials for .net' }, { status: 500 });
+    }
+
+    const client = createClient(supabaseUrl, supabaseKey);
+    const { error } = await client.from('page_content').upsert({
+      id: 'net-cms',
+      content: content,
+      updated_at: new Date().toISOString()
+    });
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
     
     return NextResponse.json({ success: true });
   } catch (error) {
