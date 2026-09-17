@@ -87,7 +87,7 @@ export default function ComplianceAdminPage() {
             <div key={k}>
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">{lbl}</label>
               <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500 outline-none"
-                value={cv().hero[k]} onChange={(e) => update(["complianceVault","hero"], {...cv().hero, [k]: e.target.value})} />
+                value={cv().hero[k as string]} onChange={(e) => update(["complianceVault","hero"], {...cv().hero, [k as string]: e.target.value})} />
             </div>
           ))}
           <div className="md:col-span-2">
