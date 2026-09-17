@@ -3,11 +3,26 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { uploadImageToServer } from @/lib/uploadImage;
 
 export default function HeaderConfigPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
+
+  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingLogo(true);
+    try {
+      const publicUrl = await uploadImageToServer(file);
+      handleStringChange('logoImage', publicUrl);
+    } catch (err) {
+      alert("Failed to upload logo.");
+    }
+    setUploadingLogo(false);
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -116,6 +131,31 @@ export default function HeaderConfigPage() {
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Sub Logo Text</label>
             <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-blue-500 outline-none transition-colors" 
               value={data.header.logoSubText} onChange={(e) => handleStringChange('logoSubText', e.target.value)} />
+          </div>
+                    <div className="md:col-span-2 bg-[#0a1128] p-4 rounded-xl border border-white/10 flex items-center gap-6">
+            <div className="w-16 h-16 rounded bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden shrink-0">
+              {data.header.logoImage ? (
+                <img src={data.header.logoImage} alt="Logo" className="w-full h-full object-contain" />
+              ) : (
+                <span className="text-2xl opacity-50">???</span>
+              )}
+            </div>
+            <div className="flex-1">
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Logo Image (Optional)</label>
+              <div className="flex items-center gap-4">
+                <input 
+                  type="text" 
+                  className="flex-1 bg-[#1a233a] border border-white/10 rounded-lg px-4 py-2 text-sm text-white focus:border-blue-500 outline-none transition-colors" 
+                  value={data.header.logoImage || ''} 
+                  onChange={(e) => handleStringChange('logoImage', e.target.value)}
+                  placeholder="https://... or click upload"
+                />
+                <label className="cursor-pointer px-4 py-2 bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2">
+                  {uploadingLogo ? "Uploading..." : "Upload Local File"}
+                  <input type="file" className="hidden" accept="image/*" onChange={handleLogoUpload} disabled={uploadingLogo} />
+                </label>
+              </div>
+            </div>
           </div>
           <div className="md:col-span-2">
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Logo Tagline</label>
