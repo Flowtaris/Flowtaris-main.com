@@ -26,7 +26,7 @@ export default function ResourcesEditor({ site }: { site: string }) {
   const [saveStatus, setSaveStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer);
   }, [saveStatus]);
 
   async function handlePdfUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -38,7 +38,7 @@ export default function ResourcesEditor({ site }: { site: string }) {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      const res = await fetch(`/api/upload?site=${site}`, { method: "POST", body: formData });
       const data = await res.json();
       if (data.url) {
         setNewPdfUrl(data.url);

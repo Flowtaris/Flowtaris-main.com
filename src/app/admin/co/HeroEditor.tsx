@@ -71,7 +71,7 @@ export default function HeroEditor({ site }: { site: string }) {
 
   // Clear save status after 4 seconds
   useEffect(() => {
-    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer);
   }, [saveStatus]);
 
 
@@ -125,7 +125,7 @@ export default function HeroEditor({ site }: { site: string }) {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      const res = await fetch(`/api/upload?site=${site}`, { method: "POST", body: formData });
       const data = await res.json();
       if (data.url) setHeroImage(data.url);
       else setSaveStatus({ type: "error", message: data.error || "Failed to upload image" });
@@ -135,7 +135,7 @@ export default function HeroEditor({ site }: { site: string }) {
 
   async function handleRemoveImage() {
     if (heroImage && heroImage.startsWith("/uploads/")) {
-      try { await fetch("/api/upload", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: heroImage }) }); }
+      try { await fetch(`/api/upload?site=${site}`, { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: heroImage }) }); }
       catch (err) { console.error("Error deleting image file", err); }
     }
     setHeroImage("");

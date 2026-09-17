@@ -94,7 +94,7 @@ export default function JudgmentSlugsEditor({ site }: { site: string }) {
   const [saveStatus, setSaveStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer);
   }, [saveStatus]);
 
   async function saveSlugContent() {

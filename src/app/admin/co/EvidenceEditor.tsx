@@ -67,7 +67,7 @@ export default function EvidenceEditor({ site }: { site: string }) {
   }, [site]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer);
   }, [saveStatus]);
 
   async function save() {

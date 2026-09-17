@@ -1,16 +1,30 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-// We try to use the service key to bypass RLS, fallback to anon key if not found
-const supabaseKey = process.env.SUPABASE_SERVICE_KEY_CO || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+function getSupabaseClient(site: string) {
+  let url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  let key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-const supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: { persistSession: false }
-});
+  if (site === 'co') {
+    url = process.env.SUPABASE_URL_CO || url;
+    key = process.env.SUPABASE_SERVICE_KEY_CO || key;
+  } else if (site === 'ai') {
+    url = process.env.SUPABASE_URL_AI || url;
+    key = process.env.SUPABASE_SERVICE_KEY_AI || key;
+  } else if (site === 'com') {
+    url = process.env.SUPABASE_URL_COM || url;
+    key = process.env.SUPABASE_SERVICE_KEY_COM || key;
+  }
+
+  return createClient(url, key, { auth: { persistSession: false } });
+}
 
 export async function POST(request: Request) {
   try {
+    const urlParams = new URL(request.url).searchParams;
+    const site = urlParams.get('site') || 'com';
+    const supabase = getSupabaseClient(site);
+
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
     
@@ -52,6 +66,10 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
+    const urlParams = new URL(request.url).searchParams;
+    const site = urlParams.get('site') || 'com';
+    const supabase = getSupabaseClient(site);
+
     const { url } = await request.json();
     if (!url) {
       return NextResponse.json({ error: 'Invalid file URL' }, { status: 400 });
