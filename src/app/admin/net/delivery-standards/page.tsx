@@ -20,9 +20,11 @@ export default function DeliveryAdminPage() {
       })
       .then((json) => {
         if (json && json.error) throw new Error(json.error);
-        if (!json.deliveryStandards) {
-          json.deliveryStandards = { hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""}, manifesto:{title:"",paragraphs:[]}, nodes:[], faqs:[] };
-        }
+        if (!json.deliveryStandards) json.deliveryStandards = {};
+        json.deliveryStandards.hero = json.deliveryStandards.hero || {badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""};
+        json.deliveryStandards.manifesto = json.deliveryStandards.manifesto || {title:"",paragraphs:[]};
+        json.deliveryStandards.nodes = json.deliveryStandards.nodes || [];
+        json.deliveryStandards.faqs = json.deliveryStandards.faqs || [];
         setData(json);
         setLoading(false);
       })
