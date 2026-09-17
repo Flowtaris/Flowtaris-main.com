@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { uploadImageToServer } from @/lib/uploadImage;
+import { uploadImageToServer } from "@/lib/uploadImage";
 
 export default function HeaderConfigPage() {
   const [data, setData] = useState<any>(null);
