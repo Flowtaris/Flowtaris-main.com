@@ -189,7 +189,7 @@ export default function HeroConfigPage() {
       {/* Sticky Save Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-[#0a1128]/80 backdrop-blur-xl border-t border-white/10 p-4 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-2">
-          <p className="text-sm text-gray-400">Changes take effect on the live site immediately after saving.</p>
+          <p className="text-sm text-gray-400">Changes reflect on the live site in a maximum of 60 seconds.</p>
           <button
             onClick={handleSave}
             disabled={saving}
