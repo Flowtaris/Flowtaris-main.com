@@ -12,9 +12,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               Admin Dashboard
             </Link>
           </div>
-          <a href="/" target="_blank" rel="noreferrer" className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2">
-            Preview on site →
-          </a>
         </header>
         <main>
           {children}
