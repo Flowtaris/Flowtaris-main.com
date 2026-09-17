@@ -35,8 +35,12 @@ export default function ComplianceAdminPage() {
   const update = (path: string[], value: any) => setData((prev: any) => {
     const next = { ...prev };
     let cur: any = next;
-    for (let i = 0; i < path.length - 1; i++) { cur[path[i]] = { ...cur[path[i]] }; cur = cur[path[i]]; }
-    cur[path[path.length - 1]] = value;
+    for (let i = 0; i < path.length - 1; i++) { 
+      const k = path[i] as string; 
+      cur[k] = { ...cur[k] }; 
+      cur = cur[k]; 
+    }
+    cur[path[path.length - 1] as string] = value;
     return next;
   });
 
