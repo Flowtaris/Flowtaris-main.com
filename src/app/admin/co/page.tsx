@@ -5,17 +5,24 @@ import Link from "next/link";
 
 // ── Editor Components ──────────────────────────────────────────────
 import HeroEditor from "./HeroEditor";
-import TrustEditor from "./TrustEditor";
 import JudgmentEditor from "./JudgmentEditor";
 import JudgmentSlugsEditor from "./JudgmentSlugsEditor";
 import PrinciplesEditor from "./PrinciplesEditor";
 import LeverageEditor from "./LeverageEditor";
 import ResourcesEditor from "./ResourcesEditor";
 import WorkdayEditor from "./WorkdayEditor";
+import NetsuiteEditor from "./NetsuiteEditor";
+import CoupaEditor from "./CoupaEditor";
 import FooterEditor from "./FooterEditor";
-import EvidenceEditor from "./EvidenceEditor";
 import ContactEditor from "./ContactEditor";
+import EvidenceEditor from "./EvidenceEditor";
+import OperationsEvidenceEditor from "./OperationsEvidenceEditor";
+import SecurityEvidenceEditor from "./SecurityEvidenceEditor";
+import InformationSecurityPolicyEditor from "./InformationSecurityPolicyEditor";
+import LegalEvidenceEditor from "./LegalEvidenceEditor";
 import QuestionnaireEditor from "./QuestionnaireEditor";
+import RegisterEditor from "./RegisterEditor";
+import HomeSectionsEditor from "./HomeSectionsEditor";
 
 // ── Icons ──────────────────────────────────────────────────────────
 import {
@@ -36,18 +43,24 @@ import {
 // ── Sidebar Configuration ──────────────────────────────────────────
 const sidebarLinks = [
   { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
-  { id: "hero", label: "Homepage & Hero", icon: <Type size={18} /> },
-  { id: "trust", label: "Systems of Trust", icon: <ShieldCheck size={18} /> },
-  { id: "judgment", label: "Judgment Logs", icon: <Scale size={18} /> },
+  { id: "hero", label: "Homepage & Hero", icon: <LayoutDashboard size={18} /> },
+  { id: "home_sections", label: "Homepage Content", icon: <LayoutDashboard size={18} /> },
+  { id: "judgment", label: "Judgment Page", icon: <Scale size={18} /> },
   { id: "judgment_slugs", label: "Judgment Slugs", icon: <FileText size={18} /> },
   { id: "principles", label: "Principles", icon: <BookOpen size={18} /> },
-  { id: "statement", label: "Trust Statement", icon: <MessageSquare size={18} /> },
   { id: "leverage", label: "Leverage Page", icon: <Grid size={18} /> },
-  { id: "evidence", label: "Evidence Page", icon: <ShieldCheck size={18} /> },
+  { id: "register", label: "Deal Registration", icon: <FileText size={18} /> },
+  { id: "evidence", label: "Evidence Main", icon: <ShieldCheck size={18} /> },
+  { id: "evidence_operations", label: "Evidence Operations", icon: <ShieldCheck size={18} /> },
+  { id: "evidence_security", label: "Evidence Security", icon: <ShieldCheck size={18} /> },
+  { id: "evidence_legal", label: "Evidence Legal", icon: <ShieldCheck size={18} /> },
+  { id: "evidence_infosec", label: "Info Security Policy", icon: <ShieldCheck size={18} /> },
   { id: "questionnaire", label: "Questionnaire Center", icon: <FileBox size={18} /> },
   { id: "contact", label: "Contact Page", icon: <MessageSquare size={18} /> },
   { id: "resources", label: "PDF Resources", icon: <FileBox size={18} /> },
-  { id: "workday", label: "Workday Specialists", icon: <Briefcase size={18} /> },
+  { id: "netsuite", label: "NetSuite Alliance", icon: <Briefcase size={18} /> },
+  { id: "coupa", label: "Coupa Alliance", icon: <Briefcase size={18} /> },
+  { id: "workday", label: "Workday Alliance", icon: <Briefcase size={18} /> },
   { id: "footer", label: "Global Footer", icon: <LayoutDashboard size={18} /> },
 ];
 
@@ -167,15 +180,24 @@ export default function AdminPage() {
               <h1 style={{ fontSize: 28, fontWeight: "bold", color: "#111827", marginBottom: 8 }}>Dashboard Overview</h1>
               <p style={{ color: "#6B7280", marginBottom: 40, fontSize: 15 }}>Manage your Flowtaris web presence content from here.</p>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 24 }}>
-                <DashboardCard icon={<Type size={20} color="#3B82F6" />} iconBg="#EFF6FF" title="Homepage & Hero" description="Edit the global hero text, subtitles, and the main messaging of the site." actions={[{ label: "Manage Hero →", onClick: () => setActiveTab("hero") }]} />
                 <DashboardCard icon={<FileBox size={20} color="#8B5CF6" />} iconBg="#F5F3FF" title="PDF Resources" description="Add, update, or remove downloadable PDF documents from the main page." actions={[{ label: "Manage PDFs →", onClick: () => setActiveTab("resources") }]} />
-                <DashboardCard icon={<ShieldCheck size={20} color="#10B981" />} iconBg="#ECFDF5" title="Systems of Trust" description="Manage the three core pillars: Judgment, Evidence, and Leverage." actions={[{ label: "Manage Systems →", onClick: () => setActiveTab("trust") }]} />
+                <DashboardCard icon={<LayoutDashboard size={20} color="#3B82F6" />} iconBg="#EFF6FF" title="Hero" description="Manage the primary H1, sub-headline, and the hero image." actions={[{ label: "Manage Hero →", onClick: () => setActiveTab("hero") }]} />
+                <DashboardCard icon={<LayoutDashboard size={20} color="#3B82F6" />} iconBg="#EFF6FF" title="Homepage Content" description="Manage the featured judgment logs, trust statements, and final CTAs on the homepage." actions={[{ label: "Manage Content →", onClick: () => setActiveTab("home_sections") }]} />
                 <DashboardCard icon={<Scale size={20} color="#F59E0B" />} iconBg="#FFFBEB" title="Judgment Logs" description="Update the featured decision logs displayed on the homepage." actions={[{ label: "Manage Logs →", onClick: () => setActiveTab("judgment") }]} />
                 <DashboardCard icon={<BookOpen size={20} color="#EC4899" />} iconBg="#FDF2F8" title="Principles" description="Manage the principles derived from decision logs and page content." actions={[{ label: "Manage Principles →", onClick: () => setActiveTab("principles") }]} />
                 <DashboardCard icon={<Grid size={20} color="#6366F1" />} iconBg="#EEF2FF" title="Leverage Page" description="Manage alliances, partnerships, and the specialist network." actions={[{ label: "Manage Leverage →", onClick: () => setActiveTab("leverage") }]} />
-                <DashboardCard icon={<ShieldCheck size={20} color="#10B981" />} iconBg="#ECFDF5" title="Evidence Page" description="Manage evidence documents, questionnaires, and policies." actions={[{ label: "Manage Evidence →", onClick: () => setActiveTab("evidence") }]} />
+                <DashboardCard icon={<FileText size={20} color="#0284C7" />} iconBg="#E0F2FE" title="Principles & Process" description="Manage principles and delivery process components." actions={[{ label: "Manage Principles →", onClick: () => setActiveTab("principles") }]} />
+                <DashboardCard icon={<FileText size={20} color="#6366F1" />} iconBg="#EEF2FF" title="Deal Registration" description="Manage the form fields and layout of the partner registration page." actions={[{ label: "Manage Registration →", onClick: () => setActiveTab("register") }]} />
+                <DashboardCard icon={<ShieldCheck size={20} color="#10B981" />} iconBg="#ECFDF5" title="Evidence Main" description="Manage evidence documents, library, and policies." actions={[{ label: "Manage Evidence →", onClick: () => setActiveTab("evidence") }]} />
+                <DashboardCard icon={<ShieldCheck size={20} color="#059669" />} iconBg="#D1FAE5" title="Evidence Operations" description="Manage operations model, incident escalation, and RTO/RPO." actions={[{ label: "Manage Operations →", onClick: () => setActiveTab("evidence_operations") }]} />
+                <DashboardCard icon={<ShieldCheck size={20} color="#047857" />} iconBg="#D1FAE5" title="Evidence Security" description="Manage security controls, policies, and incident response." actions={[{ label: "Manage Security →", onClick: () => setActiveTab("evidence_security") }]} />
+                <DashboardCard icon={<ShieldCheck size={20} color="#065F46" />} iconBg="#D1FAE5" title="Evidence Legal" description="Manage legal terms, master service agreements, and DPA." actions={[{ label: "Manage Legal →", onClick: () => setActiveTab("evidence_legal") }]} />
+                <DashboardCard icon={<ShieldCheck size={20} color="#064E3B" />} iconBg="#D1FAE5" title="Info Security Policy" description="Manage Information Security Policy document evidence." actions={[{ label: "Manage Policy →", onClick: () => setActiveTab("evidence_infosec") }]} />
                 <DashboardCard icon={<FileBox size={20} color="#0EA5E9" />} iconBg="#F0F9FF" title="Questionnaire Center" description="Manage pre-filled security and compliance questionnaires." actions={[{ label: "Manage Questionnaires →", onClick: () => setActiveTab("questionnaire") }]} />
                 <DashboardCard icon={<MessageSquare size={20} color="#3B82F6" />} iconBg="#EFF6FF" title="Contact Page" description="Manage contact routing blocks, addresses, and corporate info." actions={[{ label: "Manage Contact →", onClick: () => setActiveTab("contact") }]} />
+                <DashboardCard icon={<Briefcase size={20} color="#6366F1" />} iconBg="#EEF2FF" title="NetSuite Alliance" description="Manage the NetSuite strategic alliance page content." actions={[{ label: "Manage NetSuite →", onClick: () => setActiveTab("netsuite") }]} />
+                <DashboardCard icon={<Briefcase size={20} color="#6366F1" />} iconBg="#EEF2FF" title="Coupa Alliance" description="Manage the Coupa strategic alliance page content." actions={[{ label: "Manage Coupa →", onClick: () => setActiveTab("coupa") }]} />
+                <DashboardCard icon={<Briefcase size={20} color="#6366F1" />} iconBg="#EEF2FF" title="Workday Alliance" description="Manage the Workday strategic alliance page content and specialists." actions={[{ label: "Manage Workday →", onClick: () => setActiveTab("workday") }]} />
                 <DashboardCard icon={<LayoutDashboard size={20} color="#059669" />} iconBg="#D1FAE5" title="Global Footer" description="Manage the footer logo, links, and copyright text." actions={[{ label: "Manage Footer →", onClick: () => setActiveTab("footer") }]} />
               </div>
             </div>
@@ -183,32 +205,26 @@ export default function AdminPage() {
 
           {/* ── Section Editors ── */}
           {activeTab === "hero"           && <HeroEditor site={activeSite} />}
-          {activeTab === "trust"          && <TrustEditor site={activeSite} />}
+          {activeTab === "home_sections"  && <HomeSectionsEditor site={activeSite} />}
           {activeTab === "judgment"       && <JudgmentEditor site={activeSite} />}
           {activeTab === "judgment_slugs" && <JudgmentSlugsEditor site={activeSite} />}
           {activeTab === "principles"     && <PrinciplesEditor site={activeSite} />}
           {activeTab === "leverage"       && <LeverageEditor site={activeSite} />}
+          {activeTab === "register"       && <RegisterEditor site={activeSite} />}
           {activeTab === "evidence"       && <EvidenceEditor site={activeSite} />}
+          {activeTab === "evidence_operations" && <OperationsEvidenceEditor site={activeSite} />}
+          {activeTab === "evidence_security" && <SecurityEvidenceEditor site={activeSite} />}
+          {activeTab === "evidence_legal" && <LegalEvidenceEditor site={activeSite} />}
+          {activeTab === "evidence_infosec" && <InformationSecurityPolicyEditor site={activeSite} />}
           {activeTab === "questionnaire"  && <QuestionnaireEditor site={activeSite} />}
           {activeTab === "contact"        && <ContactEditor site={activeSite} />}
           {activeTab === "resources"      && <ResourcesEditor site={activeSite} />}
+          {activeTab === "netsuite"       && <NetsuiteEditor site={activeSite} />}
+          {activeTab === "coupa"          && <CoupaEditor site={activeSite} />}
           {activeTab === "workday"        && <WorkdayEditor site={activeSite} />}
           {activeTab === "footer"         && <FooterEditor site={activeSite} />}
 
           {/* ── Placeholder Tabs ── */}
-          {activeTab === "statement" && (
-            <div style={{ maxWidth: 800 }}>
-              <h1 style={{ fontSize: 24, fontWeight: "bold", color: "#111827", marginBottom: 24, textTransform: "capitalize" }}>{activeTab.replace("-", " ")}</h1>
-              <div style={{ background: "#fff", borderRadius: 12, padding: 40, textAlign: "center", boxShadow: "0 1px 3px rgba(0,0,0,0.05)", border: "1px solid #E5E7EB" }}>
-                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, borderRadius: "50%", background: "#F3F4F6", marginBottom: 16 }}>
-                  <FileBox size={24} color="#9CA3AF" />
-                </div>
-                <h3 style={{ fontSize: 18, fontWeight: 500, color: "#111827", marginBottom: 8 }}>Section Under Construction</h3>
-                <p style={{ color: "#6B7280", maxWidth: 400, margin: "0 auto" }}>This section is ready to be connected to your Supabase schema when you need dynamic content here.</p>
-              </div>
-            </div>
-          )}
-
         </main>
       </div>
     </div>
