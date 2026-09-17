@@ -14,10 +14,7 @@ export default function ROILedgerAdminPage() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
     fetch("/api/net-cms", { signal: controller.signal })
-      .then((res) => {
-        if (!res.ok) throw new Error(`API error: ${res.status}`);
-        return res.json();
-      })
+      .then((res) => { if (!res.ok) throw new Error(`API error: ${res.status}`); return res.json(); })
       .then((json) => {
         if (json && json.error) throw new Error(json.error);
         if (!json.roiLedger) json.roiLedger = {};
@@ -25,191 +22,166 @@ export default function ROILedgerAdminPage() {
         json.roiLedger.philosophy = json.roiLedger.philosophy || {title:"",paragraphs:[]};
         json.roiLedger.facts = json.roiLedger.facts || [];
         json.roiLedger.faqs = json.roiLedger.faqs || [];
-        setData(json);
-        setLoading(false);
+        setData(json); setLoading(false);
       })
-      .catch((err) => {
-        console.error("Failed to load CMS config:", err);
-        // Use hardcoded fallback so the page always renders
-        setData({ header:{logoText:"Flowtaris",logoSubText:"",logoTagline:"Accountability Engine",navLinks:[],statusChip:"All Systems Nominal",ctaText:"Get Started",ctaLink:"https://flowtaris.com/contact"}, hero:{h1Line1:"Raw Data",h1Line2:"Zero Spin.",h1Line3:"Real Results.",bodyText:"Live telemetry from Flowtaris enterprise integrations.",stats:[],ctaPrimaryText:"Explore Telemetry",ctaPrimaryLink:"#telemetry",ctaSecondaryText:"View Architecture",ctaSecondaryLink:"/architecture"}, footer:{platformLinks:[],companyLinks:[],ecosystemLinks:[],contactBtnText:"Consult an Architect",contactBtnLink:"https://flowtaris.com/contact"}, performance:{tagline:"// live_metrics.query()",title:"Deterministic Performance",description:"Real numbers from production.",payloadSuccessRate:99.99,payloadSuccessRateLabel:"Payload Success Rate",payloadSuccessRateDesc:"30-Day Rolling Window",metrics:[]}, ctaSection:{tagline:"Ready to Build",title:"Stop Guessing.",description:"",primaryBtnText:"Consult an Architect",primaryBtnLink:"https://flowtaris.com/contact",secondaryBtnText:"Explore Observatory",secondaryBtnLink:"/integration-observatory"}, standardSection:{tagline:"The Flowtaris Standard",title:"Engineering Over Marketing.",description:"",cards:[]}, transparencySection:{tagline:"Operational Transparency",title:"Real Dashboards.",descPara1:"",descPara2:"",stats:[],images:{main:"/control-room.jpg",sub1:"/dashboard.jpg",sub2:"/roi-chart.jpg"}}, faqSection:{tagline:"Technical Knowledge Base",title:"Engineering FAQ",faqs:[]}, complianceVault:{hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""},philosophy:{title:"",paragraphs:[]},policies:[],faqs:[],telemetry:{title:"",logs:[]}}, roiLedger:{hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""},philosophy:{title:"",paragraphs:[]},facts:[],faqs:[]}, deliveryStandards:{hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""},manifesto:{title:"",paragraphs:[]},nodes:[],faqs:[]}, observatory:{hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""},gridNodes:[],faqs:[],architecture:{title:"",paragraphs:[]}} });
+      .catch(() => {
+        setData({ roiLedger:{hero:{badge:"",titleLine1:"",titleAccent:"",titleLine2:"",description:""},philosophy:{title:"",paragraphs:[]},facts:[],faqs:[]} });
         setLoading(false);
       })
       .finally(() => clearTimeout(timeout));
   }, []);
 
-  const handleHeroChange = (key: string, value: string) => {
-    setData((prev: any) => ({
-      ...prev,
-      roiLedger: { ...prev.roiLedger, hero: { ...prev.roiLedger.hero, [key]: value } }
-    }));
-  };
+  const update = (path: string[], value: any) => setData((prev: any) => {
+    const next = { ...prev };
+    let cur: any = next;
+    for (let i = 0; i < path.length - 1; i++) { cur[path[i]] = { ...cur[path[i]] }; cur = cur[path[i]]; }
+    cur[path[path.length - 1]] = value;
+    return next;
+  });
 
-  const handlePhilosophyChange = (key: string, value: string | string[]) => {
-    setData((prev: any) => ({
-      ...prev,
-      roiLedger: { ...prev.roiLedger, philosophy: { ...prev.roiLedger.philosophy, [key]: value } }
-    }));
-  };
+  const rl = () => data.roiLedger;
 
-  const handleFactChange = (index: number, key: string, value: string) => {
-    setData((prev: any) => {
-      const newFacts = [...prev.roiLedger.facts];
-      newFacts[index] = { ...newFacts[index], [key]: value };
-      return {
-        ...prev,
-        roiLedger: { ...prev.roiLedger, facts: newFacts }
-      };
-    });
-  };
+  // Facts handlers
+  const setFact = (i: number, k: string, v: string) => { const a = [...rl().facts]; a[i] = {...a[i],[k]:v}; update(["roiLedger","facts"],a); };
+  const addFact = () => update(["roiLedger","facts"], [...rl().facts, { id: `0${rl().facts.length+1}`, title: "", content: "" }]);
+  const removeFact = (i: number) => update(["roiLedger","facts"], rl().facts.filter((_:any,idx:number) => idx !== i));
 
-  const handleFAQChange = (index: number, key: string, value: string) => {
-    setData((prev: any) => {
-      const newFaqs = [...prev.roiLedger.faqs];
-      newFaqs[index] = { ...newFaqs[index], [key]: value };
-      return {
-        ...prev,
-        roiLedger: { ...prev.roiLedger, faqs: newFaqs }
-      };
-    });
-  };
+  // FAQs handlers
+  const setFaq = (i: number, k: string, v: string) => { const a = [...rl().faqs]; a[i] = {...a[i],[k]:v}; update(["roiLedger","faqs"],a); };
+  const addFaq = () => update(["roiLedger","faqs"], [...rl().faqs, { question: "", answer: "" }]);
+  const removeFaq = (i: number) => update(["roiLedger","faqs"], rl().faqs.filter((_:any,idx:number) => idx !== i));
 
   const handleSave = async () => {
-    setSaving(true);
-    setSaveStatus("idle");
+    setSaving(true); setSaveStatus("idle");
     try {
-      const res = await fetch("/api/net-cms", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        setSaveStatus("success");
-        setTimeout(() => setSaveStatus("idle"), 3000);
-      } else {
-        alert("Failed to save.");
-      }
-    } catch (e) {
-      alert("Failed to save.");
-    }
+      const res = await fetch("/api/net-cms", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      if (res.ok) { setSaveStatus("success"); setTimeout(() => setSaveStatus("idle"), 3000); }
+      else setSaveStatus("error");
+    } catch { setSaveStatus("error"); }
     setSaving(false);
   };
 
-  if (loading || !data) return <div className="text-gray-400">Loading configuration...</div>;
+  if (loading || !data) return <div className="text-gray-400 p-8">Loading configuration...</div>;
 
   return (
     <div className="pb-24 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
-        <Link href="/admin/net" className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-2 mb-4">
-          ← Back to Dashboard
-        </Link>
+        <Link href="/admin/net" className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-2 mb-4">← Back to Dashboard</Link>
         <h1 className="text-3xl font-bold text-white flex items-center gap-3">
           <span className="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg">📈</span>
           ROI Ledger Configuration
         </h1>
-        <p className="text-gray-400 mt-2">Manage the ROI Ledger page: Hero, Financial Narrative, TCO Metrics, and Procurement FAQs.</p>
+        <p className="text-gray-400 mt-2">Manage the ROI Ledger: Hero, Financial Narrative, TCO Metrics, and Procurement FAQs.</p>
       </div>
 
       {/* Hero Section */}
       <div className="bg-[#151c2f] border border-white/5 rounded-2xl overflow-hidden mb-8 shadow-xl">
-        <div className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
-          <h2 className="font-semibold text-white">Hero Section</h2>
-        </div>
+        <div className="px-6 py-4 border-b border-white/5"><h2 className="font-semibold text-white">Hero Section</h2></div>
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Badge Text</label>
-            <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.hero.badge} onChange={(e) => handleHeroChange('badge', e.target.value)} />
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Title Line 1</label>
-            <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.hero.titleLine1} onChange={(e) => handleHeroChange('titleLine1', e.target.value)} />
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Title Accent (Sage Green)</label>
-            <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.hero.titleAccent} onChange={(e) => handleHeroChange('titleAccent', e.target.value)} />
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Title Line 2</label>
-            <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.hero.titleLine2} onChange={(e) => handleHeroChange('titleLine2', e.target.value)} />
-          </div>
+          {[["Badge Text","badge"],["Title Line 1","titleLine1"],["Title Accent (Sage Green)","titleAccent"],["Title Line 2","titleLine2"]].map(([lbl,k]) => (
+            <div key={k}>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">{lbl}</label>
+              <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none"
+                value={rl().hero[k]} onChange={(e) => update(["roiLedger","hero"], {...rl().hero, [k]: e.target.value})} />
+            </div>
+          ))}
           <div className="md:col-span-2">
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Description</label>
-            <textarea rows={3} className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.hero.description} onChange={(e) => handleHeroChange('description', e.target.value)} />
+            <textarea rows={3} className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none"
+              value={rl().hero.description} onChange={(e) => update(["roiLedger","hero"], {...rl().hero, description: e.target.value})} />
           </div>
         </div>
       </div>
 
-      {/* Philosophy Section */}
+      {/* Philosophy / Financial Narrative */}
       <div className="bg-[#151c2f] border border-white/5 rounded-2xl overflow-hidden mb-8 shadow-xl">
-        <div className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
-          <h2 className="font-semibold text-white">Financial Narrative (Sticky Left Column)</h2>
-        </div>
+        <div className="px-6 py-4 border-b border-white/5"><h2 className="font-semibold text-white">Financial Narrative (Sticky Left Column)</h2></div>
         <div className="p-6 space-y-6">
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Section Title</label>
-            <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.philosophy.title} onChange={(e) => handlePhilosophyChange('title', e.target.value)} />
+            <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none"
+              value={rl().philosophy.title} onChange={(e) => update(["roiLedger","philosophy"], {...rl().philosophy, title: e.target.value})} />
           </div>
           <div>
             <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Paragraphs (One per line)</label>
-            <textarea rows={6} className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none" 
-              value={data.roiLedger.philosophy.paragraphs.join('\n')} 
-              onChange={(e) => handlePhilosophyChange('paragraphs', e.target.value.split('\n'))} />
+            <textarea rows={6} className="w-full bg-[#0a1128] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-emerald-500 outline-none"
+              value={rl().philosophy.paragraphs.join('\n')}
+              onChange={(e) => update(["roiLedger","philosophy"], {...rl().philosophy, paragraphs: e.target.value.split('\n')})} />
           </div>
         </div>
       </div>
 
-      {/* Facts Section */}
+      {/* TCO Metrics / Facts */}
       <div className="bg-[#151c2f] border border-white/5 rounded-2xl overflow-hidden mb-8 shadow-xl">
-        <div className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
+        <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between">
           <h2 className="font-semibold text-white">TCO Metrics (Scrolling Right Column)</h2>
+          <button onClick={addFact} className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-3 py-1.5 rounded-lg transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            Add Metric
+          </button>
         </div>
-        <div className="p-6 space-y-6">
-          {data.roiLedger.facts.map((fact: any, index: number) => (
+        <div className="p-6 space-y-4">
+          {rl().facts.length === 0 && <p className="text-gray-500 text-sm text-center py-4">No metrics yet. Click "Add Metric" to create one.</p>}
+          {rl().facts.map((fact: any, index: number) => (
             <div key={index} className="bg-[#1a233a] p-4 rounded-xl border border-white/5 space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-bold text-gray-500 uppercase">Metric {index + 1}</span>
+                <button onClick={() => removeFact(index)} className="text-xs text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-lg transition-all flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  Remove
+                </button>
+              </div>
               <div className="flex gap-4">
                 <div className="w-24">
                   <label className="block text-[10px] text-gray-500 uppercase mb-1">ID / Number</label>
-                  <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none" 
-                    value={fact.id} onChange={(e) => handleFactChange(index, 'id', e.target.value)} />
+                  <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none"
+                    value={fact.id} onChange={(e) => setFact(index, 'id', e.target.value)} />
                 </div>
                 <div className="flex-1">
                   <label className="block text-[10px] text-gray-500 uppercase mb-1">Title</label>
-                  <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none" 
-                    value={fact.title} onChange={(e) => handleFactChange(index, 'title', e.target.value)} />
+                  <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none"
+                    value={fact.title} onChange={(e) => setFact(index, 'title', e.target.value)} />
                 </div>
               </div>
               <div>
                 <label className="block text-[10px] text-gray-500 uppercase mb-1">Content</label>
-                <textarea rows={3} className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none" 
-                  value={fact.content} onChange={(e) => handleFactChange(index, 'content', e.target.value)} />
+                <textarea rows={3} className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none"
+                  value={fact.content} onChange={(e) => setFact(index, 'content', e.target.value)} />
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* FAQs Section */}
+      {/* Financial FAQs */}
       <div className="bg-[#151c2f] border border-white/5 rounded-2xl overflow-hidden mb-8 shadow-xl">
-        <div className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
+        <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between">
           <h2 className="font-semibold text-white">Financial FAQs</h2>
+          <button onClick={addFaq} className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 px-3 py-1.5 rounded-lg transition-all">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            Add FAQ
+          </button>
         </div>
-        <div className="p-6 space-y-6">
-          {data.roiLedger.faqs.map((faq: any, index: number) => (
+        <div className="p-6 space-y-4">
+          {rl().faqs.length === 0 && <p className="text-gray-500 text-sm text-center py-4">No FAQs yet. Click "Add FAQ" to create one.</p>}
+          {rl().faqs.map((faq: any, index: number) => (
             <div key={index} className="bg-[#1a233a] p-4 rounded-xl border border-white/5 space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-bold text-gray-500 uppercase">FAQ {index + 1}</span>
+                <button onClick={() => removeFaq(index)} className="text-xs text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-lg transition-all flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  Remove
+                </button>
+              </div>
               <div>
                 <label className="block text-[10px] text-gray-500 uppercase mb-1">Question</label>
-                <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none" 
-                  value={faq.question} onChange={(e) => handleFAQChange(index, 'question', e.target.value)} />
+                <input type="text" className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none"
+                  value={faq.question} onChange={(e) => setFaq(index, 'question', e.target.value)} />
               </div>
               <div>
                 <label className="block text-[10px] text-gray-500 uppercase mb-1">Answer</label>
-                <textarea rows={3} className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none" 
-                  value={faq.answer} onChange={(e) => handleFAQChange(index, 'answer', e.target.value)} />
+                <textarea rows={3} className="w-full bg-[#0a1128] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:border-emerald-500 outline-none"
+                  value={faq.answer} onChange={(e) => setFaq(index, 'answer', e.target.value)} />
               </div>
             </div>
           ))}
@@ -217,14 +189,15 @@ export default function ROILedgerAdminPage() {
       </div>
 
       {/* Sticky Save Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#0a1128]/80 backdrop-blur-xl border-t border-white/10 p-4 z-50">
+      <div className="fixed bottom-0 left-0 right-0 bg-[#0a1128]/90 backdrop-blur-xl border-t border-white/10 p-4 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-2">
-          <p className="text-sm text-gray-400">Changes reflect on the live site in a maximum of 60 seconds.</p>
-          <button
-            onClick={handleSave}
-            disabled={saving}
-            className="px-6 py-2.5 bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-[0_0_15px_rgba(5,150,105,0.4)] hover:bg-emerald-500 transition-all disabled:opacity-50 flex items-center gap-2"
-          >
+          <p className="text-sm text-gray-400">
+            {saveStatus === "success" && <span className="text-emerald-400 font-semibold">✓ Saved successfully!</span>}
+            {saveStatus === "error" && <span className="text-red-400 font-semibold">✗ Save failed. Try again.</span>}
+            {saveStatus === "idle" && "Changes reflect on the live site in a maximum of 60 seconds."}
+          </p>
+          <button onClick={handleSave} disabled={saving}
+            className="px-6 py-2.5 bg-emerald-600 text-white rounded-lg font-bold text-sm shadow-[0_0_15px_rgba(5,150,105,0.4)] hover:bg-emerald-500 transition-all disabled:opacity-50 flex items-center gap-2">
             {saving ? "Saving..." : "Save Configuration"}
           </button>
         </div>
@@ -232,5 +205,3 @@ export default function ROILedgerAdminPage() {
     </div>
   );
 }
-
-
