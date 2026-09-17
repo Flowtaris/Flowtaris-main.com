@@ -80,10 +80,8 @@ export default function NetsuiteEditor({ site }: { site: string }) {
 
   useEffect(() => { fetchData(); }, [fetchData]);
   useEffect(() => {
-    if (saveStatus) {
-      const timer = setTimeout(() => setSaveStatus(null), 4000);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => setSaveStatus(null), 4000);
+    return () => clearTimeout(timer);
   }, [saveStatus]);
 
   const update = (cat: string, field: string, val: any) => setData((prev: any) => ({ ...prev, [cat]: { ...prev[cat], [field]: val } }));

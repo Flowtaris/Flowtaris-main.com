@@ -71,7 +71,7 @@ export default function HeroEditor({ site }: { site: string }) {
 
   // Clear save status after 4 seconds
   useEffect(() => {
-    if (saveStatus) { const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); } return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
   }, [saveStatus]);
 
 

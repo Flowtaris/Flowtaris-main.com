@@ -41,7 +41,7 @@ export default function LeverageEditor({ site }: { site: string }) {
   const [saveStatus, setSaveStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   useEffect(() => {
-    if (saveStatus) { const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); } return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
   }, [saveStatus]);
 
   async function save() {

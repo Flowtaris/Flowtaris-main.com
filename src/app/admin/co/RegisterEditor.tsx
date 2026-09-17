@@ -114,10 +114,8 @@ export default function RegisterEditor({ site }: { site: string }) {
   useEffect(() => { fetchData(); }, [fetchData]);
 
   useEffect(() => {
-    if (saveStatus) {
-      const timer = setTimeout(() => setSaveStatus(null), 4000);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => setSaveStatus(null), 4000);
+    return () => clearTimeout(timer);
   }, [saveStatus]);
 
   const update = (category: string, field: string, value: any) => {

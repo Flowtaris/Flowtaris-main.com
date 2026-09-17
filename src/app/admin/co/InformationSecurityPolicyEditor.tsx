@@ -72,7 +72,7 @@ export default function InformationSecurityPolicyEditor({ site }: { site: string
   }, [site]);
 
   useEffect(() => {
-    if (saveStatus) { const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); } return undefined;
+    const timer = setTimeout(() => setSaveStatus(null), 4000); return () => clearTimeout(timer); return undefined;
   }, [saveStatus]);
 
   async function save() {
