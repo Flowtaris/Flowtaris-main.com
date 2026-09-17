@@ -1,0 +1,516 @@
+{
+  "header": {
+    "logoText": "Flowtaris",
+    "logoSubText": "",
+    "logoTagline": "Accountability Engine",
+    "navLinks": [
+      {
+        "href": "/integration-observatory",
+        "label": "Observatory"
+      },
+      {
+        "href": "/delivery-standards",
+        "label": "Standards"
+      },
+      {
+        "href": "/roi-ledger",
+        "label": "ROI Ledger"
+      },
+      {
+        "href": "/compliance-vault",
+        "label": "Compliance"
+      }
+    ],
+    "statusChip": "All Systems Nominal",
+    "ctaText": "Get Started",
+    "ctaLink": "https://flowtaris.com/contact"
+  },
+  "hero": {
+    "h1Line1": "Raw Data",
+    "h1Line2": "Zero Spin.",
+    "h1Line3": "Real Results.",
+    "bodyText": "Live telemetry from Flowtaris enterprise integrations — no promises, no marketing. Only deterministic numbers pulled straight from production.",
+    "stats": [
+      {
+        "val": "99.99%",
+        "lbl": "Uptime SLA"
+      },
+      {
+        "val": "42ms",
+        "lbl": "P99 Latency"
+      },
+      {
+        "val": "0",
+        "lbl": "Data Loss"
+      }
+    ],
+    "ctaPrimaryText": "Explore Telemetry",
+    "ctaPrimaryLink": "#telemetry",
+    "ctaSecondaryText": "View Architecture",
+    "ctaSecondaryLink": "https://flowtaris.com/architecture"
+  },
+  "footer": {
+    "platformLinks": [
+      {
+        "href": "/integration-observatory",
+        "label": "Observatory"
+      },
+      {
+        "href": "/delivery-standards",
+        "label": "Standards"
+      },
+      {
+        "href": "/roi-ledger",
+        "label": "ROI Ledger"
+      },
+      {
+        "href": "/compliance-vault",
+        "label": "Compliance Vault"
+      },
+      {
+        "label": "xxx",
+        "href": "/contact"
+      }
+    ],
+    "companyLinks": [
+      {
+        "href": "https://flowtaris.com/about",
+        "label": "About Us"
+      },
+      {
+        "href": "https://flowtaris.com/careers",
+        "label": "Careers"
+      },
+      {
+        "href": "https://flowtaris.com/blog",
+        "label": "Engineering Blog"
+      }
+    ],
+    "ecosystemLinks": [
+      {
+        "href": "https://flowtaris.com",
+        "label": "flowtaris.com"
+      },
+      {
+        "href": "https://flowtaris.ai",
+        "label": "flowtaris.ai"
+      },
+      {
+        "href": "https://flowtaris.co",
+        "label": "flowtaris.co"
+      }
+    ],
+    "contactBtnText": "Consult an Architect",
+    "contactBtnLink": "https://flowtaris.com/contact"
+  },
+  "performance": {
+    "tagline": "// live_metrics.query()",
+    "title": "Deterministic Performance",
+    "description": "Extracted directly from CI/CD pipeline telemetry. Not marketing claims. Real numbers from real production systems.",
+    "payloadSuccessRate": 99.99,
+    "payloadSuccessRateLabel": "Payload Success Rate",
+    "payloadSuccessRateDesc": "30-Day Rolling Window",
+    "metrics": [
+      {
+        "label": "Deployment Frequency",
+        "value": 14,
+        "unit": "/ day",
+        "desc": "Microservice artifacts merged to main and shipped to production daily."
+      },
+      {
+        "label": "Lead Time",
+        "value": 4.2,
+        "unit": "hrs",
+        "desc": "From initial git commit to code running in production."
+      },
+      {
+        "label": "Change Failure Rate",
+        "value": 0.01,
+        "unit": "%",
+        "desc": "Deployments requiring immediate rollback or hotfix."
+      },
+      {
+        "label": "Mean Time To Restore",
+        "value": 12,
+        "unit": "mins",
+        "desc": "P1/P2 incident duration from alert to full restoration."
+      }
+    ]
+  },
+  "ctaSection": {
+    "tagline": "Ready to Build",
+    "title": "Stop Guessing.<br />Start Engineering.",
+    "description": "Whether you need SAP-NetSuite integration, real-time Kafka pipelines, or legacy modernization into event-driven architecture, Flowtaris delivers with public accountability.",
+    "primaryBtnText": "Consult an Architect →",
+    "primaryBtnLink": "https://flowtaris.com/contact",
+    "secondaryBtnText": "Explore Observatory",
+    "secondaryBtnLink": "/integration-observatory"
+  },
+  "standardSection": {
+    "tagline": "The Flowtaris Standard",
+    "title": "Engineering Over Marketing.",
+    "description": "Over 70% of enterprise digital transformations fail because they are built by system integrators who write scripts, not engineers who build distributed systems.",
+    "cards": [
+      {
+        "iconId": "shield",
+        "title": "Strict Schema Validation",
+        "description": "Every payload is validated against a JSON Schema. Malformed data is routed to a Dead Letter Queue before touching the ERP.",
+        "codeHtml": "\n<div class=\"text-slate-500 font-semibold mb-1\">// 1. Receive data from external system</div>\n<div class=\"text-slate-900 font-bold mb-3\"><span class=\"text-indigo-600\">const</span> data = <span class=\"text-amber-600\">await</span> receivePayload();</div>\n<div class=\"text-slate-500 font-semibold mb-1\">// 2. Check if data is perfectly formatted</div>\n<div class=\"text-slate-900 font-bold\"><span class=\"text-rose-600\">if</span> (data.isMissingRequiredFields()) {</div>\n<div class=\"pl-4 text-slate-500 font-semibold mb-1 mt-1\">// 3. Stop immediately. Do not send bad data to ERP.</div>\n<div class=\"pl-4 text-slate-900 font-bold\"><span class=\"text-emerald-600\">return</span> rejectAndNotifyAdmin(data);</div>\n<div class=\"text-slate-900 font-bold\">}</div>\n"
+      },
+      {
+        "iconId": "refresh",
+        "title": "Idempotent Processors",
+        "description": "Retries never produce duplicates. Every operation is safe to replay across network partitions.",
+        "codeHtml": "\n<div class=\"text-slate-500 font-semibold mb-1\">// 1. Check if we already processed this exact invoice</div>\n<div class=\"text-slate-900 font-bold mb-3\"><span class=\"text-indigo-600\">const</span> isDuplicate = <span class=\"text-amber-600\">await</span> checkDatabase(invoice.id);</div>\n<div class=\"text-slate-900 font-bold\"><span class=\"text-rose-600\">if</span> (isDuplicate) {</div>\n<div class=\"pl-4 text-slate-500 font-semibold mb-1 mt-1\">// 2. If duplicate, safely ignore it. No double billing.</div>\n<div class=\"pl-4 text-slate-900 font-bold\"><span class=\"text-emerald-600\">return</span> \"Already Processed\";</div>\n<div class=\"text-slate-900 font-bold\">} <span class=\"text-rose-600\">else</span> {</div>\n<div class=\"pl-4 text-slate-500 font-semibold mb-1 mt-1\">// 3. Otherwise, proceed safely.</div>\n<div class=\"pl-4 text-slate-900 font-bold\"><span class=\"text-amber-600\">await</span> processPayment(invoice);</div>\n<div class=\"text-slate-900 font-bold\">}</div>\n"
+      },
+      {
+        "iconId": "lightning",
+        "title": "Automated Circuit Breakers",
+        "description": "If error rate exceeds 5% in 60 seconds, the circuit trips. Connection pools are preserved automatically.",
+        "codeHtml": "\n<div class=\"text-slate-500 font-semibold mb-1\">// 1. Continuously monitor the target system (e.g. SAP)</div>\n<div class=\"text-slate-900 font-bold mb-3\"><span class=\"text-indigo-600\">const</span> systemHealth = monitorTargetSystem();</div>\n<div class=\"text-slate-500 font-semibold mb-1\">// 2. If the system starts failing or slowing down</div>\n<div class=\"text-slate-900 font-bold\"><span class=\"text-rose-600\">if</span> (systemHealth.errorRate > <span class=\"text-emerald-600\">5%</span>) {</div>\n<div class=\"pl-4 text-slate-500 font-semibold mb-1 mt-1\">// 3. Pause all traffic to prevent a total crash</div>\n<div class=\"pl-4 text-slate-900 font-bold\"><span class=\"text-amber-600\">await</span> pauseTrafficAndQueueMessages();</div>\n<div class=\"text-slate-900 font-bold\">}</div>\n"
+      }
+    ]
+  },
+  "transparencySection": {
+    "tagline": "Operational Transparency",
+    "title": "Real Dashboards.<br />Real Data.",
+    "descPara1": "Every metric is sourced from live Supabase tables updated by our CI/CD pipelines, Kafka consumer lag monitors, and incident management systems.",
+    "descPara2": "We believe the most powerful sales tool is <strong className=\"text-[var(--color-brand-navy)]\">public accountability</strong>. When you see our DORA metrics and incident post-mortems in real-time, trust becomes a mathematical certainty.",
+    "stats": [
+      {
+        "value": "847",
+        "label": "Integrations Deployed"
+      },
+      {
+        "value": "23",
+        "label": "Enterprise Clients"
+      },
+      {
+        "value": "4.7M",
+        "label": "Payloads / Month"
+      },
+      {
+        "value": "12",
+        "label": "ERP Platforms"
+      }
+    ],
+    "images": {
+      "main": "/control-room.jpg",
+      "sub1": "/dashboard.jpg",
+      "sub2": "/roi-chart.jpg"
+    }
+  },
+  "faqSection": {
+    "tagline": "Technical Knowledge Base",
+    "title": "Engineering FAQ",
+    "faqs": [
+      {
+        "question": "How does Flowtaris handle API rate limits?",
+        "answer": "Token bucket algorithms with exponential backoff on all outbound clients. HTTP 429 triggers automatic pause and retry. Zero data loss."
+      },
+      {
+        "question": "What is the Accountability Engine?",
+        "answer": "A public ledger of technical competence. DORA metrics, uptime stats, and incident post-mortems exposed for verifiable proof of engineering quality."
+      },
+      {
+        "question": "What happens when an ERP goes offline?",
+        "answer": "Kafka-backed middleware absorbs backpressure. Messages queue in durable topics. Recovery triggers automatic resumption with ordering guarantees."
+      },
+      {
+        "question": "How is data integrity guaranteed?",
+        "answer": "JSON Schema validation at ingress. Idempotency keys prevent duplicates. Nightly reconciliation jobs compare source and target state."
+      }
+    ]
+  },
+  "complianceVault": {
+    "hero": {
+      "badge": "Enterprise Compliance Framework",
+      "titleLine1": "Security is an ",
+      "titleAccent": "Engineering",
+      "titleLine2": " Standard.",
+      "description": "Compliance isn't a legal checklist—it is the mathematical foundation of accountability. We have open-sourced our zero-trust security posture to accelerate your enterprise procurement and give your CISO complete peace of mind."
+    },
+    "philosophy": {
+      "title": "Zero-Trust is a Baseline. Accountability is the Goal.",
+      "paragraphs": [
+        "At Flowtaris, we believe that integrating mission-critical enterprise systems (like SAP, NetSuite, and Salesforce) requires absolute trust. That is why security is engineered into the very core of our event-driven architecture, not bolted on as a post-deployment afterthought.",
+        "Every piece of integration telemetry processed by Flowtaris is treated as highly sensitive. We operate under a strict zero-trust model, ensuring that every internal microservice, database query, and third-party webhook is rigorously authenticated and continuously monitored by automated threat detection heuristics.",
+        "Scroll to review our comprehensive compliance artifacts, architectural guarantees, and vendor risk documentation designed to clear procurement bottlenecks instantly."
+      ]
+    },
+    "policies": [
+      {
+        "id": "01",
+        "title": "Zero-Trust Architecture & Event Telemetry",
+        "content": "Flowtaris is fundamentally built on a zero-trust model. Every microservice, integration bridge, and external API call requires strict, ephemeral cryptographic authentication. Our underlying Kafka event pipelines ensure that every transaction is isolated, logged, and immutable, providing mathematically verifiable audit trails for all data flow."
+      },
+      {
+        "id": "02",
+        "title": "SOC 2 Type II & ISO 27001 Certification",
+        "content": "We do not grade our own homework. Flowtaris undergoes rigorous annual third-party penetration testing and maintains SOC 2 Type II compliance. Our entire infrastructure is exclusively hosted on ISO 27001 certified cloud environments (AWS/GCP), ensuring physical and network security standards that meet the highest enterprise requirements."
+      },
+      {
+        "id": "03",
+        "title": "Cryptographic At-Rest & In-Transit Security",
+        "content": "Data minimization is our default stance. All client data in transit is encrypted using TLS 1.3 with Perfect Forward Secrecy (PFS). At rest, data is encrypted via AES-256 block-level encryption. We offer Bring Your Own Key (BYOK) architectures for enterprise clients requiring absolute sovereignty over their data access."
+      },
+      {
+        "id": "04",
+        "title": "GDPR, CCPA & Data Sovereignty",
+        "content": "Compliance is automated into our deployment pipelines. Flowtaris fully supports GDPR and CCPA requirements, offering automated data subject access requests (DSAR) and right-to-be-forgotten APIs. We provide standardized Data Processing Agreements (DPAs) and guarantee geographic data fencing for EU-only or US-only isolation."
+      },
+      {
+        "id": "05",
+        "title": "High Availability & BCDR Resiliency",
+        "content": "Enterprise systems cannot go down. Our Business Continuity and Disaster Recovery (BCDR) plan guarantees a Recovery Time Objective (RTO) of 4 hours and a Recovery Point Objective (RPO) of 1 hour for all mission-critical infrastructure, backed by multi-region active-active failover clustering."
+      },
+      {
+        "id": "06",
+        "title": "Accelerated Vendor Risk Assessment",
+        "content": "Procurement shouldn't take six months. We maintain a comprehensively pre-filled SIG Core questionnaire and a real-time Trust Center detailing our security posture, RBAC access controls, incident management plans, and employee background check protocols to accelerate your due diligence."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do you sign custom Data Processing Agreements (DPAs) for EU enterprise clients?",
+        "answer": "Yes. For our enterprise tier, we offer highly customized Data Processing Agreements (DPAs) that comply with GDPR, CCPA, and industry-specific regulations like HIPAA and SOC 2 requirements. We guarantee geographic data fencing for EU-only or US-only isolation upon request."
+      },
+      {
+        "question": "What is your Recovery Time Objective (RTO) and Recovery Point Objective (RPO)?",
+        "answer": "Our standard Business Continuity and Disaster Recovery (BCDR) plan guarantees a maximum RTO of 4 hours and an RPO of 1 hour for all mission-critical infrastructure. This is backed by our mathematically verifiable SLA and powered by multi-region active-active failover clustering."
+      },
+      {
+        "question": "Can our infosec team run custom penetration tests against the Flowtaris integration layer?",
+        "answer": "Absolutely. We encourage transparent security practices. Enterprise clients can schedule custom gray-box penetration tests on dedicated staging environments once annually. We also provide access to our continuous internal security audit logs."
+      },
+      {
+        "question": "Where is Flowtaris infrastructure geographically hosted?",
+        "answer": "By default, all data is partitioned and hosted within US-East (AWS) or EU-Central (GCP) depending on your strict jurisdictional requirements. For extreme compliance needs, we offer single-tenant dedicated hosting options for absolute hardware sovereignty."
+      },
+      {
+        "question": "How do you accelerate the vendor risk assessment (SIG Core) process?",
+        "answer": "Enterprise procurement should not take six months. We maintain a pre-filled, comprehensive SIG Core questionnaire detailing our security posture, RBAC access controls, incident management, and business continuity plans. Upon NDA execution, your Infosec team receives instant access to our live Trust Center."
+      }
+    ],
+    "telemetry": {
+      "title": "Live Audit Telemetry Stream",
+      "logs": [
+        "[auth.svc] 0x7F2B - Identity Token Validated",
+        "[db.cluster] Query strict parameterized check: PASS",
+        "[kafka.ingress] Payload schema validated against registry",
+        "[iam.service] Zero-Trust Role assumed by integration-bot",
+        "[network.mesh] MTLS Handshake successful",
+        "[compliance.gate] GDPR Data Fencing Rule Enforced (EU-Central)",
+        "[threat.detect] Anomaly score: 0.001 - Nominal",
+        "[audit.log] Transaction appended to immutable ledger"
+      ]
+    }
+  },
+  "roiLedger": {
+    "hero": {
+      "badge": "Financial Engineering",
+      "titleLine1": "Integration is a",
+      "titleAccent": "Wealth",
+      "titleLine2": " Engine.",
+      "description": "Stop viewing enterprise integration as a capital sink. Flowtaris transforms disparate systems into a compounding revenue engine by eliminating maintenance overhead, accelerating time-to-market, and mitigating downtime risk."
+    },
+    "philosophy": {
+      "title": "Predictable Opex. Zero Technical Debt.",
+      "paragraphs": [
+        "Building an in-house Enterprise Service Bus (ESB) or point-to-point integration mesh is a massive capital expenditure (Capex) that instantly begins accumulating technical debt. Every new endpoint becomes a maintenance liability.",
+        "Flowtaris shifts your integration strategy to a predictable, highly leveraged operational expenditure (Opex). Our strictly decoupled event-driven architecture ensures that your engineering headcount is permanently focused on core product development, not plumbing.",
+        "Scroll to review the hard mathematics of how Flowtaris delivers a verifiable, compounding Return on Investment (ROI) across enterprise organizations."
+      ]
+    },
+    "facts": [
+      {
+        "id": "01",
+        "title": "40% Reduction in Engineering Overhead",
+        "content": "By offloading complex integration logic, exponential backoff retries, and strict schema validation to the Flowtaris Accountability Engine, enterprise teams typically reduce backend engineering headcount requirements for integration by 40%."
+      },
+      {
+        "id": "02",
+        "title": "Zero Infrastructure Capex",
+        "content": "No Kafka clusters to provision, no Zookeeper nodes to maintain, no database shards to balance. Flowtaris operates as a fully managed, serverless event mesh. You pay strictly for successful payloads processed, entirely eliminating idle infrastructure costs."
+      },
+      {
+        "id": "03",
+        "title": "99.99% Downtime Revenue Protection",
+        "content": "When ERPs or CRMs experience outages, dropped payloads equal lost revenue. Flowtaris's durable event logs and intelligent circuit breakers absorb the backpressure, ensuring zero data loss and completely mitigating revenue leakage during third-party downtime."
+      },
+      {
+        "id": "04",
+        "title": "Accelerated Time-to-Market (TTM)",
+        "content": "Legacy point-to-point integrations take months to scope, build, and test. With our standardized schema registries and pre-built enterprise connectors, new integrations can be deployed to production in days, allowing you to capture market opportunities immediately."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How does Flowtaris calculate predictable billing for high-throughput Kafka pipelines?",
+        "answer": "We offer absolute predictability. We bill exclusively on successful payload ingress. Internal retries, dead-letter routing, and internal network hops are completely unmetered. You never pay for our system working to recover a failed state."
+      },
+      {
+        "question": "Is Flowtaris classified as Capex or Opex for accounting purposes?",
+        "answer": "Flowtaris is classified as a pure Operational Expenditure (Opex). There are no upfront perpetual licenses or hardware purchases. Our SaaS model ensures your costs scale linearly and predictably with your business growth."
+      },
+      {
+        "question": "How do you quantify the ROI of 'Zero Technical Debt'?",
+        "answer": "Technical debt carries a compounding interest rate in the form of maintenance hours. By utilizing our centralized schema validation and decoupled architecture, you eliminate the need for future code rewrites when third-party APIs deprecate endpoints."
+      },
+      {
+        "question": "Can we cap our monthly expenditure?",
+        "answer": "Yes. Enterprise tiers include strictly enforceable hard caps and granular alerting thresholds to ensure you never experience unexpected billing spikes, even during massive volumetric surges."
+      }
+    ]
+  },
+  "deliveryStandards": {
+    "hero": {
+      "badge": "Delivery SLA Guarantee",
+      "titleLine1": "Zero Scope Creep. ",
+      "titleAccent": "Absolute",
+      "titleLine2": " Enforcement.",
+      "description": "Enterprise software delivery is broken by scope creep, delayed launches, and budget overruns. Flowtaris fixes this through mathematically rigid delivery standards. We guarantee SLA deployments and strictly enforced, fixed-cost pipelines."
+    },
+    "manifesto": {
+      "title": "The Enforcement Pipeline.",
+      "paragraphs": [
+        "In traditional integration consulting, 'agile' often becomes a polite excuse for delayed timelines and budget explosions. CFOs are routinely forced to sign off on endless maintenance hours. We reject this model entirely.",
+        "Flowtaris operates on a strict 'Enforcement Pipeline' model. Every integration, schema change, and infrastructure deployment must pass through rigorous, non-negotiable standards before it touches a production environment. This architectural rigidity is what allows us to offer mathematically verifiable, fixed-cost enterprise integration.",
+        "Scroll down to trace the rigid nodes of our Enforcement Pipeline. These are the uncompromising standards that guarantee your project launches on time, on budget, and entirely free of technical debt."
+      ]
+    },
+    "nodes": [
+      {
+        "id": "N-01",
+        "title": "Fixed-Cost Architecture Lock",
+        "content": "Before a single line of code is written, the event schemas and integration pipelines are mathematically mapped and cryptographically locked. This eliminates 'discovery phase' budget explosions. If it takes us longer to build than quoted, we absorb the cost. You pay the fixed contract."
+      },
+      {
+        "id": "N-02",
+        "title": "Zero-Downtime Rollback Guarantee",
+        "content": "Deployment windows should not induce panic. Our continuous delivery pipeline enforces immutable deployments and Blue/Green traffic routing. If anomalous telemetry is detected post-deployment, the pipeline instantly and automatically reverts to the previous stable state with zero data loss."
+      },
+      {
+        "id": "N-03",
+        "title": "Mandatory SLA Validation Gates",
+        "content": "No code reaches staging without passing automated latency and load threshold checks. We enforce strict Service Level Agreement (SLA) testing during the CI/CD phase. If an integration slows down your CRM or ERP response times by even 15 milliseconds, the build is automatically rejected."
+      },
+      {
+        "id": "N-04",
+        "title": "Financial Accountability Audits",
+        "content": "We provide complete transparency into infrastructure utilization. As part of our delivery standard, CFOs receive automated, real-time dashboards detailing exactly how much compute and network bandwidth each integration is consuming, ensuring Opex remains highly predictable."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What happens if Flowtaris misses a guaranteed SLA delivery date?",
+        "answer": "We put our revenue on the line. If a contracted integration is not fully functional in production by the agreed-upon SLA date, we automatically apply financial penalties to your invoice as dictated by our Master Services Agreement."
+      },
+      {
+        "question": "How do you prevent 'Scope Creep' during a massive enterprise rollout?",
+        "answer": "Through our 'Fixed-Cost Architecture Lock'. We refuse to build on ambiguous requirements. The discovery phase concludes with a cryptographically locked schema registry. Any deviations requested after this lock require a formal, transparently priced change order."
+      },
+      {
+        "question": "Do you offer localized data residency guarantees for EU or APAC delivery?",
+        "answer": "Yes. Our delivery standards require strict geographic tagging for all infrastructure as code (IaC) deployments. We can mathematically guarantee that European integration telemetry never leaves EU-Central servers, ensuring immediate GDPR compliance."
+      },
+      {
+        "question": "Who is responsible if an upstream API change breaks an integration?",
+        "answer": "We are. Part of our delivery standard is proactive API monitoring. If Salesforce or SAP deprecates an endpoint, our Accountability Engine detects the versioning shift and our engineering team updates the integration bridge before it impacts your production environment."
+      }
+    ]
+  },
+  "observatory": {
+    "hero": {
+      "badge": "Telemetry & Tracing",
+      "titleLine1": "The Absolute ",
+      "titleAccent": "End of",
+      "titleLine2": " Black Boxes.",
+      "description": "Legacy Enterprise Service Buses (ESBs) fail because they hide data mutations in monolithic, unreadable logs. Flowtaris exposes every payload. We provide microscopic, real-time visibility into latency drops, structural schema diffs, and cryptographic lineage across your entire distributed architecture."
+    },
+    "gridNodes": [
+      {
+        "id": "T-01",
+        "title": "Cryptographic Payload Lineage",
+        "content": "Track exactly which microservice, user, or automated bot modified a payload. Our underlying immutable event sourcing architecture guarantees that every single data mutation is cryptographically signed and perfectly auditable.",
+        "metric": "100%",
+        "metricLabel": "Immutable Auditability"
+      },
+      {
+        "id": "T-02",
+        "title": "Microscopic Latency Profiling",
+        "content": "Stop guessing why the integration is slow. Flowtaris injects distributed tracing headers (OpenTelemetry standard) into every request, allowing you to visualize network latency down to the millisecond across multi-region hops.",
+        "metric": "< 5ms",
+        "metricLabel": "Internal Processing Overhead"
+      },
+      {
+        "id": "T-03",
+        "title": "Intelligent Dead-Letter Diagnostics",
+        "content": "When a third-party API rejects a payload, Flowtaris doesn't just log a generic 500 error. The Observatory captures the exact HTTP headers, the request body, the API response, and automatically suggests remediation steps based on schema validation rules.",
+        "metric": "Zero",
+        "metricLabel": "Silent Failures"
+      },
+      {
+        "id": "T-04",
+        "title": "Real-Time Volumetric Analytics",
+        "content": "Monitor ingress and egress bandwidth utilization in real-time. Anticipate API rate limits before they are breached using our predictive, machine-learning-driven backpressure algorithms and dynamic circuit breakers.",
+        "metric": "Real-Time",
+        "metricLabel": "Predictive Throttling Analytics"
+      },
+      {
+        "id": "T-05",
+        "title": "Asynchronous Sidecar Architecture",
+        "content": "Observability shouldn't slow down transactions. We intercept telemetry via an ultra-low overhead, out-of-band sidecar proxy, guaranteeing that payload parsing never blocks the main execution thread.",
+        "metric": "0ms",
+        "metricLabel": "Added Latency"
+      },
+      {
+        "id": "T-06",
+        "title": "Intelligent Payload Diffing",
+        "content": "When an integration breaks, finding the exact structural change is critical. Our engine automatically computes a cryptographic JSON diff between historical successful payloads and the current failing request.",
+        "metric": "Diff",
+        "metricLabel": "Automated Schema Resolution"
+      },
+      {
+        "id": "T-07",
+        "title": "Dynamic Circuit Breakers",
+        "content": "We don't just observe failures; we prevent cascading outages. If an upstream endpoint begins returning 503s, our Observatory automatically trips the circuit, spooling messages securely until the endpoint recovers.",
+        "metric": "Auto",
+        "metricLabel": "Outage Prevention"
+      },
+      {
+        "id": "T-08",
+        "title": "Role-Based Access Masking",
+        "content": "Your DevOps team needs to see the error, but they don't need to see the Social Security Number. Our telemetry engine enforces real-time RBAC redaction on all persisted logs.",
+        "metric": "AES-256",
+        "metricLabel": "Field-Level Redaction"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How does Flowtaris handle PII (Personally Identifiable Information) within its logging telemetry?",
+        "answer": "Security is paramount. The Observatory utilizes intelligent Data Loss Prevention (DLP) masking. Before any payload is persisted to our telemetry logs, sensitive fields like SSNs, credit card numbers, or customized PII regex patterns are irreversibly hashed or fully redacted."
+      },
+      {
+        "question": "Can I export Flowtaris telemetry into our existing Datadog or Splunk instances?",
+        "answer": "Absolutely. The Integration Observatory is fully OpenTelemetry compatible. You can easily configure continuous, low-latency streaming of all log metrics, distributed traces, and APM data directly into Datadog, Splunk, New Relic, or any standard SIEM tool."
+      },
+      {
+        "question": "How long is historical payload lineage retained?",
+        "answer": "By default, metadata and tracing headers are retained for 90 days, while the actual raw payload bodies are retained for 30 days to optimize compliance. Enterprise clients can configure custom S3 bucket offloading for infinite retention."
+      },
+      {
+        "question": "Does distributed tracing add latency to our integrations?",
+        "answer": "No. Our tracing architecture is entirely asynchronous. The logging and metrics collection pipelines operate out-of-band on a highly optimized sidecar architecture, ensuring zero impact on your mission-critical transaction latency."
+      }
+    ],
+    "architecture": {
+      "title": "The Mechanics of Absolute Visibility",
+      "paragraphs": [
+        "Enterprise Service Buses (ESBs) were designed in an era where 'logging' meant dumping unstructured text into a file. In a modern, microservice-driven architecture, this is worse than useless—it is a security and compliance nightmare. You cannot debug a distributed transaction if you cannot cryptographically trace its lineage.",
+        "The Flowtaris Integration Observatory solves the 'Black Box Problem' by treating telemetry as a first-class citizen. We do not retroactively scrape logs. Instead, we embed OpenTelemetry-standard distributed tracing directly into the integration fabric.",
+        "Every payload mutation, every protocol translation, and every network hop is cryptographically hashed, timed to the microsecond, and persisted in an immutable event store. This allows CFOs and Engineering VPs to see exactly where data is bottlenecks, where schemas are failing, and exactly how much bandwidth is being consumed, all in real-time."
+      ]
+    }
+  }
+}

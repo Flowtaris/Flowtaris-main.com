@@ -31,6 +31,16 @@ const sites = [
     badge: "AI",
     sections: ["Hero Config", "Capabilities", "Case Studies", "Insights", "Site Config", "Assessment"],
   },
+  {
+    id: "net",
+    name: "Flowtaris.net",
+    description: "Accountability Engine telemetry, engineering radar, compliance, and ROI ledger.",
+    href: "/admin/net",
+    accentBg: "linear-gradient(135deg, #0F1523, #1A233A)",
+    accent: "#3B82F6",
+    badge: "ENGINE",
+    sections: ["Header", "Hero", "Footer", "Performance", "FAQ", "Transparency", "Standard", "Bottom CTA", "Compliance", "ROI Ledger", "Delivery", "Observatory"],
+  },
 ]
 
 export default function AdminHubPage() {
@@ -45,10 +55,10 @@ export default function AdminHubPage() {
             </span>
           </div>
           <h1 style={{ fontSize: 36, fontWeight: 800, color: "#0F172A", marginBottom: 8 }}>
-            Manage All Three Domains
+            Manage All Four Domains
           </h1>
           <p style={{ fontSize: 16, color: "#64748B", maxWidth: 560 }}>
-            One login. Full control over flowtaris.com, flowtaris.co, and flowtaris.ai.
+            One login. Full control over flowtaris.com, flowtaris.co, flowtaris.ai, and flowtaris.net.
             Changes save directly to each domain&apos;s database.
           </p>
         </div>
