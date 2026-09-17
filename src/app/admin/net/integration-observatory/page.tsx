@@ -8,6 +8,7 @@ export default function ObservatoryAdminPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle"|"success"|"error">("idle");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -69,12 +70,19 @@ export default function ObservatoryAdminPage() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveStatus("idle");
     try {
-      await fetch("/api/net-cms", {
+      const res = await fetch("/api/net-cms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) {
+        setSaveStatus("success");
+        setTimeout(() => setSaveStatus("idle"), 3000);
+      } else {
+        alert("Failed to save.");
+      }
     } catch (e) {
       alert("Failed to save.");
     }

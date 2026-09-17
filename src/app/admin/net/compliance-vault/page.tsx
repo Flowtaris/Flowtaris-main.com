@@ -8,6 +8,7 @@ export default function ComplianceAdminPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle"|"success"|"error">("idle");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -80,12 +81,19 @@ export default function ComplianceAdminPage() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveStatus("idle");
     try {
-      await fetch("/api/net-cms", {
+      const res = await fetch("/api/net-cms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) {
+        setSaveStatus("success");
+        setTimeout(() => setSaveStatus("idle"), 3000);
+      } else {
+        alert("Failed to save.");
+      }
     } catch (e) {
       alert("Failed to save.");
     }
@@ -101,7 +109,7 @@ export default function ComplianceAdminPage() {
           ← Back to Dashboard
         </Link>
         <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-          <span className="p-2 bg-blue-500/10 text-blue-400 rounded-lg">🛡️</span>
+          <span className="p-2 bg-blue-500/10 text-blue-400 rounded-lg"></span>
           Compliance Vault Configuration
         </h1>
         <p className="text-gray-400 mt-2">Manage the compliance page: Hero, Philosophy, Facts, FAQs, and Live Telemetry.</p>

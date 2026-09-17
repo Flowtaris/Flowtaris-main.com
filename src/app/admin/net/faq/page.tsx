@@ -8,6 +8,7 @@ export default function FAQConfigPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle"|"success"|"error">("idle");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -72,12 +73,19 @@ export default function FAQConfigPage() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveStatus("idle");
     try {
-      await fetch("/api/net-cms", {
+      const res = await fetch("/api/net-cms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) {
+        setSaveStatus("success");
+        setTimeout(() => setSaveStatus("idle"), 3000);
+      } else {
+        alert("Failed to save.");
+      }
     } catch (e) {
       alert("Failed to save.");
     }
@@ -176,8 +184,7 @@ export default function FAQConfigPage() {
           >
             {saving ? "Saving..." : (
               <>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
-                Save Configuration
+                {saveStatus === "success" ? (<><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>Saved!</>) : (<><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>Save Configuration</>)}
               </>
             )}
           </button>

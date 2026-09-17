@@ -7,7 +7,7 @@ export default function AdminDashboard() {
       title: "Header Config",
       desc: "Manage logo text, status chip, and top navigation links",
       href: "/admin/net/header",
-      icon: "⚙️"
+      icon: ""
     },
     {
       title: "Hero Config",
@@ -25,7 +25,7 @@ export default function AdminDashboard() {
       title: "Performance Config",
       desc: "Manage the telemetry section, DORA metrics arrays, and uptime highlights",
       href: "/admin/net/performance",
-      icon: "⚡"
+      icon: ""
     },
     {
       title: "FAQ Config",
@@ -43,7 +43,7 @@ export default function AdminDashboard() {
       title: "Standard Config",
       desc: "Manage the 'Engineering Over Marketing' section and feature cards",
       href: "/admin/net/standard",
-      icon: "⚙️"
+      icon: ""
     },
     {
       title: "Bottom CTA Config",
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
       title: "Compliance Config",
       desc: "Manage the Compliance Vault: Hero, Philosophy, Hard Facts, FAQs, and Live Telemetry",
       href: "/admin/net/compliance-vault",
-      icon: "🛡️"
+      icon: ""
     },
     {
       title: "ROI Ledger Config",
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
       title: "Delivery Config",
       desc: "Manage the Enforcement Pipeline, Manifesto, and SLA Guarantees",
       href: "/admin/net/delivery-standards",
-      icon: "⚙️"
+      icon: ""
     },
     {
       title: "Observatory Config",

@@ -8,6 +8,7 @@ export default function DeliveryAdminPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle"|"success"|"error">("idle");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -69,12 +70,19 @@ export default function DeliveryAdminPage() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveStatus("idle");
     try {
-      await fetch("/api/net-cms", {
+      const res = await fetch("/api/net-cms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) {
+        setSaveStatus("success");
+        setTimeout(() => setSaveStatus("idle"), 3000);
+      } else {
+        alert("Failed to save.");
+      }
     } catch (e) {
       alert("Failed to save.");
     }
@@ -90,7 +98,7 @@ export default function DeliveryAdminPage() {
           ← Back to Dashboard
         </Link>
         <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-          <span className="p-2 bg-rose-500/10 text-rose-500 rounded-lg">⚙️</span>
+          <span className="p-2 bg-rose-500/10 text-rose-500 rounded-lg"></span>
           Delivery Standards Configuration
         </h1>
         <p className="text-gray-400 mt-2">Manage the Delivery Standards: Hero, Manifesto, Enforcement Pipeline Nodes, and FAQs.</p>

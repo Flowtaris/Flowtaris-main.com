@@ -9,6 +9,7 @@ export default function HeaderConfigPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle"|"success"|"error">("idle");
   const [uploadingLogo, setUploadingLogo] = useState(false);
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,12 +88,19 @@ export default function HeaderConfigPage() {
 
   const handleSave = async () => {
     setSaving(true);
+    setSaveStatus("idle");
     try {
-      await fetch("/api/net-cms", {
+      const res = await fetch("/api/net-cms", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) {
+        setSaveStatus("success");
+        setTimeout(() => setSaveStatus("idle"), 3000);
+      } else {
+        alert("Failed to save.");
+      }
     } catch (e) {
       alert("Failed to save.");
     }
@@ -109,7 +117,7 @@ export default function HeaderConfigPage() {
           ← Back to Dashboard
         </Link>
         <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-          <span className="p-2 bg-blue-500/10 text-blue-400 rounded-lg">⚙️</span>
+          <span className="p-2 bg-blue-500/10 text-blue-400 rounded-lg"></span>
           Header Configuration
         </h1>
         <p className="text-gray-400 mt-2">Manage the top navigation bar, logo text, and primary engagement button.</p>
@@ -118,7 +126,7 @@ export default function HeaderConfigPage() {
       {/* Brand Identity section */}
       <div className="bg-[#151c2f] border border-white/5 rounded-2xl overflow-hidden mb-8 shadow-xl">
         <div className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
-          <span className="text-yellow-400">✨</span>
+          <span className="text-yellow-400"></span>
           <h2 className="font-semibold text-white">Brand Identity</h2>
         </div>
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -168,7 +176,7 @@ export default function HeaderConfigPage() {
       {/* Nav & Action section */}
       <div className="bg-[#151c2f] border border-white/5 rounded-2xl overflow-hidden mb-8 shadow-xl">
         <div className="px-6 py-4 border-b border-white/5 flex items-center gap-2">
-          <span className="text-emerald-400">🚀</span>
+          <span className="text-emerald-400"></span>
           <h2 className="font-semibold text-white">Navigation & Actions</h2>
         </div>
         <div className="p-6">
@@ -247,8 +255,7 @@ export default function HeaderConfigPage() {
           >
             {saving ? "Saving..." : (
               <>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>
-                Save Configuration
+                {saveStatus === "success" ? (<><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>Saved!</>) : (<><svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>Save Configuration</>)}
               </>
             )}
           </button>
