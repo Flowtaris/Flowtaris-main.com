@@ -1,6 +1,35 @@
 import { NextResponse, type NextRequest } from 'next/server'
 
 export function proxy(request: NextRequest) {
+  // 0.5 Basic Auth Wall for admin
+  const hostname = request.headers.get('host') || '';
+  const isAdminDomain = hostname.includes('admin.flowtaris.com');
+  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
+
+  if (isAdminDomain || isAdminRoute) {
+    const basicAuth = request.headers.get('authorization');
+    if (basicAuth) {
+      const authValue = basicAuth.split(' ')[1];
+      if (authValue) {
+        const [user, pwd] = atob(authValue).split(':');
+        const validUser = process.env.ADMIN_USERNAME || 'admin';
+        const validPwd = process.env.ADMIN_PASSWORD || 'flowtaris2026';
+
+        if (user !== validUser || pwd !== validPwd) {
+          return new NextResponse('Auth required', {
+            status: 401,
+            headers: { 'WWW-Authenticate': 'Basic realm="Secure Area"' },
+          });
+        }
+      }
+    } else {
+      return new NextResponse('Auth required', {
+        status: 401,
+        headers: { 'WWW-Authenticate': 'Basic realm="Secure Area"' },
+      });
+    }
+  }
+
   // 0. Intercept legacy URLs and tracking query parameters with a 410 Gone
   const { pathname, searchParams } = request.nextUrl
   if (
